@@ -6,6 +6,7 @@
 //-----------------------------------------------------------------------
 
 //create phaser game variable
+var test;
 var game = new Phaser.Game(600, 600, Phaser.AUTO);
 
 //***
