@@ -20,6 +20,7 @@ Preloader.prototype = {
 		game.load.path = "assets/img/";
 		game.load.image('player', 'characterTempArt.png');
 		game.load.image('platform', 'platform.png');
+		game.load.image('flame', 'flameParticle.png');
 	},
 	create: function(){
 		console.log("In Preloader: create");
@@ -67,6 +68,10 @@ Game.prototype = {
 		//create any player objects
 		var player = new Player(100, 100, 0.5, 'player');
 		game.add.existing(player);
+
+		//create any npc objects
+		var npc = new NPC(400, 400, 0.25, 'player');
+		game.add.existing(npc);
 
 		//create a platform object
 		platforms = game.add.group();
