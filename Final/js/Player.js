@@ -72,7 +72,7 @@ Player.prototype.update = function(){
 	//jump
 	if(vert < 0 && hitGround) this.body.velocity.y += this.jump;
 	//fall
-	else if (vert > 0) this.body.velocity.y += accel;
+	else if (vert > 0) this.body.velocity.y += this.accel;
 	//move left and right + accelerate
 	if(hori != 0) {
 		this.body.velocity.x += this.accel * hori;
