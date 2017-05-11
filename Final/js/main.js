@@ -18,7 +18,7 @@ Preloader.prototype = {
 		console.log("In Preloader: preload");
 		//LOAD ART ASSETS
 		game.load.path = "assets/img/";
-		game.load.image('player', 'characterTempArt.png');
+		game.load.image('player', 'sprite_fire1.png');
 		game.load.image('platform', 'platform.png');
 		game.load.image('flame', 'flameParticle.png');
 	},
@@ -66,11 +66,11 @@ Game.prototype = {
 	create: function() {
 		console.log("in Game Create");
 		//create any player objects
-		var player = new Player(100, 100, 0.5, 'player');
+		var player = new Player(100, 100, 3, 'player');
 		game.add.existing(player);
 
 		//create any npc objects
-		var npc = new NPC(400, 400, 0.25, 'player');
+		var npc = new NPC(400, 400, 2, 'player');
 		game.add.existing(npc);
 
 		//create a platform object

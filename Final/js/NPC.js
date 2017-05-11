@@ -25,6 +25,8 @@ function NPC(x, y, scale, img){
 	//personal variables
 	this.maxSpeed = 50;
 	this.idle = true;
+
+	this.body.tint = 0x00FF00;
 }
 
 //EDIT PROTOTYPE
