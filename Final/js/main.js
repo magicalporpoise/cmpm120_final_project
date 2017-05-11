@@ -18,7 +18,7 @@ Preloader.prototype = {
 		console.log("In Preloader: preload");
 		//LOAD ART ASSETS
 		game.load.path = "assets/img/";
-		game.load.image('player', 'sprite_fire1.png');
+		game.load.spritesheet('player', 'stb-Sheet.png', 32, 50);
 		game.load.image('platform', 'platform.png');
 		game.load.image('flame', 'flameParticle.png');
 	},
@@ -57,6 +57,7 @@ MainMenu.prototype = {
 //	set up assets, play the game
 //***
 var Game = function(game) {
+	var player;
 }
 
 Game.prototype = {
@@ -66,7 +67,10 @@ Game.prototype = {
 	create: function() {
 		console.log("in Game Create");
 		//create any player objects
-		var player = new Player(100, 100, 3, 'player');
+		player = new Player(100, 100, 3, 'player');
+				// player animations
+		player.animations.add('idle', [0], 1, false);
+		player.animations.add('walk', [1, 2, 3, 4, 5, 6, 7], 10, true);
 		game.add.existing(player);
 
 		//create any npc objects
@@ -85,6 +89,10 @@ Game.prototype = {
 	},
 	update:function() {		// add game logic
 		// some logic is handled within other objects
+		//handling animations here because i dont understand why
+		//	it wont work the way it should
+		if(player.body.velocity.x != 0) player.animations.play('walk', 15, true);
+		else player.animations.play('idle');
 	}
 }
 
