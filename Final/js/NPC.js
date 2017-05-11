@@ -26,7 +26,7 @@ function NPC(x, y, scale, img){
 	this.maxSpeed = 50;
 	this.idle = true;
 
-	this.body.tint = 0x00FF00;
+	this.tint = 0x00FF00;
 }
 
 //EDIT PROTOTYPE
@@ -62,11 +62,9 @@ NPC.prototype.update = function(){
 	if(!idle) hori = determineBehavior();
 
 	// move the character
-	//if(vert < 0 && hitGround) this.body.velocity.y += jump;
-	//else if (vert > 0) this.body.velocity.y += accel;
 	if(hori != 0) this.body.velocity.x = this.maxSpeed * hori;
-	//else this.body.velocity.x -= Math.sign(this.body.velocity.x) * accel / 2;
-	//if(Math.abs(this.body.velocity.x) < accel) this.body.velocity.x = 0;
+
+
 }
 
 // determineBehavior(npc)
@@ -75,4 +73,9 @@ NPC.prototype.update = function(){
 function determineBehavior(){
 	if(Math.random() < 0.5) return 1
 	else return -1;
+}
+
+// NPC on fire!!
+function burning(){
+	console.log("I'M ON FIRE");
 }

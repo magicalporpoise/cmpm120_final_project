@@ -58,6 +58,8 @@ MainMenu.prototype = {
 //***
 var Game = function(game) {
 	var player;
+	var npc;
+	var flamethrower;
 }
 
 Game.prototype = {
@@ -72,9 +74,10 @@ Game.prototype = {
 		player.animations.add('idle', [0], 1, false);
 		player.animations.add('walk', [1, 2, 3, 4, 5, 6, 7], 10, true);
 		game.add.existing(player);
+		flamethrower = player.emitter;
 
 		//create any npc objects
-		var npc = new NPC(400, 400, 2, 'player');
+		npc = new NPC(400, 400, 2, 'player');
 		game.add.existing(npc);
 
 		//create a platform object
@@ -93,6 +96,8 @@ Game.prototype = {
 		//	it wont work the way it should
 		if(player.body.velocity.x != 0) player.animations.play('walk', 15, true);
 		else player.animations.play('idle');
+
+		//game.physics.arcade.collide(flamethrower, npc, burning, null, this);
 	}
 }
 
