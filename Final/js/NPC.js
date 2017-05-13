@@ -23,10 +23,19 @@ function NPC(x, y, scale, img){
 	this.body.collideWorldBounds = true;
 
 	//personal variables
-	this.maxSpeed = 50;
-	this.idle = true;
+	this.maxSpeed = 100;
+	this.idle = false;
+	this.facing = 1;
+	this.movingHori = 0;
 
-	this.tint = 0x00FF00;
+	//create view box
+	this.sight = new ViewBox(this.x, this.y, 0.33, 'platform');
+	game.add.existing(this.sight);
+
+	//behavior timer
+	this.behave = game.time.create(false);
+	this.behave.loop(3000, determineBehavior, this);
+	this.behave.start();
 }
 
 //EDIT PROTOTYPE
@@ -38,7 +47,8 @@ NPC.prototype.constructor = NPC;
 //	set up any main vars
 //***
 NPC.prototype.create = function(){
-	//cursors = game.input.keyboard.createCursorKeys();
+	//timer for behavior
+	console.log("NPC MADE");
 }
 
 //***
@@ -46,36 +56,38 @@ NPC.prototype.create = function(){
 //	npc behavior
 //***
 NPC.prototype.update = function(){
-	//let mv_up = determineBehavior(); //cursors.up.isDown;
-	//let mv_left = determineBehavior(walking); //cursors.left.isDown;
-	//let mv_right = determineBehavior(walking); //cursors.right.isDown;
-	//let mv_down = determineBehavior(); //cursors.down.isDown;
-	//collide with platforms
-	//	 will this work even tho platforms are in main?
-	let hitGround = game.physics.arcade.collide(this, layer1); //changed this from platforms to CreateMap
-
-	//movement vars
-	let vert = 0;
-	let hori = 0;
-	if(Math.random() < 0.1) idle = false;
-	else idle = true;
-	if(!idle) hori = determineBehavior();
+	let hitGround = game.physics.arcade.collide(this, platforms);
 
 	// move the character
-	if(hori != 0) this.body.velocity.x = this.maxSpeed * hori;
+	if(this.movingHori != 0) {
+		this.body.velocity.x = this.maxSpeed * this.movingHori;
+		if(Math.sign(this.body.velocity.x) != this.facing){
+			this.facing *= -1;
+			this.scale.x *= -1;
+			this.sight.scale.x *= -1;
+		}
+	} else this.body.velocity.x = 0;
+	//make the sight follow the facing variable
+	this.sight.x = this.x;
+	this.sight.y = this.y-32;
 
-
+	if(this.sight.playerInSight) this.tint = 0xFF0000;
+	else this.tint = 0x0000FF;
 }
 
 // determineBehavior(npc)
 //		take the npc and set its movement variables
 //		based off stimuli
 function determineBehavior(){
-	if(Math.random() < 0.5) return 1
-	else return -1;
-}
+	//console.log("called");
+	if(this.idle) {
+		this.idle = false;
+		this.movingHori = 0;
+	} else {
+		//turn around
+		this.movingHori = -1 * this.facing;
 
-// NPC on fire!!
-function burning(){
-	console.log("I'M ON FIRE");
+		this.idle = true;
+	}
+	//console.log(this.movingHori);
 }
