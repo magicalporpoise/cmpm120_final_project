@@ -32,6 +32,8 @@ function NPC(x, y, scale, img){
 	game.add.existing(this.sight);
 
 	//timer for behavior
+	this.behave = game.time.create();
+	
 }
 
 //EDIT PROTOTYPE
