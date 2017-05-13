@@ -23,17 +23,19 @@ function NPC(x, y, scale, img){
 	this.body.collideWorldBounds = true;
 
 	//personal variables
-	this.maxSpeed = 50;
-	this.idle = true;
+	this.maxSpeed = 100;
+	this.idle = false;
 	this.facing = 1;
+	this.movingHori = 0;
 
 	//create view box
-	this.sight = new ViewBox(this.x, this.y, 0.25, 'platform')
+	this.sight = new ViewBox(this.x, this.y, 0.33, 'platform');
 	game.add.existing(this.sight);
 
-	//timer for behavior
-	this.behave = game.time.create();
-	
+	//behavior timer
+	this.behave = game.time.create(false);
+	this.behave.loop(3000, determineBehavior, this);
+	this.behave.start();
 }
 
 //EDIT PROTOTYPE
@@ -45,7 +47,8 @@ NPC.prototype.constructor = NPC;
 //	set up any main vars
 //***
 NPC.prototype.create = function(){
-	//cursors = game.input.keyboard.createCursorKeys();
+	//timer for behavior
+	console.log("NPC MADE");
 }
 
 //***
@@ -55,22 +58,15 @@ NPC.prototype.create = function(){
 NPC.prototype.update = function(){
 	let hitGround = game.physics.arcade.collide(this, platforms);
 
-	//movement vars
-	let vert = 0;
-	let hori = 0;
-	if(Math.random() < 0.1) idle = false;
-	else idle = true;
-	if(!idle) hori = determineBehavior();
-
 	// move the character
-	if(hori != 0) {
-		this.body.velocity.x = this.maxSpeed * hori;
+	if(this.movingHori != 0) {
+		this.body.velocity.x = this.maxSpeed * this.movingHori;
 		if(Math.sign(this.body.velocity.x) != this.facing){
 			this.facing *= -1;
 			this.scale.x *= -1;
 			this.sight.scale.x *= -1;
 		}
-	}
+	} else this.body.velocity.x = 0;
 	//make the sight follow the facing variable
 	this.sight.x = this.x;
 	this.sight.y = this.y-32;
@@ -82,7 +78,16 @@ NPC.prototype.update = function(){
 // determineBehavior(npc)
 //		take the npc and set its movement variables
 //		based off stimuli
-function determineBehavior(currentSpeed){
-	if(Math.random() < 0.5) return 1
-	else return -1;
+function determineBehavior(){
+	//console.log("called");
+	if(this.idle) {
+		this.idle = false;
+		this.movingHori = 0;
+	} else {
+		//turn around
+		this.movingHori = -1 * this.facing;
+
+		this.idle = true;
+	}
+	//console.log(this.movingHori);
 }
