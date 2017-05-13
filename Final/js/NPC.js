@@ -25,8 +25,13 @@ function NPC(x, y, scale, img){
 	//personal variables
 	this.maxSpeed = 50;
 	this.idle = true;
+	this.facing = 1;
 
-	this.tint = 0x00FF00;
+	//create view box
+	this.sight = new ViewBox(this.x, this.y, 0.25, 'platform')
+	game.add.existing(this.sight);
+
+	//timer for behavior
 }
 
 //EDIT PROTOTYPE
@@ -46,12 +51,6 @@ NPC.prototype.create = function(){
 //	npc behavior
 //***
 NPC.prototype.update = function(){
-	//let mv_up = determineBehavior(); //cursors.up.isDown;
-	//let mv_left = determineBehavior(walking); //cursors.left.isDown;
-	//let mv_right = determineBehavior(walking); //cursors.right.isDown;
-	//let mv_down = determineBehavior(); //cursors.down.isDown;
-	//collide with platforms
-	//	 will this work even tho platforms are in main?
 	let hitGround = game.physics.arcade.collide(this, platforms);
 
 	//movement vars
@@ -62,20 +61,26 @@ NPC.prototype.update = function(){
 	if(!idle) hori = determineBehavior();
 
 	// move the character
-	if(hori != 0) this.body.velocity.x = this.maxSpeed * hori;
+	if(hori != 0) {
+		this.body.velocity.x = this.maxSpeed * hori;
+		if(Math.sign(this.body.velocity.x) != this.facing){
+			this.facing *= -1;
+			this.scale.x *= -1;
+			this.sight.scale.x *= -1;
+		}
+	}
+	//make the sight follow the facing variable
+	this.sight.x = this.x;
+	this.sight.y = this.y-32;
 
-
+	if(this.sight.playerInSight) this.tint = 0xFF0000;
+	else this.tint = 0x0000FF;
 }
 
 // determineBehavior(npc)
 //		take the npc and set its movement variables
 //		based off stimuli
-function determineBehavior(){
+function determineBehavior(currentSpeed){
 	if(Math.random() < 0.5) return 1
 	else return -1;
-}
-
-// NPC on fire!!
-function burning(){
-	console.log("I'M ON FIRE");
 }

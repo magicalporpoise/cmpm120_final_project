@@ -96,8 +96,6 @@ Game.prototype = {
 		//	it wont work the way it should
 		if(player.body.velocity.x != 0) player.animations.play('walk', 15, true);
 		else player.animations.play('idle');
-
-		//game.physics.arcade.collide(flamethrower, npc, burning, null, this);
 	}
 }
 
