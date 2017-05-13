@@ -9,6 +9,7 @@ function Player(x, y, scale, img){
 	//inherit Phaser.Sprite class
 	// calling new Sprite
 	Phaser.Sprite.call(this, game, x, y, img, 0);
+
 	//phaser related variables
 	//		and physics
 	this.x = x;
@@ -16,8 +17,6 @@ function Player(x, y, scale, img){
 	this.scale.x = scale;
 	this.scale.y = scale;
 	this.anchor.set(0.5, 0.5);
-
-	this.scale.x *= -1;
 
 	game.physics.arcade.enable(this);
 	this.body.gravity.y = 1000;
@@ -28,7 +27,7 @@ function Player(x, y, scale, img){
 	this.jump = -500;
 	this.accel = 50;
 
-	this.facing = -1; //1 for right, -1 for left
+	this.facing = 1; //1 for right, -1 for left
 
 	this.emitter = game.add.emitter(this.x, this.y, 1000);
 	this.emitter.makeParticles('flame');
@@ -37,7 +36,6 @@ function Player(x, y, scale, img){
 	this.emitter.gravity.y = -100;
 	this.emitter.minParticleScale = 0.5;
 	this.emitter.maxParticleScale = 1.5;
-
 }
 
 //EDIT PROTOTYPE
@@ -50,8 +48,7 @@ Player.prototype.constructor = Player;
 //***
 Player.prototype.create = function(){
 	//cursors = game.input.keyboard.createCursorKeys();
-	//animations
-	console.log("CREATING A PLAYER OBJ");
+
 }
 //***
 //UPDATE FUNCTION:
@@ -65,9 +62,7 @@ Player.prototype.update = function(){
 	let k_ability = game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR); 
 	//collide with platforms
 	// will this work even tho platforms are in main?
-	// *** fix later, currently if a player is NEXT to a platform,
-	//	it will accelerate them upwards *******
-	let hitGround = game.physics.arcade.collide(this, platforms);
+	let hitGround = game.physics.arcade.collide(this, layer1);//platforms -> CreateMap
 
 	//movement vars
 	let vert = mv_down - mv_up;
@@ -77,7 +72,7 @@ Player.prototype.update = function(){
 	//jump
 	if(vert < 0 && hitGround) this.body.velocity.y += this.jump;
 	//fall
-	else if (vert > 0) this.body.velocity.y += this.accel;
+	else if (vert > 0) this.body.velocity.y += accel;
 	//move left and right + accelerate
 	if(hori != 0) {
 		this.body.velocity.x += this.accel * hori;
@@ -87,16 +82,13 @@ Player.prototype.update = function(){
 		}
 	}
 	//deccelerate
-	else {this.body.velocity.x -= Math.sign(this.body.velocity.x) * this.accel / 2;}
+	else this.body.velocity.x -= Math.sign(this.body.velocity.x) * this.accel / 2;
 	//stopping
-	if(Math.abs(this.body.velocity.x) < this.accel) {
-		this.body.velocity.x = 0;
-	}
+	if(Math.abs(this.body.velocity.x) < this.accel) this.body.velocity.x = 0;
 	//reaching max speed
-	if(Math.abs(this.body.velocity.x) > this.maxSpeed){
+	if(Math.abs(this.body.velocity.x) > this.maxSpeed) 
 		this.body.velocity.x = Math.sign(this.body.velocity.x) * this.maxSpeed;
-	}
-	//flamethrower
+
 	this.emitter.x = this.x + (this.width);
 	this.emitter.y = this.y;
 	if(k_ability) {

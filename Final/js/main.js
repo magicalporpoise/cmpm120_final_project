@@ -21,6 +21,12 @@ Preloader.prototype = {
 		game.load.spritesheet('player', 'stb-Sheet.png', 32, 50);
 		game.load.image('platform', 'platform.png');
 		game.load.image('flame', 'flameParticle.png');
+		//loads in json tilemap created with tiled(key,filename,
+		//not exactly sure why null works here,the tilemap tool used)
+		game.load.tilemap('Level0','Level0.json',null,Phaser.Tilemap.TILED_JSON);
+		//loads the image used in tiled to create the map(key, filename,32x32)
+		//the key can actually be called anything as well
+		game.load.spritesheet('tilesheet','dirt-tiles.png',32,32);
 	},
 	create: function(){
 		console.log("In Preloader: create");
@@ -60,6 +66,7 @@ var Game = function(game) {
 	var player;
 	var npc;
 	var flamethrower;
+	var tilemap;
 }
 
 Game.prototype = {
@@ -77,17 +84,37 @@ Game.prototype = {
 		flamethrower = player.emitter;
 
 		//create any npc objects
-		npc = new NPC(400, 400, 2, 'player');
+		npc = new NPC(400, 100, 2, 'player');
 		game.add.existing(npc);
 
-		//create a platform object
-		platforms = game.add.group();
-		platforms.enableBody = true;
-		var ground = platforms.create(0, game.world.height -64, 'platform');
-		ground.scale.setTo(2, 2);
-		ground.body.immovable = true;
-		//start / allow physics
 		game.physics.startSystem(Phaser.Physics.ARCADE);
+
+		//this is whatever you used for the key when you loaded it in
+		map = game.add.tilemap('Level0');
+
+		//add a tileset image to create the map-object(name,key used above when loading image)
+		//name has to be the one specified in the json file
+		// under tileset in the name category
+		map.addTilesetImage('Level0_tilesheet','tilesheet');
+
+		//initiates new layer, must be exact same name as specified in json
+		layer1 = map.createLayer ('Tile Layer 1');
+
+		//entire grid will have collision set
+		map.setCollisionByExclusion([]);
+
+		//fits layer to the game world
+		layer1.resizeWorld();
+
+
+		//create a platform object
+		//platforms = game.add.group();
+		//platforms.enableBody = true;
+		//var ground = platforms.create(0, game.world.height -64, 'platform');
+		//ground.scale.setTo(2, 2);
+		//ground.body.immovable = true;
+		//start / allow physics
+		//game.physics.startSystem(Phaser.Physics.ARCADE);
 	
 	},
 	update:function() {		// add game logic
@@ -96,6 +123,10 @@ Game.prototype = {
 		//	it wont work the way it should
 		if(player.body.velocity.x != 0) player.animations.play('walk', 15, true);
 		else player.animations.play('idle');
+
+		game.physics.arcade.collide(Player,layer1);
+
+		//game.physics.arcade.collide(flamethrower, npc, burning, null, this);
 	}
 }
 
