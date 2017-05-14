@@ -26,16 +26,16 @@ function Player(x, y, scale, img){
 	this.maxSpeed = 400;
 	this.jump = -500;
 	this.accel = 50;
-
+	this.hidden = false; // can the player be seen?
 	this.facing = 1; //1 for right, -1 for left
 
-	this.emitter = game.add.emitter(this.x, this.y, 1000);
+	/*this.emitter = game.add.emitter(this.x, this.y, 1000);
 	this.emitter.makeParticles('flame');
 	this.emitter.maxRotation = 0;
 	this.emitter.minRotation = 0;
 	this.emitter.gravity.y = -100;
 	this.emitter.minParticleScale = 0.5;
-	this.emitter.maxParticleScale = 1.5;
+	this.emitter.maxParticleScale = 1.5;*/
 }
 
 //EDIT PROTOTYPE
@@ -59,7 +59,7 @@ Player.prototype.update = function(){
 	let mv_left = game.input.keyboard.isDown(Phaser.Keyboard.A); //cursors.left.isDown;
 	let mv_right = game.input.keyboard.isDown(Phaser.Keyboard.D); //cursors.right.isDown;
 	let mv_down = game.input.keyboard.isDown(Phaser.Keyboard.S); //cursors.down.isDown;
-	let k_ability = game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR); 
+	//let k_ability = game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR); 
 	//collide with platforms
 	// will this work even tho platforms are in main?
 	let hitGround = game.physics.arcade.collide(this, layer1);//platforms -> CreateMap
@@ -69,32 +69,26 @@ Player.prototype.update = function(){
 	let hori = mv_right - mv_left;
 
 	// move the character
-	//jump
-	if(vert < 0 && hitGround) this.body.velocity.y += this.jump;
-	//fall
-	else if (vert > 0) this.body.velocity.y += accel;
-	//move left and right + accelerate
-	if(hori != 0) {
-		this.body.velocity.x += this.accel * hori;
-		if(Math.sign(this.body.velocity.x) != this.facing){
-			this.facing *= -1;
-			this.scale.x *= -1;
+	if(!this.hidden){
+		//jump
+		if(vert < 0 && hitGround) this.body.velocity.y += this.jump;
+		//fall
+		else if (vert > 0) this.body.velocity.y += accel;
+		//move left and right + accelerate
+		if(hori != 0) {
+			this.body.velocity.x += this.accel * hori;
+			if(Math.sign(this.body.velocity.x) != this.facing){
+				this.facing *= -1;
+				this.scale.x *= -1;
+			}
 		}
+		//reaching max speed
+		if(Math.abs(this.body.velocity.x) > this.maxSpeed) 
+			this.body.velocity.x = Math.sign(this.body.velocity.x) * this.maxSpeed;
 	}
 	//deccelerate
 	else this.body.velocity.x -= Math.sign(this.body.velocity.x) * this.accel / 2;
 	//stopping
 	if(Math.abs(this.body.velocity.x) < this.accel) this.body.velocity.x = 0;
-	//reaching max speed
-	if(Math.abs(this.body.velocity.x) > this.maxSpeed) 
-		this.body.velocity.x = Math.sign(this.body.velocity.x) * this.maxSpeed;
 
-	this.emitter.x = this.x + (this.width);
-	this.emitter.y = this.y;
-	if(k_ability) {
-		this.emitter.on = true;
-		this.emitter.gravity.x = this.facing * 1000 + this.body.velocity.x;
-		this.emitter.start(true, 1000, 50);
-	}
-	else {this.emitter.on = false;}
 }
