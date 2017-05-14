@@ -73,7 +73,7 @@ Player.prototype.update = function(){
 		//jump
 		if(vert < 0 && hitGround) this.body.velocity.y += this.jump;
 		//fall
-		else if (vert > 0) this.body.velocity.y += accel;
+		//else if (vert > 0) this.body.velocity.y += this.accel;
 		//move left and right + accelerate
 		if(hori != 0) {
 			this.body.velocity.x += this.accel * hori;
@@ -85,10 +85,11 @@ Player.prototype.update = function(){
 		//reaching max speed
 		if(Math.abs(this.body.velocity.x) > this.maxSpeed) 
 			this.body.velocity.x = Math.sign(this.body.velocity.x) * this.maxSpeed;
-	}
-	//deccelerate
-	else this.body.velocity.x -= Math.sign(this.body.velocity.x) * this.accel / 2;
-	//stopping
-	if(Math.abs(this.body.velocity.x) < this.accel) this.body.velocity.x = 0;
+
+		//deccelerate
+		this.body.velocity.x -= Math.sign(this.body.velocity.x) * this.accel / 2;
+		//stopping
+		if(Math.abs(this.body.velocity.x) < 20) this.body.velocity.x = 0;
+	} else this.body.velocity.x = 0; //stop when hidden
 
 }

@@ -106,7 +106,8 @@ Game.prototype = {
 		//fits layer to the game world
 		layer1.resizeWorld();
 
-
+		hidingspot = new HidingSpot(200, 500, 1, 'platform');
+		game.add.existing(hidingspot);
 		//create a platform object
 		//platforms = game.add.group();
 		//platforms.enableBody = true;

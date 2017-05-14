@@ -56,7 +56,7 @@ NPC.prototype.create = function(){
 //	npc behavior
 //***
 NPC.prototype.update = function(){
-	let hitGround = game.physics.arcade.collide(this, platforms);
+	let hitGround = game.physics.arcade.collide(this, layer1);
 
 	// move the character
 	if(this.movingHori != 0) {
@@ -71,7 +71,7 @@ NPC.prototype.update = function(){
 	this.sight.x = this.x;
 	this.sight.y = this.y-32;
 
-	if(this.sight.playerInSight) this.tint = 0xFF0000;
+	if(this.sight.playerInSight && !player.hidden) this.tint = 0xFF0000;
 	else this.tint = 0x0000FF;
 }
 
