@@ -122,6 +122,7 @@ Game.prototype = {
 		//ground.body.immovable = true;
 		//start / allow physics
 		//game.physics.startSystem(Phaser.Physics.ARCADE);
+		game.camera.follow(player); //camera follows player
 	
 	},
 	update:function() {		// add game logic
