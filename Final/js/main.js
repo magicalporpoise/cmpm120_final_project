@@ -19,6 +19,9 @@ Preloader.prototype = {
 		//LOAD ART ASSETS
 		game.load.path = "assets/img/";
 		game.load.spritesheet('player', 'stb-Sheet.png', 32, 50);
+		// test
+		game.load.spritesheet('player2', 'teddyBear_Vector.png', 540, 830);
+		
 		game.load.image('platform', 'platform.png');
 		game.load.image('flame', 'flameParticle.png');
 		//loads in json tilemap created with tiled(key,filename,
@@ -76,10 +79,13 @@ Game.prototype = {
 	create: function() {
 		console.log("in Game Create");
 		//create any player objects
-		player = new Player(100, 100, 3, 'player');
+
+		game.stage.backgroundColor = "#4488AA";
+
+		player = new Player(100, 100, 0.3, 'player2');
 				// player animations
 		player.animations.add('idle', [0], 1, false);
-		player.animations.add('walk', [1, 2, 3, 4, 5, 6, 7], 10, true);
+		player.animations.add('walk', [4,5,6,7], 10, true);
 		game.add.existing(player);
 		flamethrower = player.emitter;
 
