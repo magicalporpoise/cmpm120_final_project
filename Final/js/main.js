@@ -79,13 +79,17 @@ Game.prototype = {
 		console.log("in Game Create");
 		//activate physics
 		game.physics.startSystem(Phaser.Physics.ARCADE);
+		//Major Groups for Collision checks
+		group_ViewBox = game.add.group();
+		group_npc = game.add.group();
+
 		//BG color, blue
 		game.stage.backgroundColor = "#4488AA";
 		// the official player object
 		player = new Player(100, 100, 0.15, 'player2');
 
 		//create any npc objects
-		npc = new NPC(400, 100, 2, 'player');
+		npc = new NPC(400, 100, 2, 'player', group_ViewBox);
 
 		//this is whatever you used for the key when you loaded it in
 		map = game.add.tilemap('Level0');
@@ -106,15 +110,10 @@ Game.prototype = {
 
 		hidingspot = new HidingSpot(200, 500, 1, 'platform');
 		game.add.existing(hidingspot);
-		//create a platform object
-		//platforms = game.add.group();
-		//platforms.enableBody = true;
-		//var ground = platforms.create(0, game.world.height -64, 'platform');
-		//ground.scale.setTo(2, 2);
-		//ground.body.immovable = true;
-		//start / allow physics
-		//game.physics.startSystem(Phaser.Physics.ARCADE);
+		
 		game.camera.follow(player); //camera follows player
+
+		console.log(group_npc.children);
 	
 	},
 	update:function() {		// add game logic

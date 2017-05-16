@@ -5,7 +5,7 @@
 //***
 // CONSTRUCTOR
 //***
-function NPC(x, y, scale, img){
+function NPC(x, y, scale, img, group){
 	//inherit Phaser.Sprite class
 	// calling new Sprite
 	Phaser.Sprite.call(this, game, x, y, img, 0);
@@ -27,10 +27,13 @@ function NPC(x, y, scale, img){
 	this.idle = false;
 	this.facing = 1;
 	this.movingHori = 0;
+	this.isStunned = false;
 
 	//create view box
-	this.sight = new ViewBox(this.x, this.y, 0.33, 'platform');
+	this.sight = new ViewBox(this.x, this.y, 0.33, 'platform', group);
 	game.add.existing(this.sight);
+	group.add(this.sight);
+	console.log("in NPC: "+ group.children);
 
 	//behavior timer
 	this.behave = game.time.create(false);
@@ -38,6 +41,7 @@ function NPC(x, y, scale, img){
 	this.behave.start();
 	//insert into game
 	game.add.existing(this);
+	group_npc.add(this);
 }
 
 //EDIT PROTOTYPE
@@ -58,10 +62,10 @@ NPC.prototype.create = function(){
 //	npc behavior
 //***
 NPC.prototype.update = function(){
-	let hitGround = game.physics.arcade.collide(this, layer1);
+	game.physics.arcade.collide(this, layer1);
 
 	// move the character
-	if(this.movingHori != 0) {
+	if(this.movingHori != 0 && !this.isStunned) {
 		this.body.velocity.x = this.maxSpeed * this.movingHori;
 		if(Math.sign(this.body.velocity.x) != this.facing){
 			this.facing *= -1;
@@ -73,8 +77,10 @@ NPC.prototype.update = function(){
 	this.sight.x = this.x;
 	this.sight.y = this.y-32;
 
-	if(this.sight.playerInSight && !player.hidden) this.tint = 0xFF0000;
-	else this.tint = 0x0000FF;
+	if(!this.isStunned){
+		if(this.sight.playerInSight && !player.hidden) this.tint = 0xFF0000;
+		else this.tint = 0x0000FF;
+	} else this.tint = 0x00FF00;
 }
 
 // determineBehavior(npc)
@@ -91,5 +97,7 @@ function determineBehavior(){
 
 		this.idle = true;
 	}
+
+	if(this.isStunned) this.isStunned = false;
 	//console.log(this.movingHori);
 }

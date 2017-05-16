@@ -48,7 +48,7 @@ Player.prototype.update = function(){
 	let mv_left = game.input.keyboard.isDown(Phaser.Keyboard.A); //cursors.left.isDown;
 	let mv_right = game.input.keyboard.isDown(Phaser.Keyboard.D); //cursors.right.isDown;
 	let mv_down = game.input.keyboard.justPressed(Phaser.Keyboard.S); //cursors.down.isDown;
-	//let k_ability = game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR); 
+	let k_attack = game.input.keyboard.justPressed(Phaser.Keyboard.K); 
 	//collide with platforms
 	// will this work even tho platforms are in main?
 	let hitGround = game.physics.arcade.collide(this, layer1);//platforms -> CreateMap
@@ -83,9 +83,26 @@ Player.prototype.update = function(){
 		this.body.velocity.x -= Math.sign(this.body.velocity.x) * this.accel / 2;
 		//stopping
 		if(Math.abs(this.body.velocity.x) < this.accel/2) this.body.velocity.x = 0;
+
+		//attacking
+		if(!game.physics.arcade.overlap(this, group_ViewBox) && k_attack){
+			var hitBox;
+			if(this.facing > 0) hitBox = game.add.sprite(this.x, this.y, 'platform');
+			else hitBox = game.add.sprite(this.x-60, this.y, 'platform');
+			game.physics.arcade.enable(hitBox);
+			//change hit box size
+			hitBox.body.setSize(60, 50, 0, 0);
+			game.physics.arcade.overlap(hitBox, group_npc, stunTheEnemy);
+			hitBox.destroy();
+			//--add animation--//
+		}
 	} else this.body.velocity.x = 0; //stop when hidden
 
 	if(this.body.velocity.x != 0) this.animations.play('walk', 15, true);
 	else this.animations.play('idle');
 
+}
+
+function stunTheEnemy(hb, npc){
+	npc.isStunned = true;
 }
