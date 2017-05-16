@@ -36,6 +36,8 @@ function NPC(x, y, scale, img){
 	this.behave = game.time.create(false);
 	this.behave.loop(3000, determineBehavior, this);
 	this.behave.start();
+	//insert into game
+	game.add.existing(this);
 }
 
 //EDIT PROTOTYPE

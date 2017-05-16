@@ -68,7 +68,6 @@ MainMenu.prototype = {
 var Game = function(game) {
 	var player;
 	var npc;
-	var flamethrower;
 	var tilemap;
 }
 
@@ -78,22 +77,15 @@ Game.prototype = {
 	},
 	create: function() {
 		console.log("in Game Create");
-		//create any player objects
-
+		//activate physics
+		game.physics.startSystem(Phaser.Physics.ARCADE);
+		//BG color, blue
 		game.stage.backgroundColor = "#4488AA";
-
+		// the official player object
 		player = new Player(100, 100, 0.15, 'player2');
-				// player animations
-		player.animations.add('idle', [0], 1, false);
-		player.animations.add('walk', [4,5,6,7], 10, true);
-		game.add.existing(player);
-		flamethrower = player.emitter;
 
 		//create any npc objects
 		npc = new NPC(400, 100, 2, 'player');
-		game.add.existing(npc);
-
-		game.physics.startSystem(Phaser.Physics.ARCADE);
 
 		//this is whatever you used for the key when you loaded it in
 		map = game.add.tilemap('Level0');
@@ -127,14 +119,6 @@ Game.prototype = {
 	},
 	update:function() {		// add game logic
 		// some logic is handled within other objects
-		//handling animations here because i dont understand why
-		//	it wont work the way it should
-		if(player.body.velocity.x != 0) player.animations.play('walk', 15, true);
-		else player.animations.play('idle');
-
-		game.physics.arcade.collide(Player,layer1);
-
-		//game.physics.arcade.collide(flamethrower, npc, burning, null, this);
 	}
 }
 

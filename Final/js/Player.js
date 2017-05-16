@@ -25,31 +25,20 @@ function Player(x, y, scale, img){
 
 	this.maxSpeed = 400;
 	this.jump = -500;
-	this.accel = 35;
+	this.accel = 50;
 	this.hidden = false; // can the player be seen?
 	this.facing = 1; //1 for right, -1 for left
 
-	/*this.emitter = game.add.emitter(this.x, this.y, 1000);
-	this.emitter.makeParticles('flame');
-	this.emitter.maxRotation = 0;
-	this.emitter.minRotation = 0;
-	this.emitter.gravity.y = -100;
-	this.emitter.minParticleScale = 0.5;
-	this.emitter.maxParticleScale = 1.5;*/
+	//upload animations
+	this.animations.add('idle', [0], 1, false);
+	this.animations.add('walk', [4,5,6,7], 10, true);
+	game.add.existing(this);
 }
 
 //EDIT PROTOTYPE
 Player.prototype = Object.create(Phaser.Sprite.prototype);
 Player.prototype.constructor = Player;
 
-//***
-//CREATE:
-//	set up any main vars
-//***
-Player.prototype.create = function(){
-	//cursors = game.input.keyboard.createCursorKeys();
-
-}
 //***
 //UPDATE FUNCTION:
 //	player input and behavior
@@ -95,5 +84,8 @@ Player.prototype.update = function(){
 		//stopping
 		if(Math.abs(this.body.velocity.x) < this.accel/2) this.body.velocity.x = 0;
 	} else this.body.velocity.x = 0; //stop when hidden
+
+	if(this.body.velocity.x != 0) this.animations.play('walk', 15, true);
+	else this.animations.play('idle');
 
 }
