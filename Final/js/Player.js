@@ -51,7 +51,7 @@ Player.prototype.update = function(){
 	let k_attack = game.input.keyboard.justPressed(Phaser.Keyboard.K); 
 	//collide with platforms
 	// will this work even tho platforms are in main?
-	let hitGround = game.physics.arcade.collide(this, layer1);//platforms -> CreateMap
+	let hitGround = game.physics.arcade.collide(this, layer1);
 
 	//movement vars
 	let vert = mv_down - mv_up;
