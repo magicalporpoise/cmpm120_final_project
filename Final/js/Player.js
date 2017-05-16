@@ -25,7 +25,7 @@ function Player(x, y, scale, img){
 
 	this.maxSpeed = 400;
 	this.jump = -500;
-	this.accel = 50;
+	this.accel = 35;
 	this.hidden = false; // can the player be seen?
 	this.facing = 1; //1 for right, -1 for left
 
@@ -55,10 +55,10 @@ Player.prototype.create = function(){
 //	player input and behavior
 //***
 Player.prototype.update = function(){
-	let mv_up = game.input.keyboard.isDown(Phaser.Keyboard.W); //cursors.up.isDown;
+	let mv_up = game.input.keyboard.justPressed(Phaser.Keyboard.W); //cursors.up.isDown;
 	let mv_left = game.input.keyboard.isDown(Phaser.Keyboard.A); //cursors.left.isDown;
 	let mv_right = game.input.keyboard.isDown(Phaser.Keyboard.D); //cursors.right.isDown;
-	let mv_down = game.input.keyboard.isDown(Phaser.Keyboard.S); //cursors.down.isDown;
+	let mv_down = game.input.keyboard.justPressed(Phaser.Keyboard.S); //cursors.down.isDown;
 	//let k_ability = game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR); 
 	//collide with platforms
 	// will this work even tho platforms are in main?
@@ -71,9 +71,13 @@ Player.prototype.update = function(){
 	// move the character
 	if(!this.hidden){
 		//jump
-		if(vert < 0 && hitGround) this.body.velocity.y += this.jump;
-		//fall
-		//else if (vert > 0) this.body.velocity.y += this.accel;
+		if(vert < 0 && hitGround){ 
+			// also allows wall jumps if against a wall 
+			this.body.velocity.y = this.jump;
+		} else if (vert > 0) {
+			//fast fall.
+			this.body.velocity.y = 10*this.accel;
+		}
 		//move left and right + accelerate
 		if(hori != 0) {
 			this.body.velocity.x += this.accel * hori;
@@ -89,7 +93,7 @@ Player.prototype.update = function(){
 		//deccelerate
 		this.body.velocity.x -= Math.sign(this.body.velocity.x) * this.accel / 2;
 		//stopping
-		if(Math.abs(this.body.velocity.x) < 20) this.body.velocity.x = 0;
+		if(Math.abs(this.body.velocity.x) < this.accel/2) this.body.velocity.x = 0;
 	} else this.body.velocity.x = 0; //stop when hidden
 
 }

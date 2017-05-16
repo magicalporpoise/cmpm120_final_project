@@ -82,7 +82,7 @@ Game.prototype = {
 
 		game.stage.backgroundColor = "#4488AA";
 
-		player = new Player(100, 100, 0.3, 'player2');
+		player = new Player(100, 100, 0.15, 'player2');
 				// player animations
 		player.animations.add('idle', [0], 1, false);
 		player.animations.add('walk', [4,5,6,7], 10, true);

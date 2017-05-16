@@ -34,7 +34,7 @@ HidingSpot.prototype.constructor = HidingSpot;
 HidingSpot.prototype.update = function(){
 	let hidden = game.physics.arcade.overlap(this, player);
 	// change the player's hiding variable
-	toggleHiding(game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR), hidden);
+	toggleHiding(game.input.keyboard.justPressed(Phaser.Keyboard.SPACEBAR), hidden);
 }
 
 function toggleHiding(pressSpace, overlapping){
