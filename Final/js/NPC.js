@@ -98,6 +98,9 @@ function determineBehavior(){
 		this.idle = true;
 	}
 
-	if(this.isStunned) this.isStunned = false;
-	//console.log(this.movingHori);
+	if(this.isStunned){
+		this.isStunned = false;
+		this.idle = true;
+		//console.log(this.movingHori);
+	}
 }
