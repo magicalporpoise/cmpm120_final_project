@@ -14,6 +14,102 @@
         {
          "draworder":"topdown",
          "height":76,
+         "name":"hiding_spots",
+         "objects":[
+                {
+                 "gid":38,
+                 "height":32,
+                 "id":22,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":1504,
+                 "y":1884
+                }, 
+                {
+                 "gid":38,
+                 "height":32,
+                 "id":23,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":2360,
+                 "y":2364
+                }, 
+                {
+                 "gid":38,
+                 "height":32,
+                 "id":24,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":736,
+                 "y":2360
+                }, 
+                {
+                 "gid":38,
+                 "height":32,
+                 "id":25,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":1244,
+                 "y":2364
+                }, 
+                {
+                 "gid":38,
+                 "height":32,
+                 "id":26,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":188,
+                 "y":1496
+                }, 
+                {
+                 "gid":38,
+                 "height":32,
+                 "id":27,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":1044,
+                 "y":1492
+                }, 
+                {
+                 "gid":38,
+                 "height":32,
+                 "id":28,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":940,
+                 "y":864
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "width":100,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "draworder":"topdown",
+         "height":76,
          "name":"npc",
          "objects":[
                 {
@@ -83,7 +179,7 @@
          "x":0,
          "y":0
         }],
- "nextobjectid":22,
+ "nextobjectid":29,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tileheight":32,
