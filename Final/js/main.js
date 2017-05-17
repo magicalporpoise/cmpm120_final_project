@@ -6,7 +6,7 @@
 //-----------------------------------------------------------------------
 
 //create phaser game variable
-var game = new Phaser.Game(600, 600, Phaser.AUTO);
+var game = new Phaser.Game(800, 800, Phaser.AUTO);
 
 //***
 //PRELOAD: 
@@ -82,6 +82,7 @@ Game.prototype = {
 		//Major Groups for Collision checks
 		group_ViewBox = game.add.group();
 		group_npc = game.add.group();
+		group_npc.enableBody = true;
 
 		//BG color, blue
 		game.stage.backgroundColor = "#4488AA";
@@ -89,7 +90,8 @@ Game.prototype = {
 		player = new Player(100, 100, 0.15, 'player2');
 
 		//create any npc objects
-		npc = new NPC(400, 100, 2, 'player', group_ViewBox);
+		npc = new NPC(400,100,2,'player', group_ViewBox); //adding in npc's like this 
+		npc2 = new NPC(1000,1000,2,'player',group_ViewBox); //will have to be a temp fix
 
 		//this is whatever you used for the key when you loaded it in
 		map = game.add.tilemap('Level0');
@@ -103,10 +105,13 @@ Game.prototype = {
 		layer1 = map.createLayer ('Tile Layer 1');
 
 		//entire grid will have collision set
-		map.setCollisionByExclusion([]);
+		map.setCollisionByExclusion([]); //i don't completely understand how this works
 
 		//fits layer to the game world
 		layer1.resizeWorld();
+
+		//supposed to add our npc's in on the object layer but i am not gettin feedback
+		map.createFromObjects('npc', 16, 'player',0,true,true, group_npc);
 
 		hidingspot = new HidingSpot(200, 500, 1, 'platform');
 		game.add.existing(hidingspot);
