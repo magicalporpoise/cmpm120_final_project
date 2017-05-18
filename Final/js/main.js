@@ -113,7 +113,7 @@ Game.prototype = {
 		//supposed to add our npc's in on the object layer but i am not gettin feedback
 		map.createFromObjects('npc', 16, 'player',0,true,true, group_npc);
 
-		hidingspot = new HidingSpot(200, 500, 1, 'platform');
+		hidingspot = new HidingSpot(200, 400, 1, 'platform');
 		game.add.existing(hidingspot);
 		
 		game.camera.follow(player); //camera follows player

@@ -23,9 +23,9 @@ function Player(x, y, scale, img){
 	this.body.collideWorldBounds = true;
 	//personal variables
 
-	this.maxSpeed = 400;
+	this.maxSpeed = 250;
 	this.jump = -500;
-	this.accel = 50;
+	this.accel = 25;
 	this.hidden = false; // can the player be seen?
 	this.facing = 1; //1 for right, -1 for left
 
