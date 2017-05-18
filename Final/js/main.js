@@ -110,8 +110,9 @@ Game.prototype = {
 		//fits layer to the game world
 		layer1.resizeWorld();
 
-		//supposed to add our npc's in on the object layer but i am not gettin feedback
-		map.createFromObjects('npc', 16, 'player',0,true,true, group_npc);
+		//adds in npc's but it doesn't get NPC properties
+		map.createFromObjects('npc', 10, 'player',0,true,false, group_ViewBox);
+		console.log(map.objects['npc']);
 
 		hidingspot = new HidingSpot(200, 400, 1, 'platform');
 		game.add.existing(hidingspot);
