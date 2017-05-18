@@ -16,11 +16,21 @@ var Preloader = function(game) {};
 Preloader.prototype = {
 	preload: function() {
 		console.log("In Preloader: preload");
+		
+		//LOAD MUSIC
+		game.load.path = 'assets/audio/music/level1/';
+		game.load.audio('ambient', 'ambient.mp3');
+
+		//LOAD SFX
+		game.load.path = 'assets/audio/sfx/';
+		game.load.audio('growl', 'growl.wav');
+		game.load.audio('step', 'footstep.mp3');
+
 		//LOAD ART ASSETS
 		game.load.path = "assets/img/";
 		game.load.spritesheet('player', 'stb-Sheet.png', 32, 50);
 		// test
-		game.load.spritesheet('player2', 'teddy_colored.png', 630, 900);
+		game.load.spritesheet('player2', 'teddyBear_Vector.png', 540, 830);
 		
 		game.load.image('platform', 'platform.png');
 		game.load.image('flame', 'flameParticle.png');
@@ -30,6 +40,8 @@ Preloader.prototype = {
 		//loads the image used in tiled to create the map(key, filename,32x32)
 		//the key can actually be called anything as well
 		game.load.spritesheet('tilesheet','dirt-tiles.png',32,32);
+
+		
 	},
 	create: function(){
 		console.log("In Preloader: create");
@@ -84,6 +96,10 @@ Game.prototype = {
 		group_npc = game.add.group();
 		group_npc.enableBody = true;
 
+		//add music
+		this.music = game.add.audio('ambient');
+		this.music.loopFull();
+
 		//BG color, blue
 		game.stage.backgroundColor = "#4488AA";
 		// the official player object
@@ -110,9 +126,8 @@ Game.prototype = {
 		//fits layer to the game world
 		layer1.resizeWorld();
 
-		//adds in npc's but it doesn't get NPC properties
-		map.createFromObjects('npc', 10, 'player',0,true,false, group_ViewBox);
-		console.log(map.objects['npc']);
+		//supposed to add our npc's in on the object layer but i am not gettin feedback
+		map.createFromObjects('npc', 16, 'player',0,true,true, group_npc);
 
 		hidingspot = new HidingSpot(200, 400, 1, 'platform');
 		game.add.existing(hidingspot);

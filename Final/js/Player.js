@@ -29,9 +29,12 @@ function Player(x, y, scale, img){
 	this.hidden = false; // can the player be seen?
 	this.facing = 1; //1 for right, -1 for left
 
+	//sounds
+	this.stepSFX = game.add.audio('step');
+
 	//upload animations
 	this.animations.add('idle', [0], 1, false);
-	this.animations.add('walk', [1,2,3,4], 10, true);
+	this.animations.add('walk', [4,5,6,7], 10, true);
 	game.add.existing(this);
 }
 
@@ -74,6 +77,7 @@ Player.prototype.update = function(){
 				this.facing *= -1;
 				this.scale.x *= -1;
 			}
+
 		}
 		//reaching max speed
 		if(Math.abs(this.body.velocity.x) > this.maxSpeed) 
@@ -98,8 +102,13 @@ Player.prototype.update = function(){
 		}
 	} else this.body.velocity.x = 0; //stop when hidden
 
-	if(this.body.velocity.x != 0) this.animations.play('walk', 15, true);
-	else this.animations.play('idle');
+	if(this.body.velocity.x != 0){
+		this.animations.play('walk', 15, true);
+		//this.stepSFX.stop();
+	}else {
+		this.stepSFX.loopFull();
+		this.animations.play('idle');
+	}
 
 }
 
