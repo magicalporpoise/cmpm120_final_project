@@ -34,7 +34,7 @@ function Player(x, y, scale, img){
 
 	//upload animations
 	this.animations.add('idle', [0], 1, false);
-	this.animations.add('walk', [4,5,6,7], 10, true);
+	this.animations.add('walk', [1,2,3,4], 10, true);
 	game.add.existing(this);
 }
 
