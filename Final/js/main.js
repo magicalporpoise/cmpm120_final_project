@@ -20,7 +20,7 @@ Preloader.prototype = {
 		game.load.path = "assets/img/";
 		game.load.spritesheet('player', 'stb-Sheet.png', 32, 50);
 		// test
-		game.load.spritesheet('player2', 'teddyBear_Vector.png', 540, 830);
+		game.load.spritesheet('player2', 'teddy_colored.png', 630, 900);
 		
 		game.load.image('platform', 'platform.png');
 		game.load.image('flame', 'flameParticle.png');
