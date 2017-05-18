@@ -107,7 +107,7 @@ Game.prototype = {
 
 		//create any npc objects
 		//npc = new NPC(400,100,2,'player', group_ViewBox); //adding in npc's like this 
-		npc2 = new NPC(1000,1000,2,'player',group_ViewBox); //will have to be a temp fix
+		//npc2 = new NPC(1000,1000,2,'player',group_ViewBox); //will have to be a temp fix
 		npc3 = new NPC(50,1200,2,'player',group_ViewBox);
 		npc4 = new NPC(3000,50,2,'player',group_ViewBox);
 		npc5 = new NPC(4000,2000,2,'player',group_ViewBox);
