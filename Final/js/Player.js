@@ -31,6 +31,7 @@ function Player(x, y, scale, img){
 
 	//sounds
 	this.stepSFX = game.add.audio('step');
+	this.stepSFX.loopFull();
 
 	//upload animations
 	this.animations.add('idle', [0], 1, false);
@@ -107,9 +108,9 @@ Player.prototype.update = function(){
 	}
 	if(this.body.velocity.x != 0){
 		this.animations.play('walk', 15, true);
-		//this.stepSFX.stop();
+		this.stepSFX.resume();
 	}else {
-		this.stepSFX.loopFull();
+		this.stepSFX.pause();
 		this.animations.play('idle');
 	}
 

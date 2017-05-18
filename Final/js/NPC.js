@@ -42,7 +42,7 @@ function NPC(x, y, scale, img, group){
 
 	//behavior timer
 	this.behave = game.time.create(false);
-	this.behave.loop(Math.random()*2000+1000, determineBehavior, this);
+	this.behave.loop(Math.random()*2000+2000, determineBehavior, this);
 	this.behave.start();
 	this.stunTimer = game.time.create(false);
 	this.stunTimer.loop(3000, unStun, this);
