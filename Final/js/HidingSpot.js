@@ -18,8 +18,9 @@ function HidingSpot(x, y, scale_length, img){
 	this.y = y;
 	this.scale.x = scale_length;
 	this.scale.y = scale_length;
-
+	this.tint = 0x000000;
 	game.physics.arcade.enable(this);
+	game.add.existing(this);
 
 }
 

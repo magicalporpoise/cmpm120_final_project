@@ -23,7 +23,7 @@ function Player(x, y, scale, img){
 	this.body.collideWorldBounds = true;
 	//personal variables
 
-	this.maxSpeed = 250;
+	this.maxSpeed = 500;
 	this.jump = -500;
 	this.accel = 25;
 	this.hidden = false; // can the player be seen?
@@ -61,6 +61,7 @@ Player.prototype.update = function(){
 	let hori = mv_right - mv_left;
 
 	// move the character
+	this.tint = 0xFFFFFF;
 	if(!this.hidden){
 		//jump
 		if(vert < 0 && hitGround){ 
@@ -92,16 +93,18 @@ Player.prototype.update = function(){
 		if(!game.physics.arcade.overlap(this, group_ViewBox) && k_attack){
 			var hitBox;
 			if(this.facing > 0) hitBox = game.add.sprite(this.x, this.y, 'platform');
-			else hitBox = game.add.sprite(this.x-60, this.y, 'platform');
+			else hitBox = game.add.sprite(this.x-100, this.y, 'platform');
 			game.physics.arcade.enable(hitBox);
 			//change hit box size
-			hitBox.body.setSize(60, 50, 0, 0);
+			hitBox.body.setSize(100, 50, 0, 0);
 			game.physics.arcade.overlap(hitBox, group_npc, stunTheEnemy);
 			hitBox.destroy();
 			//--add animation--//
 		}
-	} else this.body.velocity.x = 0; //stop when hidden
-
+	} else {
+		this.tint = 0;
+		this.body.velocity.x = 0; //stop when hidden
+	}
 	if(this.body.velocity.x != 0){
 		this.animations.play('walk', 15, true);
 		//this.stepSFX.stop();

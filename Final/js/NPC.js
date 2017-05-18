@@ -25,7 +25,7 @@ function NPC(x, y, scale, img, group){
 	game.physics.arcade.enable(this);
 	this.body.gravity.y = 500;
 	this.body.collideWorldBounds = true;
-
+	this.tint = 0x0000FF;
 	//personal variables
 	this.maxSpeed = 100;
 	this.idle = false;
@@ -42,8 +42,11 @@ function NPC(x, y, scale, img, group){
 
 	//behavior timer
 	this.behave = game.time.create(false);
-	this.behave.loop(3000, determineBehavior, this);
+	this.behave.loop(Math.random()*2000+1000, determineBehavior, this);
 	this.behave.start();
+	this.stunTimer = game.time.create(false);
+	this.stunTimer.loop(3000, unStun, this);
+	this.stunTimer.start();
 	//insert into game
 	game.add.existing(this);
 	group_npc.add(this);
@@ -69,7 +72,7 @@ NPC.prototype.create = function(){
 NPC.prototype.update = function(){
 	game.physics.arcade.collide(this, layer1);
 	let hit = 0;
-	if(!player.hidden) hit = game.physics.arcade.collide(this, player);
+	if(!player.hidden) hit = game.physics.arcade.overlap(this, player);
 
 	// move the character
 	if(this.movingHori != 0 && !this.isStunned) {
@@ -86,15 +89,20 @@ NPC.prototype.update = function(){
 
 	//behavior
 	if(!this.isStunned){
+		this.stunTimer.pause();
 		if(this.sight.playerInSight && !player.hidden) { //aggro - red
 			this.tint = 0xFF0000;
 			this.aggro = true;
 			this.behave.pause();
-		} else { // wander - blue
+		} else if(player.hidden){ // wander - blue
 			this.tint = 0x0000FF;
-			//this.behave.resume();
+			this.aggro = false;
+			this.behave.resume();
 		}
-	} else this.tint = 0x00FF00; // stunned - green
+	} else {
+		this.tint = 0x00FF00; // stunned - green
+		this.stunTimer.resume();
+	}
 
 	if(this.aggro){
 		this.idle = false;
@@ -117,12 +125,12 @@ function determineBehavior(){
 			this.movingHori = -1 * this.facing;
 			this.idle = true;
 		}
+}
 
-		if(this.isStunned){
-			this.isStunned = false;
-			this.idle = true;
-			//console.log(this.movingHori);
-		}
+function unStun(){
+	this.isStunned = false;
+	this.idle = false;
+	this.stunTimer.pause();
 }
 
 function attackPlayer(self){
