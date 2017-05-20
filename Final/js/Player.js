@@ -38,8 +38,9 @@ function Player(x, y, scale, img){
 	//this.animations.add('walk', [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,], 10, true);
 	//this.onStart.add(animationStarted, this);
 	//this.animations.add('walk', Phaser.Animation.generateFrameNames('', 1, 61, '', 4), 10, true, false);
-	var anim = animations.add('walk');
-	anim.play(10, true);
+	var anim = this.animations.add('walk');
+	//anim.play(100, true);
+
 	game.add.existing(this);
 }
 
@@ -112,7 +113,7 @@ Player.prototype.update = function(){
 		this.body.velocity.x = 0; //stop when hidden
 	}
 	if(this.body.velocity.x != 0){
-		this.animations.play('walk', 15, true);
+		this.animations.play('walk', 65, true);
 		this.stepSFX.resume();
 	}else {
 		this.stepSFX.pause();
