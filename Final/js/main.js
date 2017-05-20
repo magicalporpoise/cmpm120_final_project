@@ -2,7 +2,6 @@
 // Phaser: Game World
 // 		phaser template for a basic game world
 //		use this as the base for a 2-D game project
-// 		Written by: Philip Stanley
 //-----------------------------------------------------------------------
 
 //create phaser game variable
@@ -41,6 +40,7 @@ Preloader.prototype = {
 		//the key can actually be called anything as well
 		game.load.spritesheet('tilesheet','dirt-tiles.png',32,32);
 
+		game.load.atlasJSONArray('teddy', 'tb.png', 'tb.json');
 		
 	},
 	create: function(){
@@ -103,7 +103,12 @@ Game.prototype = {
 		//BG color, blue
 		game.stage.backgroundColor = "#AAAAAA";
 		// the official player object
-		player = new Player(100, 100, 0.15, 'player2');
+		//console.log('above create');
+		player = new Player(100, 100, 0.15, 'teddy');
+		//console.log('below create');
+		//player = game.add.sprite(0, 100, 'teddy', 'tb_000.png');
+		//player.scale.x = 0.3;
+		//player.scale.y=0.3;
 
 		//create any npc objects
 		npc = new NPC(580,500,2,'player', group_ViewBox); //adding in npc's like this 

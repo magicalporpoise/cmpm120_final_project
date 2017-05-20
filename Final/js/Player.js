@@ -1,6 +1,5 @@
 // Player.js
 // Player object template for phaser
-//		Written by: Philip Stanley
 
 //***
 // CONSTRUCTOR
@@ -34,8 +33,13 @@ function Player(x, y, scale, img){
 	this.stepSFX.loopFull();
 
 	//upload animations
-	this.animations.add('idle', [0], 1, false);
-	this.animations.add('walk', [1,2,3,4], 10, true);
+	this.animations.add('idle', [0], 1, true);
+	//this.animations.add('idle', Phaser.Animation.generateFrameNames('', 1, 2, '', 4), 10, true, false);
+	//this.animations.add('walk', [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,], 10, true);
+	//this.onStart.add(animationStarted, this);
+	//this.animations.add('walk', Phaser.Animation.generateFrameNames('', 1, 61, '', 4), 10, true, false);
+	var anim = animations.add('walk');
+	anim.play(10, true);
 	game.add.existing(this);
 }
 
@@ -48,6 +52,7 @@ Player.prototype.constructor = Player;
 //	player input and behavior
 //***
 Player.prototype.update = function(){
+	//console.log('top of update');
 	let mv_up = game.input.keyboard.justPressed(Phaser.Keyboard.W); //cursors.up.isDown;
 	let mv_left = game.input.keyboard.isDown(Phaser.Keyboard.A); //cursors.left.isDown;
 	let mv_right = game.input.keyboard.isDown(Phaser.Keyboard.D); //cursors.right.isDown;
@@ -113,6 +118,7 @@ Player.prototype.update = function(){
 		this.stepSFX.pause();
 		this.animations.play('idle');
 	}
+	//console.log('bot of update');
 
 }
 
