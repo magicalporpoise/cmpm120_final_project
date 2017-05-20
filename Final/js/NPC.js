@@ -5,10 +5,10 @@
 //***
 // CONSTRUCTOR
 //***
-function NPC(x, y, scale, img, group){
+function NPC(game, x, y, img, frame) {
 	//inherit Phaser.Sprite class
 	// calling new Sprite
-	Phaser.Sprite.call(this, game, x, y, img, 0);
+	Phaser.Sprite.call(this, game, x, y, img, frame);
 
 	//pass by reference, the player
 	//  now the AI will track?
@@ -18,8 +18,8 @@ function NPC(x, y, scale, img, group){
 	//		and physics
 	this.x = x;
 	this.y = y;
-	this.scale.x = scale;
-	this.scale.y = scale;
+	//this.scale.x = scale;
+	//this.scale.y = scale;
 	this.anchor.set(0.5, 0.5);
 
 	game.physics.arcade.enable(this);
@@ -35,9 +35,9 @@ function NPC(x, y, scale, img, group){
 	this.aggro = false;
 
 	//create view box
-	this.sight = new ViewBox(this.x, this.y, 0.45, 'platform', group);
+	this.sight = new ViewBox(this.x, this.y, 0.45, 'platform');
 	game.add.existing(this.sight);
-	group.add(this.sight);
+	group_ViewBox.add(this.sight);
 	//console.log("in NPC: "+ group.children);
 
 	//behavior timer

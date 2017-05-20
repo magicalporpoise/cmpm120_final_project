@@ -106,16 +106,16 @@ Game.prototype = {
 		player = new Player(100, 100, 0.15, 'player2');
 
 		//create any npc objects
-		npc = new NPC(580,500,2,'player', group_ViewBox); //adding in npc's like this 
+		//npc = new NPC(580,500,2,'player', group_ViewBox); //adding in npc's like this 
 		//npc2 = new NPC(1000,1000,2,'player',group_ViewBox); //will have to be a temp fix
-		npc3 = new NPC(50,1200,2,'player',group_ViewBox);
-		npc4 = new NPC(3000,50,2,'player',group_ViewBox);
-		npc5 = new NPC(4000,2000,2,'player',group_ViewBox);
-		npc6 = new NPC(200,2000,2,'player',group_ViewBox);
-		npc7 = new NPC(1200,1500,2,'player',group_ViewBox);
-		npc8 = new NPC(2000,2200,2,'player',group_ViewBox);
-		npc9 = new NPC(2200,2200,2,'player',group_ViewBox);
-		npc10 = new NPC(2400,2200,2,'player',group_ViewBox);
+		//npc3 = new NPC(50,1200,2,'player',group_ViewBox);
+		//npc4 = new NPC(3000,50,2,'player',group_ViewBox);
+		//npc5 = new NPC(4000,2000,2,'player',group_ViewBox);
+		//npc6 = new NPC(200,2000,2,'player',group_ViewBox);
+		//npc7 = new NPC(1200,1500,2,'player',group_ViewBox);
+		//npc8 = new NPC(2000,2200,2,'player',group_ViewBox);
+		//npc9 = new NPC(2200,2200,2,'player',group_ViewBox);
+		//npc10 = new NPC(2400,2200,2,'player',group_ViewBox);
 
 		//this is whatever you used for the key when you loaded it in
 		map = game.add.tilemap('Level0');
@@ -135,7 +135,8 @@ Game.prototype = {
 		layer1.resizeWorld();
 
 		//supposed to add our npc's in on the object layer but i am not gettin feedback
-		//map.createFromObjects('npc', 16, 'player',0,true,true, group_npc);
+		map.createFromObjects('npc',  10, 'player',0,true,true, group_npc, NPC);
+		console.log(map);
 
 		hidingspot1 = new HidingSpot(1200, 2300, 0.5, 'platform');
 		hidingspot2 = new HidingSpot(600, 600, 0.5, 'platform');
