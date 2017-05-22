@@ -33,6 +33,7 @@ function NPC(game, x, y, img, frame) {
 	this.movingHori = 0;
 	this.isStunned = false;
 	this.aggro = false;
+	this.canAttack = true;
 
 	//create view box
 	this.sight = new ViewBox(this.x, this.y, 0.45, 'platform');
@@ -72,7 +73,9 @@ NPC.prototype.create = function(){
 NPC.prototype.update = function(){
 	game.physics.arcade.collide(this, layer1);
 	let hit = 0;
-	if(!player.hidden) hit = game.physics.arcade.overlap(this, player);
+	if(!player.hidden && this.aggro) {
+		hit = game.physics.arcade.overlap(this, player, attackPlayer);
+	}
 
 	// move the character
 	if(this.movingHori != 0 && !this.isStunned) {
@@ -94,7 +97,7 @@ NPC.prototype.update = function(){
 			this.tint = 0xFF0000;
 			this.aggro = true;
 			this.behave.pause();
-		} else if(player.hidden){ // wander - blue
+		} else if((this.aggro && player.hidden) && !this.sight.playerInSight){ // wander - blue
 			this.tint = 0x0000FF;
 			this.aggro = false;
 			this.behave.resume();
@@ -108,7 +111,7 @@ NPC.prototype.update = function(){
 		this.idle = false;
 		this.isStunned = false;
 		this.maxSpeed = 200;
-		attackPlayer(this);
+		moveTowardsPlayer(this);
 	} else this.maxSpeed = 100;
 }
 
@@ -120,6 +123,7 @@ function determineBehavior(){
 		if(this.idle) {
 			this.idle = false;
 			this.movingHori = 0;
+			this.canAttack = true;
 		} else {
 			//turn around
 			this.movingHori = -1 * this.facing;
@@ -133,9 +137,19 @@ function unStun(){
 	this.stunTimer.pause();
 }
 
-function attackPlayer(self){
+function moveTowardsPlayer(self){
 	// follow and hit player
 	//console.log("ATTACK!!")
 	self.movingHori = Math.sign(player.x - self.x);
 	//console.log(player.x - self.x);
+}
+
+function attackPlayer(self, play){
+	if(self.canAttack) play.hearts--;
+	//knockback
+	play.body.velocity.y = -200;
+	play.body.velocity.x = self.movingHori * 500;
+
+	//prevent infinite hits
+	self.canAttack = false;
 }
