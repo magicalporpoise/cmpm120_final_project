@@ -21,8 +21,9 @@ function Player(x, y, scale, img){
 	game.physics.arcade.enable(this);
 	this.body.gravity.y = 1000;
 	this.body.collideWorldBounds = true;
+	
 	//personal variables
-
+	this.hearts = 10;
 	this.maxSpeed = 500;
 	this.jump = -500;
 	this.accel = 25;
@@ -91,14 +92,14 @@ Player.prototype.update = function(){
 		if(Math.abs(this.body.velocity.x) < this.accel/2) this.body.velocity.x = 0;
 
 		//attacking
-		if(!game.physics.arcade.overlap(this, group_ViewBox) && k_attack){
+		if(k_attack){
 			var hitBox;
 			if(this.facing > 0) hitBox = game.add.sprite(this.x, this.y, 'platform');
 			else hitBox = game.add.sprite(this.x-100, this.y, 'platform');
 			game.physics.arcade.enable(hitBox);
 			//change hit box size
 			hitBox.body.setSize(100, 50, 0, 0);
-			game.physics.arcade.overlap(hitBox, group_npc, stunTheEnemy);
+			if(!group_npc.aggro) game.physics.arcade.overlap(hitBox, group_npc, stunTheEnemy);
 			hitBox.destroy();
 			//--add animation--//
 		}
