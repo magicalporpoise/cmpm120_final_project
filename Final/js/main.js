@@ -6,8 +6,8 @@
 //-----------------------------------------------------------------------
 
 //create phaser game variable
-var game = new Phaser.Game(900, 700, Phaser.AUTO);
-
+var game;
+var pauseScreen;
 //***
 //PRELOAD: 
 //	load main art assets and move to the main menu
@@ -91,6 +91,14 @@ Game.prototype = {
 		console.log("in Game Create");
 		//activate physics
 		game.physics.startSystem(Phaser.Physics.ARCADE);
+		//Pause Screen
+		/*
+		pauseScreen = game.add.graphics(0, 0);
+		pauseScreen.beginFill(0x000, 0.5);
+		pauseScreen.drawRect(0, 0, game.width, game.height);
+		pauseScreen.endFill();
+		*/
+		//window.graphics = graphics;
 		//Major Groups for Collision checks
 		group_ViewBox = game.add.group();
 		group_npc = game.add.group();
@@ -160,7 +168,29 @@ Game.prototype = {
 
 //Add the states to the game and start up.
 //	additional logic can be used to traverse states
-game.state.add('Preloader', Preloader);
-game.state.add('MainMenu', MainMenu);
-game.state.add('Game', Game);
-game.state.start('Preloader');
+window.onload = function() {
+	var width  = 900;
+	var height = 700;
+	game = new Phaser.Game(width, height, Phaser.AUTO);
+
+	game.state.add('Preloader', Preloader);
+	game.state.add('MainMenu', MainMenu);
+	game.state.add('Game', Game);
+	game.state.start('Preloader');
+}
+
+window.onkeydown = function(event){
+	var kdown = event.keyCode || event.which;
+	if(kdown === Phaser.Keyboard.P){
+		pauseGame();
+	}
+}
+
+function pauseGame(){
+	game.paused ? game.paused = false : game.paused = true;
+
+	if(game.paused){
+		//add gray alpha layer to display pause
+	} else {
+	}
+}

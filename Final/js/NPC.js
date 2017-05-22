@@ -73,7 +73,7 @@ NPC.prototype.create = function(){
 NPC.prototype.update = function(){
 	game.physics.arcade.collide(this, layer1);
 	let hit = 0;
-	if(!player.hidden) {
+	if(!player.hidden && this.aggro) {
 		hit = game.physics.arcade.overlap(this, player, attackPlayer);
 	}
 
