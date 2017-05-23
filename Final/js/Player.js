@@ -123,6 +123,9 @@ Player.prototype.update = function(){
 
 }
 
+//=========
+//FUNCTIONS
+//=========
 function stunTheEnemy(hb, npc){
 	npc.isStunned = true;
 }

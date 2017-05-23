@@ -3,9 +3,9 @@
 // allows npcs to 'see' the player.
 //		Written by: Philip Stanley
 
-//***
-// CONSTRUCTOR
-//***
+//===========
+//CONSTRUCTOR
+//===========
 function ViewBox(x, y, scale_length, img){
 	//inherit Phaser.Sprite class
 	// calling new Sprite
@@ -25,17 +25,19 @@ function ViewBox(x, y, scale_length, img){
 	this.playerInSight = false;
 }
 
-//EDIT PROTOTYPE
+//=========
+//PROTOTYPE
+//=========
 ViewBox.prototype = Object.create(Phaser.Sprite.prototype);
 ViewBox.prototype.constructor = ViewBox;
 
-//***
+//==================
 //UPDATE FUNCTION:
 //	viewbox behavior
-//***
+//==================
 ViewBox.prototype.update = function(){
 	let inSights = game.physics.arcade.overlap(this, player);
-	// move the character
+	//check if player is in sights
 	if(inSights) {this.playerInSight = true;}
 	else this.playerInSight = false;
 }
