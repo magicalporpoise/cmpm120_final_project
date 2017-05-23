@@ -6,7 +6,7 @@
 //===========
 //CONSTRUCTOR
 //===========
-function HidingSpot(x, y, scale_length, frame){
+function HidingSpot(x, y, scale_length, img, frame){
 	//inherit Phaser.Sprite class
 	// calling new Sprite
 	Phaser.Sprite.call(this, game, x, y, img, frame);
