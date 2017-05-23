@@ -91,6 +91,7 @@ Game.prototype = {
 		console.log("in Game Create");
 		//activate physics
 		game.physics.startSystem(Phaser.Physics.ARCADE);
+
 		//Pause Screen
 		/*
 		pauseScreen = game.add.graphics(0, 0);
@@ -99,60 +100,62 @@ Game.prototype = {
 		pauseScreen.endFill();
 		*/
 		//window.graphics = graphics;
+
 		//Major Groups for Collision checks
 		group_ViewBox = game.add.group();
 		group_npc = game.add.group();
 		group_npc.enableBody = true;
 
-		//add music
+		//Add Audio / Music
 		this.music = game.add.audio('ambient');
 		this.music.loopFull();
 
 		//BG color, blue
 		game.stage.backgroundColor = "#AAAAAA";
-		// the official player object
+
+		//=============
+		//PLAYER OBJECT
+		//=============
 		player = new Player(100, 100, 0.15, 'player2');
 
-		//create any npc objects
-		//npc = new NPC(580,500,2,'player', group_ViewBox); //adding in npc's like this 
-		//npc2 = new NPC(1000,1000,2,'player',group_ViewBox); //will have to be a temp fix
-		//npc3 = new NPC(50,1200,2,'player',group_ViewBox);
-		//npc4 = new NPC(3000,50,2,'player',group_ViewBox);
-		//npc5 = new NPC(4000,2000,2,'player',group_ViewBox);
-		//npc6 = new NPC(200,2000,2,'player',group_ViewBox);
-		//npc7 = new NPC(1200,1500,2,'player',group_ViewBox);
-		//npc8 = new NPC(2000,2200,2,'player',group_ViewBox);
-		//npc9 = new NPC(2200,2200,2,'player',group_ViewBox);
-		//npc10 = new NPC(2400,2200,2,'player',group_ViewBox);
+		//===================
+		//TILEMAP: main level
+		//===================
+			//this is whatever you used for the key when you loaded it in
+			map = game.add.tilemap('Level0');
 
-		//this is whatever you used for the key when you loaded it in
-		map = game.add.tilemap('Level0');
+			//add a tileset image to create the map-object(name,key used above when loading image)
+			//name has to be the one specified in the json file
+			// under tileset in the name category
+			map.addTilesetImage('Level0_tilesheet','tilesheet');
 
-		//add a tileset image to create the map-object(name,key used above when loading image)
-		//name has to be the one specified in the json file
-		// under tileset in the name category
-		map.addTilesetImage('Level0_tilesheet','tilesheet');
+			//initiates new layer, must be exact same name as specified in json
+			layer1 = map.createLayer ('Tile Layer 1');
 
-		//initiates new layer, must be exact same name as specified in json
-		layer1 = map.createLayer ('Tile Layer 1');
+			//entire grid will have collision set
+			map.setCollisionByExclusion([]); //i don't completely understand how this works
 
-		//entire grid will have collision set
-		map.setCollisionByExclusion([]); //i don't completely understand how this works
+			//fits layer to the game world
+			layer1.resizeWorld();
 
-		//fits layer to the game world
-		layer1.resizeWorld();
+			//====================================
+			//CREATE OBJECTS: from tile map layers
+			//====================================
+			//walking npcs
+			map.createFromObjects('npc',  10, 'player',0,true,true, group_npc, NPC);
+			//hiding spots
+			hidingspot1 = new HidingSpot(1200, 2300, 0.5, 'platform');
+			hidingspot2 = new HidingSpot(600, 600, 0.5, 'platform');
 
-		//supposed to add our npc's in on the object layer but i am not gettin feedback
-		map.createFromObjects('npc',  10, 'player',0,true,true, group_npc, NPC);
 		console.log(map);
 
-		hidingspot1 = new HidingSpot(1200, 2300, 0.5, 'platform');
-		hidingspot2 = new HidingSpot(600, 600, 0.5, 'platform');
-		
-		game.camera.follow(player); //camera follows player
+		//camera follows player
+		game.camera.follow(player);
 
+		//print groups to confirm proper creation
 		console.log(group_npc.children);
 
+		//debug text
 		displayText = game.add.text(player.x, player.y-100, 'Player Hearts:', { fontSize: '32px', fill: '#F00'});
 	
 	},
@@ -166,8 +169,9 @@ Game.prototype = {
 
 
 
-//Add the states to the game and start up.
-//	additional logic can be used to traverse states
+//======================
+//START GAME: add states
+//======================
 window.onload = function() {
 	var width  = 900;
 	var height = 700;
@@ -179,6 +183,7 @@ window.onload = function() {
 	game.state.start('Preloader');
 }
 
+//out of 'Update' pause state
 window.onkeydown = function(event){
 	var kdown = event.keyCode || event.which;
 	if(kdown === Phaser.Keyboard.P){
@@ -186,9 +191,9 @@ window.onkeydown = function(event){
 	}
 }
 
+//pause the game
 function pauseGame(){
 	game.paused ? game.paused = false : game.paused = true;
-
 	if(game.paused){
 		//add gray alpha layer to display pause
 	} else {

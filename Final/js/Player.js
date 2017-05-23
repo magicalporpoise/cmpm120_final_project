@@ -2,16 +2,16 @@
 // Player object template for phaser
 //		Written by: Philip Stanley
 
-//***
-// CONSTRUCTOR
-//***
+//===========
+//CONSTRUCTOR
+//===========
 function Player(x, y, scale, img){
-	//inherit Phaser.Sprite class
+	//Inherit Phaser.Sprite class
 	// calling new Sprite
 	Phaser.Sprite.call(this, game, x, y, img, 0);
 
 	//phaser related variables
-	//		and physics
+	//and physics
 	this.x = x;
 	this.y = y;
 	this.scale.x = scale;
@@ -23,12 +23,12 @@ function Player(x, y, scale, img){
 	this.body.collideWorldBounds = true;
 	
 	//personal variables
-	this.hearts = 10;
-	this.maxSpeed = 500;
-	this.jump = -500;
-	this.accel = 25;
-	this.hidden = false; // can the player be seen?
-	this.facing = 1; //1 for right, -1 for left
+	this.hearts = 10;		//character's hp
+	this.maxSpeed = 500;	//speed cap
+	this.jump = -500;		//jump height
+	this.accel = 25;		//acceleration
+	this.hidden = false; 	//is the player hidden from enemies?
+	this.facing = 1; 		//1 for right, -1 for left
 
 	//sounds
 	this.stepSFX = game.add.audio('step');
@@ -37,63 +37,67 @@ function Player(x, y, scale, img){
 	//upload animations
 	this.animations.add('idle', [0], 1, false);
 	this.animations.add('walk', [1,2,3,4], 10, true);
+
+	//add to game world
 	game.add.existing(this);
 }
 
-//EDIT PROTOTYPE
+//=========
+//PROTOTYPE
+//=========
 Player.prototype = Object.create(Phaser.Sprite.prototype);
 Player.prototype.constructor = Player;
 
-//***
-//UPDATE FUNCTION:
-//	player input and behavior
-//***
+//==========================================
+//UPDATE FUNCTION: player input and behavior
+//==========================================
 Player.prototype.update = function(){
-	let mv_up = game.input.keyboard.justPressed(Phaser.Keyboard.W); //cursors.up.isDown;
-	let mv_left = game.input.keyboard.isDown(Phaser.Keyboard.A); //cursors.left.isDown;
-	let mv_right = game.input.keyboard.isDown(Phaser.Keyboard.D); //cursors.right.isDown;
-	let mv_down = game.input.keyboard.justPressed(Phaser.Keyboard.S); //cursors.down.isDown;
+	//get key presses
+	let mv_up = game.input.keyboard.justPressed(Phaser.Keyboard.W);
+	let mv_left = game.input.keyboard.isDown(Phaser.Keyboard.A);
+	let mv_right = game.input.keyboard.isDown(Phaser.Keyboard.D);
+	let mv_down = game.input.keyboard.justPressed(Phaser.Keyboard.S);
 	let k_attack = game.input.keyboard.justPressed(Phaser.Keyboard.K); 
+
 	//collide with platforms
-	// will this work even tho platforms are in main?
 	let hitGround = game.physics.arcade.collide(this, layer1);
 
 	//movement vars
 	let vert = mv_down - mv_up;
 	let hori = mv_right - mv_left;
 
-	// move the character
-	this.tint = 0xFFFFFF;
+	//MOVEMENT
 	if(!this.hidden){
+		//tinting
+		this.tint = 0xFFFFFF;
+
 		//jump
 		if(vert < 0 && hitGround){ 
-			// also allows wall jumps if against a wall 
-			this.body.velocity.y = this.jump;
-		} else if (vert > 0) {
-			//fast fall.
-			this.body.velocity.y = 10*this.accel;
+			this.body.velocity.y = this.jump; // also allows wall jumps
 		}
+
 		//move left and right + accelerate
 		if(hori != 0) {
 			this.body.velocity.x += this.accel * hori;
-			if(Math.sign(this.body.velocity.x) != this.facing){
+			if(Math.sign(this.body.velocity.x) != this.facing) {
 				this.facing *= -1;
 				this.scale.x *= -1;
 			}
 
+		} else { //deccelerate
+			this.body.velocity.x -= Math.sign(this.body.velocity.x) * this.accel / 2;
+			//stopping
+			if(Math.abs(this.body.velocity.x) < this.accel/2) this.body.velocity.x = 0;
 		}
+
 		//reaching max speed
 		if(Math.abs(this.body.velocity.x) > this.maxSpeed) 
 			this.body.velocity.x = Math.sign(this.body.velocity.x) * this.maxSpeed;
 
-		//deccelerate
-		this.body.velocity.x -= Math.sign(this.body.velocity.x) * this.accel / 2;
-		//stopping
-		if(Math.abs(this.body.velocity.x) < this.accel/2) this.body.velocity.x = 0;
-
+		//Can only attack while not hidden
 		//attacking
 		if(k_attack){
-			var hitBox;
+			var hitBox;	//make a hitbox to check against an enemy
 			if(this.facing > 0) hitBox = game.add.sprite(this.x, this.y, 'platform');
 			else hitBox = game.add.sprite(this.x-100, this.y, 'platform');
 			game.physics.arcade.enable(hitBox);
@@ -103,10 +107,12 @@ Player.prototype.update = function(){
 			hitBox.destroy();
 			//--add animation--//
 		}
-	} else {
-		this.tint = 0;
-		this.body.velocity.x = 0; //stop when hidden
+	} else { //IS HIDDEN
+		this.tint = 0;				//turn black when hidden
+		this.body.velocity.x = 0;	//stop when hidden
 	}
+
+	//ANIMATION + SOUND HANDLING
 	if(this.body.velocity.x != 0){
 		this.animations.play('walk', 15, true);
 		this.stepSFX.resume();
