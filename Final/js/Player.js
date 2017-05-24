@@ -20,6 +20,8 @@ function Player(x, y, scale, img){
 	game.physics.arcade.enable(this);
 	this.body.gravity.y = 1000;
 	this.body.collideWorldBounds = true;
+	//set hitbox size
+	this.body.setSize(500, 800);
 	
 	//personal variables
 	this.hearts = 10;		//character's hp
