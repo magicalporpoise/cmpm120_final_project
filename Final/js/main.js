@@ -143,7 +143,7 @@ Game.prototype = {
 
 		layer1.scale = {x:5,y:.5};
 
-		Phaser.Canvas.setSmoothingEnabled(this.game.context, false);
+		//Phaser.Canvas.setSmoothingEnabled(this.game.context, false);
 
 		//entire grid will have collision set
 		map.setCollisionByExclusion([]); //i don't completely understand how this works
