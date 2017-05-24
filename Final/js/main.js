@@ -42,7 +42,7 @@ Preloader.prototype = {
 		//loads the image used in tiled to create the map(key, filename,32x32)
 		//the key can actually be called anything as well
 		//game.load.spritesheet('tilesheet','dirt-tiles.png',32,32);
-		game.load.spritesheet('tilesheet','bricks.png');
+		game.load.spritesheet('bricks');
 
 		
 	},
@@ -136,21 +136,19 @@ Game.prototype = {
 		//name has to be the one specified in the json file
 		// under tileset in the name category
 		//map.addTilesetImage('Level0_tilesheet','tilesheet');
-		map.addTilesetImage('bricks', 'tilesheet');
+		map.addTilesetImage('bricks');
 
 		//initiates new layer, must be exact same name as specified in json
-		layer1 = map.createLayer ('Tile Layer 1');
-
-		layer1.scale = {x:5,y:.5};
+		layer1 = map.createLayer('Tile Layer 1');
+		layer1.resizeWorld();
+		//layer1.scale.x = .5;
+		//layer1.scale.y = .5;
 
 		//Phaser.Canvas.setSmoothingEnabled(this.game.context, false);
 
 		//entire grid will have collision set
 		map.setCollisionByExclusion([]); //i don't completely understand how this works
 
-
-		//fits layer to the game world
-		layer1.resizeWorld();
 
 		//supposed to add our npc's in on the object layer but i am not gettin feedback
 		map.createFromObjects('npc',  10, 'player',0,true,true, group_npc, NPC);
@@ -179,8 +177,8 @@ Game.prototype = {
 //Add the states to the game and start up.
 //	additional logic can be used to traverse states
 window.onload = function() {
-	var width  = 900;
-	var height = 1000;
+	var width  = 800;
+	var height = 600;
 	game = new Phaser.Game(width, height, Phaser.AUTO);
 
 	game.state.add('Preloader', Preloader);
