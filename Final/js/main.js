@@ -112,21 +112,16 @@ Game.prototype = {
 
 		//BG color, blue
 		game.stage.backgroundColor = "#AAAAAA";
-<<<<<<< HEAD
+
 		// the official player object
 		//console.log('above create');
 		player = new Player(100, 100, 0.15, 'teddy');
+		player.body.setSize(300, 600, 150, 200);
+
 		//console.log('below create');
 		//player = game.add.sprite(0, 100, 'teddy', 'tb_000.png');
 		//player.scale.x = 0.3;
 		//player.scale.y=0.3;
-=======
-
-		//=============
-		//PLAYER OBJECT
-		//=============
-		player = new Player(100, 100, 0.15, 'player2');
->>>>>>> ee32a37d9f073e6e7dd65365051bdcad17b57219
 
 		//===================
 		//TILEMAP: main level
@@ -174,6 +169,7 @@ Game.prototype = {
 		displayText.x = player.x- 100;
 		displayText.y = player.y - 100;
 		// some logic is handled within other objects
+		game.debug.body(player);
 	}
 }
 
