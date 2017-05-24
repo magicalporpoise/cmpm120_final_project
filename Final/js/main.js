@@ -36,10 +36,13 @@ Preloader.prototype = {
 		game.load.image('flame', 'flameParticle.png');
 		//loads in json tilemap created with tiled(key,filename,
 		//not exactly sure why null works here,the tilemap tool used)
-		game.load.tilemap('Level0','Level0.json',null,Phaser.Tilemap.TILED_JSON);
+		//game.load.tilemap('Level0','Level0.json',null,Phaser.Tilemap.TILED_JSON);
+
+		game.load.tilemap('tiletest1','tiletest1.json',null,Phaser.Tilemap.TILED_JSON);	
 		//loads the image used in tiled to create the map(key, filename,32x32)
 		//the key can actually be called anything as well
-		game.load.spritesheet('tilesheet','dirt-tiles.png',32,32);
+		//game.load.spritesheet('tilesheet','dirt-tiles.png',32,32);
+		game.load.spritesheet('tilesheet','bricks.png');
 
 		
 	},
@@ -126,18 +129,25 @@ Game.prototype = {
 		//npc10 = new NPC(2400,2200,2,'player',group_ViewBox);
 
 		//this is whatever you used for the key when you loaded it in
-		map = game.add.tilemap('Level0');
+		//map = game.add.tilemap('Level0');
+		map = game.add.tilemap('tiletest1');
 
 		//add a tileset image to create the map-object(name,key used above when loading image)
 		//name has to be the one specified in the json file
 		// under tileset in the name category
-		map.addTilesetImage('Level0_tilesheet','tilesheet');
+		//map.addTilesetImage('Level0_tilesheet','tilesheet');
+		map.addTilesetImage('bricks', 'tilesheet');
 
 		//initiates new layer, must be exact same name as specified in json
 		layer1 = map.createLayer ('Tile Layer 1');
 
+		layer1.scale = {x:5,y:.5};
+
+		Phaser.Canvas.setSmoothingEnabled(this.game.context, false);
+
 		//entire grid will have collision set
 		map.setCollisionByExclusion([]); //i don't completely understand how this works
+
 
 		//fits layer to the game world
 		layer1.resizeWorld();
@@ -170,7 +180,7 @@ Game.prototype = {
 //	additional logic can be used to traverse states
 window.onload = function() {
 	var width  = 900;
-	var height = 700;
+	var height = 1000;
 	game = new Phaser.Game(width, height, Phaser.AUTO);
 
 	game.state.add('Preloader', Preloader);

@@ -1,0 +1,36 @@
+{ "height":10,
+ "layers":[
+        {
+         "data":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 5, 5, 5, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+         "height":10,
+         "name":"Tile Layer 1",
+         "opacity":1,
+         "type":"tilelayer",
+         "visible":true,
+         "width":10,
+         "x":0,
+         "y":0
+        }],
+ "nextobjectid":1,
+ "orientation":"orthogonal",
+ "renderorder":"right-down",
+ "tileheight":672,
+ "tilesets":[
+        {
+         "columns":3,
+         "firstgid":1,
+         "image":"bricks.png",
+         "imageheight":2016,
+         "imagewidth":2016,
+         "margin":0,
+         "name":"bricks",
+         "spacing":0,
+         "tilecount":9,
+         "tileheight":672,
+         "tilewidth":672,
+         "transparentcolor":"#000000"
+        }],
+ "tilewidth":672,
+ "version":1,
+ "width":10
+}
