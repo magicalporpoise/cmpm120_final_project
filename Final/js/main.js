@@ -41,7 +41,8 @@ Preloader.prototype = {
 		game.load.spritesheet('tilesheet','dirt-tiles.png',32,32);
 
 		game.load.atlasJSONArray('teddy', 'tb.png', 'tb.json');
-		
+		game.load.atlasJSONArray('redBook', 'redBook.png', 'redBook.json');
+		game.load.atlasJSONArray('blueBook', 'blueBookSheet.png', 'blueBookSheet.json');
 	},
 	create: function(){
 		console.log("In Preloader: create");
@@ -107,8 +108,8 @@ Game.prototype = {
 		group_npc.enableBody = true;
 
 		//Add Audio / Music
-		this.music = game.add.audio('ambient');
-		this.music.loopFull();
+		//this.music = game.add.audio('ambient');
+		//this.music.loopFull();
 
 		//BG color, blue
 		game.stage.backgroundColor = "#AAAAAA";
@@ -147,7 +148,7 @@ Game.prototype = {
 			//CREATE OBJECTS: from tile map layers
 			//====================================
 			//walking npcs
-			map.createFromObjects('npc',  10, 'player',0,true,true, group_npc, NPC);
+			map.createFromObjects('npc',  10, 'redBook',0,true,true, group_npc, NPC);
 			//hiding spots
 			hidingspot1 = new HidingSpot(1200, 2300, 0.5, 'platform');
 			hidingspot2 = new HidingSpot(600, 600, 0.5, 'platform');

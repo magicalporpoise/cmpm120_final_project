@@ -31,7 +31,7 @@ function Player(x, y, scale, img){
 
 	//sounds
 	this.stepSFX = game.add.audio('step');
-	this.stepSFX.loopFull();
+	//this.stepSFX.loopFull();
 
 	//upload animations
 	this.animations.add('idle', [0], 1, true);
@@ -76,7 +76,7 @@ Player.prototype.update = function(){
 		this.tint = 0xFFFFFF;
 
 		//jump
-		if(vert < 0 && hitGround && this.body.velocity.y ==0 ){ 
+		if(vert < 0 && hitGround){  // && this.body.velocity.y ==0  for no double jump
 			this.body.velocity.y = this.jump; // also allows wall jumps
 		}
 

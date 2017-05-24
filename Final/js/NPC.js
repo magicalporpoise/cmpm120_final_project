@@ -21,7 +21,7 @@ function NPC(game, x, y, img, frame) {
 	game.physics.arcade.enable(this);
 	this.body.gravity.y = 500;
 	this.body.collideWorldBounds = true;
-	this.tint = 0x0000FF;
+	//this.tint = 0x0000FF;
 
 	//personal variables
 	this.maxSpeed = 100; 	//speed cap
@@ -47,6 +47,10 @@ function NPC(game, x, y, img, frame) {
 	this.stunTimer = game.time.create(false);
 	this.stunTimer.loop(3000, unStun, this);
 	this.stunTimer.start();
+	this.facing = -1;
+
+	var anim = this.animations.add('walk');
+	this.animations.add('idle', [0], 1, true);
 
 	//insert into game
 	game.add.existing(this);
@@ -79,21 +83,26 @@ NPC.prototype.update = function(){
 			this.facing *= -1;
 			this.scale.x *= -1;
 			this.sight.scale.x *= -1;
+			this.animations.play('walk', 105, true);
 		}
-	} else this.body.velocity.x = 0;
+	} else {
+		this.body.velocity.x = 0;
+		this.animations.play('idle', 0, false);
+	}
 	//make the sight follow the facing variable
 	this.sight.x = this.x;
 	this.sight.y = this.y-32;
 
 	//BEHAVIOR
 	if(!this.isStunned){
+		
 		this.stunTimer.pause();
 		if(this.sight.playerInSight && !player.hidden) { //aggro - red
 			this.tint = 0xFF0000;
 			this.aggro = true;
 			this.behave.pause();
 		} else if((this.aggro && player.hidden) && !this.sight.playerInSight){ // wander - blue
-			this.tint = 0x0000FF;
+			this.tint = 0xFFFFFF;
 			this.aggro = false;
 			this.behave.resume();
 		}
