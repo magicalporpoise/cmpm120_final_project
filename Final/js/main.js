@@ -40,6 +40,9 @@ Preloader.prototype = {
 		//the key can actually be called anything as well
 		game.load.spritesheet('tilesheet','dirt-tiles.png',32,32);
 
+
+		game.load.image('sightLine','sightline2.png');
+
 		game.load.atlasJSONArray('teddy', 'tb.png', 'tb.json');
 		game.load.atlasJSONArray('redBook', 'redBook.png', 'redBook.json');
 		game.load.atlasJSONArray('blueBook', 'blueBookSheet.png', 'blueBookSheet.json');
@@ -65,6 +68,7 @@ MainMenu.prototype = {
 		var introText = game.add.text(16, game.world.height/2,
 						'PRESS SPACE TO CONTINUE', 
 						{ fontSize: '32px', fill: '#FFF' });
+
 	},
 	update: function(){
 		if(game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR)){
@@ -91,7 +95,8 @@ Game.prototype = {
 	create: function() {
 		console.log("in Game Create");
 		//activate physics
-		game.physics.startSystem(Phaser.Physics.ARCADE);
+		//game.physics.startSystem(Phaser.Physics.ARCADE);
+		game.physics.startSystem(Phaser.Physics.P2JS);
 
 		//Pause Screen
 		/*
@@ -102,10 +107,14 @@ Game.prototype = {
 		*/
 		//window.graphics = graphics;
 
+		
+
 		//Major Groups for Collision checks
 		group_ViewBox = game.add.group();
 		group_npc = game.add.group();
 		group_npc.enableBody = true;
+
+
 
 		//Add Audio / Music
 		//this.music = game.add.audio('ambient');
@@ -119,6 +128,8 @@ Game.prototype = {
 		//=============
 		//player = new Player(100, 100, 0.15, 'player2');
 		player = new Player(100, 100, 0.15, 'teddy');
+
+		game.physics.p2.enable([group_npc, player], true);
 
 		//===================
 		//TILEMAP: main level
@@ -139,6 +150,7 @@ Game.prototype = {
 
 			//fits layer to the game world
 			layer1.resizeWorld();
+			game.physics.p2.convertTilemap(map, layer1);
 
 			//====================================
 			//CREATE OBJECTS: from tile map layers
@@ -167,6 +179,7 @@ Game.prototype = {
 		displayText.y = player.y - 100;
 		// some logic is handled within other objects
 		game.debug.body(player);
+		//game.debug.body(npc);
 	}
 }
 

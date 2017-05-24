@@ -16,7 +16,7 @@ function ViewBox(x, y, scale_length, img){
 	//		and physics
 	this.x = x;
 	this.y = y;
-	this.scale.x = scale_length;
+	this.scale.x = scale_length*-1;
 	//this.scale.y = scale;
 
 	game.physics.arcade.enable(this);

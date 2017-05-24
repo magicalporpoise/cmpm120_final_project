@@ -14,8 +14,10 @@ function NPC(game, x, y, img, frame) {
 	//		and physics
 	this.x = x;
 	this.y = y;
-	//this.scale.x = scale;
-	//this.scale.y = scale;
+	
+	this.scale.x = 0.7;
+	this.scale.y = 0.7;
+	
 	this.anchor.set(0.5, 0.5);
 
 	game.physics.arcade.enable(this);
@@ -33,7 +35,7 @@ function NPC(game, x, y, img, frame) {
 	this.canAttack = true;	//attack cooldown
 
 	//create view box
-	this.sight = new ViewBox(this.x, this.y, 0.45, 'platform');
+	this.sight = new ViewBox(this.x+800, this.y, 1, 'sightLine');
 	game.add.existing(this.sight);
 	group_ViewBox.add(this.sight);
 	//console.log("in NPC: "+ group.children);
