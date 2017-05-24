@@ -10,6 +10,10 @@ function NPC(game, x, y, img, frame) {
 	// calling new Sprite
 	Phaser.Sprite.call(this, game, x, y, img, frame);
 
+	// hitbox
+	//this.body.setSize(x-100, y-50, 00, 0);
+
+
 	//phaser related variables
 	//		and physics
 	this.x = x;
@@ -35,7 +39,7 @@ function NPC(game, x, y, img, frame) {
 	this.canAttack = true;	//attack cooldown
 
 	//create view box
-	this.sight = new ViewBox(this.x+800, this.y, 1, 'sightLine');
+	this.sight = new ViewBox(this.x, this.y, 1, 'sightLine');
 	game.add.existing(this.sight);
 	group_ViewBox.add(this.sight);
 	//console.log("in NPC: "+ group.children);
@@ -71,6 +75,11 @@ NPC.prototype.constructor = NPC;
 //	npc behavior
 //================
 NPC.prototype.update = function(){
+
+	// debug
+	game.debug.body(this);
+
+
 	//COLLISION + OVERLAPS
 	game.physics.arcade.collide(this, layer1);
 	let hit = 0;

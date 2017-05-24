@@ -20,6 +20,9 @@ Preloader.prototype = {
 		game.load.path = 'assets/audio/music/level1/';
 		game.load.audio('ambient', 'ambient.mp3');
 
+		game.load.path = 'assets/audio/music/'
+		game.load.audio('dank','Detention_creepy.mp3')
+
 		//LOAD SFX
 		game.load.path = 'assets/audio/sfx/';
 		game.load.audio('growl', 'growl.wav');
@@ -117,8 +120,8 @@ Game.prototype = {
 
 
 		//Add Audio / Music
-		//this.music = game.add.audio('ambient');
-		//this.music.loopFull();
+		this.music = game.add.audio('dank');
+		this.music.loopFull();
 
 		//BG color, blue
 		game.stage.backgroundColor = "#AAAAAA";

@@ -24,7 +24,7 @@ function Player(x, y, scale, img){
 	this.body.collideWorldBounds = true;
 	//set hitbox size
 	this.body.setSize(400, 800, 100, 50);
-	
+
 	
 	//personal variables
 	this.hearts = 10;		//character's hp
@@ -60,6 +60,7 @@ Player.prototype.constructor = Player;
 //==========================================
 Player.prototype.update = function(){
 
+
 	//get key presses
 	let mv_up = game.input.keyboard.justPressed(Phaser.Keyboard.W);
 	let mv_left = game.input.keyboard.isDown(Phaser.Keyboard.A);
@@ -67,6 +68,8 @@ Player.prototype.update = function(){
 	let mv_down = game.input.keyboard.justPressed(Phaser.Keyboard.S);
 
 	let k_attack = game.input.keyboard.justPressed(Phaser.Keyboard.K); 
+
+	let f_dash = game.input.keyboard.justPressed(Phaser.Keyboard.F);
 
 	//collide with platforms
 	let hitGround = game.physics.arcade.collide(this, layer1);
@@ -116,6 +119,12 @@ Player.prototype.update = function(){
 			hitBox.destroy();
 			//--add animation--//
 		}
+		if (f_dash){
+			//player.x+=Math.sign(this.body.velocity.x)*100;
+			this.body.velocity.x=this.facing*(this.maxSpeed+300);
+		}
+
+
 	} else { //IS HIDDEN
 		this.tint = 0;				//turn black when hidden
 		this.body.velocity.x = 0;	//stop when hidden
