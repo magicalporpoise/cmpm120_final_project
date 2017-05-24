@@ -78,7 +78,7 @@ Player.prototype.update = function(){
 		this.tint = 0xFFFFFF;
 
 		//jump
-		if(vert < 0 && hitGround){ 
+		if(vert < 0 && hitGround && this.body.velocity.y ==0 ){ 
 			this.body.velocity.y = this.jump; // also allows wall jumps
 		}
 
@@ -120,7 +120,7 @@ Player.prototype.update = function(){
 
 	//ANIMATION + SOUND HANDLING
 	if(this.body.velocity.x != 0){
-		this.animations.play('walk', 65, true);
+		this.animations.play('walk', 205, true);
 		this.stepSFX.resume();
 	}else {
 		this.stepSFX.pause();
