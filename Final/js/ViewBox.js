@@ -39,6 +39,9 @@ ViewBox.prototype.constructor = ViewBox;
 //	viewbox behavior
 //==================
 ViewBox.prototype.update = function(){
+	//debug
+	game.debug.body(this);
+
 	let inSights = game.physics.arcade.overlap(this, player);
 	//check if player is in sights
 	if(inSights) {this.playerInSight = true;}

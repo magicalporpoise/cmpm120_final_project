@@ -46,17 +46,11 @@ function NPC(game, x, y, img, frame) {
 
 	//behavior timers
 	//	patrolling...
-	this.behave = game.time.create(false);
-	this.behave.loop(Math.random()*2000+2000, determineBehavior, this);
-	this.behave.start();
+	this.bh = behave.loop(Math.random()*2000+2000, determineBehavior, this);
 	//stunned for how long...
-	this.stunTimer = game.time.create(false);
-	this.stunTimer.loop(3000, unStun, this);
-	this.stunTimer.start();
+	this.st = stunTimer.loop(3000, unStun, this);
 	//reset attack
-	this.atkTimer = game.time.create(false);
-	this.atkTimer.loop(3000, resetAttack, this);
-	this.atkTimer.start();
+	this.at = atkTimer.loop(3000, resetAttack, this);
 
 	var anim = this.animations.add('walk');
 	this.animations.add('idle', [0], 1, true);
@@ -109,20 +103,21 @@ NPC.prototype.update = function(){
 
 	//BEHAVIOR
 	if(!this.isStunned){
-		
-		this.stunTimer.pause();
+		removeFromQ(stunTimer, this.st);
 		if(this.sight.playerInSight && !player.hidden) { //aggro - red
 			this.tint = 0xFF0000;
 			this.aggro = true;
-			this.behave.pause();
+			removeFromQ(behave, this.bh);
 		} else if(player.hidden && !this.sight.playerInSight){ // wander - blue
 			this.tint = 0xFFFFFF;
 			this.aggro = false;
-			this.behave.resume();
+			addBackIntoBehave(this.bh);
 		}
 	} else {
 		this.tint = 0x00FF00; // stunned - green
-		this.stunTimer.resume();
+		//
+		//resume stun
+		//
 	}
 
 	//AGGRO'd
@@ -131,9 +126,11 @@ NPC.prototype.update = function(){
 		this.isStunned = false;
 		this.maxSpeed = 200;
 		moveTowardsPlayer(this);
-		this.atkTimer.resume();
+		//
+		//attack timer start
+		//
 	} else {
-		this.atkTimer.pause();
+		removeFromQ(atkTimer, this.at);
 		this.maxSpeed = 100;
 	}
 }
@@ -145,7 +142,7 @@ NPC.prototype.update = function(){
 //		take the npc and set its movement variables
 //		based off stimuli
 function determineBehavior(){
-	//console.log("called");
+	console.log("called from normie npc");
 		if(this.idle) {
 			this.idle = false;
 			this.movingHori = 0;
@@ -160,7 +157,9 @@ function determineBehavior(){
 function unStun(){
 	this.isStunned = false;
 	this.idle = false;
-	this.stunTimer.pause();
+	//
+	//pause the timer event
+	//
 }
 
 //follow player
@@ -190,4 +189,22 @@ function attackPlayer(self, play){
 
 function resetAttack(){
 	this.canAttack = true;
+}
+
+//timer functions
+function removeFromQ(myTimer, myEvent){
+	//loop thru the events
+	for(let i = 0; i < myTimer.events.length; i++){
+		if(myTimer[i] === myEvent) {
+			game.time.events.remove(myTimer[i]);
+			break;
+		}
+	}
+	myEvent = 0;
+}
+
+function addBackIntoBehave(myEvent){
+	if(myEvent == 0){
+		myEvent = behave.loop(Math.random()*2000+2000, determineBehavior, this);
+	}
 }

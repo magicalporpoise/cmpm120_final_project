@@ -89,6 +89,11 @@ var Game = function(game) {
 	var player;
 	var npc;
 	var tilemap;
+
+	//declare timers
+	var behave;
+	var stunTimer;
+	var atkTimer;
 }
 
 Game.prototype = {
@@ -134,6 +139,13 @@ Game.prototype = {
 
 		//game.physics.p2.enable([group_npc, player], true);
 
+		//======
+		//TIMERS for NPCs
+		//======
+		behave = game.time.create(false);
+		stunTimer = game.time.create(false);
+		atkTimer = game.time.create(false);
+
 
 		//===================
 		//TILEMAP: main level
@@ -159,8 +171,11 @@ Game.prototype = {
 			//====================================
 			//CREATE OBJECTS: from tile map layers
 			//====================================
+			//timing information above
 			//walking npcs
 			map.createFromObjects('npc',  10, 'redBook', 0, true, true, group_npc, NPC);
+			//flying npc
+			//flyer = new flyingNPC(game, 300, 100, 'flame', 0);
 			//hiding spots
 			hidingspot1 = new HidingSpot(1200, 2300, 0.5, 'platform');
 			hidingspot2 = new HidingSpot(600, 600, 0.5, 'platform');
@@ -172,6 +187,11 @@ Game.prototype = {
 
 		//print groups to confirm proper creation
 		console.log(group_npc.children);
+
+		//START TIMERS
+		behave.start();
+		stunTimer.start();
+		atkTimer.start();
 
 		//debug text
 		displayText = game.add.text(player.x, player.y-100, 'Player Hearts:', { fontSize: '32px', fill: '#F00'});
