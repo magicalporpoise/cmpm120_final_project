@@ -186,6 +186,13 @@ Game.prototype = {
 		// some logic is handled within other objects
 		//game.debug.body(player);
 		//game.debug.body(npc);
+
+		// gray
+		//if (player.hearts<=0) {
+			//var gray = game.add.filter('Gray');
+			//game.world.filters = [gray];
+		//}
+
 	}
 }
 

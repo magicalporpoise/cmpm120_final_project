@@ -87,7 +87,7 @@ NPC.prototype.constructor = NPC;
 NPC.prototype.update = function(){
 
 	// debug
-	game.debug.body(this);
+	//game.debug.body(this);
 
 
 	//COLLISION + OVERLAPS
@@ -118,6 +118,7 @@ NPC.prototype.update = function(){
 
 	//BEHAVIOR
 	if(!this.isStunned){
+		this.tint = 0xFFFFFF;
 		
 		this.stunTimer.pause();
 		if(this.sight.playerInSight && !player.hidden) { //aggro - red
@@ -155,6 +156,13 @@ NPC.prototype.update = function(){
 	} else {
 		this.atkTimer.pause();
 		this.maxSpeed = 100;
+	}
+
+
+	//HEALTH
+	if (player.hearts<=0) {
+		var gray = game.add.filter('Gray');
+		game.world.filters = [gray];
 	}
 }
 

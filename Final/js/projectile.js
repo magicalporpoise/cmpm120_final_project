@@ -19,9 +19,15 @@ function projectile(x, y, speed, direction, scale_length, img){
 	//this.scale.y = scale;
 
 	game.physics.arcade.enable(this);
+
+	this.collideworldbounds = true;
+	this.outofboundskill = true;
 	
 	// Booleans for sight
 	this.playerInSight = false;
+	
+	// for mouse clicked event
+	//game.physics.arcade.moveToPointer(this, 300);
 }
 
 //=========
@@ -35,15 +41,17 @@ projectile.prototype.constructor = projectile;
 //	projectile behavior
 //==================
 projectile.prototype.update = function(){
+	
+	// move
 	this.body.velocity.x = this.speed * this.dir;
-
+	
+	// collision
 	let projHit = game.physics.arcade.overlap(this, group_npc);
-	//check if player is in sights
-
 	if (projHit) {
 		game.physics.arcade.overlap(this, group_npc, vanish);
 		this.destroy();
 	}
+
 
 	// debug
 	//game.debug.body(this);

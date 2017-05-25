@@ -71,6 +71,9 @@ Player.prototype.update = function(){
 	let f_dash = game.input.keyboard.justPressed(Phaser.Keyboard.F);
 	let r_shoot = game.input.keyboard.justPressed(Phaser.Keyboard.R);
 
+	// for mouse is down
+	//game.input.activePointer.isDown;
+
 	//collide with platforms
 	let hitGround = game.physics.arcade.collide(this, layer1);
 
@@ -125,13 +128,11 @@ Player.prototype.update = function(){
 			//this.body.velocity.x=this.facing*(this.maxSpeed+500);
 		}
 		if (r_shoot){
-			this.shoot = new projectile(this.x, this.y, 500, this.facing, 0.5, 'redSquare');
+			this.shoot = new projectile(this.x, this.y, 500, this.facing, 0.1, 'redSquare');
 			game.add.existing(this.shoot);
 			console.log('r pressed');
-			player.hearts -=5;
+			player.hearts -=2;
 		}
-
-
 	} else { //IS HIDDEN
 		this.tint = 0;				//turn black when hidden
 		this.body.velocity.x = 0;	//stop when hidden
@@ -145,7 +146,7 @@ Player.prototype.update = function(){
 		this.stepSFX.pause();
 		this.animations.play('idle');
 	}
-	//console.log('bot of update');
+	console.log('bot of update');
 
 }
 
