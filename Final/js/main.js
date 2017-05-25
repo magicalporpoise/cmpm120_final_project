@@ -160,7 +160,7 @@ Game.prototype = {
 			//CREATE OBJECTS: from tile map layers
 			//====================================
 			//walking npcs
-			map.createFromObjects('npc',  10, 'redBook',0,true,true, group_npc, NPC);
+			map.createFromObjects('npc',  10, 'redBook', 0, true, true, group_npc, NPC);
 			//hiding spots
 			hidingspot1 = new HidingSpot(1200, 2300, 0.5, 'platform');
 			hidingspot2 = new HidingSpot(600, 600, 0.5, 'platform');

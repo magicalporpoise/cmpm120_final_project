@@ -32,7 +32,7 @@ function NPC(game, x, y, img, frame) {
 	//personal variables
 	this.maxSpeed = 100; 	//speed cap
 	this.idle = false;		//stand still?
-	this.facing = 1;		//1 for right, -1 for left
+	this.facing = -1;		//1 for right, -1 for left
 	this.movingHori = 0;	//moving left, right, or none
 	this.isStunned = false; //stunned?
 	this.aggro = false;		//seen player? --> aggro
@@ -53,7 +53,10 @@ function NPC(game, x, y, img, frame) {
 	this.stunTimer = game.time.create(false);
 	this.stunTimer.loop(3000, unStun, this);
 	this.stunTimer.start();
-	this.facing = -1;
+	//reset attack
+	this.atkTimer = game.time.create(false);
+	this.atkTimer.loop(3000, resetAttack, this);
+	this.atkTimer.start();
 
 	var anim = this.animations.add('walk');
 	this.animations.add('idle', [0], 1, true);
@@ -112,7 +115,7 @@ NPC.prototype.update = function(){
 			this.tint = 0xFF0000;
 			this.aggro = true;
 			this.behave.pause();
-		} else if((this.aggro && player.hidden) && !this.sight.playerInSight){ // wander - blue
+		} else if(player.hidden && !this.sight.playerInSight){ // wander - blue
 			this.tint = 0xFFFFFF;
 			this.aggro = false;
 			this.behave.resume();
@@ -128,7 +131,11 @@ NPC.prototype.update = function(){
 		this.isStunned = false;
 		this.maxSpeed = 200;
 		moveTowardsPlayer(this);
-	} else this.maxSpeed = 100;
+		this.atkTimer.resume();
+	} else {
+		this.atkTimer.pause();
+		this.maxSpeed = 100;
+	}
 }
 
 //=========
@@ -142,7 +149,6 @@ function determineBehavior(){
 		if(this.idle) {
 			this.idle = false;
 			this.movingHori = 0;
-			this.canAttack = true;
 		} else {
 			//turn around
 			this.movingHori = -1 * this.facing;
@@ -161,16 +167,27 @@ function unStun(){
 function moveTowardsPlayer(self){
 	// follow and hit player
 	//console.log("ATTACK!!")
-	self.movingHori = Math.sign(player.x - self.x);
+	let move = (player.x - self.x);
+	if(Math.abs(move) < 25){
+		move = 0;
+	} else move = Math.sign(move);
+
+	self.movingHori = move
 	//console.log(player.x - self.x);
 }
-
+ 
 //hit player, deal damage, deal knockback
 function attackPlayer(self, play){
-	if(self.canAttack) play.hearts--;
+	if(self.canAttack) {
+		play.hearts--;
+		self.canAttack = false;
+	}
 	//knockback
 	play.body.velocity.y = -200;
 	play.body.velocity.x = self.movingHori * 500;
 	//prevent infinite hits
-	self.canAttack = false;
+}
+
+function resetAttack(){
+	this.canAttack = true;
 }

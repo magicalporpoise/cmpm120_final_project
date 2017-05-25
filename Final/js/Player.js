@@ -18,9 +18,6 @@ function Player(x, y, scale, img){
 	this.anchor.set(0.5, 0.5);
 
 	game.physics.arcade.enable(this);
-	//game.physics.p2.enable(this);
-	//this.enableBody = true;
-	//this.physicsBodyType = Phaser.Physics.P2JS;
 	this.body.gravity.y = 1000;
 	this.body.collideWorldBounds = true;
 	//set hitbox size
@@ -31,7 +28,7 @@ function Player(x, y, scale, img){
 	//personal variables
 	this.hearts = 10;		//character's hp
 	this.maxSpeed = 500;	//speed cap
-	this.jump = -500;		//jump height
+	this.jump = -700;		//jump height
 	this.accel = 25;		//acceleration
 	this.hidden = false; 	//is the player hidden from enemies?
 	this.facing = 1; 		//1 for right, -1 for left
@@ -86,7 +83,7 @@ Player.prototype.update = function(){
 		this.tint = 0xFFFFFF;
 
 		//jump
-		if(vert < 0 && hitGround){  // && this.body.velocity.y ==0  for no double jump
+		if(vert < 0 && hitGround && this.body.velocity.y ==0) {  //for no double jump
 			this.body.velocity.y = this.jump; // also allows wall jumps
 		}
 
@@ -123,7 +120,7 @@ Player.prototype.update = function(){
 		}
 		if (f_dash){
 			//player.x+=Math.sign(this.body.velocity.x)*100;
-			this.body.velocity.x=this.facing*(this.maxSpeed+300);
+			this.body.velocity.x=this.facing*(this.maxSpeed+500);
 		}
 
 
