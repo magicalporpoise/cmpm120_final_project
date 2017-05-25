@@ -28,7 +28,7 @@ function Player(x, y, scale, img){
 	//personal variables
 	this.hearts = 10;		//character's hp
 	this.maxSpeed = 500;	//speed cap
-	this.jump = -700;		//jump height
+	this.jump = -600;		//jump height
 	this.accel = 25;		//acceleration
 	this.hidden = false; 	//is the player hidden from enemies?
 	this.facing = 1; 		//1 for right, -1 for left
@@ -119,8 +119,8 @@ Player.prototype.update = function(){
 			//--add animation--//
 		}
 		if (f_dash){
-			//player.x+=Math.sign(this.body.velocity.x)*100;
-			this.body.velocity.x=this.facing*(this.maxSpeed+500);
+			player.x+=Math.sign(this.body.velocity.x)*100;
+			//this.body.velocity.x=this.facing*(this.maxSpeed+500);
 		}
 
 

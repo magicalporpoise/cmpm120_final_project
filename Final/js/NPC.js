@@ -65,6 +65,13 @@ function NPC(game, x, y, img, frame) {
 	game.add.existing(this);
 	//add to its group
 	group_npc.add(this);
+
+	// for toggle of detection radius
+	this.boom;
+	this.boom_bool =true;
+	// for detection radius itself
+	var boom;
+
 }
 
 //=========
@@ -106,6 +113,8 @@ NPC.prototype.update = function(){
 	//make the sight follow the facing variable
 	this.sight.x = this.x;
 	this.sight.y = this.y-32;
+	//this.boom.x = this.x;
+	//this.boom.y= this.y;
 
 	//BEHAVIOR
 	if(!this.isStunned){
@@ -114,8 +123,19 @@ NPC.prototype.update = function(){
 		if(this.sight.playerInSight && !player.hidden) { //aggro - red
 			this.tint = 0xFF0000;
 			this.aggro = true;
+			// for creating detection Boom object
+			if (this.boom_bool) {
+				this.boom = new detectionBoom(this.x, this.y, 0.2, 'redSquare');
+				this.boom_bool = false;
+				game.add.existing(this.boom);
+			}
+			
+
+
 			this.behave.pause();
 		} else if(player.hidden && !this.sight.playerInSight){ // wander - blue
+			this.boom_bool = true;
+
 			this.tint = 0xFFFFFF;
 			this.aggro = false;
 			this.behave.resume();
@@ -144,6 +164,9 @@ NPC.prototype.update = function(){
 // determineBehavior(npc)
 //		take the npc and set its movement variables
 //		based off stimuli
+
+
+
 function determineBehavior(){
 	//console.log("called");
 		if(this.idle) {
