@@ -19,11 +19,13 @@ function Player(x, y, scale, img){
 
 	game.physics.arcade.enable(this);
 	//game.physics.p2.enable(this);
+	//this.enableBody = true;
 	//this.physicsBodyType = Phaser.Physics.P2JS;
 	this.body.gravity.y = 1000;
 	this.body.collideWorldBounds = true;
 	//set hitbox size
 	this.body.setSize(400, 800, 100, 50);
+	//this.body.addRectangle(400, 800, 100, 50);
 
 	
 	//personal variables

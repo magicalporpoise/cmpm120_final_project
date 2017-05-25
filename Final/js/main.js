@@ -98,9 +98,9 @@ Game.prototype = {
 	create: function() {
 		console.log("in Game Create");
 		//activate physics
-		//game.physics.startSystem(Phaser.Physics.ARCADE);
-		game.physics.startSystem(Phaser.Physics.P2JS);
-
+		game.physics.startSystem(Phaser.Physics.ARCADE);
+		//game.physics.startSystem(Phaser.Physics.P2JS);
+		//game.physics.p2.gravity.y = 1000;
 		//Pause Screen
 		/*
 		pauseScreen = game.add.graphics(0, 0);
@@ -132,7 +132,8 @@ Game.prototype = {
 		//player = new Player(100, 100, 0.15, 'player2');
 		player = new Player(100, 100, 0.15, 'teddy');
 
-		game.physics.p2.enable([group_npc, player], true);
+		//game.physics.p2.enable([group_npc, player], true);
+
 
 		//===================
 		//TILEMAP: main level
@@ -153,7 +154,7 @@ Game.prototype = {
 
 			//fits layer to the game world
 			layer1.resizeWorld();
-			game.physics.p2.convertTilemap(map, layer1);
+			//game.physics.p2.convertTilemap(map, layer1);
 
 			//====================================
 			//CREATE OBJECTS: from tile map layers
