@@ -69,6 +69,7 @@ Player.prototype.update = function(){
 	let k_attack = game.input.keyboard.justPressed(Phaser.Keyboard.K); 
 
 	let f_dash = game.input.keyboard.justPressed(Phaser.Keyboard.F);
+	let r_shoot = game.input.keyboard.justPressed(Phaser.Keyboard.R);
 
 	//collide with platforms
 	let hitGround = game.physics.arcade.collide(this, layer1);
@@ -119,8 +120,15 @@ Player.prototype.update = function(){
 			//--add animation--//
 		}
 		if (f_dash){
-			player.x+=Math.sign(this.body.velocity.x)*100;
+			player.x+=this.facing*300;//Math.sign(this.body.velocity.x)*300;
+			player.hearts -=2;
 			//this.body.velocity.x=this.facing*(this.maxSpeed+500);
+		}
+		if (r_shoot){
+			this.shoot = new projectile(this.x, this.y, 500, this.facing, 0.5, 'redSquare');
+			game.add.existing(this.shoot);
+			console.log('r pressed');
+			player.hearts -=5;
 		}
 
 
@@ -131,7 +139,7 @@ Player.prototype.update = function(){
 
 	//ANIMATION + SOUND HANDLING
 	if(this.body.velocity.x != 0){
-		this.animations.play('walk', 205, true);
+		this.animations.play('walk', 145, true);
 		this.stepSFX.resume();
 	}else {
 		this.stepSFX.pause();

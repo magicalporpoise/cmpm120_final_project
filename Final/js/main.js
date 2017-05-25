@@ -176,11 +176,11 @@ Game.prototype = {
 		console.log(group_npc.children);
 
 		//debug text
-		displayText = game.add.text(player.x, player.y-100, 'Player Hearts:', { fontSize: '32px', fill: '#F00'});
+		displayText = game.add.text(player.x, player.y-100, 'Health/Imagination:', { fontSize: '32px', fill: '#F00'});
 	
 	},
 	update:function() {		// add game logic
-		displayText.text = "Player Hearts: " + player.hearts;
+		displayText.text = "Health/Imagination: " + player.hearts;
 		displayText.x = player.x- 100;
 		displayText.y = player.y - 100;
 		// some logic is handled within other objects

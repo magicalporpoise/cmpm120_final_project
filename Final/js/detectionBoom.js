@@ -41,7 +41,7 @@ detectionBoom.prototype.update = function(){
 	let boomHit = game.physics.arcade.overlap(this, group_npc);
 	if (this.s<=20) {
 		this.scale.x += 0.1;
-		this.scale.y += 0.1;
+		this.scale.y += 0.03;
 	}
 	if (this.s>=50) {
 		this.destroy();
