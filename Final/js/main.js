@@ -17,8 +17,8 @@ Preloader.prototype = {
 		console.log("In Preloader: preload");
 		
 		//LOAD MUSIC
-		game.load.path = 'assets/audio/music/level1/';
-		game.load.audio('ambient', 'ambient.mp3');
+		game.load.path = 'assets/audio/music/';
+		game.load.audio('ambient', 'Detention_ambient.mp3');
 
 		game.load.path = 'assets/audio/music/'
 		game.load.audio('dank','Detention_creepy.mp3')
@@ -126,8 +126,8 @@ Game.prototype = {
 		group_npc.enableBody = true;
 
 		//Add Audio / Music
-		this.music = game.add.audio('dank');
-		this.music.loopFull();
+		this.music1 = game.add.audio('dank');
+		this.music2 = game.add.audio('ambient');
 
 		//BG color, blue
 		game.stage.backgroundColor = "#AAAAAA";
@@ -190,6 +190,8 @@ Game.prototype = {
 			//====================================
 			//walking npcs
 			map.createFromObjects('npc',  10, 'redBook', 0, true, true, group_npc, NPC);
+			//flying enemy
+			flyer = new flyingNPC(game, 200, 100, 'blueBook', 0);
 			//hiding spots
 			hidingspot1 = new HidingSpot(1200, 2300, 0.5, 'platform');
 			hidingspot2 = new HidingSpot(600, 600, 0.5, 'platform');
@@ -203,8 +205,8 @@ Game.prototype = {
 		grayScreen = game.add.image(game.world.centerX, game.world.centerY, 'blackTile');
 		//game.physics.arcade.enable(grayScreen);
 		grayScreen.anchor.setTo(0.5);
-		grayScreen.width  = game.world.width;
-		grayScreen.height = game.world.height;
+		grayScreen.width  = game.world.width + 200;
+		grayScreen.height = game.world.height + 200;
 		console.log(grayScreen);
 		grayScreen.alpha = 0;
 		//print groups to confirm proper creation
@@ -234,7 +236,23 @@ Game.prototype = {
 				//CHANGE TO END GAME STATE
 			}
 	    //}
+
+	    //music stuff
+	    this.music1turn = false;
+	    this.music2turn = true;
+	    if(!this.music1.isPlaying && !this.music2.isPlaying){
+	    	if(this.music1turn){
+	    		this.music1turn == false;
+	    		this.music2turn == true;
+	    		this.music2.play();
+	    	}else if(this.music2turn){
+	    		this.music2turn == false;
+	    		this.music1turn == true;
+	    		this.music1.play();
+	    	}
+	    }
 	}
+	    
 }
 
 

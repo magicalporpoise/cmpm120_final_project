@@ -47,7 +47,7 @@ function NPC(game, x, y, img, frame) {
 	//behavior timers
 	//	patrolling...
 	this.behave = game.time.create(false);
-	this.behave.loop(Math.random()*2000+2000, determineBehavior, this);
+	this.behave.loop(Math.random()*2000+2000, normalBehave, this);
 	this.behave.start();
 	//stunned for how long...
 	this.stunTimer = game.time.create(false);
@@ -85,10 +85,8 @@ NPC.prototype.constructor = NPC;
 //	npc behavior
 //================
 NPC.prototype.update = function(){
-
 	// debug
 	//game.debug.body(this);
-
 
 	//COLLISION + OVERLAPS
 	game.physics.arcade.collide(this, layer1);
@@ -157,13 +155,6 @@ NPC.prototype.update = function(){
 		this.atkTimer.pause();
 		this.maxSpeed = 100;
 	}
-
-
-	//HEALTH
-	//if (player.hearts<=0) {
-	//	var gray = game.add.filter('Gray');
-	//	game.world.filters = [gray];
-	//}
 }
 
 //=========
@@ -172,7 +163,7 @@ NPC.prototype.update = function(){
 // determineBehavior(npc)
 //		take the npc and set its movement variables
 //		based off stimuli
-function determineBehavior(){
+normalBehave = function determineBehavior(){
 	//console.log("called");
 		if(this.idle) {
 			this.idle = false;
@@ -182,6 +173,7 @@ function determineBehavior(){
 			this.movingHori = -1 * this.facing;
 			this.idle = true;
 		}
+	//console.log("normal npc = " + this.movingHori);
 }
 
 //undo the stun effect
