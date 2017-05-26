@@ -164,6 +164,8 @@ Game.prototype = {
 			//====================================
 			//walking npcs
 			map.createFromObjects('npc',  10, 'redBook', 0, true, true, group_npc, NPC);
+			//flying enemy
+			flyer = new flyingNPC(game, 200, 100, 'blueBook', 0);
 			//hiding spots
 			hidingspot1 = new HidingSpot(1200, 2300, 0.5, 'platform');
 			hidingspot2 = new HidingSpot(600, 600, 0.5, 'platform');
@@ -177,8 +179,8 @@ Game.prototype = {
 		grayScreen = game.add.image(game.world.centerX, game.world.centerY, 'blackTile');
 		//game.physics.arcade.enable(grayScreen);
 		grayScreen.anchor.setTo(0.5);
-		grayScreen.width  = game.world.width;
-		grayScreen.height = game.world.height;
+		grayScreen.width  = game.world.width + 200;
+		grayScreen.height = game.world.height + 200;
 		console.log(grayScreen);
 		grayScreen.alpha = 0;
 		//print groups to confirm proper creation
