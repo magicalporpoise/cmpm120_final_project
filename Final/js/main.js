@@ -36,6 +36,8 @@ Preloader.prototype = {
 
 		game.load.image('platform', 'platform.png');
 		game.load.image('flame', 'flameParticle.png');
+		game.load.image('blackTile', 'black_tile.png');
+
 		//loads in json tilemap created with tiled(key,filename,
 		//not exactly sure why null works here,the tilemap tool used)
 		game.load.tilemap('Level0','Level0.json',null,Phaser.Tilemap.TILED_JSON);
@@ -91,6 +93,7 @@ var Game = function(game) {
 	var player;
 	var npc;
 	var tilemap;
+	var grayScreen;
 }
 
 Game.prototype = {
@@ -118,8 +121,6 @@ Game.prototype = {
 		group_ViewBox = game.add.group();
 		group_npc = game.add.group();
 		group_npc.enableBody = true;
-
-
 
 		//Add Audio / Music
 		this.music = game.add.audio('dank');
@@ -172,8 +173,16 @@ Game.prototype = {
 		//camera follows player
 		game.camera.follow(player);
 
+		// gray screen
+		grayScreen = game.add.image(game.world.centerX, game.world.centerY, 'blackTile');
+		//game.physics.arcade.enable(grayScreen);
+		grayScreen.anchor.setTo(0.5);
+		grayScreen.width  = game.world.width;
+		grayScreen.height = game.world.height;
+		console.log(grayScreen);
+		grayScreen.alpha = 0;
 		//print groups to confirm proper creation
-		console.log(group_npc.children);
+		//console.log(group_npc.children);
 
 		//debug text
 		displayText = game.add.text(player.x, player.y-100, 'Health/Imagination:', { fontSize: '32px', fill: '#F00'});
@@ -183,16 +192,22 @@ Game.prototype = {
 		displayText.text = "Health/Imagination: " + player.hearts;
 		displayText.x = player.x- 100;
 		displayText.y = player.y - 100;
+
+		grayScreen.x = game.world.centerX;
+		grayScreen.y = game.world.centerY;
 		// some logic is handled within other objects
 		//game.debug.body(player);
 		//game.debug.body(npc);
 
-		// gray
 		//if (player.hearts<=0) {
-			//var gray = game.add.filter('Gray');
-			//game.world.filters = [gray];
-		//}
+			//ALSO KILL THE PLAYER
+			//STOP ALL INPUT
+			grayScreen.alpha = (10 - player.hearts) / 10;
 
+			if(grayScreen.alpha > 0.90){
+				//CHANGE TO END GAME STATE
+			}
+	    //}
 	}
 }
 
@@ -208,6 +223,7 @@ window.onload = function() {
 
 	game.state.add('Preloader', Preloader);
 	game.state.add('MainMenu', MainMenu);
+	game.state.add('Lose', Lose);
 	game.state.add('Game', Game);
 	game.state.start('Preloader');
 }

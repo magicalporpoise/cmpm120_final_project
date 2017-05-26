@@ -160,10 +160,10 @@ NPC.prototype.update = function(){
 
 
 	//HEALTH
-	if (player.hearts<=0) {
-		var gray = game.add.filter('Gray');
-		game.world.filters = [gray];
-	}
+	//if (player.hearts<=0) {
+	//	var gray = game.add.filter('Gray');
+	//	game.world.filters = [gray];
+	//}
 }
 
 //=========
@@ -172,9 +172,6 @@ NPC.prototype.update = function(){
 // determineBehavior(npc)
 //		take the npc and set its movement variables
 //		based off stimuli
-
-
-
 function determineBehavior(){
 	//console.log("called");
 		if(this.idle) {
@@ -215,7 +212,7 @@ function attackPlayer(self, play){
 	}
 	//knockback
 	play.body.velocity.y = -200;
-	play.body.velocity.x = self.movingHori * 500;
+	play.body.velocity.x += Math.sign(player.x - self.x) * 100;
 	//prevent infinite hits
 }
 

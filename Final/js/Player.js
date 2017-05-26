@@ -146,7 +146,7 @@ Player.prototype.update = function(){
 		this.stepSFX.pause();
 		this.animations.play('idle');
 	}
-	console.log('bot of update');
+	//console.log('bot of update');
 
 }
 
