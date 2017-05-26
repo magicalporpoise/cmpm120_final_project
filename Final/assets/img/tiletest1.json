@@ -58,8 +58,32 @@
          "width":150,
          "x":0,
          "y":0
+        }, 
+        {
+         "draworder":"topdown",
+         "height":30,
+         "name":"hide",
+         "objects":[
+                {
+                 "gid":119,
+                 "height":32,
+                 "id":8,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":1056,
+                 "y":640
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "width":150,
+         "x":0,
+         "y":0
         }],
- "nextobjectid":8,
+ "nextobjectid":11,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tileheight":32,

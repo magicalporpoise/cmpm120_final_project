@@ -124,6 +124,7 @@ Game.prototype = {
 		group_ViewBox = game.add.group();
 		group_npc = game.add.group();
 		group_npc.enableBody = true;
+		group_hidingspot = game.add.group();
 
 		//Add Audio / Music
 		this.music1 = game.add.audio('dank');
@@ -165,12 +166,11 @@ Game.prototype = {
 		//entire grid will have collision set
 		map.setCollisionByExclusion([]); //i don't completely understand how this works
 
-
-		//supposed to add our npc's in on the object layer but i am not gettin feedback
-		map.createFromObjects('npc',  91, 'redBook',0,true,true, group_npc, NPC);
+		//logs info about map objects and tiles
 		console.log(map);
 
 		//game.physics.p2.convertTilemap(map, layer1);
+
 		//=============
 		//PLAYER OBJECT
 		//=============
@@ -184,12 +184,17 @@ Game.prototype = {
 		//CREATE OBJECTS: from tile map layers
 		//====================================
 		//walking npcs
+		//prameters(nameofobjectlayer, gid, image, frame, ?, autoCull, group, function);
 		map.createFromObjects('npc',  91, 'redBook', 0, true, true, group_npc, NPC);
 		//flying enemy
 		flyer = new flyingNPC(game, 200, 100, 'blueBook', 0);
 		//hiding spots
-		hidingspot1 = new HidingSpot(1200, 2300, 0.5, 'platform');
-		hidingspot2 = new HidingSpot(600, 600, 0.5, 'platform');
+
+		//hidingspot1 = new HidingSpot(1200, 2300, 0.5, 'platform');
+		//hidingspot2 = new HidingSpot(600, 600, 0.5, 'platform');
+
+		//creates hiding spots
+		map.createFromObjects('hide', 119, 'platform', 0, true, true, group_hidingspot, HidingSpot);
 
 		//camera follows player
 		game.camera.follow(player);

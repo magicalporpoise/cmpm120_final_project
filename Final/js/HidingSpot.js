@@ -6,7 +6,7 @@
 //===========
 //CONSTRUCTOR
 //===========
-function HidingSpot(x, y, scale_length, img, frame){
+function HidingSpot(game, x, y, img, frame){
 	//inherit Phaser.Sprite class
 	// calling new Sprite
 	Phaser.Sprite.call(this, game, x, y, img, frame);
@@ -16,13 +16,16 @@ function HidingSpot(x, y, scale_length, img, frame){
 	//		and physics
 	this.x = x;
 	this.y = y;
-	this.scale.x = scale_length;
-	this.scale.y = scale_length;
+	this.scale.x = .5;
+	this.scale.y = .5;
 	this.tint = 0x000000;
 	game.physics.arcade.enable(this);
 
 	//insert into game
 	game.add.existing(this);
+
+	//add to hidingspot group
+	group_hidingspot.add(this);
 }
 
 //=========
