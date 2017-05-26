@@ -17,8 +17,8 @@ Preloader.prototype = {
 		console.log("In Preloader: preload");
 		
 		//LOAD MUSIC
-		game.load.path = 'assets/audio/music/level1/';
-		game.load.audio('ambient', 'ambient.mp3');
+		game.load.path = 'assets/audio/music/';
+		game.load.audio('ambient', 'Detention_ambient.mp3');
 
 		game.load.path = 'assets/audio/music/'
 		game.load.audio('dank','Detention_creepy.mp3')
@@ -123,8 +123,8 @@ Game.prototype = {
 		group_npc.enableBody = true;
 
 		//Add Audio / Music
-		this.music = game.add.audio('dank');
-		this.music.loopFull();
+		this.music1 = game.add.audio('dank');
+		this.music2 = game.add.audio('ambient');
 
 		//BG color, blue
 		game.stage.backgroundColor = "#AAAAAA";
@@ -208,7 +208,23 @@ Game.prototype = {
 				//CHANGE TO END GAME STATE
 			}
 	    //}
+
+	    //music stuff
+	    this.music1turn = false;
+	    this.music2turn = true;
+	    if(!this.music1.isPlaying && !this.music2.isPlaying){
+	    	if(this.music1turn){
+	    		this.music1turn == false;
+	    		this.music2turn == true;
+	    		this.music2.play();
+	    	}else if(this.music2turn){
+	    		this.music2turn == false;
+	    		this.music1turn == true;
+	    		this.music1.play();
+	    	}
+	    }
 	}
+	    
 }
 
 
@@ -223,7 +239,7 @@ window.onload = function() {
 
 	game.state.add('Preloader', Preloader);
 	game.state.add('MainMenu', MainMenu);
-	game.state.add('Lose', Lose);
+	//game.state.add('Lose', Lose);
 	game.state.add('Game', Game);
 	game.state.start('Preloader');
 }
