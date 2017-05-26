@@ -42,7 +42,7 @@ Preloader.prototype = {
 		//loads the image used in tiled to create the map(key, filename,32x32)
 		//the key can actually be called anything as well
 		//game.load.spritesheet('tilesheet','dirt-tiles.png',32,32);
-		game.load.spritesheet('bricks');
+		game.load.spritesheet('bricks2');
 
 		
 	},
@@ -136,7 +136,7 @@ Game.prototype = {
 		//name has to be the one specified in the json file
 		// under tileset in the name category
 		//map.addTilesetImage('Level0_tilesheet','tilesheet');
-		map.addTilesetImage('bricks');
+		map.addTilesetImage('bricks2');
 
 		//initiates new layer, must be exact same name as specified in json
 		layer1 = map.createLayer('Tile Layer 1');
