@@ -202,7 +202,7 @@ Game.prototype = {
 		//if (player.hearts<=0) {
 			//ALSO KILL THE PLAYER
 			//STOP ALL INPUT
-			grayScreen.alpha = (10 - player.hearts) / 10;
+			//grayScreen.alpha = (10 - player.hearts) / 10;
 
 			if(grayScreen.alpha > 0.90){
 				//CHANGE TO END GAME STATE
