@@ -131,8 +131,7 @@ Game.prototype = {
 
 		//BG color, blue
 		game.stage.backgroundColor = "#AAAAAA";
-//<<<<<<< HEAD
-//=======
+
 		//create any npc objects
 		//npc = new NPC(580,500,2,'player', group_ViewBox); //adding in npc's like this 
 		//npc2 = new NPC(1000,1000,2,'player',group_ViewBox); //will have to be a temp fix
@@ -145,6 +144,12 @@ Game.prototype = {
 		//npc9 = new NPC(2200,2200,2,'player',group_ViewBox);
 		//npc10 = new NPC(2400,2200,2,'player',group_ViewBox);
 
+
+		//===================
+		//TILEMAP: main level
+		//===================
+
+
 		//this is whatever you used for the key when you loaded it in
 		map = game.add.tilemap('tiletest1');
 
@@ -156,20 +161,16 @@ Game.prototype = {
 		//initiates new layer, must be exact same name as specified in json
 		layer1 = map.createLayer('Tile Layer 1');
 		layer1.resizeWorld();
-		//layer1.scale.x = .5;
-		//layer1.scale.y = .5;
-
-		//Phaser.Canvas.setSmoothingEnabled(this.game.context, false);
 
 		//entire grid will have collision set
 		map.setCollisionByExclusion([]); //i don't completely understand how this works
 
 
 		//supposed to add our npc's in on the object layer but i am not gettin feedback
-		map.createFromObjects('npc',  10, 'player',0,true,true, group_npc, NPC);
+		map.createFromObjects('npc',  91, 'redBook',0,true,true, group_npc, NPC);
 		console.log(map);
-//>>>>>>> map_v2
 
+		//game.physics.p2.convertTilemap(map, layer1);
 		//=============
 		//PLAYER OBJECT
 		//=============
@@ -179,24 +180,16 @@ Game.prototype = {
 		//game.physics.p2.enable([group_npc, player], true);
 
 
-		//===================
-		//TILEMAP: main level
-		//===================
-
-			//game.physics.p2.convertTilemap(map, layer1);
-
-			//====================================
-			//CREATE OBJECTS: from tile map layers
-			//====================================
-			//walking npcs
-			map.createFromObjects('npc',  10, 'redBook', 0, true, true, group_npc, NPC);
-			//flying enemy
-			flyer = new flyingNPC(game, 200, 100, 'blueBook', 0);
-			//hiding spots
-			hidingspot1 = new HidingSpot(1200, 2300, 0.5, 'platform');
-			hidingspot2 = new HidingSpot(600, 600, 0.5, 'platform');
-
-		console.log(map);
+		//====================================
+		//CREATE OBJECTS: from tile map layers
+		//====================================
+		//walking npcs
+		map.createFromObjects('npc',  91, 'redBook', 0, true, true, group_npc, NPC);
+		//flying enemy
+		flyer = new flyingNPC(game, 200, 100, 'blueBook', 0);
+		//hiding spots
+		hidingspot1 = new HidingSpot(1200, 2300, 0.5, 'platform');
+		hidingspot2 = new HidingSpot(600, 600, 0.5, 'platform');
 
 		//camera follows player
 		game.camera.follow(player);
