@@ -40,10 +40,13 @@ Preloader.prototype = {
 
 		//loads in json tilemap created with tiled(key,filename,
 		//not exactly sure why null works here,the tilemap tool used)
-		game.load.tilemap('Level0','Level0.json',null,Phaser.Tilemap.TILED_JSON);
+		//game.load.tilemap('Level0','Level0.json',null,Phaser.Tilemap.TILED_JSON);
+
+		game.load.tilemap('tiletest1','tiletest1.json',null,Phaser.Tilemap.TILED_JSON);	
 		//loads the image used in tiled to create the map(key, filename,32x32)
 		//the key can actually be called anything as well
-		game.load.spritesheet('tilesheet','dirt-tiles.png',32,32);
+		//game.load.spritesheet('tilesheet','dirt-tiles.png',32,32);
+		game.load.spritesheet('bricks3');
 
 		// rasterized images and atlas's 
 		game.load.image('sightLine','sightline2.png');
@@ -128,6 +131,44 @@ Game.prototype = {
 
 		//BG color, blue
 		game.stage.backgroundColor = "#AAAAAA";
+//<<<<<<< HEAD
+//=======
+		//create any npc objects
+		//npc = new NPC(580,500,2,'player', group_ViewBox); //adding in npc's like this 
+		//npc2 = new NPC(1000,1000,2,'player',group_ViewBox); //will have to be a temp fix
+		//npc3 = new NPC(50,1200,2,'player',group_ViewBox);
+		//npc4 = new NPC(3000,50,2,'player',group_ViewBox);
+		//npc5 = new NPC(4000,2000,2,'player',group_ViewBox);
+		//npc6 = new NPC(200,2000,2,'player',group_ViewBox);
+		//npc7 = new NPC(1200,1500,2,'player',group_ViewBox);
+		//npc8 = new NPC(2000,2200,2,'player',group_ViewBox);
+		//npc9 = new NPC(2200,2200,2,'player',group_ViewBox);
+		//npc10 = new NPC(2400,2200,2,'player',group_ViewBox);
+
+		//this is whatever you used for the key when you loaded it in
+		map = game.add.tilemap('tiletest1');
+
+		//add a tileset image to create the map-object(name,key used above when loading image)
+		//name has to be the one specified in the json file
+		// under tileset in the name category
+		map.addTilesetImage('bricks3');
+
+		//initiates new layer, must be exact same name as specified in json
+		layer1 = map.createLayer('Tile Layer 1');
+		layer1.resizeWorld();
+		//layer1.scale.x = .5;
+		//layer1.scale.y = .5;
+
+		//Phaser.Canvas.setSmoothingEnabled(this.game.context, false);
+
+		//entire grid will have collision set
+		map.setCollisionByExclusion([]); //i don't completely understand how this works
+
+
+		//supposed to add our npc's in on the object layer but i am not gettin feedback
+		map.createFromObjects('npc',  10, 'player',0,true,true, group_npc, NPC);
+		console.log(map);
+//>>>>>>> map_v2
 
 		//=============
 		//PLAYER OBJECT
@@ -141,22 +182,7 @@ Game.prototype = {
 		//===================
 		//TILEMAP: main level
 		//===================
-			//this is whatever you used for the key when you loaded it in
-			map = game.add.tilemap('Level0');
 
-			//add a tileset image to create the map-object(name,key used above when loading image)
-			//name has to be the one specified in the json file
-			// under tileset in the name category
-			map.addTilesetImage('Level0_tilesheet','tilesheet');
-
-			//initiates new layer, must be exact same name as specified in json
-			layer1 = map.createLayer ('Tile Layer 1');
-
-			//entire grid will have collision set
-			map.setCollisionByExclusion([]); //i don't completely understand how this works
-
-			//fits layer to the game world
-			layer1.resizeWorld();
 			//game.physics.p2.convertTilemap(map, layer1);
 
 			//====================================
@@ -217,13 +243,13 @@ Game.prototype = {
 //START GAME: add states
 //======================
 window.onload = function() {
-	var width  = 900;
-	var height = 700;
+	var width  = 800;
+	var height = 600;
 	game = new Phaser.Game(width, height, Phaser.AUTO);
 
 	game.state.add('Preloader', Preloader);
 	game.state.add('MainMenu', MainMenu);
-	game.state.add('Lose', Lose);
+	//game.state.add('Lose', Lose);
 	game.state.add('Game', Game);
 	game.state.start('Preloader');
 }
