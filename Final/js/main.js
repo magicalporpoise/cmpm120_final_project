@@ -40,9 +40,8 @@ Preloader.prototype = {
 
 		//loads in json tilemap created with tiled(key,filename,
 		//not exactly sure why null works here,the tilemap tool used)
-		//game.load.tilemap('Level0','Level0.json',null,Phaser.Tilemap.TILED_JSON);
+		game.load.tilemap('tiletest1','tiletest1.json',null,Phaser.Tilemap.TILED_JSON);
 
-		game.load.tilemap('tiletest1','tiletest1.json',null,Phaser.Tilemap.TILED_JSON);	
 		//loads the image used in tiled to create the map(key, filename,32x32)
 		//the key can actually be called anything as well
 		//game.load.spritesheet('tilesheet','dirt-tiles.png',32,32);
@@ -125,6 +124,7 @@ Game.prototype = {
 		group_npc = game.add.group();
 		group_npc.enableBody = true;
 		group_hidingspot = game.add.group();
+		group_flyingNPC = game.add.group();
 
 		//Add Audio / Music
 		this.music1 = game.add.audio('dank');
@@ -187,7 +187,8 @@ Game.prototype = {
 		//prameters(nameofobjectlayer, gid, image, frame, ?, autoCull, group, function);
 		map.createFromObjects('npc',  91, 'redBook', 0, true, true, group_npc, NPC);
 		//flying enemy
-		flyer = new flyingNPC(game, 200, 100, 'blueBook', 0);
+		//flyer = new flyingNPC(game, 200, 100, 'blueBook', 0);
+		map.createFromObjects('flyer', 130, 'blueBook', 0, true, true, group_flyingNPC, flyingNPC);
 		//hiding spots
 
 		//hidingspot1 = new HidingSpot(1200, 2300, 0.5, 'platform');
