@@ -128,7 +128,7 @@ Player.prototype.update = function(){
 			//this.body.velocity.x=this.facing*(this.maxSpeed+500);
 		}
 		if (r_shoot){
-			this.shoot = new projectile(this.x, this.y, 500, this.facing, 0.1, 'redSquare');
+			this.shoot = new projectile(this.x, this.y, 800, this.facing, 0.3, 'rainbowShot');
 			game.add.existing(this.shoot);
 			console.log('r pressed');
 			player.hearts -=2;

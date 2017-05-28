@@ -25,6 +25,7 @@ function projectile(x, y, speed, direction, scale_length, img){
 	
 	// Booleans for sight
 	this.playerInSight = false;
+	this.anim = this.animations.add('shoot');
 	
 	// for mouse clicked event
 	//game.physics.arcade.moveToPointer(this, 300);
@@ -51,6 +52,8 @@ projectile.prototype.update = function(){
 		game.physics.arcade.overlap(this, group_npc, vanish);
 		this.destroy();
 	}
+
+	this.animations.play('shoot', 10, false);
 
 
 	// debug

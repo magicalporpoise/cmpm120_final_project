@@ -55,6 +55,7 @@ Preloader.prototype = {
 		game.load.atlasJSONArray('teddy', 'tb.png', 'tb.json');
 		game.load.atlasJSONArray('redBook', 'redBook.png', 'redBook.json');
 		game.load.atlasJSONArray('blueBook', 'blueBookSheet.png', 'blueBookSheet.json');
+		game.load.atlasJSONArray('rainbowShot', 'rainbowShot.png', 'rainbowShot.json');
 
 	},
 	create: function(){
