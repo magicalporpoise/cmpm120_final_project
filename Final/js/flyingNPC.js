@@ -18,6 +18,14 @@ function flyingNPC(game, x, y, img, frame) {
 	this.sight.rotation = -Math.PI/2;
 	this.sight.body.setSize(this.sight.height, this.sight.width, this.sight.width-42, 42);
 	this.body.gravity.y = 0;
+
+	//insert into game
+	game.add.existing(this); 
+
+	//add to flyingNPC group
+	group_flyingNPC.add(this);
+
+
 }
 
 //=========
