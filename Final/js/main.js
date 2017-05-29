@@ -51,7 +51,7 @@ Preloader.prototype = {
 		game.load.image('sightLine','sightline2.png');
 		game.load.image('redSquare','redSquareFill3.png');
 
-		game.load.atlasJSONArray('teddy', 'tb.png', 'tb.json');
+		game.load.atlasJSONArray('teddy', 'teddy_idletorun.png', 'teddy_idletorun.json');
 		game.load.atlasJSONArray('redBook', 'redBook.png', 'redBook.json');
 		game.load.atlasJSONArray('blueBook', 'blueBookSheet.png', 'blueBookSheet.json');
 		game.load.atlasJSONArray('rainbowShot', 'rainbowShot.png', 'rainbowShot.json');
