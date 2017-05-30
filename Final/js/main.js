@@ -130,6 +130,8 @@ Game.prototype = {
 		//Add Audio / Music
 		this.music1 = game.add.audio('dank');
 		this.music2 = game.add.audio('ambient');
+		this.counter = 1;
+		this.music1.play();
 
 		//BG color, blue
 		game.stage.backgroundColor = "#AAAAAA";
@@ -238,19 +240,18 @@ Game.prototype = {
 	    //}
 
 	    //music stuff
-	    this.music1turn = false;
-	    this.music2turn = true;
-	    if(!this.music1.isPlaying && !this.music2.isPlaying){
-	    	if(this.music1turn){
-	    		this.music1turn == false;
-	    		this.music2turn == true;
-	    		this.music2.play();
-	    	}else if(this.music2turn){
-	    		this.music2turn == false;
-	    		this.music1turn == true;
-	    		this.music1.play();
+	    if(!this.music1.isDecoding && !this.music2.isDecoding){
+	    	if(!this.music1.isPlaying && !this.music2.isPlaying){
+	    		if(this.counter % 2 == 0){
+	    			this.music2.play();
+	    			this.counter++;
+	    		} else{
+	    			this.music1.play();
+	    			this.counter++;
+	    		}
 	    	}
 	    }
+	    
 	}
 	    
 }
