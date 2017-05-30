@@ -44,6 +44,9 @@ function NPC(game, x, y, img, frame) {
 	group_ViewBox.add(this.sight);
 	//console.log("in NPC: "+ group.children);
 
+	//SFX
+	this.growlSFX = game.add.audio('growl');
+
 	//behavior timers
 	//	patrolling...
 	this.behave = game.time.create(false);
@@ -122,11 +125,13 @@ NPC.prototype.update = function(){
 		if(this.sight.playerInSight && !player.hidden) { //aggro - red
 			this.tint = 0xFF0000;
 			this.aggro = true;
+			
 			// for creating detection Boom object
 			if (this.boom_bool) {
 				this.boom = new detectionBoom(this.x, this.y, 0.2, 'redSquare');
 				this.boom_bool = false;
 				game.add.existing(this.boom);
+				this.growlSFX.play();
 			}
 			
 
