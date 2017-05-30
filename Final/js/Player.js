@@ -35,7 +35,8 @@ function Player(x, y, scale, img){
 
 	//sounds
 	this.stepSFX = game.add.audio('step');
-	//this.stepSFX.loopFull();
+	this.stepSFX.loopFull();
+	
 
 	//upload animations
 
@@ -111,12 +112,14 @@ Player.prototype.update = function(){
 		//move left and right + accelerate
 		if(hori != 0) {
 			this.body.velocity.x += this.accel * hori;
+
 			if(Math.sign(this.body.velocity.x) != this.facing) {
 				this.facing *= -1;
 				this.scale.x *= -1;
 				this.excel=true;
 				console.log("here");
 				this.decel = false;
+
 				//this.animations.play('run', 75, true);
 
 				console.log("acceling");
@@ -131,6 +134,7 @@ Player.prototype.update = function(){
 
 			console.log("deceling");
 		}
+
 
 		//reaching max speed
 		if(Math.abs(this.body.velocity.x) > this.maxSpeed) 
@@ -209,9 +213,13 @@ Player.prototype.update = function(){
 
 			
 
-		//this.stepSFX.resume();
+		if(!hitGround){
+			this.stepSFX.pause();
+		}else{
+			this.stepSFX.resume();
+		}
 	} else {
-		//this.stepSFX.pause();
+		this.stepSFX.pause();
 
 		this.animations.play('idle', 10, true);
 	}

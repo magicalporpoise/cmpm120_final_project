@@ -132,6 +132,7 @@ Game.prototype = {
 		this.music2 = game.add.audio('ambient');
 		this.counter = 1;
 		this.music1.play();
+		
 
 		//BG color, blue
 		game.stage.backgroundColor = "#AAAAAA";
