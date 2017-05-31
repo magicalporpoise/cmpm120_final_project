@@ -46,6 +46,9 @@ function NPC(game, x, y, img, frame) {
 
 	//SFX
 	this.growlSFX = game.add.audio('growl');
+	this.stunSFX = game.add.audio('NPCHit');
+	this.stunSFXplayed = false;
+
 
 	//behavior timers
 	//	patrolling...
@@ -146,7 +149,13 @@ NPC.prototype.update = function(){
 		}
 	} else {
 		this.tint = 0x00FF00; // stunned - green
+		if(!this.stunSFXplayed){
+			this.stunSFXplayed = true;
+			this.stunSFX.play();
+		}
+		
 		this.stunTimer.resume();
+		console.log(this.stunSFXplayed);
 	}
 
 	//AGGRO'd
@@ -183,6 +192,7 @@ normalBehave = function determineBehavior(){
 
 //undo the stun effect
 function unStun(){
+	this.stunSFXplayed = false;
 	this.isStunned = false;
 	this.idle = false;
 	this.stunTimer.pause();
