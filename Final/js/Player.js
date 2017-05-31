@@ -37,10 +37,20 @@ function Player(x, y, scale, img){
 	this.stepSFX = game.add.audio('step');
 
 
+
 	// for anim cancelling/playing at the right times
 	this.isJumping = false;
 	this.isPunching = false;
 	//this.stepSFX.loopFull();
+
+	this.stepSFX.loopFull();
+	this.playerAttack1SFX = game.add.audio('player_attack1');
+	this.playerAttack2SFX = game.add.audio('player_attack2');
+	this.playerAttack3SFX = game.add.audio('player_attack3');
+	this.playerAttackCounter = 1; 
+
+	
+
 
 	//upload animations
 
@@ -125,12 +135,14 @@ Player.prototype.update = function(){
 		//move left and right + accelerate
 		if(hori != 0) {
 			this.body.velocity.x += this.accel * hori;
+
 			if(Math.sign(this.body.velocity.x) != this.facing) {
 				this.facing *= -1;
 				this.scale.x *= -1;
 				this.excel=true;
 				//console.log("here");
 				this.decel = false;
+
 				//this.animations.play('run', 75, true);
 
 				//console.log("acceling");
@@ -145,6 +157,7 @@ Player.prototype.update = function(){
 
 			//console.log("deceling");
 		}
+
 
 		//reaching max speed
 		if(Math.abs(this.body.velocity.x) > this.maxSpeed) 
@@ -178,6 +191,18 @@ Player.prototype.update = function(){
 			this.shoot = new projectile(this.x, this.y, 800, this.facing, 0.3, 'rainbowShot');
 			game.add.existing(this.shoot);
 			console.log('r pressed');
+			//SFX
+			if(this.playerAttackCounter % 2 == 0){
+				this.playerAttack2SFX.play();
+				this.playerAttackCounter++;
+			}else if(this.playerAttackCounter %3 == 0){
+				this.playerAttack3SFX.play();
+				this.playerAttackCounter++;
+			}else{
+				this.playerAttack1SFX.play();
+				this.playerAttackCounter++;
+			}
+
 			player.hearts -=2;
 		}
 	} else { //IS HIDDEN
@@ -261,11 +286,20 @@ Player.prototype.update = function(){
 
 			
 
-		//this.stepSFX.resume();
+		if(!hitGround){
+			this.stepSFX.pause();
+		}else{
+			this.stepSFX.resume();
+		}
 	} else {
+
 		//this.stepSFX.pause();
 		console.log("idle");
 		//if (!this.isJumping)
+
+		this.stepSFX.pause();
+
+
 		this.animations.play('idle', 10, true);
 	}
 	//console.log('bot of update');

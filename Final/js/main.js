@@ -27,6 +27,12 @@ Preloader.prototype = {
 		game.load.path = 'assets/audio/sfx/';
 		game.load.audio('growl', 'growl.wav');
 		game.load.audio('step', 'footstep.mp3');
+		game.load.audio('NPCHit', 'NPCHit.mp3')
+		game.load.path = 'assets/audio/sfx/player_attacks/';
+		game.load.audio('player_attack1', 'player_attack1.wav');
+		game.load.audio('player_attack2', 'player_attack2.wav');
+		game.load.audio('player_attack3', 'player_attack3.wav');
+
 
 		//LOAD ART ASSETS
 		game.load.path = "assets/img/";
@@ -132,6 +138,7 @@ Game.prototype = {
 		this.music2 = game.add.audio('ambient');
 		this.counter = 1;
 		this.music1.play();
+		
 
 		//BG color, blue
 		game.stage.backgroundColor = "#AAAAAA";
