@@ -23,7 +23,7 @@ function flyingNPC(game, x, y, img, frame) {
 	game.add.existing(this); 
 
 	//add to flyingNPC group
-	group_flyingNPC.add(this);
+	group_npc.add(this);
 
 
 }
@@ -40,6 +40,11 @@ flyingNPC.prototype.constructor = flyingNPC;
 //======
 flyingNPC.prototype.update = function(){
 	NPC.prototype.update.call(this);
+
+	//also follow y direction
+	if(this.aggro){
+		this.body.velocity.y = (player.y - this.y);
+	}
 
 	//prevent weird sight flipping on update from
 	//parent npc class

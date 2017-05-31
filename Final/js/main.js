@@ -131,7 +131,7 @@ Game.prototype = {
 		group_npc = game.add.group();
 		group_npc.enableBody = true;
 		group_hidingspot = game.add.group();
-		group_flyingNPC = game.add.group();
+		//group_flyingNPC = game.add.group();
 
 		//Add Audio / Music
 		this.music1 = game.add.audio('dank');
@@ -144,16 +144,10 @@ Game.prototype = {
 		game.stage.backgroundColor = "#AAAAAA";
 
 		//create any npc objects
-		//npc = new NPC(580,500,2,'player', group_ViewBox); //adding in npc's like this 
-		//npc2 = new NPC(1000,1000,2,'player',group_ViewBox); //will have to be a temp fix
-		//npc3 = new NPC(50,1200,2,'player',group_ViewBox);
-		//npc4 = new NPC(3000,50,2,'player',group_ViewBox);
-		//npc5 = new NPC(4000,2000,2,'player',group_ViewBox);
-		//npc6 = new NPC(200,2000,2,'player',group_ViewBox);
-		//npc7 = new NPC(1200,1500,2,'player',group_ViewBox);
-		//npc8 = new NPC(2000,2200,2,'player',group_ViewBox);
-		//npc9 = new NPC(2200,2200,2,'player',group_ViewBox);
-		//npc10 = new NPC(2400,2200,2,'player',group_ViewBox);
+		//npc = new NPC(game, 580,500,'player', 0);
+		//npc = new NPC(game, 600,500,'player', 0);
+		//npc = new NPC(game, 700,500,'player', 0);
+		//npc = new NPC(game, 800,500,'player', 0);
 
 
 		//===================
@@ -198,7 +192,7 @@ Game.prototype = {
 		map.createFromObjects('npc',  91, 'redBook', 0, true, true, group_npc, NPC);
 		//flying enemy
 		//flyer = new flyingNPC(game, 200, 100, 'blueBook', 0);
-		map.createFromObjects('flyer', 130, 'blueBook', 0, true, true, group_flyingNPC, flyingNPC);
+		map.createFromObjects('flyer', 130, 'blueBook', 0, true, true, group_npc, flyingNPC);
 		//hiding spots
 
 		//hidingspot1 = new HidingSpot(1200, 2300, 0.5, 'platform');
@@ -258,9 +252,7 @@ Game.prototype = {
 	    		}
 	    	}
 	    }
-	    
 	}
-	    
 }
 
 
@@ -269,8 +261,8 @@ Game.prototype = {
 //START GAME: add states
 //======================
 window.onload = function() {
-	var width  = 800;
-	var height = 600;
+	var width  = 1000;
+	var height = 650;
 	game = new Phaser.Game(width, height, Phaser.AUTO);
 
 	game.state.add('Preloader', Preloader);
