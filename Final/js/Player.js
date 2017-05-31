@@ -28,21 +28,35 @@ function Player(x, y, scale, img){
 	//personal variables
 	this.hearts = 10;		//character's hp
 	this.maxSpeed = 500;	//speed cap
-	this.jump = -800;		//jump height
+	this.jump = -600;		//jump height
 	this.accel = 25;		//acceleration
 	this.hidden = false; 	//is the player hidden from enemies?
 	this.facing = 1; 		//1 for right, -1 for left
 
 	//sounds
 	this.stepSFX = game.add.audio('step');
+
+
+	// for anim cancelling/playing at the right times
+	this.isJumping = false;
+	this.isPunching = false;
 	//this.stepSFX.loopFull();
 
 	//upload animations
 
-	this.animations.add('idle', [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14], 1, true);
-	this.animations.add('run', [45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74], 75, true);
-	this.animations.add('idletorun', [15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44], 65, true);
-	this.animations.add('runtoidle', [44,43,42,41,40,39,38,37,36,35,34,33,32,31,30,29,28,27,26,25,24,23,22,21,20,19,18,17,16,15], 65, true);
+	this.animations.add('falling', //[0,1,2,3,4,5,6,7,8,9,
+		[10,11,12,13,14], 1, false);
+	this.animations.add('idle', [15,16,17,18,19,20,21,22,23,24,25,26,27,28,29], 65, true);
+	this.animations.add('jump', [30,31,32,33,34,35,36,37,38,39,40,41,42,43,44],50,true);
+	this.animations.add('idletorun', [45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74], 65, true);
+	this.animations.add('run', [75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,101,102,103], 75, true);
+	this.animations.add('punch', [104,105,106,107,108,109,110,111,112,113], 75, true);
+
+
+
+	//this.animations.add('run', [45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74], 75, true);
+	//this.animations.add('idletorun', [15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44], 65, true);
+	//this.animations.add('runtoidle', [44,43,42,41,40,39,38,37,36,35,34,33,32,31,30,29,28,27,26,25,24,23,22,21,20,19,18,17,16,15], 65, true);
 
 
 
@@ -62,7 +76,7 @@ function Player(x, y, scale, img){
 	this.decel = false;
 
 	this.oldVelocity = 0;
-	var ItoR_playing
+	var idletorun_playing, jump_playing;
 }
 
 //=========
@@ -115,21 +129,21 @@ Player.prototype.update = function(){
 				this.facing *= -1;
 				this.scale.x *= -1;
 				this.excel=true;
-				console.log("here");
+				//console.log("here");
 				this.decel = false;
 				//this.animations.play('run', 75, true);
 
-				console.log("acceling");
+				//console.log("acceling");
 			}
 
 		} else { //deccelerate
-			this.body.velocity.x -= Math.sign(this.body.velocity.x) * this.accel / 2;
+			this.body.velocity.x -= Math.sign(this.body.velocity.x) * this.accel;
 			//stopping
 			if(Math.abs(this.body.velocity.x) < this.accel/2) this.body.velocity.x = 0;
 
 			this.decel = true;
 
-			console.log("deceling");
+			//console.log("deceling");
 		}
 
 		//reaching max speed
@@ -145,8 +159,14 @@ Player.prototype.update = function(){
 			game.physics.arcade.enable(hitBox);
 			//change hit box size
 			hitBox.body.setSize(100, 50, 0, 0);
+
+			console.log("isPunching set to true");
+
+			this.isPunching = true;
 			if(!group_npc.aggro) game.physics.arcade.overlap(hitBox, group_npc, stunTheEnemy);
 			hitBox.destroy();
+
+
 			//--add animation--//
 		}
 		if (f_dash){
@@ -167,42 +187,74 @@ Player.prototype.update = function(){
 
 	//ANIMATION + SOUND HANDLING
 
-	if (this.body.velocity.x != 0) {
-			//console.log("vel" + this.body.velocity.x);
+	if (mv_up) {
+		console.log("jump");
+		//this.animations.play('jump', 50, false);
+		this.isJumping = true;
+	}
+	if (hitGround) {
+		this.isJumping = false;
+	}
+
+
+
+
+
+	/*else if (mv_left || mv_right) {
+		idletorun_playing = this.animations.play('idletorun');
+		if (idletorun_playing.loopCount>=1) {
+			console.log("done");
+			idletorun_playing = this.animations.play('run', 75, true);
+
+		}
+		
+	}
+	
+	
+	if (this.body.velocity.y >= 100 || this.body.velocity.y <= -100) {
+		console.log("y vel " + this.body.velocity.y);
+		//this.animations.play('falling', 2, false);
+	}*/
+
+	if (this.isPunching){
+		console.log("punch anim");
+		this.animations.play('punch', 50, false);
+	}
+
+	else if (this.isJumping){
+		console.log("jump anim");
+		this.jump_playing = this.animations.play('falling', 5, false);
+	}
+
+	else if (this.body.velocity.x != 0) {
+			console.log("run");
 
 
 			if (this.excel) {
 				//if (this.body.acceleration.x>0)
 				//console.log("accel anim");
-				ItoR_playing = this.animations.play('idletorun');  //,65,false);
+				idletorun_playing = this.animations.play('idletorun');  //,65,false);
 				//else 
-				//ItoR_playing = this.animations.play('runtoidle');
+				//idletorun_playing = this.animations.play('runtoidle');
 			
 			}
+			//idletorun_playing.killOnComplete = true;
 
-			if (this.body.velocity.x<this.oldVelocity) {
-				//console.log("decel anim");
-				//ItoR_playing = this.animations.play('runtoidle');
-			}
-
-
-			//ItoR_playing.killOnComplete = true;
-
-			//ItoR_playing.killOnComplete = true;
-			if (ItoR_playing.loopCount>=1) {
+			//idletorun_playing.killOnComplete = true;
+			if (idletorun_playing.loopCount>=1) {
 				//console.log("finished");
 				this.excel = false;
 				//this.decel = false;
-				//ItoR_playing.destroy();
-				//ItoR_playing.killOnComplete = true;
+				//idletorun_playing.destroy();
+				//idletorun_playing.killOnComplete = true;
 				
 
-				ItoR_playing = this.animations.play('run', 75, true);
+				this.animations.play('run', 75, true);
 
-				if (Math.abs(this.body.velocity.x)<=100 && this.body.velocity.x<this.oldVelocity) {
-					console.log("slowed down, change anim");
-					//ItoR_playing = this.animations.play('runtoidle');
-				}
+				//if (Math.abs(this.body.velocity.x)<=100 && this.body.velocity.x<this.oldVelocity) {
+				//	console.log("slowed down, change anim");
+					//idletorun_playing = this.animations.play('runtoidle');
+				//}
 			
 
 			}
@@ -212,12 +264,14 @@ Player.prototype.update = function(){
 		//this.stepSFX.resume();
 	} else {
 		//this.stepSFX.pause();
-
+		console.log("idle");
+		//if (!this.isJumping)
 		this.animations.play('idle', 10, true);
 	}
 	//console.log('bot of update');
 
 	this.oldVelocity = this.body.velocity.x;
+	
 
 
 }
@@ -226,5 +280,7 @@ Player.prototype.update = function(){
 //FUNCTIONS
 //=========
 function stunTheEnemy(hb, npc){
+	console.log("isPunching should be false...")
+	player.isPunching = false;
 	npc.isStunned = true;
 }
