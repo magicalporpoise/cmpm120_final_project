@@ -38,6 +38,10 @@ function NPC(game, x, y, img, frame) {
 	this.aggro = false;		//seen player? --> aggro
 	this.canAttack = true;	//attack cooldown
 
+	// for jumping
+	this.jump = -600;
+	this.body.gravity.y = 1000;
+
 	//create view box
 	this.sight = new ViewBox(this.x, this.y, 1, 'sightLine');
 	game.add.existing(this.sight);
@@ -164,6 +168,10 @@ NPC.prototype.update = function(){
 		this.isStunned = false;
 		this.maxSpeed = 200;
 		moveTowardsPlayer(this);
+		
+
+
+
 		this.atkTimer.resume();
 	} else {
 		this.atkTimer.pause();
@@ -209,6 +217,16 @@ function moveTowardsPlayer(self){
 
 	self.movingHori = move
 	//console.log(player.x - self.x);
+	console.log("player.y " + player.y);
+	console.log("npc.y " + this.y);
+
+	// allows npc to jump
+	if (this.y>=player.y){
+		console.log("player.y " + player.y);
+		this.body.velocity.y = this.jump;
+
+	}
+
 }
  
 //hit player, deal damage, deal knockback

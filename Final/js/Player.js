@@ -78,8 +78,12 @@ function Player(x, y, scale, img, frame){
 	this.excel = true;
 	this.decel = false;
 	this.oldVelocity = 0;
+<<<<<<< HEAD
 
 	var idletorun_playing, jump_playing;
+=======
+	var idletorun_playing, jump_playing, punch_playing;
+>>>>>>> e9395e915a5c84e27dd45ca61b4d1a951e2f8925
 }
 
 //=========
@@ -212,8 +216,21 @@ Player.prototype.update = function(){
 	} else 	this.isJumping = true;
 
 	if (this.isPunching){
+<<<<<<< HEAD
 		this.currentAnim = this.animations.play('punch', 50, false);
 		this.currentAnim.onComplete.add(function(){this.isPunching = false;}, this);
+=======
+		console.log("punch anim");
+		//if (punch_playing.loopCount<=1)
+
+		punch_playing = this.animations.play('punch', 50, false);
+		punch_playing.onComplete.add(animationStopped, this);
+	}
+
+	else if (this.isJumping){
+		console.log("jump anim");
+		this.jump_playing = this.animations.play('falling', 5, false);
+>>>>>>> e9395e915a5c84e27dd45ca61b4d1a951e2f8925
 	}
 	else if (this.body.velocity.x != 0) {
 
@@ -259,6 +276,11 @@ Player.prototype.update = function(){
 //=========
 function stunTheEnemy(hb, npc){
 	console.log("isPunching should be false...")
-	player.isPunching = false;
+	//player.isPunching = false;
 	npc.isStunned = true;
+}
+
+
+function animationStopped(sprite, animation){
+	player.isPunching = false;
 }
