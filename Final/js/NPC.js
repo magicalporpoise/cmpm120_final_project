@@ -68,7 +68,7 @@ function NPC(game, x, y, img, frame) {
 	this.atkTimer.loop(3000, resetAttack, this);
 	this.atkTimer.start();
 
-	var anim = this.animations.add('walk');
+	this.animations.add('walk');
 	this.animations.add('idle', [0], 1, true);
 
 	//insert into game
