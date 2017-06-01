@@ -217,11 +217,11 @@ function moveTowardsPlayer(self){
 
 	self.movingHori = move
 	//console.log(player.x - self.x);
-	console.log("player.y " + player.y);
+	console.log("player.y " + player.position.y);
 	console.log("npc.y " + this.y);
 
 	// allows npc to jump
-	if (this.y>=player.y){
+	if (this.y<=player.position.y){
 		console.log("player.y " + player.y);
 		this.body.velocity.y = this.jump;
 
