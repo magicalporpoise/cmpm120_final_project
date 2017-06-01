@@ -208,6 +208,10 @@ Player.prototype.update = function(){
 	} else { //IS HIDDEN
 		this.tint = 0;				//turn black when hidden
 		this.body.velocity.x = 0;	//stop when hidden
+
+		if (game.input.keyboard.justPressed(Phaser.Keyboard.SPACEBAR) && !game.physics.arcade.overlap(this, group_hidingspot)){
+			this.hidden = false;
+		}
 	}
 
 	//ANIMATION + SOUND HANDLING

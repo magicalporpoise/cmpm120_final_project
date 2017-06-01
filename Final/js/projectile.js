@@ -42,9 +42,11 @@ projectile.prototype.constructor = projectile;
 //	projectile behavior
 //==================
 projectile.prototype.update = function(){
+
+	game.physics.arcade.moveToPointer(this, 300);
 	
 	// move
-	this.body.velocity.x = this.speed * this.dir;
+	//this.body.velocity.x = this.speed * this.dir;
 	
 	// collision
 	let projHit = game.physics.arcade.overlap(this, group_npc);
