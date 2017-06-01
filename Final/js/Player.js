@@ -4,10 +4,10 @@
 //===========
 //CONSTRUCTOR
 //===========
-function Player(x, y, scale, img, frame){
+function Player(x, y, scale, img){
 	//Inherit Phaser.Sprite class
 	// calling new Sprite
-	Phaser.Sprite.call(this, game, x, y, img, frame);
+	Phaser.Sprite.call(this, game, x, y, img, 0);
 
 	//phaser related variables
 	//and physics
@@ -49,19 +49,26 @@ function Player(x, y, scale, img, frame){
 	this.playerAttack3SFX = game.add.audio('player_attack3');
 	this.playerAttackCounter = 1; 
 
+	
+
+
 	//upload animations
-	this.animations.add('falling', [10,11,12,13,14], 1, false);
+
+	this.animations.add('falling', //[0,1,2,3,4,5,6,7,8,9,
+		[10,11,12,13,14], 1, false);
 	this.animations.add('idle', [15,16,17,18,19,20,21,22,23,24,25,26,27,28,29], 65, true);
 	this.animations.add('jump', [30,31,32,33,34,35,36,37,38,39,40,41,42,43,44],50,true);
 	this.animations.add('idletorun', [45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74], 65, true);
 	this.animations.add('run', [75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,101,102,103], 75, true);
 	this.animations.add('punch', [104,105,106,107,108,109,110,111,112,113], 75, true);
 
-	this.currentAnim;
+
 
 	//this.animations.add('run', [45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74], 75, true);
 	//this.animations.add('idletorun', [15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44], 65, true);
 	//this.animations.add('runtoidle', [44,43,42,41,40,39,38,37,36,35,34,33,32,31,30,29,28,27,26,25,24,23,22,21,20,19,18,17,16,15], 65, true);
+
+
 
 	// **** this.animations.add('idle', [30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49], 1, true);
 	//this.animations.add('idle', Phaser.Animation.generateFrameNames('', 1, 2, '', 4), 10, true, false);
@@ -72,18 +79,14 @@ function Player(x, y, scale, img, frame){
 	//this.animations.add('walk', Phaser.Animation.generateFrameNames('', 1, 61, '', 4), 10, true, false);
 	//var anim = this.animations.add('walk');
 	//anim.play(100, true);
-
 	game.add.existing(this);
+
 
 	this.excel = true;
 	this.decel = false;
-	this.oldVelocity = 0;
-<<<<<<< HEAD
 
-	var idletorun_playing, jump_playing;
-=======
+	this.oldVelocity = 0;
 	var idletorun_playing, jump_playing, punch_playing;
->>>>>>> e9395e915a5c84e27dd45ca61b4d1a951e2f8925
 }
 
 //=========
@@ -136,7 +139,7 @@ Player.prototype.update = function(){
 			if(Math.sign(this.body.velocity.x) != this.facing) {
 				this.facing *= -1;
 				this.scale.x *= -1;
-				if(Math.abs(this.body.velocity.x) < this.maxSpeed/2) this.excel=true;
+				this.excel=true;
 				//console.log("here");
 				this.decel = false;
 
@@ -151,8 +154,10 @@ Player.prototype.update = function(){
 			if(Math.abs(this.body.velocity.x) < this.accel/2) this.body.velocity.x = 0;
 
 			this.decel = true;
+
 			//console.log("deceling");
 		}
+
 
 		//reaching max speed
 		if(Math.abs(this.body.velocity.x) > this.maxSpeed) 
@@ -169,18 +174,19 @@ Player.prototype.update = function(){
 			hitBox.body.setSize(100, 50, 0, 0);
 
 			console.log("isPunching set to true");
-			this.isPunching = true;
 
+			this.isPunching = true;
 			if(!group_npc.aggro) game.physics.arcade.overlap(hitBox, group_npc, stunTheEnemy);
 			hitBox.destroy();
-		}
 
+
+			//--add animation--//
+		}
 		if (f_dash){
-			player.body.velocity.x+=this.facing*300;
+			player.x+=this.facing*300;//Math.sign(this.body.velocity.x)*300;
 			player.hearts -=2;
 			//this.body.velocity.x=this.facing*(this.maxSpeed+500);
 		}
-
 		if (r_shoot){
 			this.shoot = new projectile(this.x, this.y, 800, this.facing, 0.3, 'rainbowShot');
 			game.add.existing(this.shoot);
@@ -202,24 +208,39 @@ Player.prototype.update = function(){
 	} else { //IS HIDDEN
 		this.tint = 0;				//turn black when hidden
 		this.body.velocity.x = 0;	//stop when hidden
-
-		//spacebar makes un-hidden
-		if(game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR) && !game.physics.arcade.overlap(this, group_hidingspot)){
-			this.hidden = false;
-		}
 	}
 
 	//ANIMATION + SOUND HANDLING
-	//console.log(hitGround);
+
+	if (mv_up) {
+		console.log("jump");
+		//this.animations.play('jump', 50, false);
+		this.isJumping = true;
+	}
 	if (hitGround) {
 		this.isJumping = false;
-	} else 	this.isJumping = true;
+	}
+
+
+
+
+
+	/*else if (mv_left || mv_right) {
+		idletorun_playing = this.animations.play('idletorun');
+		if (idletorun_playing.loopCount>=1) {
+			console.log("done");
+			idletorun_playing = this.animations.play('run', 75, true);
+		}
+		
+	}
+	
+	
+	if (this.body.velocity.y >= 100 || this.body.velocity.y <= -100) {
+		console.log("y vel " + this.body.velocity.y);
+		//this.animations.play('falling', 2, false);
+	}*/
 
 	if (this.isPunching){
-<<<<<<< HEAD
-		this.currentAnim = this.animations.play('punch', 50, false);
-		this.currentAnim.onComplete.add(function(){this.isPunching = false;}, this);
-=======
 		console.log("punch anim");
 		//if (punch_playing.loopCount<=1)
 
@@ -230,45 +251,65 @@ Player.prototype.update = function(){
 	else if (this.isJumping){
 		console.log("jump anim");
 		this.jump_playing = this.animations.play('falling', 5, false);
->>>>>>> e9395e915a5c84e27dd45ca61b4d1a951e2f8925
 	}
+
 	else if (this.body.velocity.x != 0) {
+			console.log("run");
 
-			if(this.currentAnim == 'run') this.excel = false;
 
-			if (hori != 0) {
-				this.currentAnim = this.animations.play('run', 75, true);
-				//if(this.excel){
-				//	this.currentAnim = this.animations.play('idletorun');
-				//	this.currentAnim.onComplete.add(function(){this.excel = false;}, this);
-				//}
-			}
-			if (this.isJumping){
-				if(this.body.velocity.y > 50){
-					this.currentAnim = this.animations.play('falling', 5, false);
-				} else if (this.body.velocity.y < 50){
-					this.currentAnim = this.animations.play('jump', 5, false);
-				}
-			}
+			if (this.excel) {
+				//if (this.body.acceleration.x>0)
+				//console.log("accel anim");
+				idletorun_playing = this.animations.play('idletorun');  //,65,false);
+				//else 
+				//idletorun_playing = this.animations.play('runtoidle');
 			
+			}
+			//idletorun_playing.killOnComplete = true;
+
+			//idletorun_playing.killOnComplete = true;
+			if (idletorun_playing.loopCount>=1) {
+				//console.log("finished");
+				this.excel = false;
+				//this.decel = false;
+				//idletorun_playing.destroy();
+				//idletorun_playing.killOnComplete = true;
+				
+
+				this.animations.play('run', 75, true);
+
+				//if (Math.abs(this.body.velocity.x)<=100 && this.body.velocity.x<this.oldVelocity) {
+				//	console.log("slowed down, change anim");
+					//idletorun_playing = this.animations.play('runtoidle');
+				//}
+			
+
+			}
+
+			
+
 		if(!hitGround){
 			this.stepSFX.pause();
 		}else{
 			this.stepSFX.resume();
 		}
 	} else {
+
 		//this.stepSFX.pause();
-		//console.log("idle");
+		console.log("idle");
 		//if (!this.isJumping)
+
 		this.stepSFX.pause();
-		this.currentAnim = this.animations.play('idle', 10, true);
+
+
+		this.animations.play('idle', 10, true);
 	}
 	//console.log('bot of update');
-	this.oldVelocity = this.body.velocity.x;
 
-	//log current animation::
-	console.log(this.currentAnim.name);
-	//console.log(this.body.velocity.y);
+	this.oldVelocity = this.body.velocity.x;
+	
+
+
 }
 
 //=========

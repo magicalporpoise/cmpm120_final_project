@@ -39,7 +39,7 @@ function NPC(game, x, y, img, frame) {
 	this.canAttack = true;	//attack cooldown
 
 	// for jumping
-	this.jump = -600;
+	this.jump = -200;
 	this.body.gravity.y = 1000;
 
 	//create view box
@@ -95,11 +95,14 @@ NPC.prototype.constructor = NPC;
 //	npc behavior
 //================
 NPC.prototype.update = function(){
+
+	let hitGround = game.physics.arcade.collide(this, layer1);
+
 	// debug
 	//game.debug.body(this);
 
 	//COLLISION + OVERLAPS
-	game.physics.arcade.collide(this, layer1);
+	//game.physics.arcade.collide(this, layer1);
 	let hit = 0;
 	if(!player.hidden && this.aggro) {
 		hit = game.physics.arcade.overlap(this, player, attackPlayer);
@@ -166,8 +169,12 @@ NPC.prototype.update = function(){
 	if(this.aggro){
 		this.idle = false;
 		this.isStunned = false;
-		this.maxSpeed = 200;
+		this.maxSpeed = 300;
 		moveTowardsPlayer(this);
+
+		// this.y>=player.position.y+20 <- for player y check
+		// allows npc to jump
+		if (hitGround) jump(this); 
 		
 
 
@@ -217,16 +224,15 @@ function moveTowardsPlayer(self){
 
 	self.movingHori = move
 	//console.log(player.x - self.x);
-	console.log("player.y " + player.position.y);
-	console.log("npc.y " + this.y);
+	//console.log("player.y " + player.position.y);
+	//console.log("npc.y " + self.y);
 
-	// allows npc to jump
-	if (this.y<=player.position.y){
-		console.log("player.y " + player.y);
-		this.body.velocity.y = this.jump;
+}
 
-	}
-
+// npc jumps if player if higher
+function jump(self){
+	console.log("in jump");
+	self.body.velocity.y = self.jump;
 }
  
 //hit player, deal damage, deal knockback
