@@ -269,8 +269,8 @@ Game.prototype = {
 //START GAME: add states
 //======================
 window.onload = function() {
-	var width  = 800;
-	var height = 600;
+	var width  = window.innerWidth;
+	var height = window.innerHeight;
 	game = new Phaser.Game(width, height, Phaser.AUTO);
 
 	game.state.add('Preloader', Preloader);

@@ -86,7 +86,7 @@ function Player(x, y, scale, img){
 	this.decel = false;
 
 	this.oldVelocity = 0;
-	var idletorun_playing, jump_playing;
+	var idletorun_playing, jump_playing, punch_playing;
 }
 
 //=========
@@ -243,7 +243,10 @@ Player.prototype.update = function(){
 
 	if (this.isPunching){
 		console.log("punch anim");
-		this.animations.play('punch', 50, false);
+		//if (punch_playing.loopCount<=1)
+
+		punch_playing = this.animations.play('punch', 50, false);
+		punch_playing.onComplete.add(animationStopped, this);
 	}
 
 	else if (this.isJumping){
@@ -315,6 +318,11 @@ Player.prototype.update = function(){
 //=========
 function stunTheEnemy(hb, npc){
 	console.log("isPunching should be false...")
-	player.isPunching = false;
+	//player.isPunching = false;
 	npc.isStunned = true;
+}
+
+
+function animationStopped(sprite, animation){
+	player.isPunching = false;
 }
