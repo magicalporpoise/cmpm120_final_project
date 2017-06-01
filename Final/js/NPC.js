@@ -171,16 +171,17 @@ NPC.prototype.update = function(){
 		this.isStunned = false;
 		this.maxSpeed = 300;
 		moveTowardsPlayer(this);
+		if(this.sight.scale.x == 1){
+			this.sight.rotation = Math.atan2(this.y-player.y, this.x-player.x);
+		} else this.sight.rotation = Math.atan2(player.y-this.y, player.x-this.x);
 
 		// this.y>=player.position.y+20 <- for player y check
 		// allows npc to jump
 		if (hitGround) jump(this); 
-		
-
-
-
 		this.atkTimer.resume();
 	} else {
+		if(this.sight.rotation != 0) this.sight.scale.x = -this.facing;
+		this.sight.rotation = 0;
 		this.atkTimer.pause();
 		this.maxSpeed = 100;
 	}

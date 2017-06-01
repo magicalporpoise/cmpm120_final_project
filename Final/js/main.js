@@ -166,7 +166,6 @@ Game.prototype = {
 		//initiates new layer, must be exact same name as specified in json
 		layer1 = map.createLayer('Tile Layer 1');
 		layer1.resizeWorld();
-
 		//entire grid will have collision set
 		map.setCollisionByExclusion([]); //i don't completely understand how this works
 
@@ -189,7 +188,8 @@ Game.prototype = {
 		//====================================
 		//walking npcs
 		//prameters(nameofobjectlayer, gid, image, frame, ?, autoCull, group, function);
-		map.createFromObjects('npc',  91, 'redBook', 0, true, true, group_npc, NPC);
+		//map.createFromObjects('npc',  91, 'redBook', 0, true, true, group_npc, NPC);
+		map.createFromObjects('npc', 91, 'blueBook', 0, true, true, group_npc, flyingNPC);
 		//flying enemy
 		//flyer = new flyingNPC(game, 200, 100, 'blueBook', 0);
 		map.createFromObjects('flyer', 130, 'blueBook', 0, true, true, group_npc, flyingNPC);

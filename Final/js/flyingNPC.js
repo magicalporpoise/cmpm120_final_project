@@ -10,6 +10,8 @@ function flyingNPC(game, x, y, img, frame) {
 	// calling new Sprite
 	NPC.call(this, game, x, y, img, frame);
 
+	this.altitude = this.y - 300;
+
 	//CHANGE FOR FLYING ENEMY
 	game.time.events.remove(this.behave[0]);
 	this.behave.loop(Math.random()*2000+5000, flyingBehave, this);
@@ -44,8 +46,12 @@ flyingNPC.prototype.update = function(){
 	//also follow y direction
 	if(this.aggro){
 		this.body.velocity.y = (player.y - this.y);
-	}
+	} else {
+		this.sight.rotation = -Math.PI/2;
+		//fly back up to a normal height
+		if(this.y != this.altitude) this.body.velocity.y = (this.altitude-this.y);
 
+	}
 	//prevent weird sight flipping on update from
 	//parent npc class
 	this.sight.scale.x = 1;
