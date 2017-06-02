@@ -6,6 +6,9 @@ function projectile(x, y, speed, direction, scale_length, img){
 
 	//phaser related variables
 	//		and physics
+
+	
+
 	this.x = x;
 	this.y = y;
 	this.scale.x = scale_length;
@@ -26,9 +29,12 @@ function projectile(x, y, speed, direction, scale_length, img){
 	// Booleans for sight
 	this.playerInSight = false;
 	this.anim = this.animations.add('shoot');
+
+	this.doDestroy = false;
 	
 	// for mouse clicked event
 	//game.physics.arcade.moveToPointer(this, 300);
+	group_projectile1.add(this);
 }
 
 //=========
@@ -42,18 +48,30 @@ projectile.prototype.constructor = projectile;
 //	projectile behavior
 //==================
 projectile.prototype.update = function(){
+	let viewCol = game.physics.arcade.overlap(this, group_ViewBox, viewCollide);
+	//if (viewCol) console.log("projectile saw viewbox");
 
+	// move to pointer
 	game.physics.arcade.moveToPointer(this, 300);
 	
-	// move
+	// move velocity
 	//this.body.velocity.x = this.speed * this.dir;
-	
-	// collision
-	let projHit = game.physics.arcade.overlap(this, group_npc);
-	if (projHit) {
-		game.physics.arcade.overlap(this, group_npc, vanish);
+
+	let hitGround = game.physics.arcade.collide(this, layer1);
+	if (hitGround) {
+		console.log("projectile hit ground");
 		this.destroy();
 	}
+	
+	if (this.doDestroy) this.destroy();
+	// collision with npc
+	let projHit = game.physics.arcade.overlap(this, group_npc, vanish);
+	//if (projHit) {
+		//game.physics.arcade.overlap(this, group_npc, vanish);
+		//this.destroy();
+	//}
+
+	//collision with viewbox
 
 	this.animations.play('shoot', 10, false);
 
@@ -62,9 +80,16 @@ projectile.prototype.update = function(){
 	//game.debug.body(this);
 }
 
+function viewCollide(hb, view){
+	console.log("projectile saw viewbox");
+	view.ballInSight = true;
+
+}
+
 function vanish(hb, npc){
 	//npc.destroy();
 	npc.isStunned = true;
+	hb.doDestroy=true;
 	//npc.sight.destroy();
 
 }

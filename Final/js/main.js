@@ -53,6 +53,11 @@ Preloader.prototype = {
 		//game.load.spritesheet('tilesheet','dirt-tiles.png',32,32);
 		game.load.spritesheet('bricks3');
 
+
+		// vectorized images
+		game.load.image('bigcloud','cloud3_white.png');
+		game.load.image('smallcloud','cloud5_white.png');
+
 		// rasterized images and atlas's 
 		game.load.image('sightLine','sightline2.png');
 		game.load.image('redSquare','redSquareFill3.png');
@@ -131,13 +136,15 @@ Game.prototype = {
 		group_npc = game.add.group();
 		group_npc.enableBody = true;
 		group_hidingspot = game.add.group();
+
+		group_projectile1 = game.add.group();
 		//group_flyingNPC = game.add.group();
 
 		//Add Audio / Music
 		this.music1 = game.add.audio('dank');
 		this.music2 = game.add.audio('ambient');
 		this.counter = 1;
-		this.music1.play();
+		this.music1.loopFull();
 		
 
 		//BG color, blue
@@ -241,7 +248,7 @@ Game.prototype = {
 	    //}
 
 	    //music stuff
-	    if(!this.music1.isDecoding && !this.music2.isDecoding){
+	    /*if(!this.music1.isDecoding && !this.music2.isDecoding){
 	    	if(!this.music1.isPlaying && !this.music2.isPlaying){
 	    		if(this.counter % 2 == 0){
 	    			this.music2.play();
@@ -251,7 +258,7 @@ Game.prototype = {
 	    			this.counter++;
 	    		}
 	    	}
-	    }
+	    }*/
 	}
 }
 

@@ -16,6 +16,9 @@ function NPC(game, x, y, img, frame) {
 
 	//phaser related variables
 	//		and physics
+	this.ball_aggro = false;
+
+
 	this.x = x;
 	this.y = y;
 	
@@ -132,6 +135,7 @@ NPC.prototype.update = function(){
 		this.tint = 0xFFFFFF;
 		
 		this.stunTimer.pause();
+
 		if(this.sight.playerInSight && !player.hidden) { //aggro - red
 			this.tint = 0xFF0000;
 			this.aggro = true;
@@ -147,6 +151,9 @@ NPC.prototype.update = function(){
 
 
 			this.behave.pause();
+		} else if (this.sight.ballInSight) {
+			console.log("this.sight.ballInSight");
+			this.ball_aggro = true;
 		} else if(player.hidden && !this.sight.playerInSight){ // wander - blue
 			this.boom_bool = true;
 
@@ -180,6 +187,13 @@ NPC.prototype.update = function(){
 
 
 		this.atkTimer.resume();
+	} else if (this.ball_aggro) {
+		console.log("npc.ball_aggro = true");
+		this.idle = false;
+		this.isStunned = false;
+		this.maxSpeed = 300;
+		moveTowardsBall(this);
+
 	} else {
 		this.atkTimer.pause();
 		this.maxSpeed = 100;
@@ -226,12 +240,21 @@ function moveTowardsPlayer(self){
 	//console.log(player.x - self.x);
 	//console.log("player.y " + player.position.y);
 	//console.log("npc.y " + self.y);
+}
 
+
+function moveTowardsBall(self){
+	console.log("npc in moveTowardsBall");
+	console.log("projectile.x "+projectile.x);
+	let move = projectile.x-self.x;
+	if (Math.abs(move)<25) move = 0;
+	else move = Math.sign(move);
+	self.movingHori = move;
 }
 
 // npc jumps if player if higher
 function jump(self){
-	console.log("in jump");
+	//console.log("in jump");
 	self.body.velocity.y = self.jump;
 }
  

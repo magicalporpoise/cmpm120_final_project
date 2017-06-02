@@ -26,6 +26,7 @@ function ViewBox(x, y, scale_length, img){
 	
 	// Booleans for sight
 	this.playerInSight = false;
+	this.ballInSight = false;
 }
 
 //=========
@@ -39,11 +40,22 @@ ViewBox.prototype.constructor = ViewBox;
 //	viewbox behavior
 //==================
 ViewBox.prototype.update = function(){
+	let projSights = game.physics.arcade.overlap(this, group_projectile1, sawProj);
+
+	//if (projSights) console.log("viewbox has seen projectile");
+
+
 	let inSights = game.physics.arcade.overlap(this, player);
 	//check if player is in sights
-	if(inSights) {this.playerInSight = true;}
+	if(inSights) { this.playerInSight = true; }
 	else this.playerInSight = false;
 
 	// debug
-	//game.debug.body(this);
+	game.debug.body(this);
 }
+
+function sawProj(hb, npc){
+	console.log("viewbox has seen projectile");
+	npc.ball_aggro = true;
+}
+

@@ -87,6 +87,11 @@ function Player(x, y, scale, img){
 
 	this.oldVelocity = 0;
 	var idletorun_playing, jump_playing, punch_playing;
+
+	// imagination cloud
+
+	this.cloud = new cloud(this.x, this.y-100, 0.3, 'bigcloud');
+	game.add.existing(this.cloud);
 }
 
 //=========
@@ -100,6 +105,10 @@ Player.prototype.constructor = Player;
 //==========================================
 Player.prototype.update = function(){
 
+	//this.cloud = new cloud(this.x, this.y-100, 0.3, 'bigcloud');
+	//game.add.existing(this.cloud);
+	this.cloud.x = this.x-50;
+	this.cloud.y = this.y-100;
 
 	//get key presses
 	let mv_up = game.input.keyboard.justPressed(Phaser.Keyboard.W);
@@ -126,6 +135,8 @@ Player.prototype.update = function(){
 	if(!this.hidden){
 		//tinting
 		this.tint = 0xFFFFFF;
+
+		//if (hitGround) console.log("player hit ground");
 
 		//jump
 		if(vert < 0 && hitGround && this.body.velocity.y ==0) {  //for no double jump
@@ -173,7 +184,7 @@ Player.prototype.update = function(){
 			//change hit box size
 			hitBox.body.setSize(100, 50, 0, 0);
 
-			console.log("isPunching set to true");
+			//console.log("isPunching set to true");
 
 			this.isPunching = true;
 			if(!group_npc.aggro) game.physics.arcade.overlap(hitBox, group_npc, stunTheEnemy);
@@ -188,7 +199,7 @@ Player.prototype.update = function(){
 			//this.body.velocity.x=this.facing*(this.maxSpeed+500);
 		}
 		if (r_shoot){
-			this.shoot = new projectile(this.x, this.y, 800, this.facing, 0.3, 'rainbowShot');
+			this.shoot = new projectile(this.x, this.y, 1000, this.facing, 0.3, 'rainbowShot');
 			game.add.existing(this.shoot);
 			console.log('r pressed');
 			//SFX
@@ -217,7 +228,7 @@ Player.prototype.update = function(){
 	//ANIMATION + SOUND HANDLING
 
 	if (mv_up) {
-		console.log("jump");
+		//console.log("jump");
 		//this.animations.play('jump', 50, false);
 		this.isJumping = true;
 	}
@@ -245,7 +256,7 @@ Player.prototype.update = function(){
 	}*/
 
 	if (this.isPunching){
-		console.log("punch anim");
+		//console.log("punch anim");
 		//if (punch_playing.loopCount<=1)
 
 		punch_playing = this.animations.play('punch', 50, false);
@@ -253,12 +264,12 @@ Player.prototype.update = function(){
 	}
 
 	else if (this.isJumping){
-		console.log("jump anim");
+		//console.log("jump anim");
 		this.jump_playing = this.animations.play('falling', 5, false);
 	}
 
 	else if (this.body.velocity.x != 0) {
-			console.log("run");
+			//console.log("run");
 
 
 			if (this.excel) {
@@ -300,7 +311,7 @@ Player.prototype.update = function(){
 	} else {
 
 		//this.stepSFX.pause();
-		console.log("idle");
+		//console.log("idle");
 		//if (!this.isJumping)
 
 		this.stepSFX.pause();
