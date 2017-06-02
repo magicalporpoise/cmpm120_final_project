@@ -92,6 +92,12 @@ function Player(x, y, scale, img){
 
 	this.cloud = new cloud(this.x, this.y-100, 0.3, 'bigcloud');
 	game.add.existing(this.cloud);
+
+	this.cloud1 = new cloud(this.x, this.y-100, 0.3, 'smallcloud');
+	game.add.existing(this.cloud1);
+
+	this.cloud2 = new cloud(this.x, this.y-100, 0.15, 'smallcloud');
+	game.add.existing(this.cloud2);
 }
 
 //=========
@@ -108,7 +114,13 @@ Player.prototype.update = function(){
 	//this.cloud = new cloud(this.x, this.y-100, 0.3, 'bigcloud');
 	//game.add.existing(this.cloud);
 	this.cloud.x = this.x-50;
-	this.cloud.y = this.y-100;
+	this.cloud.y = this.y-150;
+
+	this.cloud1.x = this.x-30;
+	this.cloud1.y = this.y-100;
+
+	this.cloud2.x = this.x-20;
+	this.cloud2.y = this.y-80;
 
 	//get key presses
 	let mv_up = game.input.keyboard.justPressed(Phaser.Keyboard.W);

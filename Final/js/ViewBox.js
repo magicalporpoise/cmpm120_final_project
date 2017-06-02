@@ -18,15 +18,17 @@ function ViewBox(x, y, scale_length, img){
 	this.y = y;
 	this.scale.x = scale_length;
 
-	this.anchor.x+=1;
-	this.anchor.y+=0.5;
+	this.anchor.x=1;
+	this.anchor.y=0.5;
 	//this.scale.y = scale;
 
 	game.physics.arcade.enable(this);
 	
 	// Booleans for sight
 	this.playerInSight = false;
+
 	this.ballInSight = false;
+
 }
 
 //=========
@@ -49,7 +51,6 @@ ViewBox.prototype.update = function(){
 	//check if player is in sights
 	if(inSights) { this.playerInSight = true; }
 	else this.playerInSight = false;
-
 	// debug
 	game.debug.body(this);
 }
@@ -58,4 +59,6 @@ function sawProj(hb, npc){
 	console.log("viewbox has seen projectile");
 	npc.ball_aggro = true;
 }
+
+
 

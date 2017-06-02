@@ -173,7 +173,6 @@ Game.prototype = {
 		//initiates new layer, must be exact same name as specified in json
 		layer1 = map.createLayer('Tile Layer 1');
 		layer1.resizeWorld();
-
 		//entire grid will have collision set
 		map.setCollisionByExclusion([]); //i don't completely understand how this works
 
@@ -196,7 +195,8 @@ Game.prototype = {
 		//====================================
 		//walking npcs
 		//prameters(nameofobjectlayer, gid, image, frame, ?, autoCull, group, function);
-		map.createFromObjects('npc',  91, 'redBook', 0, true, true, group_npc, NPC);
+		//map.createFromObjects('npc',  91, 'redBook', 0, true, true, group_npc, NPC);
+		map.createFromObjects('npc', 91, 'blueBook', 0, true, true, group_npc, flyingNPC);
 		//flying enemy
 		//flyer = new flyingNPC(game, 200, 100, 'blueBook', 0);
 		map.createFromObjects('flyer', 130, 'blueBook', 0, true, true, group_npc, flyingNPC);
@@ -223,13 +223,13 @@ Game.prototype = {
 		//console.log(group_npc.children);
 
 		//debug text
-		displayText = game.add.text(player.x, player.y-100, 'Health/Imagination:', { fontSize: '32px', fill: '#F00'});
+		//displayText = game.add.text(player.x, player.y-100, 'Health/Imagination:', { fontSize: '32px', fill: '#F00'});
 	
 	},
 	update:function() {		// add game logic
-		displayText.text = "Health/Imagination: " + player.hearts;
-		displayText.x = player.x- 100;
-		displayText.y = player.y - 100;
+		//displayText.text = "Health/Imagination: " + player.hearts;
+		//displayText.x = player.x- 100;
+		//displayText.y = player.y - 100;
 
 		grayScreen.x = game.world.centerX;
 		grayScreen.y = game.world.centerY;
