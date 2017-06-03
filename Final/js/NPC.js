@@ -178,10 +178,7 @@ NPC.prototype.update = function(){
 		this.isStunned = false;
 		this.maxSpeed = 300;
 		moveTowardsPlayer(this);
-		if(this.sight.scale.x == 1){
-			this.sight.rotation = Math.atan2(this.y-player.y, this.x-player.x);
-		} else this.sight.rotation = Math.atan2(player.y-this.y, player.x-this.x);
-
+		rotateSights(this, this.sight)
 		// this.y>=player.position.y+20 <- for player y check
 		// allows npc to jump
 		if (hitGround) jump(this); 
@@ -273,4 +270,12 @@ function attackPlayer(self, play){
 
 function resetAttack(){
 	this.canAttack = true;
+}
+
+function rotateSights(npc, sights){
+	if(sights.scale.x == 1){
+		sights.rotation = Math.atan2(npc.y-player.y, npc.x-player.x);
+	} else sights.rotation = Math.atan2(player.y-npc.y, player.x-npc.x);
+
+	//return sights.rotation;
 }

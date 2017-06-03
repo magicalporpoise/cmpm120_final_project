@@ -10,7 +10,7 @@ function flyingNPC(game, x, y, img, frame) {
 	// calling new Sprite
 	NPC.call(this, game, x, y, img, frame);
 
-	this.altitude = this.y - 300;
+	this.altitude = this.y;
 
 	//CHANGE FOR FLYING ENEMY
 	game.time.events.remove(this.behave[0]);
@@ -46,11 +46,15 @@ flyingNPC.prototype.update = function(){
 	//also follow y direction
 	if(this.aggro){
 		this.body.velocity.y = (player.y - this.y);
+
+		//change view box size
+		//let angle = this.sight.rotation;
+		//this.sight.body.setSize(100, 100, Math.cos(this.sight.rotation) * this.sight.width, Math.sin(this.sight.rotation) * this.sight.width);
 	} else {
 		this.sight.rotation = -Math.PI/2;
+		//this.sight.body.setSize(this.sight.height, Math.abs(this.sight.width), this.sight.width-42, 42);
 		//fly back up to a normal height
 		if(this.y != this.altitude) this.body.velocity.y = (this.altitude-this.y);
-
 	}
 	//prevent weird sight flipping on update from
 	//parent npc class
