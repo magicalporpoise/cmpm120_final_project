@@ -47,6 +47,7 @@ Preloader.prototype = {
 		//loads in json tilemap created with tiled(key,filename,
 		//not exactly sure why null works here,the tilemap tool used)
 		game.load.tilemap('tiletest1','tiletest1.json',null,Phaser.Tilemap.TILED_JSON);
+		game.load.tilemap('elementary_tileset', 'elementary_tileset.json', null, Phaser.Tilemap.TILED_JSON);
 
 		//loads the image used in tiled to create the map(key, filename,32x32)
 		//the key can actually be called anything as well
@@ -128,8 +129,11 @@ Game.prototype = {
 
 		console.log(currentLevel);
 
+		//Level1 = new Level('elementary_tileset','bricks3','Tile Layer 1');
+
 		A_NEW_LEVEL = new Level('tiletest1', 'bricks3', 'Tile Layer 1');
 		game.state.start(A_NEW_LEVEL, false);	
+
 	},
 	update:function() {		// add game logic
 
