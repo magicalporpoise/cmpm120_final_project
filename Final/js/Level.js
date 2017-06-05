@@ -57,7 +57,9 @@ function Level(tilemap, tileimage, layer){
 	//creates hiding spots
 	map.createFromObjects('hide', 119, 'platform', 0, true, true, group_hidingspot, HidingSpot);
 	//make diploma
+	map.createFromObjects('exit',129,'platform', 0, true, true, group_Diploma, Diploma);
 	//var diploma = new Diploma(game, 500, 500, 'platform', 0);
+	console.log(map);
 
 	//camera follows player
 	game.camera.follow(player);

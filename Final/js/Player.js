@@ -28,7 +28,7 @@ function Player(x, y, scale, img){
 	//personal variables
 	this.hearts = 10;		//character's hp
 	this.maxSpeed = 500;	//speed cap
-	this.jump = -600;		//jump height
+	this.jump = -700;		//jump height
 	this.accel = 25;		//acceleration
 	this.hidden = false; 	//is the player hidden from enemies?
 	this.facing = 1; 		//1 for right, -1 for left
