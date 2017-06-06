@@ -34,7 +34,8 @@ function Player(x, y, scale, img){
 	this.facing = 1; 		//1 for right, -1 for left
 
 	//sounds
-	this.stepSFX = game.add.audio('step');
+	this.landSFX = game.add.audio('step');
+	this.landed = false;
 
 
 
@@ -43,7 +44,6 @@ function Player(x, y, scale, img){
 	this.isPunching = false;
 	//this.stepSFX.loopFull();
 
-	this.stepSFX.loopFull();
 	this.playerAttack1SFX = game.add.audio('player_attack1');
 	this.playerAttack2SFX = game.add.audio('player_attack2');
 	this.playerAttack3SFX = game.add.audio('player_attack3');
@@ -315,18 +315,12 @@ Player.prototype.update = function(){
 
 			
 
-		if(!hitGround){
-			this.stepSFX.pause();
-		}else{
-			this.stepSFX.resume();
-		}
 	} else {
 
 		//this.stepSFX.pause();
 		//console.log("idle");
 		//if (!this.isJumping)
 
-		this.stepSFX.pause();
 
 
 		this.animations.play('idle', 10, true);
@@ -334,6 +328,15 @@ Player.prototype.update = function(){
 	//console.log('bot of update');
 
 	this.oldVelocity = this.body.velocity.x;
+
+	if(hitGround && !this.landed){
+		this.landSFX.play();
+		this.landed = true;
+	}
+
+	if(vert < 0){
+		this.landed = false;
+	}
 	
 
 
