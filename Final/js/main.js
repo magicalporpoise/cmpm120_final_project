@@ -129,14 +129,17 @@ Game.prototype = {
 
 		console.log(currentLevel);
 
-		//Level1 = new Level('elementary_tileset','bricks3','Tile Layer 1');
-
 		A_NEW_LEVEL = new Level('tiletest1', 'bricks3', 'Tile Layer 1');
-		game.state.start(A_NEW_LEVEL, false);	
+		game.state.start(A_NEW_LEVEL, false);
+
+		//Level1 = new Level('elementary_tileset','bricks3','Tile Layer 1');
+		//	game.state.start(Level1);	
 
 	},
 	update:function() {		// add game logic
-
+		//if() {
+			
+		//}
 	}
 }
 
