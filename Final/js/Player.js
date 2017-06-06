@@ -36,6 +36,7 @@ function Player(x, y, scale, img){
 	//sounds
 	this.landSFX = game.add.audio('step');
 	this.landed = false;
+	this.punchSFX = game.add.audio('NPCHit');
 
 
 
@@ -348,6 +349,7 @@ Player.prototype.update = function(){
 function stunTheEnemy(hb, npc){
 	console.log("isPunching should be false...")
 	//player.isPunching = false;
+	player.punchSFX.play();
 	npc.isStunned = true;
 }
 
