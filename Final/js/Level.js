@@ -6,9 +6,24 @@
 //CONSTRUCTOR
 //===========
 function Level(tilemap, tileimage, layer){
-	//inherit Phaser.State class
+		//inherit Phaser.State class
 	// calling new State
 	Phaser.State.call(this);
+
+	this.tilemap = tilemap;
+	this.tileimage = tileimage;
+	this.layer = layer;
+
+	this.create();
+}
+
+//=========
+//PROTOTYPE
+//=========
+Level.prototype = Object.create(Phaser.State.prototype);
+Level.prototype.constructor = Level;
+
+Level.prototype.create = function(){
 
 	console.log("in Game Create");
 	//activate physics
@@ -21,22 +36,22 @@ function Level(tilemap, tileimage, layer){
 	this.counter = 1;
 	this.music1.loopFull();
 	
-	//BG color, blue
+	//BG color, gray
 	game.stage.backgroundColor = "#AAA";
 
 	//===================
 	//TILEMAP: main level
 	//===================
 	//this is whatever you used for the key when you loaded it in
-	map = game.add.tilemap(tilemap);
+	map = game.add.tilemap(this.tilemap);
 
 	//add a tileset image to create the map-object(name,key used above when loading image)
 	//name has to be the one specified in the json file
 	// under tileset in the name category
-	map.addTilesetImage(tileimage);
+	map.addTilesetImage(this.tileimage);
 
 	//initiates new layer, must be exact same name as specified in json
-	layer1 = map.createLayer(layer);
+	layer1 = map.createLayer(this.layer);
 	layer1.resizeWorld();
 	//entire grid will have collision set
 	map.setCollisionByExclusion([]); //i don't completely understand how this works
@@ -63,9 +78,3 @@ function Level(tilemap, tileimage, layer){
 	game.camera.follow(player);
 	//insert into game
 }
-
-//=========
-//PROTOTYPE
-//=========
-Level.prototype = Object.create(Phaser.State.prototype);
-Level.prototype.constructor = Level;

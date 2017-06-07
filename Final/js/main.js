@@ -128,8 +128,8 @@ Game.prototype = {
 
 		console.log(currentLevel);
 
-		A_NEW_LEVEL = new Level('tiletest1', 'bricks3', 'Tile Layer 1');
-		game.state.start(A_NEW_LEVEL, false);	
+		game.state.add('tutorial', new Level('tiletest1', 'bricks3', 'Tile Layer 1'), true);
+		//game.state.start('tutorial');
 	},
 	update:function() {		// add game logic
 
