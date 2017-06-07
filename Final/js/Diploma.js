@@ -33,9 +33,8 @@ Diploma.prototype.constructor = Diploma;
 Diploma.prototype.update = function(){
 	let graduate = game.physics.arcade.overlap(this, player);
 	// change the player's hiding variable
-	console.log(graduate);
+	//console.log(graduate);
 	if(graduate){
 		currentLevel++;
-		game.state.start('game', true);
 	}
 }

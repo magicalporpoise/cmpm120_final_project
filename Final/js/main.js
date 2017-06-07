@@ -48,6 +48,7 @@ Preloader.prototype = {
 		//not exactly sure why null works here,the tilemap tool used)
 		game.load.tilemap('tiletest1','tiletest1.json',null,Phaser.Tilemap.TILED_JSON);
 		game.load.tilemap('elementary_tileset', 'elementary_tileset.json', null, Phaser.Tilemap.TILED_JSON);
+		game.load.tilemap('middleschool','middleschool.json',null,Phaser.Tilemap.TILED_JSON);
 
 		//loads the image used in tiled to create the map(key, filename,32x32)
 		//the key can actually be called anything as well
@@ -104,7 +105,7 @@ MainMenu.prototype = {
 //GAME: 
 //	set up assets, play the game
 //***
-var currentLevel = 1;
+var currentLevel;
 var Game = function(game) {
 	var player;
 	var tilemap;
@@ -115,7 +116,7 @@ Game.prototype = {
 
 	preload: function(){
 		console.log("in Game Preloader");
-		if(currentLevel === undefined) currentLevel = 1;
+		if(currentLevel === undefined) currentLevel = 0;
 	},
 	create: function() {
 		//Major Groups for Collision checks
@@ -129,17 +130,17 @@ Game.prototype = {
 
 		console.log(currentLevel);
 
-		A_NEW_LEVEL = new Level('tiletest1', 'bricks3', 'Tile Layer 1');
-		game.state.start(A_NEW_LEVEL, false);
+		tutorial = new Level('tiletest1', 'bricks3', 'Tile Layer 1');
+		Level1 = new Level('elementary_tileset', 'bricks3', 'Tile Layer 1');
+		Level2 = new Level('middleschool', 'bricks3', 'Tile Layer 1');
+		game.state.start(tutorial, false);
 
-		//Level1 = new Level('elementary_tileset','bricks3','Tile Layer 1');
-		//	game.state.start(Level1);	
 
 	},
 	update:function() {		// add game logic
-		//if() {
-			
-		//}
+		if(currentLevel == 2 && game.state.current != Level1) {
+			game.state.start(Level1,false);
+		}
 	}
 }
 

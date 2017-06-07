@@ -45,15 +45,15 @@ function Level(tilemap, tileimage, layer){
 	//PLAYER OBJECT
 	//=============
 	//player = new Player(100, 100, 0.15, 'player2');
-	player = new Player(100, 100, 0.15, 'teddy');
+	player = new Player(150, 100, 0.15, 'teddy');
 
 	//====================================
 	//CREATE OBJECTS: from tile map layers
 	//====================================
 	//walking npcs
-	map.createFromObjects('npc',  91, 'redBook', 0, true, true, group_npc, NPC);
+	//map.createFromObjects('npc',  91, 'redBook', 0, true, true, group_npc, NPC);
 	//flying npcs
-	map.createFromObjects('flyer', 130, 'blueBook', 0, true, true, group_npc, flyingNPC);
+	//map.createFromObjects('flyer', 130, 'blueBook', 0, true, true, group_npc, flyingNPC);
 	//creates hiding spots
 	map.createFromObjects('hide', 119, 'platform', 0, true, true, group_hidingspot, HidingSpot);
 	//make diploma
