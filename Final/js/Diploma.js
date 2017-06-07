@@ -13,6 +13,7 @@ function Diploma(game, x, y, img, frame){
 	//		and physics
 	this.x = x;
 	this.y = y;
+	this.active = true;
 	game.physics.arcade.enable(this);
 	//insert into game
 	game.add.existing(this);
@@ -34,7 +35,10 @@ Diploma.prototype.update = function(){
 	let graduate = game.physics.arcade.overlap(this, player);
 	// change the player's hiding variable
 	//console.log(graduate);
-	if(graduate){
-		currentLevel++;
+	if(this.active){
+		if(graduate){
+			currentLevel++;
+			this.active = false;
+		}
 	}
 }

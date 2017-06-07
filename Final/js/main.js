@@ -106,6 +106,7 @@ MainMenu.prototype = {
 //	set up assets, play the game
 //***
 var currentLevel;
+var currentMap;
 var Game = function(game) {
 	var player;
 	var tilemap;
@@ -124,22 +125,32 @@ Game.prototype = {
 
 		group_ViewBox = game.add.group();
 		group_npc = game.add.group();
+		group_flyingNPC = game.add.group();
 		group_hidingspot = game.add.group();
 		group_projectile1 = game.add.group();
 		group_Diploma = game.add.group();
 
-		console.log(currentLevel);
+		//=============
+		//PLAYER OBJECT
+		//=============
+		//player = new Player(100, 100, 0.15, 'player2');
+		player = new Player(150, 100, 0.15, 'teddy');
 
-		tutorial = new Level('tiletest1', 'bricks3', 'Tile Layer 1');
-		Level1 = new Level('elementary_tileset', 'bricks3', 'Tile Layer 1');
-		Level2 = new Level('middleschool', 'bricks3', 'Tile Layer 1');
-		game.state.start(tutorial, false);
-
+		currentMap = new Level('t', 'tiletest1', 'bricks3', 'Tile Layer 1');
+		//Level1 = new Level('ele', 'elementary_tileset', 'bricks3', 'Tile Layer 1');
+		//Level2 = new Level('mid', 'middleschool', 'bricks3', 'Tile Layer 1');
+		//game.state.start('tutorial', false);
+		d = new Diploma(game, 500, 500, 'platform', 0);
 
 	},
 	update:function() {		// add game logic
-		if(currentLevel == 2 && game.state.current != Level1) {
-			game.state.start(Level1,false);
+		console.log(currentMap);
+		if(currentLevel == 1 && currentMap.key != 'e') {
+			deleteMap(currentMap);
+			currentMap = new Level('e', 'elementary_tileset', 'bricks3', 'Tile Layer 1');
+		} else if(currentLevel == 2 && currentMap.key != 'm') {
+			deleteMap(currentMap);
+			currentMap = new Level('m','middleschool', 'bricks3', 'Tile Layer 1');
 		}
 	}
 }
@@ -180,3 +191,4 @@ function pauseGame(){
 	} else {
 	}
 }
+
