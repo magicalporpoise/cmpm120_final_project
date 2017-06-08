@@ -18,6 +18,9 @@ function ViewBox(x, y, scale_length, img){
 	this.y = y;
 	this.scale.x = scale_length;
 
+	this.origWidth = this.width;
+	this.origHeight = this.height;
+
 	this.anchor.x=1;
 	this.anchor.y=0.5;
 	//this.scale.y = scale;
@@ -42,15 +45,18 @@ ViewBox.prototype.constructor = ViewBox;
 //	viewbox behavior
 //==================
 ViewBox.prototype.update = function(){
-	let projSights = game.physics.arcade.overlap(this, group_projectile1, sawProj);
+	//let projSights = game.physics.arcade.overlap(this, group_projectile1, sawProj);
 
 	//if (projSights) console.log("viewbox has seen projectile");
 
 
 	let inSights = game.physics.arcade.overlap(this, player);
 	//check if player is in sights
-	if(inSights) { this.playerInSight = true; }
-	else this.playerInSight = false;
+	if(inSights) {
+		this.playerInSight = true; 
+	} else {
+		this.playerInSight = false;
+	}
 	// debug
 	game.debug.body(this);
 }

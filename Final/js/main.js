@@ -140,14 +140,14 @@ Game.prototype = {
 		//Level1 = new Level('ele', 'elementary_tileset', 'bricks3', 'Tile Layer 1');
 		//Level2 = new Level('mid', 'middleschool', 'bricks3', 'Tile Layer 1');
 		//game.state.start('tutorial', false);
-		d = new Diploma(game, 500, 500, 'platform', 0);
-
+		//d = new Diploma(game, 500, 500, 'platform', 0);
+		n = new flyingNPC(game, 500, 500, 'blueBook', 0);
 		//game.state.add('tutorial', new Level('tiletest1', 'bricks3', 'Tile Layer 1'), true);
 		//game.state.start('tutorial');
 
 	},
 	update:function() {		// add game logic
-		console.log(currentMap);
+		//console.log(currentMap);
 		if(currentLevel == 1 && currentMap.key != 'e') {
 			deleteMap(currentMap);
 			currentMap = new Level('e', 'elementary_tileset', 'bricks3', 'Tile Layer 1');
