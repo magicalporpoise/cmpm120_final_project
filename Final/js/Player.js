@@ -200,6 +200,17 @@ Player.prototype.update = function(){
 			hitBox.body.setSize(100, 50, 0, 0);
 
 			//console.log("isPunching set to true");
+			//SFX
+			if(this.playerAttackCounter % 2 == 0){
+				this.playerAttack2SFX.play();
+				this.playerAttackCounter++;
+			}else if(this.playerAttackCounter %3 == 0){
+				this.playerAttack3SFX.play();
+				this.playerAttackCounter++;
+			}else{
+				this.playerAttack1SFX.play();
+				this.playerAttackCounter++;
+			}
 
 			this.isPunching = true;
 			if(!group_npc.aggro) game.physics.arcade.overlap(hitBox, group_npc, stunTheEnemy);
