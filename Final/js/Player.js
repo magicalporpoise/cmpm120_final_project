@@ -152,7 +152,7 @@ Player.prototype.update = function(){
 		//if (hitGround) console.log("player hit ground");
 
 		//jump
-		if(vert < 0 && hitGround && this.body.velocity.y ==0) {  //for no double jump
+		if(vert < 0 && hitGround ) {  //&& this.body.velocity.y ==0 for no double jump
 			this.body.velocity.y = this.jump; // also allows wall jumps
 		}
 
