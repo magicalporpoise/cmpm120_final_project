@@ -23,7 +23,7 @@ function Level(key, tilemap, tileimage, layer){
 	this.music1.loopFull();
 	
 	//BG color, gray
-	game.stage.backgroundColor = "#AAA";
+	game.stage.backgroundColor = "#CCC";
 
 	//===================
 	//TILEMAP: main level

@@ -258,6 +258,7 @@ function jump(self){
  
 //hit player, deal damage, deal knockback
 function attackPlayer(self, play){
+	game.camera.shake(0.005, 100);
 	if(self.canAttack) {
 		play.hearts--;
 		self.canAttack = false;
