@@ -98,11 +98,7 @@ NPC.prototype.constructor = NPC;
 //	npc behavior
 //================
 NPC.prototype.update = function(){
-
 	let hitGround = game.physics.arcade.collide(this, layer1);
-
-	// debug
-	//game.debug.body(this);
 
 	//COLLISION + OVERLAPS
 	//game.physics.arcade.collide(this, layer1);
@@ -126,23 +122,18 @@ NPC.prototype.update = function(){
 	}
 	//make the sight follow the facing variable
 	this.sight.x = this.x;
-	this.sight.y = this.y-32;
-	//this.boom.x = this.x;
-	//this.boom.y= this.y;
+	this.sight.y = this.y;
 
 	//BEHAVIOR
 	if(!this.isStunned){
-		this.tint = 0xFFFFFF;
-		
 		this.stunTimer.pause();
 
 		if(this.sight.playerInSight && !player.hidden) { //aggro - red
-			this.tint = 0xFF0000;
 			this.aggro = true;
 			
 			// for creating detection Boom object
 			if (this.boom_bool) {
-				this.boom = new detectionBoom(this.x, this.y, 0.2, 'redSquare');
+				this.boom = new detectionBoom(this.x, this.y, 0.2*this.facing, 'redSquare');
 				this.boom_bool = false;
 				game.add.existing(this.boom);
 				this.growlSFX.play();
@@ -151,18 +142,17 @@ NPC.prototype.update = function(){
 
 
 			this.behave.pause();
+
 		} else if (this.sight.ballInSight) {
 			//console.log("this.sight.ballInSight");
 			this.ball_aggro = true;
+
 		} else if(player.hidden && !this.sight.playerInSight){ // wander - blue
 			this.boom_bool = true;
-
-			this.tint = 0xFFFFFF;
 			this.aggro = false;
 			this.behave.resume();
 		}
 	} else {
-		this.tint = 0x00FF00; // stunned - green
 		if(!this.stunSFXplayed){
 			this.stunSFXplayed = true;
 			this.stunSFX.play();
@@ -174,6 +164,7 @@ NPC.prototype.update = function(){
 
 	//AGGRO'd
 	if(this.aggro){
+		this.tint = 0xAA0000;
 		this.idle = false;
 		this.isStunned = false;
 		this.maxSpeed = 300;
@@ -183,6 +174,7 @@ NPC.prototype.update = function(){
 		// allows npc to jump
 		if (hitGround) jump(this); 
 		this.atkTimer.resume();
+
 	} else if (this.ball_aggro) {
 		//console.log("npc.ball_aggro = true");
 		this.idle = false;
@@ -190,11 +182,20 @@ NPC.prototype.update = function(){
 		this.maxSpeed = 300;
 		moveTowardsBall(this);
 
+
+		if(this.sight.body.height == this.sight.origHeight){
+			//this.body.anchor.x = 0.5;
+			this.sight.body.setSize(2*this.sight.origWidth-50, 2*this.sight.origWidth-50, 0, -this.sight.origWidth);
+		}
 	} else {
+		if(this.isStunned)this.tint = 0x00FF00;
+		else this.tint = 0xFFFFFF;
 		if(this.sight.rotation != 0) this.sight.scale.x = -this.facing;
 		this.sight.rotation = 0;
 		this.atkTimer.pause();
 		this.maxSpeed = 100;
+		this.sight.body.setSize(this.sight.origWidth, this.sight.origHeight, 0, 0);
+	
 	}
 }
 
@@ -242,8 +243,8 @@ function moveTowardsPlayer(self){
 
 
 function moveTowardsBall(self){
-	console.log("npc in moveTowardsBall");
-	console.log("projectile.x "+projectile.x);
+	//console.log("npc in moveTowardsBall");
+	//console.log("projectile.x "+projectile.x);
 	let move = projectile.x-self.x;
 	if (Math.abs(move)<25) move = 0;
 	else move = Math.sign(move);
@@ -258,7 +259,7 @@ function jump(self){
  
 //hit player, deal damage, deal knockback
 function attackPlayer(self, play){
-	game.camera.shake(0.0005, 100);
+	game.camera.shake(0.005, 100);
 	if(self.canAttack) {
 		play.hearts--;
 		self.canAttack = false;
