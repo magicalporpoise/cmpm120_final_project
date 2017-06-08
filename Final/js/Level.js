@@ -18,10 +18,10 @@ function Level(key, tilemap, tileimage, layer){
 	//Pause Screen
 
 	//Add Audio / Music
-	this.music1 = game.add.audio('dank');
-	this.music2 = game.add.audio('ambient');
-	this.counter = 1;
-	this.music1.loopFull();
+	//this.music1 = game.add.audio('dank');
+	//this.music2 = game.add.audio('ambient');
+	//this.counter = 1;
+	//this.music1.loopFull();
 	
 	//BG color, gray
 	game.stage.backgroundColor = "#CCC";
