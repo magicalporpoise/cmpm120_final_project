@@ -126,7 +126,7 @@ NPC.prototype.update = function(){
 	}
 	//make the sight follow the facing variable
 	this.sight.x = this.x;
-	this.sight.y = this.y-32;
+	this.sight.y = this.y;
 	//this.boom.x = this.x;
 	//this.boom.y= this.y;
 
@@ -183,18 +183,18 @@ NPC.prototype.update = function(){
 		// allows npc to jump
 		if (hitGround) jump(this); 
 		this.atkTimer.resume();
-	} else if (this.ball_aggro) {
-		console.log("npc.ball_aggro = true");
-		this.idle = false;
-		this.isStunned = false;
-		this.maxSpeed = 300;
-		moveTowardsBall(this);
 
+		if(this.sight.body.height == this.sight.origHeight){
+			//this.body.anchor.x = 0.5;
+			this.sight.body.setSize(2*this.sight.origWidth-50, 2*this.sight.origWidth-50, 0, -this.sight.origWidth);
+		}
 	} else {
 		if(this.sight.rotation != 0) this.sight.scale.x = -this.facing;
 		this.sight.rotation = 0;
 		this.atkTimer.pause();
 		this.maxSpeed = 100;
+		this.sight.body.setSize(this.sight.origWidth, this.sight.origHeight, 0, 0);
+	
 	}
 }
 

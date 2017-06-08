@@ -48,8 +48,8 @@ function Level(key, tilemap, tileimage, layer){
 	//??? find correct spot!!
 	//
 	//===============
-	player.x = 200;
-	player.y = 200;
+	player.x = 300;
+	player.y = 300;
 
 	//====================================
 	//CREATE OBJECTS: from tile map layers

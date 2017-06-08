@@ -18,7 +18,7 @@ function flyingNPC(game, x, y, img, frame) {
 	this.behave.start();
 	//this.sight.scale.x = 1;
 	this.sight.rotation = -Math.PI/2;
-	this.sight.body.setSize(this.sight.height, this.sight.width, this.sight.width-42, 42);
+	this.sight.body.setSize(this.sight.origHeight, this.sight.origWidth, 0, 0);
 	this.body.gravity.y = 0;
 
 	//insert into game
@@ -46,12 +46,13 @@ flyingNPC.prototype.update = function(){
 	//also follow y direction
 	if(this.aggro){
 		this.body.velocity.y = (player.y - this.y);
-
+		this.sight.body.setSize(2*this.sight.origWidth-50, 2*this.sight.origWidth-50, 0, -this.sight.origWidth);
 		//change view box size
 		//let angle = this.sight.rotation;
 		//this.sight.body.setSize(100, 100, Math.cos(this.sight.rotation) * this.sight.width, Math.sin(this.sight.rotation) * this.sight.width);
 	} else {
 		this.sight.rotation = -Math.PI/2;
+		this.sight.body.setSize(this.sight.origHeight, this.sight.origWidth, 7*this.sight.origWidth/8, 0);
 		//this.sight.body.setSize(this.sight.height, Math.abs(this.sight.width), this.sight.width-42, 42);
 		//fly back up to a normal height
 		if(this.y != this.altitude) this.body.velocity.y = (this.altitude-this.y);
