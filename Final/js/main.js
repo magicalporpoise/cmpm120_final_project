@@ -133,6 +133,11 @@ Game.prototype = {
 		group_projectile1 = game.add.group();
 		group_Diploma = game.add.group();
 
+		//music
+		this.music1 = game.add.audio('dank');
+		this.music2 = game.add.audio('ambient');
+		this.music1.loopFull();
+
 		//=============
 		//PLAYER OBJECT
 		//=============
