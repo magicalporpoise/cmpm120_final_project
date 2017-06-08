@@ -253,25 +253,6 @@ Player.prototype.update = function(){
 		this.isJumping = false;
 	}
 
-
-
-
-
-	/*else if (mv_left || mv_right) {
-		idletorun_playing = this.animations.play('idletorun');
-		if (idletorun_playing.loopCount>=1) {
-			console.log("done");
-			idletorun_playing = this.animations.play('run', 75, true);
-		}
-		
-	}
-	
-	
-	if (this.body.velocity.y >= 100 || this.body.velocity.y <= -100) {
-		console.log("y vel " + this.body.velocity.y);
-		//this.animations.play('falling', 2, false);
-	}*/
-
 	if (this.isPunching || this.isShooting){
 		//console.log("punch anim");
 		//if (punch_playing.loopCount<=1)

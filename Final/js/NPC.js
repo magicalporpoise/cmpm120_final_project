@@ -146,12 +146,7 @@ NPC.prototype.update = function(){
 
 
 			this.behave.pause();
-
-		} else if (this.sight.ballInSight) {
-			//console.log("this.sight.ballInSight");
-			this.ball_aggro = false;
-
-		} else if(player.hidden && !this.sight.playerInSight){ // wander - blue
+		} else if(player.hidden){ // wander - blue
 			this.boom_bool = true;
 			this.aggro = false;
 			this.behave.resume();
@@ -186,15 +181,9 @@ NPC.prototype.update = function(){
 		this.isStunned = false;
 		this.maxSpeed = 300;
 		moveTowardsBall(this);
-
-
-		if(this.sight.body.height == this.sight.origHeight){
-			//this.body.anchor.x = 0.5;
-			this.sight.body.setSize(2*this.sight.origWidth-50, 2*this.sight.origWidth-50, 0, -this.sight.origWidth);
-		}
-
-		this.sight.body.setSize(2*this.sight.origWidth-50, 2*this.sight.origWidth-50, 0, -this.sight.origWidth);
 	*/
+		this.sight.body.setSize(2*this.sight.origWidth-50, 2*this.sight.origWidth-50, 0, -this.sight.origWidth);
+	
 	} else {
 		if(this.isStunned)this.tint = 0x00FF00;
 		else this.tint = 0xFFFFFF;
