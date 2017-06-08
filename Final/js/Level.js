@@ -14,6 +14,7 @@ function Level(key, tilemap, tileimage, layer){
 	console.log("in Game Create");
 	//activate physics
 	game.physics.startSystem(Phaser.Physics.ARCADE);
+	game.physics.setBoundsToWorld();
 	//Pause Screen
 
 	//Add Audio / Music

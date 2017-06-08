@@ -2,7 +2,7 @@
 //===========
 //CONSTRUCTOR
 //===========
-function detectionBoom(x, y, scale_length, img){
+function detectionBoom(x, y, img){
 	//inherit Phaser.Sprite class
 	// calling new Sprite
 	Phaser.Sprite.call(this, game, x, y, img, 0);
@@ -12,11 +12,12 @@ function detectionBoom(x, y, scale_length, img){
 	//		and physics
 	this.x = x;
 	this.y = y;
-	this.scale.x = scale_length;
-	this.scale.y = scale_length;
+	//this.scale.x = scale_length;
+	//this.scale_length = scale_length;
+	//this.scale.y = scale_length;
 
-	this.anchor.x+=0;
-	this.anchor.y+=0.5;
+	this.anchor.x=0.5;
+	this.anchor.y=0.5;
 	//this.scale.y = scale;
 
 	game.physics.arcade.enable(this);
@@ -40,8 +41,8 @@ detectionBoom.prototype.constructor = detectionBoom;
 detectionBoom.prototype.update = function(){
 	let boomHit = game.physics.arcade.overlap(this, group_npc);
 	if (this.s<=20) {
-		this.scale.x += 0.1;
-		this.scale.y += 0.03;
+		this.scale.x += 0.05;
+		this.scale.y += 0.025;
 	}
 	if (this.s>=50) {
 		this.destroy();
