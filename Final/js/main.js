@@ -132,6 +132,7 @@ Game.prototype = {
 		group_hidingspot = game.add.group();
 		group_projectile1 = game.add.group();
 		group_Diploma = game.add.group();
+		group_danger = game.add.group();
 
 		//music
 		this.music1 = game.add.audio('dank');
