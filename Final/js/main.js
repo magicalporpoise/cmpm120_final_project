@@ -142,6 +142,9 @@ Game.prototype = {
 		//game.state.start('tutorial', false);
 		//d = new Diploma(game, 500, 500, 'platform', 0);
 
+		//game.state.add('tutorial', new Level('tiletest1', 'bricks3', 'Tile Layer 1'), true);
+		//game.state.start('tutorial');
+
 	},
 	update:function() {		// add game logic
 		//console.log(currentMap);

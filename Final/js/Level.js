@@ -22,7 +22,7 @@ function Level(key, tilemap, tileimage, layer){
 	this.counter = 1;
 	this.music1.loopFull();
 	
-	//BG color, blue
+	//BG color, gray
 	game.stage.backgroundColor = "#AAA";
 
 	//===================
@@ -66,7 +66,7 @@ function Level(key, tilemap, tileimage, layer){
 	//console.log(map);
 	//camera follows player
 	game.camera.follow(player);
-	//insert into game
+
 }
 
 //=========
