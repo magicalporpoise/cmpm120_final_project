@@ -5,26 +5,15 @@
 //===========
 //CONSTRUCTOR
 //===========
-function Level(tilemap, tileimage, layer){
-		//inherit Phaser.State class
-	// calling new State
-	Phaser.State.call(this);
-
+function Level(key, tilemap, tileimage, layer){
+	//inherit Phaser.Tilemap class
+	// calling new Tilemap
+	Phaser.Tilemap.call(this, game);
+	this.key = key;
 	this.tilemap = tilemap;
 	this.tileimage = tileimage;
 	this.layer = layer;
-
-	this.create();
-}
-
-//=========
-//PROTOTYPE
-//=========
-Level.prototype = Object.create(Phaser.State.prototype);
-Level.prototype.constructor = Level;
-
-Level.prototype.create = function(){
-
+	//console.log(this.key);
 	console.log("in Game Create");
 	//activate physics
 	game.physics.startSystem(Phaser.Physics.ARCADE);
@@ -56,11 +45,14 @@ Level.prototype.create = function(){
 	//entire grid will have collision set
 	map.setCollisionByExclusion([]); //i don't completely understand how this works
 
-	//=============
-	//PLAYER OBJECT
-	//=============
-	//player = new Player(100, 100, 0.15, 'player2');
-	player = new Player(100, 100, 0.15, 'teddy');
+	//===============
+	//MOVE THE PLAYER
+	//
+	//??? find correct spot!!
+	//
+	//===============
+	player.x = 200;
+	player.y = 200;
 
 	//====================================
 	//CREATE OBJECTS: from tile map layers
@@ -72,9 +64,28 @@ Level.prototype.create = function(){
 	//creates hiding spots
 	map.createFromObjects('hide', 119, 'platform', 0, true, true, group_hidingspot, HidingSpot);
 	//make diploma
+	map.createFromObjects('exit',129,'platform', 0, true, true, group_Diploma, Diploma);
 	//var diploma = new Diploma(game, 500, 500, 'platform', 0);
-
+	//console.log(map);
 	//camera follows player
 	game.camera.follow(player);
-	//insert into game
+
+}
+
+//=========
+//PROTOTYPE
+//=========
+Level.prototype = Object.create(Phaser.Tilemap.prototype);
+Level.prototype.constructor = Level;
+
+function deleteMap(map){
+
+	group_npc.removeAll(true);
+	group_flyingNPC.removeAll(true);
+	group_hidingspot.removeAll(true);
+	group_Diploma.removeAll(true);
+	group_ViewBox.removeAll(true);
+
+	layer1.destroy();
+	map.destroy();
 }
