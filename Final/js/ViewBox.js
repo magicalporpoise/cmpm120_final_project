@@ -58,7 +58,7 @@ ViewBox.prototype.update = function(){
 		this.playerInSight = false;
 	}
 	// debug
-	game.debug.body(this);
+	//game.debug.body(this);
 }
 
 function sawProj(hb, npc){

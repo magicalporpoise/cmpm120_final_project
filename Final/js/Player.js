@@ -214,7 +214,7 @@ Player.prototype.update = function(){
 		if (r_shoot){
 			this.shoot = new projectile(this.x, this.y, 1000, this.facing, 0.3, 'rainbowShot');
 			game.add.existing(this.shoot);
-			console.log('r pressed');
+			//console.log('r pressed');
 			//SFX
 			if(this.playerAttackCounter % 2 == 0){
 				this.playerAttack2SFX.play();
@@ -347,7 +347,7 @@ Player.prototype.update = function(){
 //FUNCTIONS
 //=========
 function stunTheEnemy(hb, npc){
-	console.log("isPunching should be false...")
+	//console.log("isPunching should be false...")
 	//player.isPunching = false;
 	player.punchSFX.play();
 	npc.isStunned = true;
