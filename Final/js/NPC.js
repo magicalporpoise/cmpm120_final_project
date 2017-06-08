@@ -133,7 +133,7 @@ NPC.prototype.update = function(){
 			
 			// for creating detection Boom object
 			if (this.boom_bool) {
-				this.boom = new detectionBoom(this.x, this.y, 0.2*this.facing, 'redSquare');
+				this.boom = new detectionBoom(this.x, this.y,'redSquare');
 				this.boom_bool = false;
 				game.add.existing(this.boom);
 				this.growlSFX.play();
@@ -170,10 +170,7 @@ NPC.prototype.update = function(){
 		if (hitGround) jump(this); 
 		this.atkTimer.resume();
 
-		if(this.sight.body.height == this.sight.origHeight){
-			//this.body.anchor.x = 0.5;
-			this.sight.body.setSize(2*this.sight.origWidth-50, 2*this.sight.origWidth-50, 0, -this.sight.origWidth);
-		}
+		this.sight.body.setSize(2*this.sight.origWidth-50, 2*this.sight.origWidth-50, 0, -this.sight.origWidth);
 	} else {
 		if(this.isStunned)this.tint = 0x00FF00;
 		else this.tint = 0xFFFFFF;
@@ -181,7 +178,7 @@ NPC.prototype.update = function(){
 		this.sight.rotation = 0;
 		this.atkTimer.pause();
 		this.maxSpeed = 100;
-		this.sight.body.setSize(this.sight.origWidth, this.sight.origHeight, 0, 0);
+		this.sight.body.setSize(this.sight.origWidth, this.sight.origHeight-40, 0, 0);
 	
 	}
 }

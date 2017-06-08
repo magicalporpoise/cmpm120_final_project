@@ -20,6 +20,8 @@ function Player(x, y, scale, img){
 	game.physics.arcade.enable(this);
 	this.body.gravity.y = 1000;
 	this.body.collideWorldBounds = true;
+	//this.checkWorldBounds = true;
+	//this.events.onOutOfBounds.add(deathRestart, this);
 	//set hitbox size
 	this.body.setSize(400, 800, 100, 50);
 	//this.body.addRectangle(400, 800, 100, 50);
@@ -130,7 +132,6 @@ Player.prototype.update = function(){
 	let mv_down = game.input.keyboard.justPressed(Phaser.Keyboard.S);
 
 	let k_attack = game.input.keyboard.justPressed(Phaser.Keyboard.K); 
-
 	let f_dash = game.input.keyboard.justPressed(Phaser.Keyboard.F);
 	let r_shoot = game.input.keyboard.justPressed(Phaser.Keyboard.R);
 
@@ -356,4 +357,9 @@ function stunTheEnemy(hb, npc){
 
 function animationStopped(sprite, animation){
 	player.isPunching = false;
+}
+
+function deathRestart(sprite){
+	sprite.x = 300;
+	sprite.y = 300;
 }
