@@ -59,7 +59,7 @@ function Level(key, tilemap, tileimage, layer){
 	//flying npcs
 	map.createFromObjects('flyer', 130, 'blueBook', 0, true, true, group_npc, flyingNPC);
 	//creates hiding spots
-	map.createFromObjects('hide', 119, 'platform', 0, true, true, group_hidingspot, HidingSpot);
+	map.createFromObjects('hide', 119, 'chair', 0, true, true, group_hidingspot, HidingSpot);
 	//make diploma
 	map.createFromObjects('exit',129,'platform', 0, true, true, group_Diploma, Diploma);
 	//var diploma = new Diploma(game, 500, 500, 'platform', 0);

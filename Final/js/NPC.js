@@ -28,12 +28,14 @@ function NPC(game, x, y, img, frame) {
 	this.anchor.set(0.5, 0.5);
 
 	game.physics.arcade.enable(this);
-	this.body.gravity.y = 500;
+	//this.body.gravity.y = 500;
 	this.body.collideWorldBounds = true;
 	//this.tint = 0x0000FF;
 
 	//personal variables
 	this.maxSpeed = 100; 	//speed cap
+	this.maxSpeedy = 800;
+
 	this.idle = false;		//stand still?
 	this.facing = -1;		//1 for right, -1 for left
 	this.movingHori = 0;	//moving left, right, or none
@@ -43,7 +45,9 @@ function NPC(game, x, y, img, frame) {
 
 	// for jumping
 	this.jump = -200;
-	this.body.gravity.y = 1000;
+	this.body.gravity.y = 800;
+
+
 
 	//create view box
 	this.sight = new ViewBox(this.x, this.y, 1, 'sightLine');
@@ -145,7 +149,7 @@ NPC.prototype.update = function(){
 
 		} else if (this.sight.ballInSight) {
 			//console.log("this.sight.ballInSight");
-			this.ball_aggro = true;
+			this.ball_aggro = false;
 
 		} else if(player.hidden && !this.sight.playerInSight){ // wander - blue
 			this.boom_bool = true;

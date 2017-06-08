@@ -52,10 +52,10 @@ projectile.prototype.update = function(){
 	//if (viewCol) console.log("projectile saw viewbox");
 
 	// move to pointer
-	game.physics.arcade.moveToPointer(this, 300);
+	// game.physics.arcade.moveToPointer(this, 300);
 	
 	// move velocity
-	//this.body.velocity.x = this.speed * this.dir;
+	this.body.velocity.x = this.speed * this.dir;
 
 	let hitGround = game.physics.arcade.collide(this, layer1);
 	if (hitGround) {

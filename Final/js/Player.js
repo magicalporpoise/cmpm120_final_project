@@ -43,6 +43,7 @@ function Player(x, y, scale, img){
 	// for anim cancelling/playing at the right times
 	this.isJumping = false;
 	this.isPunching = false;
+	this.isShooting = false;
 	//this.stepSFX.loopFull();
 
 	this.playerAttack1SFX = game.add.audio('player_attack1');
@@ -89,16 +90,16 @@ function Player(x, y, scale, img){
 	this.oldVelocity = 0;
 	var idletorun_playing, jump_playing, punch_playing;
 
-	// imagination cloud
+	// for imagination cloud
 
-	this.cloud = new cloud(this.x, this.y-100, 0.3, 'bigcloud');
+	/*this.cloud = new cloud(this.x, this.y-100, 0.3, 'bigcloud');
 	game.add.existing(this.cloud);
 
 	this.cloud1 = new cloud(this.x, this.y-100, 0.3, 'smallcloud');
 	game.add.existing(this.cloud1);
 
 	this.cloud2 = new cloud(this.x, this.y-100, 0.15, 'smallcloud');
-	game.add.existing(this.cloud2);
+	game.add.existing(this.cloud2);*/
 }
 
 //=========
@@ -112,16 +113,16 @@ Player.prototype.constructor = Player;
 //==========================================
 Player.prototype.update = function(){
 
-	//this.cloud = new cloud(this.x, this.y-100, 0.3, 'bigcloud');
-	//game.add.existing(this.cloud);
-	this.cloud.x = this.x-50;
+	// for moving clouds
+
+	/*this.cloud.x = this.x-50;
 	this.cloud.y = this.y-150;
 
 	this.cloud1.x = this.x-30;
 	this.cloud1.y = this.y-100;
 
 	this.cloud2.x = this.x-20;
-	this.cloud2.y = this.y-80;
+	this.cloud2.y = this.y-80;*/
 
 	//get key presses
 	let mv_up = game.input.keyboard.justPressed(Phaser.Keyboard.W);
@@ -212,6 +213,8 @@ Player.prototype.update = function(){
 			//this.body.velocity.x=this.facing*(this.maxSpeed+500);
 		}
 		if (r_shoot){
+			this.isShooting = true;
+
 			this.shoot = new projectile(this.x, this.y, 1000, this.facing, 0.3, 'rainbowShot');
 			game.add.existing(this.shoot);
 			//console.log('r pressed');
@@ -268,7 +271,7 @@ Player.prototype.update = function(){
 		//this.animations.play('falling', 2, false);
 	}*/
 
-	if (this.isPunching){
+	if (this.isPunching || this.isShooting){
 		//console.log("punch anim");
 		//if (punch_playing.loopCount<=1)
 
@@ -278,7 +281,7 @@ Player.prototype.update = function(){
 
 	else if (this.isJumping){
 		//console.log("jump anim");
-		this.jump_playing = this.animations.play('falling', 5, false);
+		//this.jump_playing = this.animations.play('falling', 5, false);
 	}
 
 	else if (this.body.velocity.x != 0) {
@@ -357,4 +360,5 @@ function stunTheEnemy(hb, npc){
 
 function animationStopped(sprite, animation){
 	player.isPunching = false;
+	player.isShooting = false;
 }

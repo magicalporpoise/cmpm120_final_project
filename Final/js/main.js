@@ -61,6 +61,9 @@ Preloader.prototype = {
 		game.load.image('smallcloud','cloud5_white.png');
 
 		// rasterized images and atlas's 
+		game.load.image('chair','chair.png');
+		game.load.image('desk','desk.png');
+		game.load.image('killableSubstance','killableSubstance.png');
 		game.load.image('sightLine','sightline2.png');
 		game.load.image('redSquare','redSquareFill3.png');
 
