@@ -152,7 +152,7 @@ NPC.prototype.update = function(){
 
 			this.behave.pause();
 		} else if (this.sight.ballInSight) {
-			console.log("this.sight.ballInSight");
+			//console.log("this.sight.ballInSight");
 			this.ball_aggro = true;
 		} else if(player.hidden && !this.sight.playerInSight){ // wander - blue
 			this.boom_bool = true;
@@ -169,7 +169,7 @@ NPC.prototype.update = function(){
 		}
 		
 		this.stunTimer.resume();
-		console.log(this.stunSFXplayed);
+		//console.log(this.stunSFXplayed);
 	}
 
 	//AGGRO'd
@@ -184,7 +184,7 @@ NPC.prototype.update = function(){
 		if (hitGround) jump(this); 
 		this.atkTimer.resume();
 	} else if (this.ball_aggro) {
-		console.log("npc.ball_aggro = true");
+		//console.log("npc.ball_aggro = true");
 		this.idle = false;
 		this.isStunned = false;
 		this.maxSpeed = 300;
@@ -258,7 +258,7 @@ function jump(self){
  
 //hit player, deal damage, deal knockback
 function attackPlayer(self, play){
-	game.camera.shake(0.005, 100);
+	game.camera.shake(0.0005, 100);
 	if(self.canAttack) {
 		play.hearts--;
 		self.canAttack = false;

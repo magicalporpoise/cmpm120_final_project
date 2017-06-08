@@ -52,7 +52,7 @@ ViewBox.prototype.update = function(){
 	if(inSights) { this.playerInSight = true; }
 	else this.playerInSight = false;
 	// debug
-	game.debug.body(this);
+	//game.debug.body(this);
 }
 
 function sawProj(hb, npc){

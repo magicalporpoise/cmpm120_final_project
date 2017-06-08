@@ -147,6 +147,8 @@ Game.prototype = {
 
 	},
 	update:function() {		// add game logic
+		game.camera.follow(player, Phaser.Camera.FOLLOW_LOCKON, 0.1, 0.1);
+
 		//console.log(currentMap);
 		if(currentLevel == 1 && currentMap.key != 'e') {
 			deleteMap(currentMap);
@@ -164,8 +166,8 @@ Game.prototype = {
 //======================
 window.onload = function() {
 
-	var width  = 1000;
-	var height = 650;
+	var width  = 1400;
+	var height = 750;
 
 	//var width  = window.innerWidth;
 	//var height = window.innerHeight;

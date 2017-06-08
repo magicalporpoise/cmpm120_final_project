@@ -65,7 +65,7 @@ function Level(key, tilemap, tileimage, layer){
 	//var diploma = new Diploma(game, 500, 500, 'platform', 0);
 	//console.log(map);
 	//camera follows player
-	game.camera.follow(player);
+	//game.camera.follow(player, Phaser.Camera.FOLLOW_LOCKON, 0.1, 0.1);
 
 }
 
