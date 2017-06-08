@@ -10,9 +10,6 @@ function Level(key, tilemap, tileimage, layer){
 	// calling new Tilemap
 	Phaser.Tilemap.call(this, game);
 	this.key = key;
-	this.tilemap = tilemap;
-	this.tileimage = tileimage;
-	this.layer = layer;
 	//console.log(this.key);
 	console.log("in Game Create");
 	//activate physics
@@ -32,15 +29,15 @@ function Level(key, tilemap, tileimage, layer){
 	//TILEMAP: main level
 	//===================
 	//this is whatever you used for the key when you loaded it in
-	map = game.add.tilemap(this.tilemap);
+	map = game.add.tilemap(tilemap);
 
 	//add a tileset image to create the map-object(name,key used above when loading image)
 	//name has to be the one specified in the json file
 	// under tileset in the name category
-	map.addTilesetImage(this.tileimage);
+	map.addTilesetImage(tileimage);
 
 	//initiates new layer, must be exact same name as specified in json
-	layer1 = map.createLayer(this.layer);
+	layer1 = map.createLayer(layer);
 	layer1.resizeWorld();
 	//entire grid will have collision set
 	map.setCollisionByExclusion([]); //i don't completely understand how this works
