@@ -14,6 +14,30 @@
         {
          "draworder":"topdown",
          "height":30,
+         "name":"death",
+         "objects":[
+                {
+                 "gid":121,
+                 "height":32,
+                 "id":31,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":2290,
+                 "y":938
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "width":201,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "draworder":"topdown",
+         "height":30,
          "name":"npc",
          "objects":[
                 {
@@ -107,7 +131,7 @@
          "x":0,
          "y":0
         }],
- "nextobjectid":31,
+ "nextobjectid":32,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tileheight":32,

@@ -64,7 +64,8 @@ function Level(key, tilemap, tileimage, layer){
 	//make diploma
 	map.createFromObjects('exit',129,'platform', 0, true, true, group_Diploma, Diploma);
 	//var diploma = new Diploma(game, 500, 500, 'platform', 0);
-	//console.log(map);
+	map.createFromObjects('death',121,'killableSubstance', 0, true, true, group_danger, killableSubstance);
+	console.log(map);
 	//camera follows player
 	//game.camera.follow(player, Phaser.Camera.FOLLOW_LOCKON, 0.1, 0.1);
 
