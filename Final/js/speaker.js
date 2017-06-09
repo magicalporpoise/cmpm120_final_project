@@ -1,19 +1,17 @@
-function speaker(x, y, scale_length, img){
+function speaker(game, x, y, img, frame, text){
 	//inherit Phaser.Sprite class
 	// calling new Sprite
 	Phaser.Sprite.call(this, game, x, y, img, 0);
 	//console.log("made view box");
-
-	//phaser related variables
-	//		and physics
-	this.x = x;
-	this.y = y;
-	this.scale.x = scale_length;
-	this.scale.y = scale_length;
-
-
 	game.physics.arcade.enable(this);
-	
+
+	this.announcement = new ScrollText(game, x, y, text, { fontSize: '22px', fill: '#FFF'});
+
+	this.active = false;
+
+	this.body.setSize(300, 300);
+
+	game.add.existing(this);
 }
 
 //=========
@@ -27,13 +25,12 @@ speaker.prototype.constructor = speaker;
 //	speaker behavior
 //==================
 speaker.prototype.update = function(){
-	let playerHit = game.physics.arcade.overlap(this, player, tellPlayer);
-}
-
-function tellPlayer() {
-	// kill player
-	console.log("speaker is telling player");
-	// player.isDead = true;
-
-
+	let playerHit = game.physics.arcade.overlap(this, player);
+	if(playerHit){
+		this.active = true;
+		//console.log("in speaker " + this.active);
+		if(this.active && !this.announcement.active){
+			this.announcement.active = true;
+		}
+	}
 }

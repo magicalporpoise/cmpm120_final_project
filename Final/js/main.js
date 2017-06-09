@@ -150,7 +150,7 @@ Game.prototype = {
 		//Level1 = new Level('ele', 'elementary_tileset', 'bricks3', 'Tile Layer 1');
 		//Level2 = new Level('mid', 'middleschool', 'bricks3', 'Tile Layer 1');
 		//game.state.start('tutorial', false);
-		//d = new Diploma(game, 500, 500, 'platform', 0);
+		//s = new speaker(game, 500, 500, 'platform', 0, "yeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
 		//game.state.add('tutorial', new Level('tiletest1', 'bricks3', 'Tile Layer 1'), true);
 		//game.state.start('tutorial');
 
