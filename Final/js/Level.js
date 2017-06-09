@@ -84,6 +84,7 @@ function deleteMap(map){
 	group_hidingspot.removeAll(true);
 	group_Diploma.removeAll(true);
 	group_ViewBox.removeAll(true);
+	group_danger.removeAll(true);
 
 	layer1.destroy();
 	map.destroy();
