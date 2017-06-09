@@ -275,7 +275,7 @@ function attackPlayer(self, play){
 		
 	}
 	//knockback
-	play.body.velocity.y = -200;
+	play.body.velocity.y = -50;
 	play.body.velocity.x += Math.sign(player.x - self.x) * 100;
 	//prevent infinite hits
 }
