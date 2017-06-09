@@ -1,4 +1,4 @@
-function killableSubstance(x, y, scale_length, img){
+function killableSubstance(game,x, y, img, frame){
 	//inherit Phaser.Sprite class
 	// calling new Sprite
 	Phaser.Sprite.call(this, game, x, y, img, 0);
@@ -8,12 +8,15 @@ function killableSubstance(x, y, scale_length, img){
 	//		and physics
 	this.x = x;
 	this.y = y;
-	this.scale.x = scale_length;
-	this.scale.y = scale_length;
+	//this.scale.x = scale_length;
+	//this.scale.y = scale_length;
 
 
 	game.physics.arcade.enable(this);
-	
+	//insert into game
+	game.add.existing(this);
+	//add to danger group
+	group_danger.add(this);
 }
 
 //=========
