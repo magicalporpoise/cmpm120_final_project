@@ -54,5 +54,10 @@ HidingSpot.prototype.update = function(){
 function toggleHiding(pressSpace, overlapping){
 	if(pressSpace && overlapping){
 		player.hidden = !player.hidden;
+		if(player.hidden) player.hearts--;
 	}
+	//if(player.hidden){
+		//player.x = this.x;
+		//player.y = this.y;
+	//}
 }

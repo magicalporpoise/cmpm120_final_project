@@ -13,6 +13,8 @@ function Diploma(game, x, y, img, frame){
 	//		and physics
 	this.x = x;
 	this.y = y;
+	this.scale.x = 0.5;
+	this.scale.y = 0.5;
 	this.active = true;
 	game.physics.arcade.enable(this);
 	//insert into game

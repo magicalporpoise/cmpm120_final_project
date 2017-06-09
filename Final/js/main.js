@@ -43,6 +43,7 @@ Preloader.prototype = {
 		game.load.image('platform', 'platform.png');
 		game.load.image('flame', 'flameParticle.png');
 		game.load.image('blackTile', 'black_tile.png');
+		game.load.image('diploma', 'diploma.png');
 
 		//loads in json tilemap created with tiled(key,filename,
 		//not exactly sure why null works here,the tilemap tool used)
@@ -112,6 +113,7 @@ var currentLevel;
 var currentMap;
 var Game = function(game) {
 	var player;
+	var imagination;
 	var tilemap;
 	var grayScreen;
 }
@@ -144,7 +146,7 @@ Game.prototype = {
 		//=============
 		//player = new Player(100, 100, 0.15, 'player2');
 		player = new Player(150, 100, 0.15, 'teddy');
-
+		imagination = new cloud(0, 0, 1, 'bigcloud');
 		currentMap = new Level('t', 'tiletest1', 'bricks3', 'Tile Layer 1');
 		//Level1 = new Level('ele', 'elementary_tileset', 'bricks3', 'Tile Layer 1');
 		//Level2 = new Level('mid', 'middleschool', 'bricks3', 'Tile Layer 1');
@@ -165,9 +167,29 @@ Game.prototype = {
 			deleteMap(currentMap);
 			currentMap = new Level('m','middleschool', 'bricks3', 'Tile Layer 1');
 		}
+		//console.log(player.hearts);
+		if(player.hearts <= 0){
+			deleteMap(currentMap);
+			game.stage.backgroundColor = "#000";
+			game.state.start('GameOver');
+		}
 	}
 }
 
+
+var GameOver = function(game) {
+}
+GameOver.prototype = {
+	create:function(){
+		console.log("ending game.....");
+		var endText = game.add.text(350, 325,
+				'You did your best\nToo bad it still was\'t good enough...', 
+				{ fontSize: '32px', fill: '#FFF' });
+	},
+	update:function(){
+		//endText.text = 
+	}
+}
 
 //======================
 //START GAME: add states
@@ -185,6 +207,7 @@ window.onload = function() {
 	game.state.add('Preloader', Preloader);
 	game.state.add('MainMenu', MainMenu);
 	game.state.add('Game', Game);
+	game.state.add('GameOver', GameOver);
 	game.state.start('Preloader');
 }
 

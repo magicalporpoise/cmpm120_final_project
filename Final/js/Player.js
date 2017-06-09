@@ -28,7 +28,8 @@ function Player(x, y, scale, img){
 
 	
 	//personal variables
-	this.hearts = 10;		//character's hp
+	this.maxHearts = 50;	//character's hp
+	this.hearts = this.maxHearts;		
 	this.maxSpeed = 500;	//speed cap
 	this.jump = -500;		//jump height
 	this.accel = 25;		//acceleration
@@ -202,7 +203,7 @@ Player.prototype.update = function(){
 			//console.log("isPunching set to true");
 
 			this.isPunching = true;
-			if(!group_npc.aggro) game.physics.arcade.overlap(hitBox, group_npc, stunTheEnemy);
+			game.physics.arcade.overlap(hitBox, group_npc, stunTheEnemy, null, NPC);
 			hitBox.destroy();
 
 
@@ -268,8 +269,6 @@ Player.prototype.update = function(){
 
 	else if (this.body.velocity.x != 0) {
 			//console.log("run");
-
-
 			if (this.excel) {
 				//if (this.body.acceleration.x>0)
 				//console.log("accel anim");
@@ -333,18 +332,17 @@ Player.prototype.update = function(){
 //FUNCTIONS
 //=========
 function stunTheEnemy(hb, npc){
-	//console.log("isPunching should be false...")
-	//player.isPunching = false;
 	player.punchSFX.play();
 	npc.isStunned = true;
+	//npc.body.velocity.x += Math.sign(npc.x - player.x)*400;
+	//console.log(npc.body.velocity.x);
+	//console.log(Math.sign(npc.x - player.x)*400);
 }
 
 
 function animationStopped(sprite, animation){
 	player.isPunching = false;
-
 	player.isShooting = false;
-
 }
 
 function deathRestart(sprite){
