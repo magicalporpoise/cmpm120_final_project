@@ -31,9 +31,9 @@ speaker.prototype.update = function(){
 }
 
 function tellPlayer() {
-	// kill player
-	console.log("speaker is telling player");
-	// player.isDead = true;
+	// talk to player
+	console.log("speaker is talking to player");
+
 
 
 }
