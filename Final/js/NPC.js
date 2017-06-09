@@ -59,9 +59,7 @@ function NPC(game, x, y, img, frame) {
 	this.growlSFX = game.add.audio('growl');
 	this.stunSFX = game.add.audio('NPCHit');
 	this.stunSFXplayed = false;
-	this.enemyAttack1SFX = game.add.audio('enemy_attack1');
-	this.enemyAttack2SFX = game.add.audio('enemy_attack2');
-	this.enemyAttack3SFX = game.add.audio('enemy_attack3');
+	this.enemyAttackSFX = game.add.audio('enemy_attack');
 	this.enemyAttackCounter = 1;
 
 
@@ -80,7 +78,7 @@ function NPC(game, x, y, img, frame) {
 	this.atkTimer.start();
 	//reset attackSFX
 	this.atkSFXTimer = game.time.create(false);
-	this.atkTimer.loop(500, resetAttackSFX, this);
+	this.atkTimer.loop(1000, resetAttackSFX, this);
 	this.atkTimer.start();
 
 	this.animations.add('walk');
@@ -266,17 +264,7 @@ function jump(self){
 function attackPlayer(self, play){
 	game.camera.shake(0.005, 100);
 	if(self.canPlay){
-		if(self.NPCAttackCounter % 2 == 0){
-				self.enemyAttack2SFX.play();
-				self.enemyAttackCounter++;
-		}else if(self.enemyAttackCounter %3 == 0){
-				self.enemyAttack3SFX.play();
-				self.enemyAttackCounter++;
-		}else{
-				self.enemyAttack1SFX.play();
-				self.enemyAttackCounter++;
-		
-		}	
+		self.enemyAttackSFX.play();
 		self.canPlay = false;
 
 	}
