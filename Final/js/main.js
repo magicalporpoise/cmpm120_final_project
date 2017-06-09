@@ -32,7 +32,8 @@ Preloader.prototype = {
 		game.load.audio('player_attack1', 'player_attack1.wav');
 		game.load.audio('player_attack2', 'player_attack2.wav');
 		game.load.audio('player_attack3', 'player_attack3.wav');
-
+		game.load.path = 'assets/audio/sfx/enemy_attacks/';
+		game.load.audio('enemy_attack', 'jakesux.wav');
 
 		//LOAD ART ASSETS
 		game.load.path = "assets/img/";
