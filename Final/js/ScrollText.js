@@ -26,6 +26,8 @@ function ScrollText(game, x, y, txt, style){
 	game.physics.arcade.enable(this);
 	//insert into game
 	game.add.existing(this);
+	//add to Text group
+	group_Text.add(this);
 }
 
 //=========

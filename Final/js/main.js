@@ -56,6 +56,7 @@ Preloader.prototype = {
 		//the key can actually be called anything as well
 		//game.load.spritesheet('tilesheet','dirt-tiles.png',32,32);
 		game.load.spritesheet('bricks3');
+		game.load.spritesheet('shady');
 
 
 		// vectorized images
@@ -68,6 +69,7 @@ Preloader.prototype = {
 		game.load.image('killableSubstance','killableSubstance.png');
 		game.load.image('sightLine','sightline2.png');
 		game.load.image('redSquare','redSquareFill3.png');
+		game.load.image('chalkboard','chalkboard.png');
 
 		game.load.atlasJSONArray('teddy', 'teddy_everything.png', 'teddy_everything.json');
 		game.load.atlasJSONArray('redBook', 'redBook.png', 'redBook.json');
@@ -101,7 +103,7 @@ MainMenu.prototype = {
 	update: function(){
 		if(game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR)){
 			//go to next state
-			game.state.start('Game');
+			game.state.start('Game'); //copy paste to game over
 		}
 	}
 }
@@ -136,6 +138,7 @@ Game.prototype = {
 		group_projectile1 = game.add.group();
 		group_Diploma = game.add.group();
 		group_danger = game.add.group();
+		group_Text = game.add.group();
 
 		//music
 		this.music1 = game.add.audio('dank');
@@ -148,11 +151,11 @@ Game.prototype = {
 		//player = new Player(100, 100, 0.15, 'player2');
 		player = new Player(150, 100, 0.15, 'teddy');
 		imagination = new cloud(0, 0, 1, 'bigcloud');
-		currentMap = new Level('t', 'tiletest1', 'bricks3', 'Tile Layer 1');
+		currentMap = new Level('t', 'tiletest1', 'shady', 'Tile Layer 1');
 		//Level1 = new Level('ele', 'elementary_tileset', 'bricks3', 'Tile Layer 1');
 		//Level2 = new Level('mid', 'middleschool', 'bricks3', 'Tile Layer 1');
 		//game.state.start('tutorial', false);
-		//s = new speaker(game, 500, 500, 'platform', 0, "yeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
+		s = new speaker(game, 500, 500, 'chalkboard', 0, "yeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
 		//game.state.add('tutorial', new Level('tiletest1', 'bricks3', 'Tile Layer 1'), true);
 		//game.state.start('tutorial');
 
