@@ -13,6 +13,8 @@ function NPC(game, x, y, img, frame) {
 	// hitbox
 	//this.body.setSize(x-100, y-50, 00, 0);
 
+	//this.x-20
+	//this.body.setSize(400, 800, 100, 50);
 
 	//phaser related variables
 	//		and physics
@@ -50,7 +52,7 @@ function NPC(game, x, y, img, frame) {
 
 
 	//create view box
-	this.sight = new ViewBox(this.x, this.y, 1, 'sightLine');
+	this.sight = new ViewBox(this.x, this.y-140, 1, 'sightLine');
 	game.add.existing(this.sight);
 	group_ViewBox.add(this.sight);
 	//console.log("in NPC: "+ group.children);
@@ -108,6 +110,7 @@ NPC.prototype.constructor = NPC;
 //	npc behavior
 //================
 NPC.prototype.update = function(){
+	//game.debug.body(this);
 	let hitGround = game.physics.arcade.collide(this, layer1);
 
 	//COLLISION + OVERLAPS
@@ -132,7 +135,7 @@ NPC.prototype.update = function(){
 	}
 	//make the sight follow the facing variable
 	this.sight.x = this.x;
-	this.sight.y = this.y;
+	this.sight.y = this.y-30;
 
 	//BEHAVIOR
 	if(!this.isStunned){
@@ -143,7 +146,7 @@ NPC.prototype.update = function(){
 			
 			// for creating detection Boom object
 			if (this.boom_bool) {
-				this.boom = new detectionBoom(this.x, this.y,'redSquare');
+				this.boom = new detectionBoom(this.x, this.y,'boom');
 				this.boom_bool = false;
 				game.add.existing(this.boom);
 				this.growlSFX.play();

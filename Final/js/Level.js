@@ -66,9 +66,21 @@ function Level(key, tilemap, tileimage, layer){
 	//var diploma = new Diploma(game, 500, 500, 'platform', 0);
 	//make floor death
 	map.createFromObjects('death' ,121,'killableSubstance', 0, true, true, group_danger, killableSubstance);
-	//console.log(map);
-	//camera follows player
-	//game.camera.follow(player, Phaser.Camera.FOLLOW_LOCKON, 0.1, 0.1);
+
+	//map.createFromObjects('blober1',  91, 'blob1', 0, true, true, group_blob1, blob);
+
+	//map.createFromObjects('blober2',  91, 'blob2', 0, true, true, group_blob2, blob);
+
+	//map.createFromObjects('blober3',  91, 'blob3', 0, true, true, group_blob3, blob);
+
+	//map.createFromObjects('blober4',  91, 'blob4', 0, true, true, group_blob4, blob);
+
+	//map.createFromObjects('blober5',  91, 'blob5', 0, true, true, group_blob5, blob);
+
+	//map.createFromObjects('blober6',  91, 'blob6', 0, true, true, group_blob6, blob);
+
+	//map.createFromObjects('blober7',  91, 'blob7', 0, true, true, group_blob7, blob);
+
 
 }
 

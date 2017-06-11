@@ -36,7 +36,8 @@ killableSubstance.prototype.update = function(){
 function killPlayer() {
 	// kill player
 	console.log("killable substance is killing player");
-	player.isDead = true;
+	//player.isDead = true;
+	player.hearts--;
 
 
 }

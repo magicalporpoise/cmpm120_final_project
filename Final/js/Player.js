@@ -221,8 +221,8 @@ Player.prototype.update = function(){
 			//--add animation--//
 		}
 		if (f_dash){
-			player.x+=this.facing*300;//Math.sign(this.body.velocity.x)*300;
-			player.hearts -=2;
+			//player.x+=this.facing*300;//Math.sign(this.body.velocity.x)*300;
+			//player.hearts -=2;
 			//this.body.velocity.x=this.facing*(this.maxSpeed+500);
 		}
 		if (r_shoot){
@@ -255,6 +255,9 @@ Player.prototype.update = function(){
 	}
 
 	//ANIMATION + SOUND HANDLING
+	//console.log("player y vel "+this.body.velocity.y);
+
+	if (Math.abs(this.body.velocity.y)>850) this.body.velocity.y=850;
 
 	if (mv_up) {
 		//console.log("jump");
@@ -291,7 +294,7 @@ Player.prototype.update = function(){
 			//idletorun_playing.killOnComplete = true;
 
 			//idletorun_playing.killOnComplete = true;
-			if (idletorun_playing.loopCount>=1) {
+			if (idletorun_playing.loopCount>=1 && (mv_left || mv_right)) {//Math.abs(this.body.velocity.x)>180) {
 				//console.log("finished");
 				this.excel = false;
 				//this.decel = false;

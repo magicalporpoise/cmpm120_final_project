@@ -15,6 +15,9 @@ function detectionBoom(x, y, img){
 	//this.scale.x = scale_length;
 	//this.scale_length = scale_length;
 	//this.scale.y = scale_length;
+	this.scale.x=0.8;
+	this.scale.y=0.8;
+
 
 	this.anchor.x=0.5;
 	this.anchor.y=0.5;

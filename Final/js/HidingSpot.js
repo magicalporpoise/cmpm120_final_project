@@ -18,7 +18,7 @@ function HidingSpot(game, x, y, img, frame){
 	this.y = y;
 	this.scale.x = .5;
 	this.scale.y = .5;
-	this.tint = 0x000000;
+	//this.tint = 0x000000;
 	game.physics.arcade.enable(this);
 
 	//insert into game

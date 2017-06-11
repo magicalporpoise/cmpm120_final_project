@@ -62,11 +62,20 @@ Preloader.prototype = {
 		game.load.image('bigcloud','cloud3_white.png');
 		game.load.image('smallcloud','cloud5_white.png');
 
+		game.load.image('blob1','blob1.png');
+		game.load.image('blob2','blob2.png');
+		game.load.image('blob3','blob3.png');
+		game.load.image('blob4','blob4.png');
+		game.load.image('blob5','blob5.png');
+		game.load.image('blob6','blob6.png');
+		game.load.image('blob7','blob7.png');
+
 		// rasterized images and atlas's 
 		game.load.image('chair','chair.png');
 		game.load.image('desk','desk.png');
 		game.load.image('killableSubstance','killableSubstance.png');
-		game.load.image('sightLine','sightline2.png');
+		game.load.image('sightLine','sightLine_simple.png');
+		game.load.image('boom','newBoom2.png');
 		game.load.image('redSquare','redSquareFill3.png');
 
 		game.load.atlasJSONArray('teddy', 'teddy_everything.png', 'teddy_everything.json');
@@ -117,6 +126,7 @@ var Game = function(game) {
 	var imagination;
 	var tilemap;
 	var grayScreen;
+	var blob;
 }
 
 Game.prototype = {
@@ -136,6 +146,7 @@ Game.prototype = {
 		group_projectile1 = game.add.group();
 		group_Diploma = game.add.group();
 		group_danger = game.add.group();
+		group_blobs = game.add.group();
 
 		//music
 		this.music1 = game.add.audio('dank');
@@ -146,6 +157,7 @@ Game.prototype = {
 		//PLAYER OBJECT
 		//=============
 		//player = new Player(100, 100, 0.15, 'player2');
+
 		player = new Player(150, 100, 0.15, 'teddy');
 		imagination = new cloud(0, 0, 1, 'bigcloud');
 		currentMap = new Level('t', 'tiletest1', 'bricks3', 'Tile Layer 1');
@@ -169,7 +181,7 @@ Game.prototype = {
 			currentMap = new Level('m','middleschool', 'bricks3', 'Tile Layer 1');
 		}
 		//console.log(player.hearts);
-		if(player.hearts <= 0){
+		if(player.hearts <= 0 || player.isDead){
 			deleteMap(currentMap);
 			game.stage.backgroundColor = "#000";
 			game.state.start('GameOver');
@@ -184,8 +196,8 @@ GameOver.prototype = {
 	create:function(){
 		console.log("ending game.....");
 		var endText = game.add.text(350, 325,
-				'You did your best\nToo bad it still was\'t good enough...', 
-				{ fontSize: '32px', fill: '#FFF' });
+				'F-', 
+				{ fontSize: '56px', fill: '#FFF' });
 	},
 	update:function(){
 		//endText.text = 
