@@ -172,7 +172,8 @@ NPC.prototype.update = function(){
 
 	//AGGRO'd
 	if(this.aggro){
-		this.tint = 0xAA0000;
+		if(this.canAttack) this.tint = 0xCC0000;
+		else this.tint = 0x330000;
 		this.idle = false;
 		this.isStunned = false;
 		this.maxSpeed = 300;
@@ -247,7 +248,7 @@ function moveTowardsPlayer(self){
 	//console.log("npc.y " + self.y);
 }
 
-
+/*
 function moveTowardsBall(self){
 	//console.log("npc in moveTowardsBall");
 	//console.log("projectile.x "+projectile.x);
@@ -255,7 +256,7 @@ function moveTowardsBall(self){
 	if (Math.abs(move)<25) move = 0;
 	else move = Math.sign(move);
 	self.movingHori = move;
-}
+}*/
 
 // npc jumps if player if higher
 function jump(self){
@@ -265,21 +266,19 @@ function jump(self){
  
 //hit player, deal damage, deal knockback
 function attackPlayer(self, play){
-	game.camera.shake(0.005, 100);
 	if(self.canPlay){
 		self.enemyAttackSFX.play();
 		self.canPlay = false;
-
 	}
 	
 	if(self.canAttack) {
+		game.camera.shake(0.005, 100);
 		play.hearts--;
 		self.canAttack = false;
-		
+		//knockback
+		play.body.velocity.y = -250;
+		play.body.velocity.x = Math.sign(play.x - self.x) * 1000;
 	}
-	//knockback
-	play.body.velocity.y = -50;
-	play.body.velocity.x += Math.sign(player.x - self.x) * 100;
 	//prevent infinite hits
 }
 
@@ -295,6 +294,5 @@ function rotateSights(npc, sights){
 	if(sights.scale.x == 1){
 		sights.rotation = Math.atan2(npc.y-player.y, npc.x-player.x);
 	} else sights.rotation = Math.atan2(player.y-npc.y, player.x-npc.x);
-
 	//return sights.rotation;
 }
