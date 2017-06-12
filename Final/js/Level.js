@@ -41,7 +41,8 @@ function Level(key, tilemap, tileimage, layer){
 	layer1 = map.createLayer(layer);
 	layer1.resizeWorld();
 	//entire grid will have collision set
-	map.setCollisionByExclusion([]); //i don't completely understand how this works
+	map.setCollisionBetween([178,195],true); //i don't completely understand how this works
+	console.log(map);
 
 	//===============
 	//MOVE THE PLAYER
@@ -67,20 +68,20 @@ function Level(key, tilemap, tileimage, layer){
 	//make floor death
 	map.createFromObjects('death' ,121,'killableSubstance', 0, true, true, group_danger, killableSubstance);
 
-	//map.createFromObjects('blober1',  91, 'blob1', 0, true, true, group_blob1, blob);
+	//map.createFromObjects('blober1', 154, 'blob1', 0, true, true, group_blob1, blob1);
 
-	//map.createFromObjects('blober2',  91, 'blob2', 0, true, true, group_blob2, blob);
+	//map.createFromObjects('blober2',  155, 'blob2', 0, true, true, group_blob2, blob2);
 
-	//map.createFromObjects('blober3',  91, 'blob3', 0, true, true, group_blob3, blob);
+	//map.createFromObjects('blober3',  156, 'blob3', 0, true, true, group_blob3, blob3);
 
-	//map.createFromObjects('blober4',  91, 'blob4', 0, true, true, group_blob4, blob);
+	//map.createFromObjects('blober4',  157, 'blob4', 0, true, true, group_blob4, blob4);
 
-	//map.createFromObjects('blober5',  91, 'blob5', 0, true, true, group_blob5, blob);
+	//map.createFromObjects('blober5',  158, 'blob5', 0, true, true, group_blob5, blob5);
 
 	//map.createFromObjects('blober6',  91, 'blob6', 0, true, true, group_blob6, blob);
 
-	//map.createFromObjects('blober7',  91, 'blob7', 0, true, true, group_blob7, blob);
-
+	//map.createFromObjects('blober7',  159, 'blob7', 0, true, true, group_blob7, blob7);
+	//console.log(map);
 
 }
 
@@ -98,6 +99,12 @@ function deleteMap(map){
 	group_Diploma.removeAll(true);
 	group_ViewBox.removeAll(true);
 	group_danger.removeAll(true);
+	//group_blob1.removeAll(true);
+	//group_blob2.removeAll(true);
+	//group_blob3.removeAll(true);
+	//group_blob4.removeAll(true);
+	//group_blob5.removeAll(true);
+	//group_blob7.removeAll(true);
 
 	layer1.destroy();
 	map.destroy();

@@ -56,6 +56,7 @@ Preloader.prototype = {
 		//the key can actually be called anything as well
 		//game.load.spritesheet('tilesheet','dirt-tiles.png',32,32);
 		game.load.spritesheet('bricks3');
+		game.load.spritesheet('cloudy');
 
 
 		// vectorized images
@@ -67,7 +68,7 @@ Preloader.prototype = {
 		game.load.image('blob3','blob3.png');
 		game.load.image('blob4','blob4.png');
 		game.load.image('blob5','blob5.png');
-		game.load.image('blob6','blob6.png');
+		//game.load.image('blob6','blob6.png');
 		game.load.image('blob7','blob7.png');
 
 		// rasterized images and atlas's 
@@ -146,7 +147,13 @@ Game.prototype = {
 		group_projectile1 = game.add.group();
 		group_Diploma = game.add.group();
 		group_danger = game.add.group();
-		group_blobs = game.add.group();
+		//group_blob1 = game.add.group();
+		//group_blob2 = game.add.group();
+		//group_blob3 = game.add.group();
+		//group_blob4 = game.add.group();
+		//group_blob5 = game.add.group();
+		//group_blob7 = game.add.group();
+
 
 		//music
 		this.music1 = game.add.audio('dank');
@@ -160,7 +167,7 @@ Game.prototype = {
 
 		player = new Player(150, 100, 0.15, 'teddy');
 		imagination = new cloud(0, 0, 1, 'bigcloud');
-		currentMap = new Level('t', 'tiletest1', 'bricks3', 'Tile Layer 1');
+		currentMap = new Level('t', 'tiletest1', 'cloudy', 'Tile Layer 1');
 		//Level1 = new Level('ele', 'elementary_tileset', 'bricks3', 'Tile Layer 1');
 		//Level2 = new Level('mid', 'middleschool', 'bricks3', 'Tile Layer 1');
 		//game.state.start('tutorial', false);
