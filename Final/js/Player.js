@@ -9,8 +9,14 @@ function Player(x, y, scale, img){
 	// calling new Sprite
 	Phaser.Sprite.call(this, game, x, y, img, 0);
 
+
+	//invisibility
+	this.isInvis = false;
+
 	//phaser related variables
 	//and physics
+
+
 	this.x = x;
 	this.y = y;
 	this.scale.x = scale;
@@ -96,6 +102,10 @@ function Player(x, y, scale, img){
 	this.oldVelocity = 0;
 	var idletorun_playing, jump_playing, punch_playing;
 
+	this.counter = 0;
+
+
+
 	// for imagination cloud
 
 	/*this.cloud = new cloud(this.x, this.y-100, 0.3, 'bigcloud');
@@ -118,7 +128,8 @@ Player.prototype.constructor = Player;
 //UPDATE FUNCTION: player input and behavior
 //==========================================
 Player.prototype.update = function(){
-
+	this.alpha = 1;
+	this.isInvis = false;
 	// for moving clouds
 
 	/*this.cloud.x = this.x-50;
@@ -130,13 +141,14 @@ Player.prototype.update = function(){
 	this.cloud2.x = this.x-20;
 	this.cloud2.y = this.y-80;*/
 
-	//get key presses
+	// get key presses
 	let mv_up = game.input.keyboard.justPressed(Phaser.Keyboard.W);
 	let mv_left = game.input.keyboard.isDown(Phaser.Keyboard.A);
 	let mv_right = game.input.keyboard.isDown(Phaser.Keyboard.D);
 	let mv_down = game.input.keyboard.justPressed(Phaser.Keyboard.S);
 
 	let k_attack = game.input.keyboard.justPressed(Phaser.Keyboard.K); 
+	let l_down = game.input.keyboard.isDown(Phaser.Keyboard.L);
 	let f_dash = game.input.keyboard.justPressed(Phaser.Keyboard.F);
 	let r_shoot = game.input.keyboard.justPressed(Phaser.Keyboard.R);
 
@@ -223,7 +235,14 @@ Player.prototype.update = function(){
 
 			//--add animation--//
 		}
-		if (f_dash){
+		if (l_down){
+			this.isInvis = true;
+			this.alpha = 0.2;
+
+			this.counter++;
+			if (this.counter%60==0) this.hearts--;
+
+
 			//player.x+=this.facing*300;//Math.sign(this.body.velocity.x)*300;
 			//player.hearts -=2;
 			//this.body.velocity.x=this.facing*(this.maxSpeed+500);
@@ -346,6 +365,18 @@ Player.prototype.update = function(){
 //=========
 //FUNCTIONS
 //=========
+
+function toggleHiding(pressSpace, overlapping){
+	if(pressSpace && overlapping){
+		player.hidden = !player.hidden;
+		if(player.hidden) player.hearts--;
+	}
+
+}
+
+
+
+
 function stunTheEnemy(hb, npc){
 	player.punchSFX.play();
 	npc.isStunned = true;

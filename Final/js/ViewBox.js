@@ -32,6 +32,8 @@ function ViewBox(x, y, scale_length, img){
 
 	this.ballInSight = false;
 
+
+
 }
 
 //=========
@@ -49,10 +51,12 @@ ViewBox.prototype.update = function(){
 
 	//if (projSights) console.log("viewbox has seen projectile");
 
-
+	//let hitWall = game.physics.arcade.overlap(this, player);
+	//let insight =
+	
 	let inSights = game.physics.arcade.overlap(this, player);
 	//check if player is in sights
-	if(inSights) {
+	if(inSights && (!player.isInvis)) {
 		this.playerInSight = true; 
 	} else {
 		this.playerInSight = false;

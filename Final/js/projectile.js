@@ -88,6 +88,7 @@ function viewCollide(hb, view){
 
 function vanish(hb, npc){
 	//npc.destroy();
+	npc.aggro = false;
 	npc.isStunned = true;
 	hb.doDestroy=true;
 	//npc.sight.destroy();

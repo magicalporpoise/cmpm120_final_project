@@ -94,6 +94,8 @@ function NPC(game, x, y, img, frame) {
 	// for toggle of detection radius
 	this.boom;
 	this.boom_bool =true;
+
+	this.isDefStunned = false;
 	// for detection radius itself
 	var boom;
 
@@ -110,6 +112,10 @@ NPC.prototype.constructor = NPC;
 //	npc behavior
 //================
 NPC.prototype.update = function(){
+
+	if (Math.abs(this.body.velocity.y)>850) this.body.velocity.y=850;
+
+
 	//game.debug.body(this);
 	let hitGround = game.physics.arcade.collide(this, layer1);
 
@@ -269,13 +275,21 @@ function jump(self){
 function attackPlayer(self, play){
 	
 	if(self.canAttack) {
+
+		//game.camera.shake(0.001, 200);
+
 		self.enemyAttackSFX.play();
-		game.camera.shake(0.005, 100);
-		play.hearts--;
+		//game.camera.shake(0.005, 100);
+
+
+		play.hearts-=5;
 		self.canAttack = false;
+		//shake
+		game.camera.shake(0.02, 200);
+
 		//knockback
-		play.body.velocity.y = -250;
-		play.body.velocity.x = Math.sign(play.x - self.x) * 1000;
+		//play.body.velocity.y = -250;
+		//play.body.velocity.x = Math.sign(play.x - self.x) * 1000;
 	}
 	//prevent infinite hits
 }
