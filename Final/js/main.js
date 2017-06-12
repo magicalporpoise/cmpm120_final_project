@@ -143,11 +143,11 @@ Game.prototype = {
 
 		group_ViewBox = game.add.group();
 		group_npc = game.add.group();
-		group_flyingNPC = game.add.group();
 		group_hidingspot = game.add.group();
 		group_projectile1 = game.add.group();
 		group_Diploma = game.add.group();
 		group_danger = game.add.group();
+		group_Emitter = game.add.group();
 		//group_blob1 = game.add.group();
 		//group_blob2 = game.add.group();
 		//group_blob3 = game.add.group();
@@ -186,10 +186,10 @@ Game.prototype = {
 		//console.log(currentMap);
 		if(currentLevel == 1 && currentMap.key != 'e') {
 			deleteMap(currentMap);
-			currentMap = new Level('e', 'elementary_tileset', 'bricks3', 'Tile Layer 1');
+			currentMap = new Level('e', 'elementary_tileset', ['bricks3', 'cloudy'], ['Tile Layer 1','Tile Layer 2']);
 		} else if(currentLevel == 2 && currentMap.key != 'm') {
 			deleteMap(currentMap);
-			currentMap = new Level('m','middleschool', 'bricks3', 'Tile Layer 1');
+			currentMap = new Level('m','middleschool', ['bricks3', 'cloudy'], ['Tile Layer 1','Tile Layer 2']);
 		}
 		//console.log(player.hearts);
 		if(player.hearts <= 0 || player.isDead){

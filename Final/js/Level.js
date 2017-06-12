@@ -36,15 +36,13 @@ function Level(key, tilemap, tileimage, layer){
 	layer2 = map.createLayer(layer[1]);
 	layer1.resizeWorld();
 	//entire grid will have collision set
-	map.setCollisionBetween(178,195, true);
-	map.setCollisionBetween(1341,1344);
+	map.setCollisionByExclusion([]);
+	//map.setCollisionBetween(178,195, true);
+	//map.setCollisionBetween(1341,1344);
 	console.log(map);
 
 	//===============
 	//MOVE THE PLAYER
-	//
-	//??? find correct spot!!
-	//
 	//===============
 	player.x = 300;
 	player.y = 300;
@@ -79,10 +77,13 @@ function Level(key, tilemap, tileimage, layer){
 	//map.createFromObjects('blober7',  159, 'blob7', 0, true, true, group_blob7, blob7);
 	//console.log(map);
 
-	player.bringToTop();
 
-	imagination.bringToTop();
-	imagination.imagination.bringToTop();
+	game.world.bringToTop(group_Emitter);
+	game.world.bringToTop(group_npc);
+	player.bringToTop();
+	//imagination.bringToTop();
+	//imagination.imagination.bringToTop();
+	//imagination.rainbowDeath.particleBringToTop = true;
 
 }
 
@@ -95,7 +96,6 @@ Level.prototype.constructor = Level;
 function deleteMap(map){
 
 	group_npc.removeAll(true);
-	group_flyingNPC.removeAll(true);
 	group_hidingspot.removeAll(true);
 	group_Diploma.removeAll(true);
 	group_ViewBox.removeAll(true);
@@ -108,5 +108,6 @@ function deleteMap(map){
 	//group_blob7.removeAll(true);
 
 	layer1.destroy();
+	layer2.destroy();
 	map.destroy();
 }
