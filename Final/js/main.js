@@ -207,12 +207,22 @@ var GameOver = function(game) {
 GameOver.prototype = {
 	create:function(){
 		console.log("ending game.....");
+		//set the player's grade
+
+		game.stage.backgroundColor = "#000";
+		let finalScore = player.hearts  + "/" + player.maxHearts;
+		let g = player.hearts;
+		grade = (g < 60 ? "F" : (g < 70 ? "D" : (g < 80 ?  "C" : (g < 90 ? "B" : "A" ))));
+
 		var endText = game.add.text(350, 325,
-				'F-', 
+				("You earned a "  + finalScore + " -- " + grade), 
 				{ fontSize: '56px', fill: '#FFF' });
 	},
 	update:function(){
-		//endText.text = 
+		if(game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR)){
+			//go to next state
+			game.state.start('MainMenu');
+		}
 	}
 }
 
