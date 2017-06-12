@@ -167,7 +167,7 @@ Game.prototype = {
 
 		player = new Player(150, 100, 0.15, 'teddy');
 		imagination = new cloud(0, 0, 1, 'bigcloud');
-		currentMap = new Level('t', 'tiletest1', 'cloudy', 'Tile Layer 1');
+		currentMap = new Level('t', 'tiletest1', ['cloudy','bricks3'], ['Tile Layer 1','Tile Layer 2']);
 		//Level1 = new Level('ele', 'elementary_tileset', 'bricks3', 'Tile Layer 1');
 		//Level2 = new Level('mid', 'middleschool', 'bricks3', 'Tile Layer 1');
 		//game.state.start('tutorial', false);

@@ -35,13 +35,16 @@ function Level(key, tilemap, tileimage, layer){
 	//add a tileset image to create the map-object(name,key used above when loading image)
 	//name has to be the one specified in the json file
 	// under tileset in the name category
-	map.addTilesetImage(tileimage);
+	map.addTilesetImage(tileimage[0]);
+	map.addTilesetImage(tileimage[1]);
 
 	//initiates new layer, must be exact same name as specified in json
-	layer1 = map.createLayer(layer);
+	layer1 = map.createLayer(layer[0]);
+	layer2 = map.createLayer(layer[1]);
 	layer1.resizeWorld();
 	//entire grid will have collision set
-	map.setCollisionBetween([178,195],true); //i don't completely understand how this works
+	map.setCollisionBetween(178,195, true);
+	map.setCollisionBetween(1341,1344);
 	console.log(map);
 
 	//===============
@@ -82,6 +85,8 @@ function Level(key, tilemap, tileimage, layer){
 
 	//map.createFromObjects('blober7',  159, 'blob7', 0, true, true, group_blob7, blob7);
 	//console.log(map);
+
+	player.bringToTop();
 
 }
 
