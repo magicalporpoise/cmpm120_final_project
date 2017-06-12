@@ -165,7 +165,7 @@ NPC.prototype.update = function(){
 			this.stunSFXplayed = true;
 			this.stunSFX.play();
 		}
-		
+		//this.sight.visible = false;
 		this.stunTimer.resume();
 		//console.log(this.stunSFXplayed);
 	}
@@ -229,7 +229,8 @@ normalBehave = function determineBehavior(){
 function unStun(){
 	this.stunSFXplayed = false;
 	this.isStunned = false;
-	this.idle = false;
+	this.idle = true;
+	//this.sight.visible = true;
 	this.stunTimer.pause();
 }
 
