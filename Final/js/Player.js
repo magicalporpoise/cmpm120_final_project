@@ -50,8 +50,11 @@ function Player(x, y, scale, img){
 	//this.stepSFX.loopFull();
 
 	this.playerAttack1SFX = game.add.audio('player_attack1');
+	this.playerAttack1SFX.volume = .4;
 	this.playerAttack2SFX = game.add.audio('player_attack2');
+	this.playerAttack2SFX.volume = .4;
 	this.playerAttack3SFX = game.add.audio('player_attack3');
+	this.playerAttack3SFX.volume = .4;
 	this.playerAttackCounter = 1; 
 
 	
@@ -325,16 +328,14 @@ Player.prototype.update = function(){
 
 		this.animations.play('idle', 10, true);
 	}
-	//console.log('bot of update');
 
 	this.oldVelocity = this.body.velocity.x;
-
 	if(hitGround && !this.landed){
 		this.landSFX.play();
 		this.landed = true;
 	}
 
-	if(vert < 0){
+	if(!hitGround && (this.body.velocity.y< -50 || this.body.velocity.y > 50)){
 		this.landed = false;
 	}
 	

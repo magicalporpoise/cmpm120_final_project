@@ -59,9 +59,12 @@ function NPC(game, x, y, img, frame) {
 
 	//SFX
 	this.growlSFX = game.add.audio('growl');
+	this.growlSFX.volume = .4;
 	this.stunSFX = game.add.audio('NPCHit');
+	this.stunSFX.volume = .1;
 	this.stunSFXplayed = false;
 	this.enemyAttackSFX = game.add.audio('enemy_attack');
+	this.enemyAttackSFX.volume = .1;
 	this.enemyAttackCounter = 1;
 
 
@@ -78,10 +81,7 @@ function NPC(game, x, y, img, frame) {
 	this.atkTimer = game.time.create(false);
 	this.atkTimer.loop(3000, resetAttack, this);
 	this.atkTimer.start();
-	//reset attackSFX
-	this.atkSFXTimer = game.time.create(false);
-	this.atkTimer.loop(1000, resetAttackSFX, this);
-	this.atkTimer.start();
+	
 
 	this.animations.add('walk');
 	this.animations.add('idle', [0], 1, true);
@@ -267,12 +267,9 @@ function jump(self){
  
 //hit player, deal damage, deal knockback
 function attackPlayer(self, play){
-	if(self.canPlay){
-		self.enemyAttackSFX.play();
-		self.canPlay = false;
-	}
 	
 	if(self.canAttack) {
+		self.enemyAttackSFX.play();
 		game.camera.shake(0.005, 100);
 		play.hearts--;
 		self.canAttack = false;

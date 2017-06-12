@@ -18,7 +18,7 @@ Preloader.prototype = {
 		
 		//LOAD MUSIC
 		game.load.path = 'assets/audio/music/';
-		game.load.audio('ambient', 'Detention_ambient.mp3');
+		game.load.audio('ambient', 'Detention_second.wav');
 
 		game.load.path = 'assets/audio/music/'
 		game.load.audio('dank','Detention_creepy.mp3')
@@ -27,7 +27,8 @@ Preloader.prototype = {
 		game.load.path = 'assets/audio/sfx/';
 		game.load.audio('growl', 'growl.wav');
 		game.load.audio('step', 'footstep.mp3');
-		game.load.audio('NPCHit', 'NPCHit.mp3')
+		game.load.audio('NPCHit', 'player_smack.wav')
+		game.load.audio('playerDeathSFX', 'player_death.wav')
 		game.load.path = 'assets/audio/sfx/player_attacks/';
 		game.load.audio('player_attack1', 'player_attack1.wav');
 		game.load.audio('player_attack2', 'player_attack2.wav');
@@ -151,7 +152,10 @@ Game.prototype = {
 		//music
 		this.music1 = game.add.audio('dank');
 		this.music2 = game.add.audio('ambient');
-		this.music1.loopFull();
+		this.music2.loopFull();
+
+		this.playerDeathSFX = game.add.audio('playerDeathSFX')
+		this.playerDeathSFX.volume = 3;
 
 		//=============
 		//PLAYER OBJECT
@@ -183,6 +187,7 @@ Game.prototype = {
 		//console.log(player.hearts);
 		if(player.hearts <= 0 || player.isDead){
 			deleteMap(currentMap);
+			this.playerDeathSFX.play();
 			game.stage.backgroundColor = "#000";
 			game.state.start('GameOver');
 		}
