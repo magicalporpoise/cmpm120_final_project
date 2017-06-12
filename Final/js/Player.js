@@ -28,7 +28,7 @@ function Player(x, y, scale, img){
 
 	
 	//personal variables
-	this.maxHearts = 50;	//character's hp
+	this.maxHearts = 100;	//character's hp
 	this.hearts = this.maxHearts;		
 	this.maxSpeed = 500;	//speed cap
 	this.jump = -500;		//jump height

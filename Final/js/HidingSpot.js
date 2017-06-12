@@ -18,6 +18,7 @@ function HidingSpot(game, x, y, img, frame){
 	this.y = y;
 	this.scale.x = .5;
 	this.scale.y = .5;
+	this.time = 0;
 	//this.tint = 0x000000;
 	game.physics.arcade.enable(this);
 
@@ -42,7 +43,7 @@ HidingSpot.prototype.update = function(){
 
 	//game.debug.body(this);
 
-	let hidden = game.physics.arcade.overlap(this, player);
+	let hidden = game.physics.arcade.overlap(this, player, loseImagination);
 	// change the player's hiding variable
 	toggleHiding(game.input.keyboard.justPressed(Phaser.Keyboard.SPACEBAR), hidden);
 }
@@ -56,8 +57,14 @@ function toggleHiding(pressSpace, overlapping){
 		player.hidden = !player.hidden;
 		if(player.hidden) player.hearts--;
 	}
-	//if(player.hidden){
-		//player.x = this.x;
-		//player.y = this.y;
-	//}
+}
+
+function loseImagination(me, player){
+	if(player.hidden){
+		me.time++;
+		if(me.time % 120 == 0){
+			me.time = 0;
+			player.hearts--;
+		}
+	}
 }
