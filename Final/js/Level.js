@@ -15,13 +15,6 @@ function Level(key, tilemap, tileimage, layer){
 	//activate physics
 	game.physics.startSystem(Phaser.Physics.ARCADE);
 	game.physics.setBoundsToWorld();
-	//Pause Screen
-
-	//Add Audio / Music
-	//this.music1 = game.add.audio('dank');
-	//this.music2 = game.add.audio('ambient');
-	//this.counter = 1;
-	//this.music1.loopFull();
 	
 	//BG color, gray
 	game.stage.backgroundColor = "#CCC";
@@ -81,6 +74,9 @@ function Level(key, tilemap, tileimage, layer){
 
 	//map.createFromObjects('blober7',  91, 'blob7', 0, true, true, group_blob7, blob);
 
+
+	imagination.bringToTop();
+	imagination.imagination.bringToTop();
 
 }
 
