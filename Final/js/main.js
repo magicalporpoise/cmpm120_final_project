@@ -18,7 +18,7 @@ Preloader.prototype = {
 		
 		//LOAD MUSIC
 		game.load.path = 'assets/audio/music/';
-		game.load.audio('ambient', 'Detention_ambient.mp3');
+		game.load.audio('ambient', 'Detention_second.wav');
 
 		game.load.path = 'assets/audio/music/'
 		game.load.audio('dank','Detention_creepy.mp3')
