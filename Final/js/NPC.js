@@ -272,12 +272,15 @@ function attackPlayer(self, play){
 	}
 	
 	if(self.canAttack) {
-		game.camera.shake(0.005, 100);
+		//game.camera.shake(0.001, 200);
 		play.hearts--;
 		self.canAttack = false;
+		//shake
+		game.camera.shake(0.02, 200);
+
 		//knockback
-		play.body.velocity.y = -250;
-		play.body.velocity.x = Math.sign(play.x - self.x) * 1000;
+		//play.body.velocity.y = -250;
+		//play.body.velocity.x = Math.sign(play.x - self.x) * 1000;
 	}
 	//prevent infinite hits
 }
