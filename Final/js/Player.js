@@ -328,7 +328,6 @@ Player.prototype.update = function(){
 
 		this.animations.play('idle', 10, true);
 	}
-	console.log(this.body.velocity.y);
 
 	this.oldVelocity = this.body.velocity.x;
 	if(hitGround && !this.landed){
