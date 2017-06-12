@@ -59,9 +59,12 @@ function NPC(game, x, y, img, frame) {
 
 	//SFX
 	this.growlSFX = game.add.audio('growl');
+	this.growlSFX.volume = .4;
 	this.stunSFX = game.add.audio('NPCHit');
+	this.stunSFX.volume = .1;
 	this.stunSFXplayed = false;
 	this.enemyAttackSFX = game.add.audio('enemy_attack');
+	this.enemyAttackSFX.volume = .1;
 	this.enemyAttackCounter = 1;
 
 
@@ -78,10 +81,7 @@ function NPC(game, x, y, img, frame) {
 	this.atkTimer = game.time.create(false);
 	this.atkTimer.loop(3000, resetAttack, this);
 	this.atkTimer.start();
-	//reset attackSFX
-	this.atkSFXTimer = game.time.create(false);
-	this.atkTimer.loop(1000, resetAttackSFX, this);
-	this.atkTimer.start();
+	
 
 	this.animations.add('walk');
 	this.animations.add('idle', [0], 1, true);
@@ -94,6 +94,8 @@ function NPC(game, x, y, img, frame) {
 	// for toggle of detection radius
 	this.boom;
 	this.boom_bool =true;
+
+	this.isDefStunned = false;
 	// for detection radius itself
 	var boom;
 
@@ -110,6 +112,10 @@ NPC.prototype.constructor = NPC;
 //	npc behavior
 //================
 NPC.prototype.update = function(){
+
+	if (Math.abs(this.body.velocity.y)>850) this.body.velocity.y=850;
+
+
 	//game.debug.body(this);
 	let hitGround = game.physics.arcade.collide(this, layer1);
 
@@ -266,14 +272,16 @@ function jump(self){
  
 //hit player, deal damage, deal knockback
 function attackPlayer(self, play){
-	if(self.canPlay){
-		self.enemyAttackSFX.play();
-		self.canPlay = false;
-	}
 	
 	if(self.canAttack) {
+
 		//game.camera.shake(0.001, 200);
-		play.hearts--;
+
+		self.enemyAttackSFX.play();
+		//game.camera.shake(0.005, 100);
+
+
+		play.hearts-=5;
 		self.canAttack = false;
 		//shake
 		game.camera.shake(0.02, 200);
