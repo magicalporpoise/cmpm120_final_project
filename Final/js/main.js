@@ -249,7 +249,7 @@ Game.prototype = {
 			deleteMap(currentMap);
 			
 			playerDeathSFX.play();
-
+			musicCounter++;
 			game.state.start('GameOver');
 		}
 
