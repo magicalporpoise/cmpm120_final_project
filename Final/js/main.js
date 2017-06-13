@@ -121,7 +121,7 @@ MainMenu.prototype = {
 		introTeddy.scale.y = 5;
 		//give main menu instructions
 		controls = game.add.text(16, 750/4,
-						"                     Your Imagination is Precious:\n-----------------------------------------------------------------------------\nWASD to MOVE\nSit down (S) in seats to avoid angry books\nJ to throw a STUN BALL\nK to throw a STUN PUNCH\nL to become INVISIBLE\n\n press SPACE to continue...", 
+						"                     Your Imagination is Precious:\n-----------------------------------------------------------------------------\nWASD to MOVE\nSit down in seats to avoid angry books\nJ to throw a STUN BALL\nK to throw a STUN PUNCH\nL to become INVISIBLE\nP to Pause\n\n press SPACE to continue...", 
 						{ font: 'Source Code Pro', fontSize: '32px', fill: '#FFF' });
 
 		extraText = game.add.text(100, 650,
@@ -177,7 +177,7 @@ Game.prototype = {
 		pauseScreen.height = game.world.height + 100;
 		pauseScreen.alpha = 0;
 
-
+		//CREATE GAME GROUPS
 		group_ViewBox = game.add.group();
 		group_npc = game.add.group();
 		group_hidingspot = game.add.group();
@@ -229,7 +229,7 @@ Game.prototype = {
 			game.state.start('GameOver');
 
 		}
-		//console.log(player.hearts);
+		//PLAYER DEATH
 		if(player.hearts <= 0 || player.isDead){
 			deleteMap(currentMap);
 			if(music1.isPlaying){
