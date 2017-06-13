@@ -28,7 +28,7 @@ Preloader.prototype = {
 		game.load.audio('growl', 'growl.wav');
 		game.load.audio('step', 'footstep.mp3');
 		game.load.audio('NPCHit', 'player_smack.wav')
-		game.load.audio('playerDeathSFX', 'player_death.wav')
+		game.load.audio('playerDeathSFX', 'player_death.wav');
 		game.load.path = 'assets/audio/sfx/player_attacks/';
 		game.load.audio('player_attack1', 'player_attack1.wav');
 		game.load.audio('player_attack2', 'player_attack2.wav');
@@ -38,12 +38,9 @@ Preloader.prototype = {
 
 		//LOAD ART ASSETS
 		game.load.path = "assets/img/";
-		game.load.spritesheet('player', 'stb-Sheet.png', 32, 50);
-		// test
-		game.load.spritesheet('player2', 'teddy_colored.png', 630, 900);		
+		game.load.spritesheet('player', 'stb-Sheet.png', 32, 50);	
 
-		game.load.image('platform', 'platform.png');
-		game.load.image('flame', 'flameParticle.png');
+		game.load.image('platform', 'black_tile.png');
 		game.load.image('blackTile', 'black_tile.png');
 		game.load.image('diploma', 'diploma.png');
 
@@ -63,17 +60,9 @@ Preloader.prototype = {
 
 		// vectorized images
 		game.load.image('bigcloud','cloud3_white.png');
-		//game.load.image('smallcloud','cloud5_white.png');
-
-		game.load.image('blob1','blob1.png');
-		game.load.image('blob2','blob2.png');
-		game.load.image('blob3','blob3.png');
-		game.load.image('blob4','blob4.png');
-		game.load.image('blob5','blob5.png');
-		//game.load.image('blob6','blob6.png');
-		game.load.image('blob7','blob7.png');
 
 		// rasterized images and atlas's 
+		game.load.image('chalkboard','chalkboard.png');		
 		game.load.image('chair','chair.png');
 		game.load.image('desk','desk.png');
 		game.load.image('killableSubstance','killableSubstance.png');

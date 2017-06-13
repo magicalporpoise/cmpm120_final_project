@@ -103,7 +103,7 @@ NPC.prototype.update = function(){
 	if(this.behaveCont)this.behave ++;
 	if(this.stunTimerCont)this.stunTimer++;
 	if(this.atkTimerCont)this.atkTimer++;
-	console.log(this.behave);
+	//console.log(this.behave);
 	if(this.behave % this.longDura == 0){
 		this.behave =1;
 		determineBehavior(this);
