@@ -38,7 +38,7 @@ Preloader.prototype = {
 
 		//LOAD ART ASSETS
 		game.load.path = "assets/img/";
-		game.load.spritesheet('player', 'stb-Sheet.png', 32, 50);	
+		//game.load.spritesheet('player', 'stb-Sheet.png', 32, 50);	
 
 		game.load.image('platform', 'black_tile.png');
 		game.load.image('blackTile', 'black_tile.png');
@@ -68,7 +68,7 @@ Preloader.prototype = {
 		game.load.image('killableSubstance','killableSubstance.png');
 		game.load.image('sightLine','sightLine_simple.png');
 		game.load.image('boom','newBoom2.png');
-		game.load.image('redSquare','redSquareFill3.png');
+		//game.load.image('redSquare','redSquareFill3.png');
 
 		game.load.atlasJSONArray('teddy', 'teddy_everything.png', 'teddy_everything.json');
 		game.load.atlasJSONArray('redBook', 'redBook.png', 'redBook.json');
@@ -131,6 +131,13 @@ Game.prototype = {
 		//Major Groups for Collision checks
 		console.log('creating game');
 
+		//pause screen
+		pauseScreen = game.add.image(0, 0, 'blackTile');
+		pauseScreen.width = game.world.width + 100;
+		pauseScreen.height = game.world.height + 100;
+		pauseScreen.alpha = 0;
+
+
 		group_ViewBox = game.add.group();
 		group_npc = game.add.group();
 		group_hidingspot = game.add.group();
@@ -153,12 +160,13 @@ Game.prototype = {
 		//=============
 		player = new Player(150, 100, 0.15, 'teddy');
 		imagination = new cloud(0, 0, 1, 'bigcloud');
-
 		currentMap = new Level('t', 'tiletest1', ['cloudy','bricks3'], ['Tile Layer 1','Tile Layer 2']);
 
 	},
 	update:function() {		// add game logic
 		game.camera.follow(player, Phaser.Camera.FOLLOW_LOCKON, 0.1, 0.1);
+		pauseScreen.x = game.camera.x-50;
+		pauseScreen.y = game.camera.y-50;
 
 		//console.log(currentMap);
 		if(currentLevel == 1 && currentMap.key != 'e') {
@@ -235,10 +243,12 @@ window.onkeydown = function(event){
 
 //pause the game
 function pauseGame(){
-	game.paused ? game.paused = false : game.paused = true;
+	game.paused = !game.paused;
+	pauseScreen.bringToTop();
 	if(game.paused){
-		//add gray alpha layer to display pause
+		pauseScreen.alpha = 0.75;
 	} else {
+		pauseScreen.alpha = 0;
 	}
 }
 
