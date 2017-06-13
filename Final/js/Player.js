@@ -240,7 +240,7 @@ Player.prototype.update = function(){
 			this.alpha = 0.2;
 
 			this.counter++;
-			if (this.counter%60==0) this.hearts--;
+			if (this.counter%40==0) this.hearts--;
 
 
 			//player.x+=this.facing*300;//Math.sign(this.body.velocity.x)*300;
