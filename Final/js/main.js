@@ -52,11 +52,14 @@ Preloader.prototype = {
 		game.load.tilemap('elementary_tileset', 'elementary_tileset.json', null, Phaser.Tilemap.TILED_JSON);
 		game.load.tilemap('middleschool','middleschool.json',null,Phaser.Tilemap.TILED_JSON);
 
+		game.load.tilemap('noImaginationLand','new_last_level.json',null,Phaser.Tilemap.TILED_JSON);
+
 		//loads the image used in tiled to create the map(key, filename,32x32)
 		//the key can actually be called anything as well
 		//game.load.spritesheet('tilesheet','dirt-tiles.png',32,32);
 		game.load.spritesheet('bricks3');
 		game.load.spritesheet('cloudy');
+		game.load.spritesheet('newTilemap');
 
 
 		// vectorized images
@@ -71,7 +74,7 @@ Preloader.prototype = {
 		game.load.image('boom','newBoom2.png');
 		//game.load.image('redSquare','redSquareFill3.png');
 
-		game.load.atlasJSONArray('teddy', 'teddy_everything.png', 'teddy_everything.json');
+		game.load.atlasJSONArray('teddy', 'newTeddy_everything.png', 'newTeddy_everything.json');
 		game.load.atlasJSONArray('redBook', 'redBook.png', 'redBook.json');
 		game.load.atlasJSONArray('blueBook', 'blueBookSheet.png', 'blueBookSheet.json');
 		game.load.atlasJSONArray('rainbowShot', 'rainbowShot.png', 'rainbowShot.json');
@@ -202,7 +205,7 @@ Game.prototype = {
 			currentMap = new Level('e', 'elementary_tileset', ['bricks3', 'cloudy'], ['Tile Layer 1','Tile Layer 2']);
 		} else if(currentLevel == 2 && currentMap.key != 'm') {
 			deleteMap(currentMap);
-			currentMap = new Level('m','middleschool', ['bricks3', 'cloudy'], ['Tile Layer 1','Tile Layer 2']);
+			currentMap = new Level('m','noImaginationLand', ['newTilemap', 'cloudy'], ['Tile Layer 1','Tile Layer 2']);
 		} else if(currentLevel == 3){
 			deleteMap(currentMap);
 			game.state.start('GameOver');
