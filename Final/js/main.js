@@ -59,7 +59,7 @@ Preloader.prototype = {
 		//game.load.spritesheet('tilesheet','dirt-tiles.png',32,32);
 		game.load.spritesheet('bricks3');
 		game.load.spritesheet('cloudy');
-		game.load.spritesheet('newTilemap');
+		//game.load.spritesheet('newTilemap');
 
 
 		// vectorized images
@@ -205,7 +205,7 @@ Game.prototype = {
 			currentMap = new Level('e', 'elementary_tileset', ['bricks3', 'cloudy'], ['Tile Layer 1','Tile Layer 2']);
 		} else if(currentLevel == 2 && currentMap.key != 'm') {
 			deleteMap(currentMap);
-			currentMap = new Level('m','noImaginationLand', ['newTilemap', 'cloudy'], ['Tile Layer 1','Tile Layer 2']);
+			currentMap = new Level('m','middleschool', ['bricks3', 'cloudy'], ['Tile Layer 1','Tile Layer 2']);
 		} else if(currentLevel == 3){
 			deleteMap(currentMap);
 			game.state.start('GameOver');
@@ -256,12 +256,13 @@ var Lore = function(game) {
 Lore.prototype = {
 	create:function(){
 		console.log("Entering Game Lore");
-		loreText = game.add.text(700, 375,
-				("Imagination! who can sing thy force?\nOr who describe the swiftness of thy course?\nSoaring through air to find the bright abode,\nTh' empyreal palace of the thund'ring God,\nWe on thy pinions can surpass the wind,\nAnd leave the rolling universe behind----\nTeacher: Ernest, put that book away! You have to pay attention in class.\n----From star to star the mental optics rove,\nMeasure the skies, and range the realms above----\nTeacher: I said put that away!\nErnest: But I like using my imagination.\nTeacher: Did I say you could do that?\nErnest: I just want to think for myself!\nTeacher: That’s it, you have detention!"), 
-				{ fontSize: '32px', fill: '#FFF', align: 'center' });
-		loreText.anchor.set(0.5);
+		var txt = "Imagination! who can sing thy force?\nOr who describe the swiftness of thy course?\nSoaring through air to find the bright abode,\nTh' empyreal palace of the thund'ring God,\nWe on thy pinions can surpass the wind,\nAnd leave the rolling universe behind----\n                    Ernest, put that book away!\n                    You have to pay attention in class.\n----From star to star the mental optics rove,\nMeasure the skies, and range the realms above----\n                    I said put that away!\nBut I like using my imagination.\n                    Did I say you could do that?\nI just want to think for myself!\n                    That’s it, you have detention!";
+		loreText = new ScrollText(game, 100, 100, txt, { fontSize: '20px', fill: '#FFF', font: 'Sans Serif'});
+		loreText.speed = 1;
+		loreText.active = true;
 	},
 	update:function(){
+		console.log(loreText);
 		if(game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR)){
 			//go to next state
 			game.state.start('MainMenu');
@@ -281,7 +282,7 @@ Credits.prototype = {
 	create:function(){
 		console.log("Entering Credits");
 		creditText = game.add.text(700, 375,
-				("This is ALL the people who contributed."), 
+				("Jacob Darby - composer and writer\nJake Shapiro - artist and programmer\nPhilip Stanley - programmer and quality assurance\nTristan Clark - level designer"), 
 				{ fontSize: '32px', fill: '#FFF', align: 'center' });
 		creditText.anchor.set(0.5);
 	},

@@ -45,14 +45,14 @@ HidingSpot.prototype.update = function(){
 
 	let hidden = game.physics.arcade.overlap(this, player, loseImagination);
 	// change the player's hiding variable
-	toggleHiding((game.input.keyboard.justPressed(Phaser.Keyboard.S)), hidden);
+	toggleHiding(this, (game.input.keyboard.justPressed(Phaser.Keyboard.S)), hidden);
 }
 
 //=========
 //FUNCTIONS
 //=========
 //toggle hiding
-function toggleHiding(input, overlapping){
+function toggleHiding(me, input, overlapping){
 	if(input == false && player.hidden){
 		if(game.input.keyboard.justPressed(Phaser.Keyboard.W)) input = true;
 	}
@@ -60,6 +60,8 @@ function toggleHiding(input, overlapping){
 	if(input && overlapping){
 		player.hidden = !player.hidden;
 		if(player.hidden) {
+			player.body.velocity.x = 0;
+			player.x = me.x + 50;
 			player.hearts--;
 			player.isInvis = false;
 		}

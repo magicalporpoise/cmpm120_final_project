@@ -170,9 +170,6 @@ Player.prototype.update = function(){
 	if(!this.hidden){
 		//tinting
 		this.tint = 0xFFFFFF;
-
-		//if (hitGround) console.log("player hit ground");
-
 		//jump
 		if(vert < 0 && hitGround ) {  //&& this.body.velocity.y ==0 for no double jump
 			this.body.velocity.y = this.jump; // also allows wall jumps
@@ -188,10 +185,6 @@ Player.prototype.update = function(){
 				this.excel=true;
 				//console.log("here");
 				this.decel = false;
-
-				//this.animations.play('run', 75, true);
-
-				//console.log("acceling");
 			}
 
 		} else { //deccelerate
@@ -243,16 +236,14 @@ Player.prototype.update = function(){
 			this.alpha = 0.2;
 			this.counter++;
 
-			if (this.counter%30==0) {
+			if (this.counter%30==0){
 				this.hearts--;
 				this.counter = 0;
 			}
-
 		}
 
 		if (r_shoot && !this.isInvis){
 			this.isShooting = true;
-
 			this.shoot = new projectile(this.x + this.facing*25, this.y, 1000, this.facing, 0.3, 'rainbowShot');
 			game.add.existing(this.shoot);
 			//console.log('r pressed');
@@ -271,8 +262,9 @@ Player.prototype.update = function(){
 			player.hearts -=2;
 		}
 	} else { //IS HIDDEN
-		this.tint = 0;				//turn black when hidden
+		this.tint = 0x222222;		//face when hidden
 		this.body.velocity.x = 0;	//stop when hidden
+		this.body.velocity.y = 0;	//stop when hidden
 
 		if ((game.input.keyboard.justPressed(Phaser.Keyboard.S)||game.input.keyboard.justPressed(Phaser.Keyboard.W)) && !game.physics.arcade.overlap(this, group_hidingspot)){
 			this.hidden = false;
@@ -296,16 +288,13 @@ Player.prototype.update = function(){
 	if (this.isPunching || this.isShooting){
 		//console.log("punch anim");
 		//if (punch_playing.loopCount<=1)
-
 		punch_playing = this.animations.play('punch', 50, false);
 		punch_playing.onComplete.add(animationStopped, this);
 	}
-
 	else if (this.isJumping){
 		//console.log("jump anim");
 		//this.jump_playing = this.animations.play('falling', 5, false);
 	}
-
 	else if (this.body.velocity.x != 0) {
 			//console.log("run");
 			if (this.excel) {
@@ -328,7 +317,12 @@ Player.prototype.update = function(){
 			
 
 	} else {
-		this.animations.play('idle', 10, true);
+		if(this.hidden)	{
+			this.facing = 1;
+			this.scale.x = this.scale.y;
+			this.animations.play('sit', 50, true);
+		}
+		else this.animations.play('idle', 10, true);
 	}
 
 	this.oldVelocity = this.body.velocity.x;
