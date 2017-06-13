@@ -57,6 +57,7 @@ Preloader.prototype = {
 		//the key can actually be called anything as well
 		//game.load.spritesheet('tilesheet','dirt-tiles.png',32,32);
 		game.load.spritesheet('bricks3');
+		game.load.spritesheet('cloudy');
 
 
 		// vectorized images
@@ -68,7 +69,7 @@ Preloader.prototype = {
 		game.load.image('blob3','blob3.png');
 		game.load.image('blob4','blob4.png');
 		game.load.image('blob5','blob5.png');
-		game.load.image('blob6','blob6.png');
+		//game.load.image('blob6','blob6.png');
 		game.load.image('blob7','blob7.png');
 
 		// rasterized images and atlas's 
@@ -142,12 +143,18 @@ Game.prototype = {
 
 		group_ViewBox = game.add.group();
 		group_npc = game.add.group();
-		group_flyingNPC = game.add.group();
 		group_hidingspot = game.add.group();
 		group_projectile1 = game.add.group();
 		group_Diploma = game.add.group();
 		group_danger = game.add.group();
-		group_blobs = game.add.group();
+		group_Emitter = game.add.group();
+		//group_blob1 = game.add.group();
+		//group_blob2 = game.add.group();
+		//group_blob3 = game.add.group();
+		//group_blob4 = game.add.group();
+		//group_blob5 = game.add.group();
+		//group_blob7 = game.add.group();
+
 
 		//music
 		this.music1 = game.add.audio('dank');
@@ -164,7 +171,7 @@ Game.prototype = {
 
 		player = new Player(150, 100, 0.15, 'teddy');
 		imagination = new cloud(0, 0, 1, 'bigcloud');
-		currentMap = new Level('t', 'tiletest1', 'bricks3', 'Tile Layer 1');
+		currentMap = new Level('t', 'tiletest1', ['cloudy','bricks3'], ['Tile Layer 1','Tile Layer 2']);
 		//Level1 = new Level('ele', 'elementary_tileset', 'bricks3', 'Tile Layer 1');
 		//Level2 = new Level('mid', 'middleschool', 'bricks3', 'Tile Layer 1');
 		//game.state.start('tutorial', false);
@@ -179,10 +186,10 @@ Game.prototype = {
 		//console.log(currentMap);
 		if(currentLevel == 1 && currentMap.key != 'e') {
 			deleteMap(currentMap);
-			currentMap = new Level('e', 'elementary_tileset', 'bricks3', 'Tile Layer 1');
+			currentMap = new Level('e', 'elementary_tileset', ['bricks3', 'cloudy'], ['Tile Layer 1','Tile Layer 2']);
 		} else if(currentLevel == 2 && currentMap.key != 'm') {
 			deleteMap(currentMap);
-			currentMap = new Level('m','middleschool', 'bricks3', 'Tile Layer 1');
+			currentMap = new Level('m','middleschool', ['bricks3', 'cloudy'], ['Tile Layer 1','Tile Layer 2']);
 		}
 		//console.log(player.hearts);
 		if(player.hearts <= 0 || player.isDead){
@@ -200,12 +207,22 @@ var GameOver = function(game) {
 GameOver.prototype = {
 	create:function(){
 		console.log("ending game.....");
+		//set the player's grade
+
+		game.stage.backgroundColor = "#000";
+		let finalScore = player.hearts  + "/" + player.maxHearts;
+		let g = player.hearts;
+		grade = (g < 60 ? "F" : (g < 70 ? "D" : (g < 80 ?  "C" : (g < 90 ? "B" : "A" ))));
+
 		var endText = game.add.text(350, 325,
-				'F-', 
+				("You earned a "  + finalScore + " -- " + grade), 
 				{ fontSize: '56px', fill: '#FFF' });
 	},
 	update:function(){
-		//endText.text = 
+		if(game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR)){
+			//go to next state
+			game.state.start('MainMenu');
+		}
 	}
 }
 

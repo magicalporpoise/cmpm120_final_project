@@ -149,8 +149,8 @@ Player.prototype.update = function(){
 
 	let k_attack = game.input.keyboard.justPressed(Phaser.Keyboard.K); 
 	let l_down = game.input.keyboard.isDown(Phaser.Keyboard.L);
-	let f_dash = game.input.keyboard.justPressed(Phaser.Keyboard.F);
-	let r_shoot = game.input.keyboard.justPressed(Phaser.Keyboard.R);
+	//let f_dash = game.input.keyboard.justPressed(Phaser.Keyboard.F);
+	let r_shoot = game.input.keyboard.justPressed(Phaser.Keyboard.J);
 
 	// for mouse is down
 	//game.input.activePointer.isDown;
@@ -271,7 +271,7 @@ Player.prototype.update = function(){
 		this.tint = 0;				//turn black when hidden
 		this.body.velocity.x = 0;	//stop when hidden
 
-		if (game.input.keyboard.justPressed(Phaser.Keyboard.SPACEBAR) && !game.physics.arcade.overlap(this, group_hidingspot)){
+		if ((game.input.keyboard.justPressed(Phaser.Keyboard.S)||game.input.keyboard.justPressed(Phaser.Keyboard.W)) && !game.physics.arcade.overlap(this, group_hidingspot)){
 			this.hidden = false;
 		}
 	}
@@ -319,32 +319,12 @@ Player.prototype.update = function(){
 			if (idletorun_playing.loopCount>=1 && (mv_left || mv_right)) {//Math.abs(this.body.velocity.x)>180) {
 				//console.log("finished");
 				this.excel = false;
-				//this.decel = false;
-				//idletorun_playing.destroy();
-				//idletorun_playing.killOnComplete = true;
-				//var curSpeed = Math.abs(Math.floor(this.body.velocity.x/6));
-
-				//console.log("curSpeed "+curSpeed);
 				this.animations.play('run', 75, true);
-
-				//if (Math.abs(this.body.velocity.x)<=100 && this.body.velocity.x<this.oldVelocity) {
-				//	console.log("slowed down, change anim");
-					//idletorun_playing = this.animations.play('runtoidle');
-				//}
-			
-
 			}
 
 			
 
 	} else {
-
-		//this.stepSFX.pause();
-		//console.log("idle");
-		//if (!this.isJumping)
-
-
-
 		this.animations.play('idle', 10, true);
 	}
 
@@ -365,18 +345,6 @@ Player.prototype.update = function(){
 //=========
 //FUNCTIONS
 //=========
-
-function toggleHiding(pressSpace, overlapping){
-	if(pressSpace && overlapping){
-		player.hidden = !player.hidden;
-		if(player.hidden) player.hearts--;
-	}
-
-}
-
-
-
-
 function stunTheEnemy(hb, npc){
 	player.punchSFX.play();
 	npc.isStunned = true;
@@ -394,5 +362,4 @@ function animationStopped(sprite, animation){
 function deathRestart(sprite){
 	sprite.x = 300;
 	sprite.y = 300;
-
 }

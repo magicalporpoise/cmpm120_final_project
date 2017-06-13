@@ -15,13 +15,6 @@ function Level(key, tilemap, tileimage, layer){
 	//activate physics
 	game.physics.startSystem(Phaser.Physics.ARCADE);
 	game.physics.setBoundsToWorld();
-	//Pause Screen
-
-	//Add Audio / Music
-	//this.music1 = game.add.audio('dank');
-	//this.music2 = game.add.audio('ambient');
-	//this.counter = 1;
-	//this.music1.loopFull();
 	
 	//BG color, gray
 	game.stage.backgroundColor = "#CCC";
@@ -35,19 +28,21 @@ function Level(key, tilemap, tileimage, layer){
 	//add a tileset image to create the map-object(name,key used above when loading image)
 	//name has to be the one specified in the json file
 	// under tileset in the name category
-	map.addTilesetImage(tileimage);
+	map.addTilesetImage(tileimage[0]);
+	map.addTilesetImage(tileimage[1]);
 
 	//initiates new layer, must be exact same name as specified in json
-	layer1 = map.createLayer(layer);
+	layer1 = map.createLayer(layer[0]);
+	layer2 = map.createLayer(layer[1]);
 	layer1.resizeWorld();
 	//entire grid will have collision set
-	map.setCollisionByExclusion([]); //i don't completely understand how this works
+	map.setCollisionByExclusion([]);
+	//map.setCollisionBetween(178,195, true);
+	//map.setCollisionBetween(1341,1344);
+	console.log(map);
 
 	//===============
 	//MOVE THE PLAYER
-	//
-	//??? find correct spot!!
-	//
 	//===============
 	player.x = 300;
 	player.y = 300;
@@ -67,20 +62,28 @@ function Level(key, tilemap, tileimage, layer){
 	//make floor death
 	map.createFromObjects('death' ,121,'killableSubstance', 0, true, true, group_danger, killableSubstance);
 
-	//map.createFromObjects('blober1',  91, 'blob1', 0, true, true, group_blob1, blob);
+	//map.createFromObjects('blober1', 154, 'blob1', 0, true, true, group_blob1, blob1);
 
-	//map.createFromObjects('blober2',  91, 'blob2', 0, true, true, group_blob2, blob);
+	//map.createFromObjects('blober2',  155, 'blob2', 0, true, true, group_blob2, blob2);
 
-	//map.createFromObjects('blober3',  91, 'blob3', 0, true, true, group_blob3, blob);
+	//map.createFromObjects('blober3',  156, 'blob3', 0, true, true, group_blob3, blob3);
 
-	//map.createFromObjects('blober4',  91, 'blob4', 0, true, true, group_blob4, blob);
+	//map.createFromObjects('blober4',  157, 'blob4', 0, true, true, group_blob4, blob4);
 
-	//map.createFromObjects('blober5',  91, 'blob5', 0, true, true, group_blob5, blob);
+	//map.createFromObjects('blober5',  158, 'blob5', 0, true, true, group_blob5, blob5);
 
 	//map.createFromObjects('blober6',  91, 'blob6', 0, true, true, group_blob6, blob);
 
-	//map.createFromObjects('blober7',  91, 'blob7', 0, true, true, group_blob7, blob);
+	//map.createFromObjects('blober7',  159, 'blob7', 0, true, true, group_blob7, blob7);
+	//console.log(map);
 
+
+	game.world.bringToTop(group_Emitter);
+	game.world.bringToTop(group_npc);
+	player.bringToTop();
+	//imagination.bringToTop();
+	//imagination.imagination.bringToTop();
+	//imagination.rainbowDeath.particleBringToTop = true;
 
 }
 
@@ -93,12 +96,18 @@ Level.prototype.constructor = Level;
 function deleteMap(map){
 
 	group_npc.removeAll(true);
-	group_flyingNPC.removeAll(true);
 	group_hidingspot.removeAll(true);
 	group_Diploma.removeAll(true);
 	group_ViewBox.removeAll(true);
 	group_danger.removeAll(true);
+	//group_blob1.removeAll(true);
+	//group_blob2.removeAll(true);
+	//group_blob3.removeAll(true);
+	//group_blob4.removeAll(true);
+	//group_blob5.removeAll(true);
+	//group_blob7.removeAll(true);
 
 	layer1.destroy();
+	layer2.destroy();
 	map.destroy();
 }

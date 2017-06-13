@@ -9,20 +9,9 @@ function NPC(game, x, y, img, frame) {
 	//inherit Phaser.Sprite class
 	// calling new Sprite
 	Phaser.Sprite.call(this, game, x, y, img, frame);
-
-	// hitbox
-	//this.body.setSize(x-100, y-50, 00, 0);
-
-	//this.x-20
-	//this.body.setSize(400, 800, 100, 50);
-
 	//phaser related variables
 	//		and physics
 	this.ball_aggro = false;
-
-
-	this.x = x;
-	this.y = y;
 	
 	this.scale.x = 0.7;
 	this.scale.y = 0.7;
@@ -145,6 +134,7 @@ NPC.prototype.update = function(){
 
 	//BEHAVIOR
 	if(!this.isStunned){
+		this.sight.visible = true;
 		this.stunTimer.pause();
 
 		if(this.sight.playerInSight && !player.hidden) { //aggro - red
@@ -171,7 +161,7 @@ NPC.prototype.update = function(){
 			this.stunSFXplayed = true;
 			this.stunSFX.play();
 		}
-		//this.sight.visible = false;
+		this.sight.visible = false;
 		this.stunTimer.resume();
 		//console.log(this.stunSFXplayed);
 	}
