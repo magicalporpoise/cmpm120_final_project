@@ -61,20 +61,6 @@ function Level(key, tilemap, tileimage, layer){
 	//var diploma = new Diploma(game, 500, 500, 'platform', 0);
 	//make floor death
 	map.createFromObjects('death' ,121,'killableSubstance', 0, true, true, group_danger, killableSubstance);
-
-	//map.createFromObjects('blober1', 154, 'blob1', 0, true, true, group_blob1, blob1);
-
-	//map.createFromObjects('blober2',  155, 'blob2', 0, true, true, group_blob2, blob2);
-
-	//map.createFromObjects('blober3',  156, 'blob3', 0, true, true, group_blob3, blob3);
-
-	//map.createFromObjects('blober4',  157, 'blob4', 0, true, true, group_blob4, blob4);
-
-	//map.createFromObjects('blober5',  158, 'blob5', 0, true, true, group_blob5, blob5);
-
-	//map.createFromObjects('blober6',  91, 'blob6', 0, true, true, group_blob6, blob);
-
-	//map.createFromObjects('blober7',  159, 'blob7', 0, true, true, group_blob7, blob7);
 	//console.log(map);
 
 
@@ -108,6 +94,6 @@ function deleteMap(map){
 	//group_blob7.removeAll(true);
 
 	layer1.destroy();
-	layer2.destroy();
+	//layer2.destroy();
 	map.destroy();
 }
