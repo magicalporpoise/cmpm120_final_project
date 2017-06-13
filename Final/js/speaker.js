@@ -4,14 +4,16 @@ function speaker(game, x, y, img, frame, text){
 	Phaser.Sprite.call(this, game, x, y, img, 0);
 	//console.log("made view box");
 	game.physics.arcade.enable(this);
+	game.add.existing(this);
 
 	this.announcement = new ScrollText(game, x, y, text, { fontSize: '22px', fill: '#FFF'});
 
 	this.active = false;
 
 	this.body.setSize(300, 300);
+	group_speaker.add(this);
+	group_speaker.add(this.announcement);
 
-	game.add.existing(this);
 }
 
 //=========

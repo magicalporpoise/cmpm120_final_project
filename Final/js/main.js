@@ -148,7 +148,7 @@ Game.prototype = {
 		group_Diploma = game.add.group();
 		group_danger = game.add.group();
 		group_Emitter = game.add.group();
-		//group_blob1 = game.add.group();
+		group_speaker = game.add.group();
 		//group_blob2 = game.add.group();
 		//group_blob3 = game.add.group();
 		//group_blob4 = game.add.group();
@@ -168,16 +168,11 @@ Game.prototype = {
 		//PLAYER OBJECT
 		//=============
 		//player = new Player(100, 100, 0.15, 'player2');
+		s = new speaker(game, 500, 500, 'platform', 0, "yeeeeeeeeeeeeeeeeeeee\neeeeeeeeeeeeeeeeeeeee\neeeeeeeeeeeeeeeeeeeee");
 
 		player = new Player(150, 100, 0.15, 'teddy');
 		imagination = new cloud(0, 0, 1, 'bigcloud');
 		currentMap = new Level('t', 'tiletest1', ['cloudy','bricks3'], ['Tile Layer 1','Tile Layer 2']);
-		//Level1 = new Level('ele', 'elementary_tileset', 'bricks3', 'Tile Layer 1');
-		//Level2 = new Level('mid', 'middleschool', 'bricks3', 'Tile Layer 1');
-		//game.state.start('tutorial', false);
-		//s = new speaker(game, 500, 500, 'platform', 0, "yeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
-		//game.state.add('tutorial', new Level('tiletest1', 'bricks3', 'Tile Layer 1'), true);
-		//game.state.start('tutorial');
 
 	},
 	update:function() {		// add game logic
@@ -190,12 +185,15 @@ Game.prototype = {
 		} else if(currentLevel == 2 && currentMap.key != 'm') {
 			deleteMap(currentMap);
 			currentMap = new Level('m','middleschool', ['bricks3', 'cloudy'], ['Tile Layer 1','Tile Layer 2']);
+		} else if(currentLevel == 3){
+			deleteMap(currentMap);
+			game.state.start('GameOver');
+
 		}
 		//console.log(player.hearts);
 		if(player.hearts <= 0 || player.isDead){
 			deleteMap(currentMap);
 			this.playerDeathSFX.play();
-			game.stage.backgroundColor = "#000";
 			game.state.start('GameOver');
 		}
 	}
@@ -208,7 +206,6 @@ GameOver.prototype = {
 	create:function(){
 		console.log("ending game.....");
 		//set the player's grade
-
 		game.stage.backgroundColor = "#000";
 		let finalScore = player.hearts  + "/" + player.maxHearts;
 		let g = player.hearts;
