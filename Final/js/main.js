@@ -112,7 +112,7 @@ MainMenu.prototype = {
 		introTeddy.scale.y = 5;
 		//give main menu instructions
 		controls = game.add.text(16, 750/4,
-						"                     Your Imagination is Precious:\n-----------------------------------------------------------------------------\nWASD to MOVE\nSit down (S) in seats to avoid angry books\nJ to throw a STUN BALL\nK to throw a STUN PUNCH\nL to become INVISIBLE\n\n press space to continue...", 
+						"                     Your Imagination is Precious:\n-----------------------------------------------------------------------------\nWASD to MOVE\nSit down (S) in seats to avoid angry books\nJ to throw a STUN BALL\nK to throw a STUN PUNCH\nL to become INVISIBLE\n\n press SPACE to continue...", 
 						{ font: 'Source Code Pro', fontSize: '32px', fill: '#FFF' });
 
 	},
@@ -222,7 +222,7 @@ GameOver.prototype = {
 		grade = (g < 60 ? "F" : (g < 70 ? "D" : (g < 80 ?  "C" : (g < 90 ? "B" : "A" ))));
 
 		endText = game.add.text(350, 325,
-				("You earned a "  + finalScore + " -- " + grade), 
+				("You earned a "  + finalScore + " -- " + grade + "\npress SPACE to try again..."), 
 				{ fontSize: '56px', fill: '#FFF' });
 	},
 	update:function(){
