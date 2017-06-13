@@ -12,12 +12,7 @@ function flyingNPC(game, x, y, img, frame) {
 
 	this.altitude = this.y;
 
-	//CHANGE FOR FLYING ENEMY
-	this.behave.pause();
-
-	this.newBehave = game.time.create(false);
-	this.newBehave.loop(5000, flyingnewBehave, this);
-	this.newBehave.start();
+	//CHANGE FOR FLYING NPC
 	//this.sight.scale.x = 1;
 	this.sight.rotation = -Math.PI/2;
 	this.sight.body.setSize(this.sight.origHeight, this.sight.origWidth, 0, 0);
@@ -64,22 +59,4 @@ flyingNPC.prototype.update = function(){
 	this.sight.scale.x = 1;
 	//make it so that it's constantly flapping
 	this.animations.play('walk', 105, true);
-}
-
-//=========
-//FUNCTIONS
-//=========
-// determineBehavior(npc)
-//		take the npc and set its movement variables
-//		based off stimuli
-flyingnewBehave = function determineBehavior(){
-	//console.log("called");
-		if(this.idle) {
-			this.idle = false;
-			this.movingHori = 0;
-		} else {
-			//turn around
-			this.movingHori = -1 * this.facing;
-			this.idle = true;
-		}
 }

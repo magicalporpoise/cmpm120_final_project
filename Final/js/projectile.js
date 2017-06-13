@@ -7,8 +7,6 @@ function projectile(x, y, speed, direction, scale_length, img){
 	//phaser related variables
 	//		and physics
 
-	
-
 	this.x = x;
 	this.y = y;
 	this.scale.x = scale_length;
@@ -17,8 +15,8 @@ function projectile(x, y, speed, direction, scale_length, img){
 	this.speed = speed;
 	this.dir = direction;
 
-	this.anchor.x+=1;
-	this.anchor.y+=0.5;
+	this.anchor.x=0.5;
+	this.anchor.y=0.5;
 	//this.scale.y = scale;
 
 	game.physics.arcade.enable(this);
@@ -48,18 +46,12 @@ projectile.prototype.constructor = projectile;
 //	projectile behavior
 //==================
 projectile.prototype.update = function(){
-	let viewCol = game.physics.arcade.overlap(this, group_ViewBox, viewCollide);
-	//if (viewCol) console.log("projectile saw viewbox");
-
-	// move to pointer
-	// game.physics.arcade.moveToPointer(this, 300);
-	
 	// move velocity
 	this.body.velocity.x = this.speed * this.dir;
 
 	let hitGround = game.physics.arcade.collide(this, layer1);
 	if (hitGround) {
-		console.log("projectile hit ground");
+		//console.log("projectile hit ground");
 		this.destroy();
 	}
 	
@@ -80,17 +72,10 @@ projectile.prototype.update = function(){
 	//game.debug.body(this);
 }
 
-function viewCollide(hb, view){
-	console.log("projectile saw viewbox");
-	view.ballInSight = true;
-
-}
-
 function vanish(hb, npc){
 	//npc.destroy();
 	npc.aggro = false;
 	npc.isStunned = true;
 	hb.doDestroy=true;
 	//npc.sight.destroy();
-
 }

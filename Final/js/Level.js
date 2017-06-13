@@ -66,7 +66,7 @@ function Level(key, tilemap, tileimage, layer){
 	map.createFromObjects('death' ,121,'killableSubstance', 0, true, true, group_danger, killableSubstance);
 
 	//insert SPEAKERS
-	//map.createFromObjects('hide', 119, 'platform', 0, true, true, group_speaker, speaker);
+	//map.createFromObjects('words', XXX, 'chalkboard', 0, true, true, group_speaker, speaker);
 	//insertAllText(currentLevel, group_speaker);
 
 	game.world.bringToTop(group_speaker);
@@ -95,8 +95,8 @@ function deleteMap(map){
 	//group_blob5.removeAll(true);
 	//group_blob7.removeAll(true);
 
-	console.log(layer1);
-	console.log(layer2);
+	//console.log(layer1);
+	//console.log(layer2);
 
 	layer1.destroy();
 

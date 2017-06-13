@@ -11,8 +11,6 @@ function NPC(game, x, y, img, frame) {
 	Phaser.Sprite.call(this, game, x, y, img, frame);
 	//phaser related variables
 	//		and physics
-	this.ball_aggro = false;
-	
 	this.scale.x = 0.7;
 	this.scale.y = 0.7;
 	
@@ -59,17 +57,17 @@ function NPC(game, x, y, img, frame) {
 
 	//behavior timers
 	//	patrolling...
-	this.behave = game.time.create(false);
-	this.behave.loop(Math.random()*2000+2000, normalBehave, this);
-	this.behave.start();
+	this.behave = 0;
+	this.behaveCont = true;
 	//stunned for how long...
-	this.stunTimer = game.time.create(false);
-	this.stunTimer.loop(3000, unStun, this);
-	this.stunTimer.start();
+	this.stunTimer = 0;
+	this.stunTimerCont = false;
 	//reset attack
-	this.atkTimer = game.time.create(false);
-	this.atkTimer.loop(3000, resetAttack, this);
-	this.atkTimer.start();
+	this.atkTimer = 0;
+	this.atkTimerCont = true;
+	//duration
+	this.longDura = Math.round(Math.random()*(60)) + 60*3;
+	this.shortDura = 60*3;
 	
 
 	this.animations.add('walk');
@@ -82,9 +80,7 @@ function NPC(game, x, y, img, frame) {
 
 	// for toggle of detection radius
 	this.boom;
-	this.boom_bool =true;
-
-	this.isDefStunned = false;
+	this.boom_bool = true;
 	// for detection radius itself
 	var boom;
 
@@ -101,9 +97,23 @@ NPC.prototype.constructor = NPC;
 //	npc behavior
 //================
 NPC.prototype.update = function(){
-
-	if (Math.abs(this.body.velocity.y)>850) this.body.velocity.y=850;
-
+	//timers
+	if(this.behaveCont)this.behave ++;
+	if(this.stunTimerCont)this.stunTimer++;
+	if(this.atkTimerCont)this.atkTimer++;
+	//console.log(this.behave);
+	if(this.behave % this.longDura == 0){
+		this.behave =1;
+		determineBehavior(this);
+	}
+	if(this.stunTimer % this.shortDura == 0){
+		this.stunTimer = 1;
+		unStun(this);
+	}
+	if(this.atkTimer % this.shortDura == 0){
+		this.atkTimer = 1;
+		resetAttack(this);
+	}
 
 	//game.debug.body(this);
 	let hitGround = game.physics.arcade.collide(this, layer1);
@@ -122,8 +132,8 @@ NPC.prototype.update = function(){
 			this.facing *= -1;
 			this.scale.x *= -1;
 			this.sight.scale.x *= -1;
-			this.animations.play('walk', 105, true);
 		}
+		this.animations.play('walk', 105, true);
 	} else {
 		this.body.velocity.x = 0;
 		this.animations.play('idle', 0, false);
@@ -135,7 +145,8 @@ NPC.prototype.update = function(){
 	//BEHAVIOR
 	if(!this.isStunned){
 		this.sight.visible = true;
-		this.stunTimer.pause();
+		this.stunTimerCont = false;
+		
 
 		if(this.sight.playerInSight && !player.hidden) { //aggro - red
 			this.aggro = true;
@@ -147,14 +158,12 @@ NPC.prototype.update = function(){
 				game.add.existing(this.boom);
 				this.growlSFX.play();
 			}
-			
 
-
-			this.behave.pause();
+			this.behaveCont = false;
 		} else if(player.hidden){ // wander - blue
 			this.boom_bool = true;
 			this.aggro = false;
-			this.behave.resume();
+			this.behaveCont = true;
 		}
 	} else {
 		if(!this.stunSFXplayed){
@@ -162,46 +171,40 @@ NPC.prototype.update = function(){
 			this.stunSFX.play();
 		}
 		this.sight.visible = false;
-		this.stunTimer.resume();
+		this.stunTimerCont = true;
 		//console.log(this.stunSFXplayed);
 	}
 
 	//AGGRO'd
 	if(this.aggro){
-		if(this.canAttack) this.tint = 0xCC0000;
-		else this.tint = 0x330000;
+		if(this.canAttack) this.tint = 0xFF3333;
+		else this.tint = 0xAA4444;
 		this.idle = false;
 		this.isStunned = false;
 		//messing around with max speed
 		this.maxSpeed = Math.abs(player.x - this.x) + 150;
 		//this.maxSpeed = 300;
 		moveTowardsPlayer(this);
-		rotateSights(this, this.sight)
-		// this.y>=player.position.y+20 <- for player y check
+		rotateSights(this, this.sight);
 		// allows npc to jump
 		if (hitGround) jump(this); 
-		this.atkTimer.resume();
-
-	/*
-	} else if (this.ball_aggro) {
-		//console.log("npc.ball_aggro = true");
-		this.idle = false;
-		this.isStunned = false;
-		this.maxSpeed = 300;
-		moveTowardsBall(this);
-	*/
+		this.atkTimerCont = true;
 		this.sight.body.setSize(2*this.sight.origWidth-50, 2*this.sight.origWidth-50, 0, -this.sight.origWidth);
 	
 	} else {
-		if(this.isStunned)this.tint = 0x00FF00;
+		if(this.isStunned)this.tint = 0x66FF66;
 		else this.tint = 0xFFFFFF;
 		if(this.sight.rotation != 0) this.sight.scale.x = -this.facing;
 		this.sight.rotation = 0;
-		this.atkTimer.pause();
+		this.atkTimerCont = false;
+	
 		this.maxSpeed = 100;
 		this.sight.body.setSize(this.sight.origWidth, this.sight.origHeight-40, 0, 0);
 	
 	}
+
+	//hard cap on speed
+	if (Math.abs(this.body.velocity.y)>850) this.body.velocity.y=850;
 }
 
 //=========
@@ -210,26 +213,25 @@ NPC.prototype.update = function(){
 // determineBehavior(npc)
 //		take the npc and set its movement variables
 //		based off stimuli
-normalBehave = function determineBehavior(){
+function determineBehavior(me){
 	//console.log("called");
-		if(this.idle) {
-			this.idle = false;
-			this.movingHori = 0;
+		if(me.idle) {
+			me.idle = false;
+			me.movingHori = 0;
 		} else {
 			//turn around
-			this.movingHori = -1 * this.facing;
-			this.idle = true;
+			me.movingHori = -1 * me.facing;
+			me.idle = true;
 		}
 	//console.log("normal npc = " + this.movingHori);
 }
 
 //undo the stun effect
-function unStun(){
-	this.stunSFXplayed = false;
-	this.isStunned = false;
-	this.idle = true;
-	//this.sight.visible = true;
-	this.stunTimer.pause();
+function unStun(me){
+	me.stunSFXplayed = false;
+	me.isStunned = false;
+	me.idle = true;
+	me.stunTimerCont = false;
 }
 
 //follow player
@@ -241,23 +243,9 @@ function moveTowardsPlayer(self){
 		move = 0;
 	} else move = Math.sign(move);
 
-	self.movingHori = move
-	//console.log(player.x - self.x);
-	//console.log("player.y " + player.position.y);
-	//console.log("npc.y " + self.y);
+	self.movingHori = move;
 }
 
-/*
-function moveTowardsBall(self){
-	//console.log("npc in moveTowardsBall");
-	//console.log("projectile.x "+projectile.x);
-	let move = projectile.x-self.x;
-	if (Math.abs(move)<25) move = 0;
-	else move = Math.sign(move);
-	self.movingHori = move;
-}*/
-
-// npc jumps if player if higher
 function jump(self){
 	//console.log("in jump");
 	self.body.velocity.y = self.jump;
@@ -278,20 +266,11 @@ function attackPlayer(self, play){
 		self.canAttack = false;
 		//shake
 		game.camera.shake(0.02, 200);
-
-		//knockback
-		//play.body.velocity.y = -250;
-		//play.body.velocity.x = Math.sign(play.x - self.x) * 1000;
 	}
-	//prevent infinite hits
 }
 
-function resetAttack(){
-	this.canAttack = true;
-}
-
-function resetAttackSFX(){
-	this.canPlay = true;
+function resetAttack(me){
+	me.canAttack = true;
 }
 
 function rotateSights(npc, sights){

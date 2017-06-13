@@ -129,7 +129,6 @@ Player.prototype.constructor = Player;
 //==========================================
 Player.prototype.update = function(){
 	this.alpha = 1;
-	this.isInvis = false;
 	// for moving clouds
 
 	/*this.cloud.x = this.x-50;
@@ -148,7 +147,7 @@ Player.prototype.update = function(){
 	let mv_down = game.input.keyboard.justPressed(Phaser.Keyboard.S);
 
 	let k_attack = game.input.keyboard.justPressed(Phaser.Keyboard.K); 
-	let l_down = game.input.keyboard.isDown(Phaser.Keyboard.L);
+	let l_down = game.input.keyboard.justPressed(Phaser.Keyboard.L);
 	//let f_dash = game.input.keyboard.justPressed(Phaser.Keyboard.F);
 	let r_shoot = game.input.keyboard.justPressed(Phaser.Keyboard.J);
 
@@ -207,7 +206,7 @@ Player.prototype.update = function(){
 
 		//Can only attack while not hidden
 		//attacking
-		if(k_attack){
+		if(k_attack && !this.isInvis){
 			var hitBox;	//make a hitbox to check against an enemy
 			if(this.facing > 0) hitBox = game.add.sprite(this.x, this.y, 'platform');
 			else hitBox = game.add.sprite(this.x-100, this.y, 'platform');
@@ -231,26 +230,25 @@ Player.prototype.update = function(){
 			this.isPunching = true;
 			game.physics.arcade.overlap(hitBox, group_npc, stunTheEnemy, null, NPC);
 			hitBox.destroy();
-
-
-			//--add animation--//
 		}
 		if (l_down){
-			this.isInvis = true;
-			this.alpha = 0.2;
-
-			this.counter++;
-			if (this.counter%40==0) this.hearts--;
-
-
-			//player.x+=this.facing*300;//Math.sign(this.body.velocity.x)*300;
-			//player.hearts -=2;
-			//this.body.velocity.x=this.facing*(this.maxSpeed+500);
+			toggleInvis(this);
 		}
-		if (r_shoot){
+		if(this.isInvis){
+			this.alpha = 0.2;
+			this.counter++;
+
+			if (this.counter%30==0) {
+				this.hearts--;
+				this.counter = 0;
+			}
+
+		}
+
+		if (r_shoot && !this.isInvis){
 			this.isShooting = true;
 
-			this.shoot = new projectile(this.x, this.y, 1000, this.facing, 0.3, 'rainbowShot');
+			this.shoot = new projectile(this.x + this.facing*25, this.y, 1000, this.facing, 0.3, 'rainbowShot');
 			game.add.existing(this.shoot);
 			//console.log('r pressed');
 			//SFX
@@ -362,4 +360,8 @@ function animationStopped(sprite, animation){
 function deathRestart(sprite){
 	sprite.x = 300;
 	sprite.y = 300;
+}
+
+function toggleInvis(me){
+	me.isInvis = !me.isInvis;
 }

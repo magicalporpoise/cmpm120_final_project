@@ -28,7 +28,7 @@ Preloader.prototype = {
 		game.load.audio('growl', 'growl.wav');
 		game.load.audio('step', 'footstep.mp3');
 		game.load.audio('NPCHit', 'player_smack.wav')
-		game.load.audio('playerDeathSFX', 'player_death.wav')
+		game.load.audio('playerDeathSFX', 'player_death.wav');
 		game.load.path = 'assets/audio/sfx/player_attacks/';
 		game.load.audio('player_attack1', 'player_attack1.wav');
 		game.load.audio('player_attack2', 'player_attack2.wav');
@@ -38,14 +38,12 @@ Preloader.prototype = {
 
 		//LOAD ART ASSETS
 		game.load.path = "assets/img/";
-		game.load.spritesheet('player', 'stb-Sheet.png', 32, 50);
-		// test
-		game.load.spritesheet('player2', 'teddy_colored.png', 630, 900);		
+		//game.load.spritesheet('player', 'stb-Sheet.png', 32, 50);	
 
-		game.load.image('platform', 'platform.png');
-		game.load.image('flame', 'flameParticle.png');
+		game.load.image('platform', 'black_tile.png');
 		game.load.image('blackTile', 'black_tile.png');
 		game.load.image('diploma', 'diploma.png');
+		game.load.image('happyTeddy', 'happyTeddyBear1.png');
 
 		//loads in json tilemap created with tiled(key,filename,
 		//not exactly sure why null works here,the tilemap tool used)
@@ -54,32 +52,27 @@ Preloader.prototype = {
 		game.load.tilemap('elementary_tileset', 'elementary_tileset.json', null, Phaser.Tilemap.TILED_JSON);
 		game.load.tilemap('middleschool','middleschool.json',null,Phaser.Tilemap.TILED_JSON);
 
+		game.load.tilemap('noImaginationLand','noImaginationLand.json',null,Phaser.Tilemap.TILED_JSON);
+
 		//loads the image used in tiled to create the map(key, filename,32x32)
 		//the key can actually be called anything as well
 		//game.load.spritesheet('tilesheet','dirt-tiles.png',32,32);
 		game.load.spritesheet('bricks3');
 		game.load.spritesheet('cloudy');
+		game.load.spritesheet('newTilemap');
 
 
 		// vectorized images
 		game.load.image('bigcloud','cloud3_white.png');
-		game.load.image('smallcloud','cloud5_white.png');
-
-		game.load.image('blob1','blob1.png');
-		game.load.image('blob2','blob2.png');
-		game.load.image('blob3','blob3.png');
-		game.load.image('blob4','blob4.png');
-		game.load.image('blob5','blob5.png');
-		//game.load.image('blob6','blob6.png');
-		game.load.image('blob7','blob7.png');
 
 		// rasterized images and atlas's 
+		game.load.image('chalkboard','chalkboard.png');		
 		game.load.image('chair','chair.png');
 		game.load.image('desk','desk.png');
 		game.load.image('killableSubstance','killableSubstance.png');
 		game.load.image('sightLine','sightLine_simple.png');
 		game.load.image('boom','newBoom2.png');
-		game.load.image('redSquare','redSquareFill3.png');
+		//game.load.image('redSquare','redSquareFill3.png');
 
 		game.load.atlasJSONArray('teddy', 'teddy_everything.png', 'teddy_everything.json');
 		game.load.atlasJSONArray('redBook', 'redBook.png', 'redBook.json');
@@ -100,14 +93,30 @@ Preloader.prototype = {
 //***
 var MainMenu = function(game) {
 	//Needed text
+	var title;
+	var controls;
+	var introTeddy;
 };
 MainMenu.prototype = {
+	preload:function(){
+		console.log("MainMenu: preload");
+	},
 	create: function() {
 		console.log("MainMenu: create");
+		//title name
+		title = game.add.text(1400/2, 750/8,
+						'DETENTION', 
+						{ font: 'Source Code Pro', fontSize: '64px', fill: '#FFF', fontWeight: 'bold', align: 'center' });
+		title.anchor.set(0.5);
+		console.log(title);
+		//teddy image
+		introTeddy = game.add.image(1000, 300, 'happyTeddy');
+		introTeddy.scale.x = 5;
+		introTeddy.scale.y = 5;
 		//give main menu instructions
-		var introText = game.add.text(16, game.world.height/2,
-						'WASD to MOVE\nSPACE to HIDE\nK to STUN\n\n press space to continue...', 
-						{ fontSize: '32px', fill: '#FFF' });
+		controls = game.add.text(16, 750/4,
+						"                     Your Imagination is Precious:\n-----------------------------------------------------------------------------\nWASD to MOVE\nSit down (S) in seats to avoid angry books\nJ to throw a STUN BALL\nK to throw a STUN PUNCH\nL to become INVISIBLE\n\n press SPACE to continue...", 
+						{ font: 'Source Code Pro', fontSize: '32px', fill: '#FFF' });
 
 	},
 	update: function(){
@@ -142,6 +151,13 @@ Game.prototype = {
 		//Major Groups for Collision checks
 		console.log('creating game');
 
+		//pause screen
+		pauseScreen = game.add.image(0, 0, 'blackTile');
+		pauseScreen.width = game.world.width + 100;
+		pauseScreen.height = game.world.height + 100;
+		pauseScreen.alpha = 0;
+
+
 		group_ViewBox = game.add.group();
 		group_npc = game.add.group();
 		group_hidingspot = game.add.group();
@@ -150,12 +166,6 @@ Game.prototype = {
 		group_danger = game.add.group();
 		group_Emitter = game.add.group();
 		group_speaker = game.add.group();
-		//group_blob2 = game.add.group();
-		//group_blob3 = game.add.group();
-		//group_blob4 = game.add.group();
-		//group_blob5 = game.add.group();
-		//group_blob7 = game.add.group();
-
 
 		//music
 		this.music1 = game.add.audio('dank');
@@ -167,15 +177,17 @@ Game.prototype = {
 
 		//=============
 		//PLAYER OBJECT
+		//CURRENT MAP
 		//=============
 		player = new Player(150, 100, 0.15, 'teddy');
 		imagination = new cloud(0, 0, 1, 'bigcloud');
-
 		currentMap = new Level('t', 'tiletest1', ['cloudy','bricks3'], ['Tile Layer 1','Tile Layer 2']);
 
 	},
 	update:function() {		// add game logic
 		game.camera.follow(player, Phaser.Camera.FOLLOW_LOCKON, 0.1, 0.1);
+		pauseScreen.x = game.camera.x-50;
+		pauseScreen.y = game.camera.y-50;
 
 		//console.log(currentMap);
 		if(currentLevel == 1 && currentMap.key != 'e') {
@@ -183,7 +195,7 @@ Game.prototype = {
 			currentMap = new Level('e', 'elementary_tileset', ['bricks3', 'cloudy'], ['Tile Layer 1','Tile Layer 2']);
 		} else if(currentLevel == 2 && currentMap.key != 'm') {
 			deleteMap(currentMap);
-			currentMap = new Level('m','middleschool', ['bricks3', 'cloudy'], ['Tile Layer 1','Tile Layer 2']);
+			currentMap = new Level('m','noImaginationLand', ['newTilemap', 'cloudy'], ['Tile Layer 1','Tile Layer 2']);
 		} else if(currentLevel == 3){
 			deleteMap(currentMap);
 			game.state.start('GameOver');
@@ -200,18 +212,20 @@ Game.prototype = {
 
 
 var GameOver = function(game) {
+	var endText;
 }
 GameOver.prototype = {
 	create:function(){
 		console.log("ending game.....");
+		currentLevel = 0;
 		//set the player's grade
 		game.stage.backgroundColor = "#000";
 		let finalScore = player.hearts  + "/" + player.maxHearts;
 		let g = player.hearts;
 		grade = (g < 60 ? "F" : (g < 70 ? "D" : (g < 80 ?  "C" : (g < 90 ? "B" : "A" ))));
 
-		var endText = game.add.text(350, 325,
-				("You earned a "  + finalScore + " -- " + grade), 
+		endText = game.add.text(350, 325,
+				("You earned a "  + finalScore + " -- " + grade + "\npress SPACE to try again..."), 
 				{ fontSize: '56px', fill: '#FFF' });
 	},
 	update:function(){
@@ -252,10 +266,12 @@ window.onkeydown = function(event){
 
 //pause the game
 function pauseGame(){
-	game.paused ? game.paused = false : game.paused = true;
+	game.paused = !game.paused;
+	pauseScreen.bringToTop();
 	if(game.paused){
-		//add gray alpha layer to display pause
+		pauseScreen.alpha = 0.75;
 	} else {
+		pauseScreen.alpha = 0;
 	}
 }
 
