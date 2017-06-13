@@ -19,7 +19,7 @@ TEACHER[0]= ["Good morning, stu[D]ent! It's the start of a beautiful d[A]y.",
 			 "[J]ust pay attention and you'll do great!"
 			 ]
 TEACHER[1]= ["Come, young one. Put one foot in front of the other!",
-			 "Shoot for the moon! Even if you miss, you'll land among the stars."
+			 "Shoot for the moon! Even if you miss, you'll land among the stars.",
 			 "Your enthusiasm is admirable... but *please* don't run in my halls.",
 			 "Oh, I'm so *very* proud of you..."]
 TEACHER[2]= ["Welcome back. Please get to work.",

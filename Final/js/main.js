@@ -139,6 +139,10 @@ var Game = function(game) {
 	var tilemap;
 	var grayScreen;
 	var blob;
+	var music1;
+	var music2;
+	var playerDeathSFX;
+	var musicCounter;
 }
 
 Game.prototype = {
@@ -168,12 +172,12 @@ Game.prototype = {
 		group_speaker = game.add.group();
 
 		//music
-		this.music1 = game.add.audio('dank');
-		this.music2 = game.add.audio('ambient');
-		this.music2.loopFull();
+		music1 = game.add.audio('dank');
+		music2 = game.add.audio('ambient');
+		musicCounter = 0;
 
-		this.playerDeathSFX = game.add.audio('playerDeathSFX')
-		this.playerDeathSFX.volume = 3;
+		playerDeathSFX = game.add.audio('playerDeathSFX')
+		playerDeathSFX.volume = 3;
 
 		//=============
 		//PLAYER OBJECT
@@ -204,8 +208,25 @@ Game.prototype = {
 		//console.log(player.hearts);
 		if(player.hearts <= 0 || player.isDead){
 			deleteMap(currentMap);
-			this.playerDeathSFX.play();
+			if(music1.isPlaying){
+				music1.stop();
+			}
+			if(music2.isPlaying){
+				music2.stop();
+			}
+			playerDeathSFX.play();
+
 			game.state.start('GameOver');
+		}
+
+		if(!music1.isPlaying && !music2.isPlaying){
+			if(musicCounter%2 == 0){
+				music2.play();
+			}else{
+				music1.play();
+			}
+			musicCounter++;
+
 		}
 	}
 }
