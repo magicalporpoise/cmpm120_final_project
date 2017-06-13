@@ -93,6 +93,7 @@ var MainMenu = function(game) {
 	var title;
 	var controls;
 	var introTeddy;
+	var extraText;
 };
 MainMenu.prototype = {
 	preload:function(){
@@ -105,7 +106,6 @@ MainMenu.prototype = {
 						'DETENTION', 
 						{ font: 'Source Code Pro', fontSize: '64px', fill: '#FFF', fontWeight: 'bold', align: 'center' });
 		title.anchor.set(0.5);
-		console.log(title);
 		//teddy image
 		introTeddy = game.add.image(1000, 300, 'happyTeddy');
 		introTeddy.scale.x = 5;
@@ -115,11 +115,21 @@ MainMenu.prototype = {
 						"                     Your Imagination is Precious:\n-----------------------------------------------------------------------------\nWASD to MOVE\nSit down (S) in seats to avoid angry books\nJ to throw a STUN BALL\nK to throw a STUN PUNCH\nL to become INVISIBLE\n\n press SPACE to continue...", 
 						{ font: 'Source Code Pro', fontSize: '32px', fill: '#FFF' });
 
+		extraText = game.add.text(100, 650,
+						'L for more Lore :: C for Credits', 
+						{ font: 'Source Code Pro', fontSize: '16px', fill: '#FFF', fontWeight: 'bold', align: 'center' });
+
 	},
 	update: function(){
 		if(game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR)){
 			//go to next state
 			game.state.start('Game');
+		} else if(game.input.keyboard.isDown(Phaser.Keyboard.L)){
+			//go to next state
+			game.state.start('Lore');
+		} else if(game.input.keyboard.isDown(Phaser.Keyboard.C)){
+			//go to next state
+			game.state.start('Credits');
 		}
 	}
 }
@@ -233,6 +243,54 @@ GameOver.prototype = {
 	}
 }
 
+//===================
+//BACKGROUND AND LORE
+//	state
+//===================
+var Lore = function(game) {
+	var loreText;
+}
+Lore.prototype = {
+	create:function(){
+		console.log("Entering Game Lore");
+		loreText = game.add.text(700, 375,
+				("Imagination! who can sing thy force?\nOr who describe the swiftness of thy course?\nSoaring through air to find the bright abode,\nTh' empyreal palace of the thund'ring God,\nWe on thy pinions can surpass the wind,\nAnd leave the rolling universe behind----\nTeacher: Ernest, put that book away! You have to pay attention in class.\n----From star to star the mental optics rove,\nMeasure the skies, and range the realms above----\nTeacher: I said put that away!\nErnest: But I like using my imagination.\nTeacher: Did I say you could do that?\nErnest: I just want to think for myself!\nTeacher: That’s it, you have detention!"), 
+				{ fontSize: '32px', fill: '#FFF', align: 'center' });
+		loreText.anchor.set(0.5);
+	},
+	update:function(){
+		if(game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR)){
+			//go to next state
+			game.state.start('MainMenu');
+		}
+	}
+}
+
+
+//========================
+//CREDITS AND CONTRIBUTORS
+//	state
+//========================
+var Credits = function(game) {
+	var creditText;
+}
+Credits.prototype = {
+	create:function(){
+		console.log("Entering Credits");
+		creditText = game.add.text(700, 375,
+				("This is ALL the people who contributed."), 
+				{ fontSize: '32px', fill: '#FFF', align: 'center' });
+		creditText.anchor.set(0.5);
+	},
+	update:function(){
+		if(game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR)){
+			//go to next state
+			game.state.start('MainMenu');
+		}
+	}
+}
+
+
 //======================
 //START GAME: add states
 //======================
@@ -250,6 +308,8 @@ window.onload = function() {
 	game.state.add('MainMenu', MainMenu);
 	game.state.add('Game', Game);
 	game.state.add('GameOver', GameOver);
+	game.state.add('Lore', Lore);
+	game.state.add('Credits', Credits);
 	game.state.start('Preloader');
 }
 

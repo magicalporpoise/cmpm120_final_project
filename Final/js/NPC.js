@@ -59,17 +59,17 @@ function NPC(game, x, y, img, frame) {
 	//	patrolling...
 	this.behave = 0;
 	this.behaveCont = true;
-	//stunned for how long...
+	//	stunned...
 	this.stunTimer = 0;
 	this.stunTimerCont = false;
-	//reset attack
+	//	reset attack
 	this.atkTimer = 0;
 	this.atkTimerCont = true;
-	//duration
+	//	duration
 	this.longDura = Math.round(Math.random()*(60)) + 60*3;
 	this.shortDura = 60*3;
 	
-
+	//add animations
 	this.animations.add('walk');
 	this.animations.add('idle', [0], 1, true);
 
@@ -101,15 +101,10 @@ NPC.prototype.constructor = NPC;
 //	npc behavior
 //================
 NPC.prototype.update = function(){
-	//quote
-	this.teacherism.x = this.x;
-	this.teacherism.y = this.y-100;
-
-	//timers
+	//TIMERS
 	if(this.behaveCont)this.behave ++;
 	if(this.stunTimerCont)this.stunTimer++;
 	if(this.atkTimerCont)this.atkTimer++;
-	//console.log(this.behave);
 	if(this.behave % this.longDura == 0){
 		this.behave = 1;
 		determineBehavior(this);
@@ -123,11 +118,8 @@ NPC.prototype.update = function(){
 		resetAttack(this);
 	}
 
-	//game.debug.body(this);
-	let hitGround = game.physics.arcade.collide(this, layer1);
-
 	//COLLISION + OVERLAPS
-	//game.physics.arcade.collide(this, layer1);
+	let hitGround = game.physics.arcade.collide(this, layer1);
 	let hit = 0;
 	if(!player.hidden && this.aggro) {
 		hit = game.physics.arcade.overlap(this, player, attackPlayer);
@@ -137,6 +129,7 @@ NPC.prototype.update = function(){
 	if(this.movingHori != 0 && !this.isStunned) {
 		this.body.velocity.x = this.maxSpeed * this.movingHori;
 		if(Math.sign(this.body.velocity.x) != this.facing){
+		//flip images
 			this.facing *= -1;
 			this.scale.x *= -1;
 			this.sight.scale.x *= -1;
@@ -152,11 +145,12 @@ NPC.prototype.update = function(){
 
 	//BEHAVIOR
 	if(!this.isStunned){
+	//when the player has not stunned this...
 		this.sight.visible = true;
 		this.stunTimerCont = false;
-		
-
-		if(this.sight.playerInSight && !player.hidden) { //aggro - red
+		if(this.sight.playerInSight && !player.hidden) { 
+		//turn aggro
+			//make quote appear
 			this.aggro = true;
 			if(this.teacherism.fullText == ""){
 				this.teacherism.fullText = EQ[Math.floor(Math.random()*(EQ.length))];
@@ -167,56 +161,58 @@ NPC.prototype.update = function(){
 			if (this.boom_bool) {
 				this.boom = new detectionBoom(this.x, this.y,'boom');
 				this.boom_bool = false;
-				game.add.existing(this.boom);
 				this.growlSFX.play();
 			}
 
 			this.behaveCont = false;
-		} else if(player.hidden){ // wander - blue
+		} else if(player.hidden){
+		//reset booleans when hidden
 			this.boom_bool = true;
 			this.aggro = false;
 			this.behaveCont = true;
 		}
 	} else {
+	//stunned behavior and resets
 		if(!this.stunSFXplayed){
 			this.stunSFXplayed = true;
 			this.stunSFX.play();
 		}
 		this.sight.visible = false;
 		this.stunTimerCont = true;
-		//console.log(this.stunSFXplayed);
 	}
 
-	//AGGRO'd
+	//AGGRO TO PLAYER
 	if(this.aggro){
 		if(this.canAttack) this.tint = 0xFF3333;
 		else this.tint = 0xAA4444;
 		this.idle = false;
 		this.isStunned = false;
 		//messing around with max speed
-		this.maxSpeed = Math.abs(player.x - this.x) + 150;
-		//this.maxSpeed = 300;
+		this.maxSpeed = Math.abs(player.x - this.x) + 100;
 		moveTowardsPlayer(this);
 		rotateSights(this, this.sight);
 		// allows npc to jump
 		if (hitGround) jump(this); 
 		this.atkTimerCont = true;
 		this.sight.body.setSize(2*this.sight.origWidth-50, 2*this.sight.origWidth-50, 0, -this.sight.origWidth);
-	
 	} else {
+		//non-aggro behavior
 		removeText(this.teacherism);
 		if(this.isStunned)this.tint = 0x66FF66;
 		else this.tint = 0xFFFFFF;
 		if(this.sight.rotation != 0) this.sight.scale.x = -this.facing;
 		this.sight.rotation = 0;
 		this.atkTimerCont = false;
-	
 		this.maxSpeed = 100;
 		this.sight.body.setSize(this.sight.origWidth, this.sight.origHeight-40, 0, 0);
 	
 	}
 
-	//hard cap on speed
+	//QUOTE
+	this.teacherism.x = this.x;
+	this.teacherism.y = this.y-100;
+
+	//HARD SPEED CAP
 	if (Math.abs(this.body.velocity.y)>850) this.body.velocity.y=850;
 }
 

@@ -9,7 +9,8 @@ for(var i = 0 ; i < 5 ; i++){
 }
 
 //an 2-D array of text
-TEACHER[0]= ["aergrgeg", "awegwegweg", "aweggwegwg"]
+TEACHER[0]= ["aergrgeg", "awegwegweg", "aweggwegwg"];
+
 
 //insert the text into the needed children
 function insertAllText(lvl, grp){
