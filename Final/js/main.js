@@ -45,6 +45,7 @@ Preloader.prototype = {
 		game.load.image('diploma', 'diploma.png');
 		game.load.image('happyTeddy', 'happyTeddyBear1.png');
 		game.load.image('sadkid', 'sadkid.png');
+		game.load.image('-1', 'minusOne.png');
 
 
 		//loads in json tilemap created with tiled(key,filename,

@@ -20,23 +20,22 @@ function cloud(x, y, scale_length, img){
 	//tracker to see if you took damage
 	this.oldHearts = player.hearts;
 	//particle effect whenever you lose imagination
-	//this.rainbowDeath = game.add.emitter(x, y, 1000);
-	//this.rainbowDeath.makeParticles('rainbowShot');
-	//this.rainbowDeath.gravity.y = 500;
-	//this.rainbowDeath.setXSpeed(-100, 300);
-	//this.rainbowDeath.setYSpeed(400, 500);
-	//this.rainbowDeath.start(true, 1000, 0, 0, true);
+	this.rainbowDeath = game.add.emitter(x, y, 1000);
+	this.rainbowDeath.makeParticles('rainbowShot');
+	this.rainbowDeath.gravity.y = 500;
+	this.rainbowDeath.setXSpeed(-100, 300);
+	this.rainbowDeath.setYSpeed(400, 500);
+	this.rainbowDeath.start(true, 1000, 0, 0, true);
 
 	//other emitter for player
 	this.playerpain = game.add.emitter(x, y, 1000);
-	this.minusOne = new Phaser.Text(game, x, y, "-1", { font: 'Source Code Pro', fontSize: '32px', fill: '#FFF' });
-	this.playerpain.makeParticles(this.minusOne);
+	this.playerpain.makeParticles('-1');
 	this.playerpain.setXSpeed(-100, 300);
 	this.playerpain.setYSpeed(-100, -200);
 	this.playerpain.start(true, 1000, 0, 0, true);
 
 	group_Emitter.add(this);
-	//group_Emitter.add(this.rainbowDeath);
+	group_Emitter.add(this.rainbowDeath);
 	group_Emitter.add(this.imagination);
 
 	//console.log(this.rainbowDeath);
@@ -56,10 +55,10 @@ cloud.prototype.update = function(){
 	this.x = game.camera.x;
 	this.y = game.camera.y;
 
-	takeDamage(this, [this.playerpain], this.oldHearts);
+	takeDamage(this, [this.playerpain, this.rainbowDeath], this.oldHearts);
 
-	//this.rainbowDeath.x = this.x + (this.scale.x*this.width)/3;
-	//this.rainbowDeath.y = this.y + (this.scale.y*this.height)/2;
+	this.rainbowDeath.x = this.x + (this.scale.x*this.width)/3;
+	this.rainbowDeath.y = this.y + (this.scale.y*this.height)/2;
 	this.playerpain.x = player.x;
 	this.playerpain.y = player.y;
 
