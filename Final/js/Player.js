@@ -141,7 +141,7 @@ Player.prototype.update = function(){
 	this.cloud2.y = this.y-80;*/
 
 	// get key presses
-	let mv_up = game.input.keyboard.justPressed(Phaser.Keyboard.W);
+	let mv_up = (game.input.keyboard.justPressed(Phaser.Keyboard.W) || game.input.keyboard.justPressed(Phaser.Keyboard.SPACEBAR));
 	let mv_left = game.input.keyboard.isDown(Phaser.Keyboard.A);
 	let mv_right = game.input.keyboard.isDown(Phaser.Keyboard.D);
 	let mv_down = game.input.keyboard.justPressed(Phaser.Keyboard.S);
