@@ -44,6 +44,7 @@ Preloader.prototype = {
 		game.load.image('diploma', 'diploma.png');
 		game.load.image('happyTeddy', 'happyTeddyBear1.png');
 		game.load.image('sadkid', 'sadkid.png');
+		game.load.image('-1', 'minusOne.png');
 
 
 		//loads in json tilemap created with tiled(key,filename,
@@ -320,7 +321,6 @@ Lore.prototype = {
 		game.add.image(1000, 325, 'sadkid');
 	},
 	update:function(){
-		console.log(loreText);
 		if(game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR)||game.input.keyboard.isDown(Phaser.Keyboard.L)){
 			//go to next state
 			game.state.start('MainMenu');

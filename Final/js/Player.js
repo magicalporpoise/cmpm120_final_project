@@ -262,7 +262,7 @@ Player.prototype.update = function(){
 			player.hearts -=2;
 		}
 	} else { //IS HIDDEN
-		this.tint = 0x222222;		//face when hidden
+		this.tint = 0x111111;		//face when hidden
 		this.body.velocity.x = 0;	//stop when hidden
 		this.body.velocity.y = 0;	//stop when hidden
 
