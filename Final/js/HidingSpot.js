@@ -60,8 +60,8 @@ function toggleHiding(input, overlapping){
 	if(input && overlapping){
 		player.hidden = !player.hidden;
 		if(player.hidden) player.hearts--;
-		this.time = 0;
 	}
+	this.time = 0;
 }
 
 function loseImagination(me, player){

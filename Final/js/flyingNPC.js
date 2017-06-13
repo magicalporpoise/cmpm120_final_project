@@ -13,19 +13,21 @@ function flyingNPC(game, x, y, img, frame) {
 	this.altitude = this.y;
 
 	//CHANGE FOR FLYING ENEMY
-	game.time.events.remove(this.behave[0]);
-	this.behave.loop(Math.random()*2000+5000, flyingBehave, this);
-	this.behave.start();
+	this.behave.pause();
+
+	this.newBehave = game.time.create(false);
+	this.newBehave.loop(5000, flyingnewBehave, this);
+	this.newBehave.start();
 	//this.sight.scale.x = 1;
 	this.sight.rotation = -Math.PI/2;
 	this.sight.body.setSize(this.sight.origHeight, this.sight.origWidth, 0, 0);
 	this.body.gravity.y = 0;
 
 	//insert into game
-	game.add.existing(this); 
+	//game.add.existing(this); 
 
 	//add to flyingNPC group
-	group_npc.add(this);
+	//group_npc.add(this);
 
 
 }
@@ -70,7 +72,7 @@ flyingNPC.prototype.update = function(){
 // determineBehavior(npc)
 //		take the npc and set its movement variables
 //		based off stimuli
-flyingBehave = function determineBehavior(){
+flyingnewBehave = function determineBehavior(){
 	//console.log("called");
 		if(this.idle) {
 			this.idle = false;
@@ -80,6 +82,4 @@ flyingBehave = function determineBehavior(){
 			this.movingHori = -1 * this.facing;
 			this.idle = true;
 		}
-
-	//console.log("flying npc behavior = " + this.movingHori);
 }

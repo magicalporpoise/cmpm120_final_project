@@ -172,7 +172,9 @@ NPC.prototype.update = function(){
 		else this.tint = 0x330000;
 		this.idle = false;
 		this.isStunned = false;
-		this.maxSpeed = 300;
+		//messing around with max speed
+		this.maxSpeed = Math.abs(player.x - this.x) + 150;
+		//this.maxSpeed = 300;
 		moveTowardsPlayer(this);
 		rotateSights(this, this.sight)
 		// this.y>=player.position.y+20 <- for player y check
