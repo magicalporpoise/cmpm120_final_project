@@ -66,7 +66,7 @@ Preloader.prototype = {
 
 		// vectorized images
 		game.load.image('bigcloud','cloud3_white.png');
-		game.load.image('smallcloud','cloud5_white.png');
+		//game.load.image('smallcloud','cloud5_white.png');
 
 		// rasterized images and atlas's 
 		game.load.image('chalkboard','chalkboard.png');		
@@ -75,6 +75,7 @@ Preloader.prototype = {
 		game.load.image('killableSubstance','killableSubstance.png');
 		game.load.image('sightLine','sightLine_simple.png');
 		game.load.image('boom','newBoom2.png');
+		game.load.image('speaker','speaker.png')
 		//game.load.image('redSquare','redSquareFill3.png');
 
 		game.load.atlasJSONArray('teddy', 'newTeddy_everything.png', 'newTeddy_everything.json');

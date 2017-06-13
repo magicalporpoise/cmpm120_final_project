@@ -14,6 +14,66 @@
         {
          "draworder":"topdown",
          "height":100,
+         "name":"chalk",
+         "objects":[
+                {
+                 "gid":118,
+                 "height":32,
+                 "id":34,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":1696,
+                 "y":484
+                }, 
+                {
+                 "gid":118,
+                 "height":32,
+                 "id":35,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":3468,
+                 "y":2400
+                }, 
+                {
+                 "gid":118,
+                 "height":32,
+                 "id":36,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":604,
+                 "y":2720
+                }, 
+                {
+                 "gid":118,
+                 "height":32,
+                 "id":37,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":356,
+                 "y":1632
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "width":124,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "draworder":"topdown",
+         "height":100,
          "name":"exit",
          "objects":[
                 {
@@ -359,7 +419,7 @@
          "x":0,
          "y":0
         }],
- "nextobjectid":34,
+ "nextobjectid":38,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tileheight":32,
