@@ -9,9 +9,8 @@ for(var i = 0 ; i < 5 ; i++){
 }
 
 //an 2-D array of text
-TEACHER[0]= ["Good morning, student!",
-			 "Make your [W]ay to your desk chair.", 
-			 "Please [S]it.", 
+TEACHER[0]= ["Good morning, stu[D]ent! It's the start of a beautiful d[A]y.",
+			 "Make your [W]ay to your desk chair and take a [S]eat.", 
 			 "Please remain in your seat, child... or there may be consequences.",
 			 "Remain [K]alm and be respectful of the wonderful instructional material.",
 			 "[D]o NOT neglect your school[W]ork, or it'll come back to bite you!",
