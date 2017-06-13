@@ -7,10 +7,10 @@
 //create phaser game variable
 var game;
 var pauseScreen;
-//***
+//================================================
 //PRELOAD: 
 //	load main art assets and move to the main menu
-//***
+//================================================
 var Preloader = function(game) {};
 Preloader.prototype = {
 	preload: function() {
@@ -44,6 +44,8 @@ Preloader.prototype = {
 		game.load.image('blackTile', 'black_tile.png');
 		game.load.image('diploma', 'diploma.png');
 		game.load.image('happyTeddy', 'happyTeddyBear1.png');
+		game.load.image('sadkid', 'sadkid.png');
+
 
 		//loads in json tilemap created with tiled(key,filename,
 		//not exactly sure why null works here,the tilemap tool used)
@@ -87,10 +89,10 @@ Preloader.prototype = {
 	}
 }
 
-//***
+//=========================================
 //MAINMENU: 
 //	wait for player input to begin the game
-//***
+//=========================================
 var MainMenu = function(game) {
 	//Needed text
 	var title;
@@ -137,10 +139,10 @@ MainMenu.prototype = {
 	}
 }
 
-//***
+//==============================
 //GAME: 
 //	set up assets, play the game
-//***
+//==============================
 var currentLevel;
 var currentMap;
 var Game = function(game) {
@@ -220,7 +222,10 @@ Game.prototype = {
 	}
 }
 
-
+//========
+//GAMEOVER
+//	state
+//========
 var GameOver = function(game) {
 	var endText;
 }
@@ -256,14 +261,17 @@ var Lore = function(game) {
 Lore.prototype = {
 	create:function(){
 		console.log("Entering Game Lore");
-		var txt = "Imagination! who can sing thy force?\nOr who describe the swiftness of thy course?\nSoaring through air to find the bright abode,\nTh' empyreal palace of the thund'ring God,\nWe on thy pinions can surpass the wind,\nAnd leave the rolling universe behind----\n                    Ernest, put that book away!\n                    You have to pay attention in class.\n----From star to star the mental optics rove,\nMeasure the skies, and range the realms above----\n                    I said put that away!\nBut I like using my imagination.\n                    Did I say you could do that?\nI just want to think for myself!\n                    That’s it, you have detention!";
+		var txt = "Imagination! who can sing thy force?\nOr who describe the swiftness of thy course?\nSoaring through air to find the bright abode,\nTh' empyreal palace of the thund'ring God,\nWe on thy pinions can surpass the wind,\nAnd leave the rolling universe behind----\n                    ERNEST, PUT THAT BOOK AWAY!\n                    YOU HAVE TO PAY ATTENTION IN CLASS\n----From star to star the mental optics rove,\nMeasure the skies, and range the realms above----\n                    I SAID PUT THAT AWAY!\nBut I like using my imagination.\n                    DID I SAY YOU COULD DO THAT?\nI just want to think for myself!\n                    THAT'S IT, YOU HAVE DETENTION!";
 		loreText = new ScrollText(game, 100, 100, txt, { fontSize: '20px', fill: '#FFF', font: 'Sans Serif'});
 		loreText.speed = 1;
 		loreText.active = true;
+
+		//add some images! 
+		game.add.image(1000, 325, 'sadkid');
 	},
 	update:function(){
 		console.log(loreText);
-		if(game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR)){
+		if(game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR)||game.input.keyboard.isDown(Phaser.Keyboard.L)){
 			//go to next state
 			game.state.start('MainMenu');
 		}
@@ -282,12 +290,12 @@ Credits.prototype = {
 	create:function(){
 		console.log("Entering Credits");
 		creditText = game.add.text(700, 375,
-				("Jacob Darby - composer and writer\nJake Shapiro - artist and programmer\nPhilip Stanley - programmer and quality assurance\nTristan Clark - level designer"), 
-				{ fontSize: '32px', fill: '#FFF', align: 'center' });
+				("Jacob Darby - composer and writer\nJake Shapiro - artist and programmer\nPhilip Stanley - programmer and quality assurance\nTristan Clark - level designer\n\n\n\n\n\n\nspecial thanks to Luka Dowell - literature contributions\nPoem by Phillis Wheatley"), 
+				{ font:'Sans Serif', fontSize: '32px', fill: '#FFF', align: 'center' });
 		creditText.anchor.set(0.5);
 	},
 	update:function(){
-		if(game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR)){
+		if(game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR)||game.input.keyboard.isDown(Phaser.Keyboard.C)){
 			//go to next state
 			game.state.start('MainMenu');
 		}

@@ -89,17 +89,8 @@ function deleteMap(map){
 	group_ViewBox.removeAll(true);
 	group_danger.removeAll(true);
 	group_speaker.removeAll(true);
-	//group_blob2.removeAll(true);
-	//group_blob3.removeAll(true);
-	//group_blob4.removeAll(true);
-	//group_blob5.removeAll(true);
-	//group_blob7.removeAll(true);
-
-	//console.log(layer1);
-	//console.log(layer2);
 
 	layer1.destroy();
-
 	if(layer2 != undefined)layer2.destroy();
 	map.destroy();
 }
