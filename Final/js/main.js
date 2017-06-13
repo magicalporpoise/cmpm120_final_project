@@ -19,9 +19,8 @@ Preloader.prototype = {
 		//LOAD MUSIC
 		game.load.path = 'assets/audio/music/';
 		game.load.audio('ambient', 'Detention_second.wav');
-
-		game.load.path = 'assets/audio/music/'
-		game.load.audio('dank','Detention_creepy.mp3')
+		game.load.audio('dank','Detention_creepy.mp3');
+		game.load.audio('menu', 'Detention_menu.wav');
 
 		//LOAD SFX
 		game.load.path = 'assets/audio/sfx/';
@@ -98,12 +97,16 @@ Preloader.prototype = {
 //MAINMENU: 
 //	wait for player input to begin the game
 //=========================================
+var musicMenu;
+var shouldPlayMenu = true;
 var MainMenu = function(game) {
 	//Needed text
 	var title;
 	var controls;
 	var introTeddy;
 	var extraText;
+
+	
 };
 MainMenu.prototype = {
 	preload:function(){
@@ -111,7 +114,15 @@ MainMenu.prototype = {
 	},
 	create: function() {
 		console.log("MainMenu: create");
+		
 		//title name
+		musicMenu = game.add.audio('menu');
+		if(shouldPlayMenu){
+			musicMenu.play();
+			shouldPlayMenu = false;
+		}
+		
+		
 		title = game.add.text(1400/2, 750/8,
 						'DETENTION', 
 						{ font: 'Source Code Pro', fontSize: '64px', fill: '#FFF', fontWeight: 'bold', align: 'center' });
@@ -131,8 +142,10 @@ MainMenu.prototype = {
 
 	},
 	update: function(){
+		
 		if(game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR)){
 			//go to next state
+			musicMenu.stop();
 			game.state.start('Game');
 		} else if(game.input.keyboard.isDown(Phaser.Keyboard.L)){
 			//go to next state
@@ -189,6 +202,7 @@ Game.prototype = {
 		group_speaker = game.add.group();
 
 		//music
+		
 		music1 = game.add.audio('dank');
 		music2 = game.add.audio('ambient');
 		musicCounter = 0;
@@ -233,12 +247,7 @@ Game.prototype = {
 		//PLAYER DEATH
 		if(player.hearts <= 0 || player.isDead){
 			deleteMap(currentMap);
-			if(music1.isPlaying){
-				music1.stop();
-			}
-			if(music2.isPlaying){
-				music2.stop();
-			}
+			
 			playerDeathSFX.play();
 
 			game.state.start('GameOver');
@@ -246,9 +255,9 @@ Game.prototype = {
 
 		if(!music1.isPlaying && !music2.isPlaying){
 			if(musicCounter%2 == 0){
-				music2.play();
-			}else{
 				music1.play();
+			}else{
+				music2.play();
 			}
 			musicCounter++;
 
@@ -266,6 +275,14 @@ var GameOver = function(game) {
 GameOver.prototype = {
 	create:function(){
 		console.log("ending game.....");
+		shouldPlayMenu = true;
+		if(music1.isPlaying){
+			music1.stop();
+		}
+		if(music2.isPlaying){
+			music2.stop();
+		}
+
 		currentLevel = 0;
 		//set the player's grade
 		game.stage.backgroundColor = "#000";
