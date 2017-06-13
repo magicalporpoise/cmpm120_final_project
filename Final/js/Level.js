@@ -66,8 +66,8 @@ function Level(key, tilemap, tileimage, layer){
 	map.createFromObjects('death' ,121,'killableSubstance', 0, true, true, group_danger, killableSubstance);
 
 	//insert SPEAKERS
-	map.createFromObjects('hide', 119, 'platform', 0, true, true, group_speaker, speaker);
-	insertAllText(currentLevel, group_speaker);
+	//map.createFromObjects('hide', 119, 'platform', 0, true, true, group_speaker, speaker);
+	//insertAllText(currentLevel, group_speaker);
 
 	game.world.bringToTop(group_speaker);
 	game.world.bringToTop(group_npc);
