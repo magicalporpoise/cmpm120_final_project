@@ -22,7 +22,7 @@ function ScrollText(game, x, y, txt, style){
 
 	this.active = false;
 	this.time = 0;
-	this.speed = 0.5;
+	this.speed = 1;
 	game.physics.arcade.enable(this);
 	//insert into game
 	game.add.existing(this);

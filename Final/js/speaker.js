@@ -6,7 +6,7 @@ function speaker(game, x, y, img, frame, text){
 	game.physics.arcade.enable(this);
 	game.add.existing(this);
 
-	this.announcement = new ScrollText(game, x, y, text, { fontSize: '22px', fill: '#FFF'});
+	this.announcement = new ScrollText(game, x, y-100, text, { fontSize: '22px', fill: '#FFF'});
 
 	this.active = false;
 

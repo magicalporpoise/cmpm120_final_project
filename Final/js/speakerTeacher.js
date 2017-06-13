@@ -35,12 +35,12 @@ function insertAllText(lvl, grp){
 	var j = 0;
 	var child;
 	for(var i = 0 ; i < numbAlive ; i+=2){
-		console.log(i);
+		//console.log(i);
 		child = grp.getChildAt(i);
-		console.log(child);
-		console.log("the text to insert: "+  TEACHER[lvl][j]);
+		//console.log(child);
+		//console.log("the text to insert: "+  TEACHER[lvl][j]);
 		child.announcement.fullText = TEACHER[lvl][j];
-		console.log(child.announcement.fullText);
+		//console.log(child.announcement.fullText);
 		j++;
 	}
 
