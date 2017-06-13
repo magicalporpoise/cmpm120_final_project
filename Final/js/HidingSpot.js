@@ -62,6 +62,8 @@ function toggleHiding(me, input, overlapping){
 		if(player.hidden) {
 			player.body.velocity.x = 0;
 			player.x = me.x + 50;
+			player.y = me.y+20;
+
 			player.hearts--;
 			player.isInvis = false;
 		}
