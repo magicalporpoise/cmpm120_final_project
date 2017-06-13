@@ -51,16 +51,17 @@ Preloader.prototype = {
 		//game.load.tilemap('texttest','texttest.json',null,Phaser.Tilemap.TILED_JSON);
 		game.load.tilemap('elementary_tileset', 'elementary_tileset.json', null, Phaser.Tilemap.TILED_JSON);
 		game.load.tilemap('middleschool','middleschool.json',null,Phaser.Tilemap.TILED_JSON);
+		game.load.tilemap('new_last_level_map','new_last_level.json',null,Phaser.Tilemap.TILED_JSON);
 
-		game.load.tilemap('noImaginationLand','new_last_level.json',null,Phaser.Tilemap.TILED_JSON);
+		//game.load.tilemap('noImaginationLand','new_last_level.json',null,Phaser.Tilemap.TILED_JSON);
 
 		//loads the image used in tiled to create the map(key, filename,32x32)
 		//the key can actually be called anything as well
 		//game.load.spritesheet('tilesheet','dirt-tiles.png',32,32);
 		game.load.spritesheet('bricks3');
 		game.load.spritesheet('cloudy');
-		game.load.spritesheet('newTilemap');
-
+		game.load.spritesheet('last_level_tile', 'last_level.png');
+		game.load.spritesheet('dirt-tiles','dirt-tiles.png');
 
 		// vectorized images
 		game.load.image('bigcloud','cloud3_white.png');
@@ -181,7 +182,8 @@ Game.prototype = {
 		//=============
 		player = new Player(150, 100, 0.15, 'teddy');
 		imagination = new cloud(0, 0, 1, 'bigcloud');
-		currentMap = new Level('t', 'tiletest1', ['cloudy','bricks3'], ['Tile Layer 1','Tile Layer 2']);
+		//currentMap = new Level('t', 'tiletest1', ['cloudy','bricks3'], ['Tile Layer 1','Tile Layer 2']);
+		currentMap = new Level('m','new_last_level_map', ['last_level_tile', 'dirt-tiles'], ['Tile Layer 1','Tile Layer 2','Tile Layer 3','collision layer']);
 
 	},
 	update:function() {		// add game logic
@@ -195,7 +197,7 @@ Game.prototype = {
 			currentMap = new Level('e', 'elementary_tileset', ['bricks3', 'cloudy'], ['Tile Layer 1','Tile Layer 2']);
 		} else if(currentLevel == 2 && currentMap.key != 'm') {
 			deleteMap(currentMap);
-			currentMap = new Level('m','noImaginationLand', ['newTilemap', 'cloudy'], ['Tile Layer 1','Tile Layer 2']);
+			//currentMap = new Level('m','noImaginationLand', ['last_level', 'dirt-tiles'], ['Tile Layer 1','Tile Layer 2','Tile Layer 3','collision Layer']);
 		} else if(currentLevel == 3){
 			deleteMap(currentMap);
 			game.state.start('GameOver');
