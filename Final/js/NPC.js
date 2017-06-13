@@ -73,6 +73,10 @@ function NPC(game, x, y, img, frame) {
 	this.animations.add('walk');
 	this.animations.add('idle', [0], 1, true);
 
+	this.teacherism = new ScrollText(game, x, y, "", {align: 'center', font: 'Source Code Pro', fontSize: '22px', fill: '#FFF'});
+	this.teacherism.speed = 0.7;
+	this.teacherism.anchor.set(0.5);
+
 	//insert into game
 	game.add.existing(this);
 	//add to its group
@@ -97,13 +101,17 @@ NPC.prototype.constructor = NPC;
 //	npc behavior
 //================
 NPC.prototype.update = function(){
+	//quote
+	this.teacherism.x = this.x;
+	this.teacherism.y = this.y-100;
+
 	//timers
 	if(this.behaveCont)this.behave ++;
 	if(this.stunTimerCont)this.stunTimer++;
 	if(this.atkTimerCont)this.atkTimer++;
 	//console.log(this.behave);
 	if(this.behave % this.longDura == 0){
-		this.behave =1;
+		this.behave = 1;
 		determineBehavior(this);
 	}
 	if(this.stunTimer % this.shortDura == 0){
@@ -150,6 +158,10 @@ NPC.prototype.update = function(){
 
 		if(this.sight.playerInSight && !player.hidden) { //aggro - red
 			this.aggro = true;
+			if(this.teacherism.fullText == ""){
+				this.teacherism.fullText = EQ[Math.floor(Math.random()*(EQ.length))];
+			}
+			this.teacherism.active = true;
 			
 			// for creating detection Boom object
 			if (this.boom_bool) {
@@ -192,6 +204,7 @@ NPC.prototype.update = function(){
 		this.sight.body.setSize(2*this.sight.origWidth-50, 2*this.sight.origWidth-50, 0, -this.sight.origWidth);
 	
 	} else {
+		removeText(this.teacherism);
 		if(this.isStunned)this.tint = 0x66FF66;
 		else this.tint = 0xFFFFFF;
 		if(this.sight.rotation != 0) this.sight.scale.x = -this.facing;

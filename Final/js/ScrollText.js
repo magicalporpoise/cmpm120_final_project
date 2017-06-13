@@ -44,3 +44,10 @@ ScrollText.prototype.update = function(){
 		this.text = this.fullText.substring(0, Math.floor(this.time));
 	}
 }
+
+function removeText(me){
+	me.text = "";
+	me.fullText = "";
+	me.active = false;
+	me.time = 0;
+}
