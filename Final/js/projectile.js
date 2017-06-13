@@ -17,8 +17,8 @@ function projectile(x, y, speed, direction, scale_length, img){
 	this.speed = speed;
 	this.dir = direction;
 
-	this.anchor.x+=1;
-	this.anchor.y+=0.5;
+	this.anchor.x=0.5;
+	this.anchor.y=0.5;
 	//this.scale.y = scale;
 
 	game.physics.arcade.enable(this);

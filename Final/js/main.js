@@ -63,7 +63,7 @@ Preloader.prototype = {
 
 		// vectorized images
 		game.load.image('bigcloud','cloud3_white.png');
-		game.load.image('smallcloud','cloud5_white.png');
+		//game.load.image('smallcloud','cloud5_white.png');
 
 		game.load.image('blob1','blob1.png');
 		game.load.image('blob2','blob2.png');
@@ -150,12 +150,6 @@ Game.prototype = {
 		group_danger = game.add.group();
 		group_Emitter = game.add.group();
 		group_speaker = game.add.group();
-		//group_blob2 = game.add.group();
-		//group_blob3 = game.add.group();
-		//group_blob4 = game.add.group();
-		//group_blob5 = game.add.group();
-		//group_blob7 = game.add.group();
-
 
 		//music
 		this.music1 = game.add.audio('dank');

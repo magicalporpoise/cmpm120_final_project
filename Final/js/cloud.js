@@ -20,7 +20,7 @@ function cloud(x, y, scale_length, img){
 	//tracker to see if you took damage
 	this.oldHearts = player.hearts;
 	//particle effect whenever you lose imagination
-	this.rainbowDeath = game.add.emitter(x, y);
+	this.rainbowDeath = game.add.emitter(x, y, 1000);
 	this.rainbowDeath.makeParticles('rainbowShot');
 	//this.rainbowDeath.gravity.y = 500;
 	this.rainbowDeath.setXSpeed(-100, 300);

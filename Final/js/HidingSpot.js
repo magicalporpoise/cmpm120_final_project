@@ -59,7 +59,10 @@ function toggleHiding(input, overlapping){
 
 	if(input && overlapping){
 		player.hidden = !player.hidden;
-		if(player.hidden) player.hearts--;
+		if(player.hidden) {
+			player.hearts--;
+			player.isInvis = false;
+		}
 	}
 	this.time = 0;
 }
