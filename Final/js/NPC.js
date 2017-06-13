@@ -11,8 +11,6 @@ function NPC(game, x, y, img, frame) {
 	Phaser.Sprite.call(this, game, x, y, img, frame);
 	//phaser related variables
 	//		and physics
-	this.ball_aggro = false;
-	
 	this.scale.x = 0.7;
 	this.scale.y = 0.7;
 	
@@ -179,8 +177,8 @@ NPC.prototype.update = function(){
 
 	//AGGRO'd
 	if(this.aggro){
-		if(this.canAttack) this.tint = 0xCC0000;
-		else this.tint = 0x330000;
+		if(this.canAttack) this.tint = 0xFF3333;
+		else this.tint = 0xAA4444;
 		this.idle = false;
 		this.isStunned = false;
 		//messing around with max speed
@@ -194,7 +192,7 @@ NPC.prototype.update = function(){
 		this.sight.body.setSize(2*this.sight.origWidth-50, 2*this.sight.origWidth-50, 0, -this.sight.origWidth);
 	
 	} else {
-		if(this.isStunned)this.tint = 0x00FF00;
+		if(this.isStunned)this.tint = 0x66FF66;
 		else this.tint = 0xFFFFFF;
 		if(this.sight.rotation != 0) this.sight.scale.x = -this.facing;
 		this.sight.rotation = 0;

@@ -43,6 +43,7 @@ Preloader.prototype = {
 		game.load.image('platform', 'black_tile.png');
 		game.load.image('blackTile', 'black_tile.png');
 		game.load.image('diploma', 'diploma.png');
+		game.load.image('happyTeddy', 'happyTeddyBear1.png');
 
 		//loads in json tilemap created with tiled(key,filename,
 		//not exactly sure why null works here,the tilemap tool used)
@@ -89,14 +90,30 @@ Preloader.prototype = {
 //***
 var MainMenu = function(game) {
 	//Needed text
+	var title;
+	var controls;
+	var introTeddy;
 };
 MainMenu.prototype = {
+	preload:function(){
+		console.log("MainMenu: preload");
+	},
 	create: function() {
 		console.log("MainMenu: create");
+		//title name
+		title = game.add.text(1400/2, 750/8,
+						'DETENTION', 
+						{ font: 'Source Code Pro', fontSize: '64px', fill: '#FFF', fontWeight: 'bold', align: 'center' });
+		title.anchor.set(0.5);
+		console.log(title);
+		//teddy image
+		introTeddy = game.add.image(1000, 300, 'happyTeddy');
+		introTeddy.scale.x = 5;
+		introTeddy.scale.y = 5;
 		//give main menu instructions
-		var introText = game.add.text(16, game.world.height/2,
-						'WASD to MOVE\nSPACE to HIDE\nK to STUN\n\n press space to continue...', 
-						{ fontSize: '32px', fill: '#FFF' });
+		controls = game.add.text(16, 750/4,
+						"                     Your Imagination is Precious:\n-----------------------------------------------------------------------------\nWASD to MOVE\nSit down (S) in seats to avoid angry books\nJ to throw a STUN BALL\nK to throw a STUN PUNCH\nL to become INVISIBLE\n\n press space to continue...", 
+						{ font: 'Source Code Pro', fontSize: '32px', fill: '#FFF' });
 
 	},
 	update: function(){
@@ -157,6 +174,7 @@ Game.prototype = {
 
 		//=============
 		//PLAYER OBJECT
+		//CURRENT MAP
 		//=============
 		player = new Player(150, 100, 0.15, 'teddy');
 		imagination = new cloud(0, 0, 1, 'bigcloud');
@@ -191,17 +209,19 @@ Game.prototype = {
 
 
 var GameOver = function(game) {
+	var endText;
 }
 GameOver.prototype = {
 	create:function(){
 		console.log("ending game.....");
+		currentLevel = 0;
 		//set the player's grade
 		game.stage.backgroundColor = "#000";
 		let finalScore = player.hearts  + "/" + player.maxHearts;
 		let g = player.hearts;
 		grade = (g < 60 ? "F" : (g < 70 ? "D" : (g < 80 ?  "C" : (g < 90 ? "B" : "A" ))));
 
-		var endText = game.add.text(350, 325,
+		endText = game.add.text(350, 325,
 				("You earned a "  + finalScore + " -- " + grade), 
 				{ fontSize: '56px', fill: '#FFF' });
 	},

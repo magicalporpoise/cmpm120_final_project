@@ -95,8 +95,8 @@ function deleteMap(map){
 	//group_blob5.removeAll(true);
 	//group_blob7.removeAll(true);
 
-	console.log(layer1);
-	console.log(layer2);
+	//console.log(layer1);
+	//console.log(layer2);
 
 	layer1.destroy();
 
