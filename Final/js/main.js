@@ -49,29 +49,32 @@ Preloader.prototype = {
 
 		//loads in json tilemap created with tiled(key,filename,
 		//not exactly sure why null works here,the tilemap tool used)
-		//game.load.tilemap('tiletest1','tiletest1.json',null,Phaser.Tilemap.TILED_JSON);
+		game.load.tilemap('tiletest1','tiletest1.json',null,Phaser.Tilemap.TILED_JSON);
 		game.load.tilemap('texttest','texttest.json',null,Phaser.Tilemap.TILED_JSON);
 		game.load.tilemap('elementary_tileset', 'elementary_tileset.json', null, Phaser.Tilemap.TILED_JSON);
 		game.load.tilemap('middleschool','middleschool.json',null,Phaser.Tilemap.TILED_JSON);
+		game.load.tilemap('elementary','elementary.json',null,Phaser.Tilemap.TILED_JSON);
 
 		//loads the image used in tiled to create the map(key, filename,32x32)
 		//the key can actually be called anything as well
 		//game.load.spritesheet('tilesheet','dirt-tiles.png',32,32);
 		game.load.spritesheet('bricks3');
 		game.load.spritesheet('cloudy');
+		game.load.spritesheet('pipes');
+		game.load.spritesheet('pipesNew')
 
 
 		// vectorized images
 		game.load.image('bigcloud','cloud3_white.png');
 		game.load.image('smallcloud','cloud5_white.png');
 
-		game.load.image('blob1','blob1.png');
-		game.load.image('blob2','blob2.png');
-		game.load.image('blob3','blob3.png');
-		game.load.image('blob4','blob4.png');
-		game.load.image('blob5','blob5.png');
+		//game.load.image('blob1','blob1.png');
+		//game.load.image('blob2','blob2.png');
+		//game.load.image('blob3','blob3.png');
+		//game.load.image('blob4','blob4.png');
+		//game.load.image('blob5','blob5.png');
 		//game.load.image('blob6','blob6.png');
-		game.load.image('blob7','blob7.png');
+		//game.load.image('blob7','blob7.png');
 
 		// rasterized images and atlas's 
 		game.load.image('chair','chair.png');
@@ -150,11 +153,6 @@ Game.prototype = {
 		group_danger = game.add.group();
 		group_Emitter = game.add.group();
 		group_speaker = game.add.group();
-		//group_blob2 = game.add.group();
-		//group_blob3 = game.add.group();
-		//group_blob4 = game.add.group();
-		//group_blob5 = game.add.group();
-		//group_blob7 = game.add.group();
 
 
 		//music
@@ -174,7 +172,8 @@ Game.prototype = {
 		player = new Player(150, 100, 0.15, 'teddy');
 		imagination = new cloud(0, 0, 1, 'bigcloud');
 
-		currentMap = new Level('t', 'texttest', ['cloudy','bricks3'], ['Tile Layer 1','Tile Layer 2']);
+		//currentMap = new Level('t', 'texttest', ['cloudy','bricks3'], ['Tile Layer 1','Tile Layer 2']);
+		currentMap = new Level('t', 'tiletest1', ['cloudy','bricks3'], ['Tile Layer 1','Tile Layer 2']);
 
 	},
 	update:function() {		// add game logic
@@ -183,7 +182,8 @@ Game.prototype = {
 		//console.log(currentMap);
 		if(currentLevel == 1 && currentMap.key != 'e') {
 			deleteMap(currentMap);
-			currentMap = new Level('e', 'elementary_tileset', ['bricks3', 'cloudy'], ['Tile Layer 1','Tile Layer 2']);
+			//currentMap = new Level('e', 'elementary_tileset', ['bricks3', 'cloudy'], ['Tile Layer 1','Tile Layer 2']);
+			currentMap = new Level('e', 'elementary', ['cloudy', 'pipesNew'], ['Tile Layer 1','Tile Layer 2']);
 		} else if(currentLevel == 2 && currentMap.key != 'm') {
 			deleteMap(currentMap);
 			currentMap = new Level('m','middleschool', ['bricks3', 'cloudy'], ['Tile Layer 1','Tile Layer 2']);
