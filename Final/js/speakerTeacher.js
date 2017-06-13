@@ -9,23 +9,23 @@ for(var i = 0 ; i < 5 ; i++){
 }
 
 //an 2-D array of text
-TEACHER[0]= ["Good morning, stu[D]ent! It's the start of a beautiful d[A]y.",
-			 "Make your [W]ay to your desk chair and take a [S]eat.", 
-			 "Please remain in your seat, child... or there may be consequences.",
-			 "Remain [K]alm and be respectful of the wonderful instructional material.",
-			 "[D]o NOT neglect your school[W]ork, or it'll come back to bite you!",
-			 "No matter [W]hen, [W]here, or [W]hy, climbing is STRICTLY prohibited.",
-			 "If you are [L]ost, a hall monitor will happily escort you to your seat.",
-			 "[J]ust pay attention and you'll do great!"
+TEACHER[0]= ["Good morning, stu[D]ent! It's the\nstart of a beautiful d[A]y.",
+			 "Make your [W]ay to your desk chair\nand take a [S]eat.", 
+			 "Please remain in your seat, child...\nor there may be consequences.",
+			 "Remain [K]alm and be respectful of\nthe wonderful instructional material.",
+			 "[D]o NOT neglect your school[W]ork,\nor it'll come back to bite you!",
+			 "No matter [W]hen, [W]here, or [W]hy,\nclimbing is STRICTLY prohibited.",
+			 "If you are [L]ost, a hall monitor will\nhappily escort you to your seat.",
+			 "[J]ust pay attention and\nyou'll do great!"
 			 ]
-TEACHER[1]= ["Come, young one. Put one foot in front of the other!",
-			 "Shoot for the moon! Even if you miss, you'll land among the stars.",
-			 "Your enthusiasm is admirable... but *please* don't run in my halls.",
+TEACHER[1]= ["Come, young one. Put one foot\nin front of the other!",
+			 "Shoot for the moon! Even if you miss,\nyou'll land among the stars.",
+			 "Your enthusiasm is admirable... but\n *please* don't run in my halls.",
 			 "Oh, I'm so *very* proud of you..."]
 TEACHER[2]= ["Welcome back. Please get to work.",
-			 "You are far too slow. Maybe I should have held you back.",
+			 "You are far too slow. Maybe I\nshould have held you back.",
 			 "I had such high hopes for you...",
-			 "Well, at least you've learned something."
+			 "Well, at least you've learned\nsomething."
 			 ]
 
 //insert the text into the needed children
