@@ -22,6 +22,8 @@ function cloud(x, y, scale_length, img){
 	//particle effect whenever you lose imagination
 	this.rainbowDeath = game.add.emitter(x, y, 1000);
 	this.rainbowDeath.makeParticles('rainbowShot');
+	this.rainbowDeath.minParticleScale = 0.7;
+	this.rainbowDeath.maxParticleScale = 0.9;
 	this.rainbowDeath.gravity.y = 500;
 	this.rainbowDeath.setXSpeed(-100, 300);
 	this.rainbowDeath.setYSpeed(400, 500);
