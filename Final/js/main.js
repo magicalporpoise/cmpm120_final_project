@@ -291,7 +291,6 @@ Lore.prototype = {
 		game.add.image(1000, 325, 'sadkid');
 	},
 	update:function(){
-		console.log(loreText);
 		if(game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR)||game.input.keyboard.isDown(Phaser.Keyboard.L)){
 			//go to next state
 			game.state.start('MainMenu');
