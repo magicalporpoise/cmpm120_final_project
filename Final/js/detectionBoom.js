@@ -24,6 +24,7 @@ function detectionBoom(x, y, img){
 	//this.scale.y = scale;
 
 	game.physics.arcade.enable(this);
+	game.add.existing(this);
 	
 	// Booleans for sight
 	this.npcInRange = false;

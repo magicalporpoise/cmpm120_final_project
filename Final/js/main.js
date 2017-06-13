@@ -7,10 +7,10 @@
 //create phaser game variable
 var game;
 var pauseScreen;
-//***
+//================================================
 //PRELOAD: 
 //	load main art assets and move to the main menu
-//***
+//================================================
 var Preloader = function(game) {};
 Preloader.prototype = {
 	preload: function() {
@@ -44,6 +44,8 @@ Preloader.prototype = {
 		game.load.image('blackTile', 'black_tile.png');
 		game.load.image('diploma', 'diploma.png');
 		game.load.image('happyTeddy', 'happyTeddyBear1.png');
+		game.load.image('sadkid', 'sadkid.png');
+
 
 		//loads in json tilemap created with tiled(key,filename,
 		//not exactly sure why null works here,the tilemap tool used)
@@ -51,7 +53,8 @@ Preloader.prototype = {
 		//game.load.tilemap('texttest','texttest.json',null,Phaser.Tilemap.TILED_JSON);
 		game.load.tilemap('elementary_tileset', 'elementary_tileset.json', null, Phaser.Tilemap.TILED_JSON);
 		game.load.tilemap('middleschool','middleschool.json',null,Phaser.Tilemap.TILED_JSON);
-		game.load.tilemap('new_last_level_map','new_last_level.json',null,Phaser.Tilemap.TILED_JSON);
+		//game.load.tilemap('new_last_level_map','new_last_level.json',null,Phaser.Tilemap.TILED_JSON);
+		game.load.tilemap('new_last_level_map','testingTiled.json',null,Phaser.Tilemap.TILED_JSON);
 
 		//game.load.tilemap('noImaginationLand','new_last_level.json',null,Phaser.Tilemap.TILED_JSON);
 
@@ -60,8 +63,10 @@ Preloader.prototype = {
 		//game.load.spritesheet('tilesheet','dirt-tiles.png',32,32);
 		game.load.spritesheet('bricks3');
 		game.load.spritesheet('cloudy');
+
 		game.load.spritesheet('last_level_tile', 'last_level.png');
 		game.load.spritesheet('dirt-tiles','dirt-tiles.png');
+
 
 		// vectorized images
 		game.load.image('bigcloud','cloud3_white.png');
@@ -88,15 +93,16 @@ Preloader.prototype = {
 	}
 }
 
-//***
+//=========================================
 //MAINMENU: 
 //	wait for player input to begin the game
-//***
+//=========================================
 var MainMenu = function(game) {
 	//Needed text
 	var title;
 	var controls;
 	var introTeddy;
+	var extraText;
 };
 MainMenu.prototype = {
 	preload:function(){
@@ -109,7 +115,6 @@ MainMenu.prototype = {
 						'DETENTION', 
 						{ font: 'Source Code Pro', fontSize: '64px', fill: '#FFF', fontWeight: 'bold', align: 'center' });
 		title.anchor.set(0.5);
-		console.log(title);
 		//teddy image
 		introTeddy = game.add.image(1000, 300, 'happyTeddy');
 		introTeddy.scale.x = 5;
@@ -119,19 +124,29 @@ MainMenu.prototype = {
 						"                     Your Imagination is Precious:\n-----------------------------------------------------------------------------\nWASD to MOVE\nSit down (S) in seats to avoid angry books\nJ to throw a STUN BALL\nK to throw a STUN PUNCH\nL to become INVISIBLE\n\n press SPACE to continue...", 
 						{ font: 'Source Code Pro', fontSize: '32px', fill: '#FFF' });
 
+		extraText = game.add.text(100, 650,
+						'L for more Lore :: C for Credits', 
+						{ font: 'Source Code Pro', fontSize: '16px', fill: '#FFF', fontWeight: 'bold', align: 'center' });
+
 	},
 	update: function(){
 		if(game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR)){
 			//go to next state
 			game.state.start('Game');
+		} else if(game.input.keyboard.isDown(Phaser.Keyboard.L)){
+			//go to next state
+			game.state.start('Lore');
+		} else if(game.input.keyboard.isDown(Phaser.Keyboard.C)){
+			//go to next state
+			game.state.start('Credits');
 		}
 	}
 }
 
-//***
+//==============================
 //GAME: 
 //	set up assets, play the game
-//***
+//==============================
 var currentLevel;
 var currentMap;
 var Game = function(game) {
@@ -140,6 +155,10 @@ var Game = function(game) {
 	var tilemap;
 	var grayScreen;
 	var blob;
+	var music1;
+	var music2;
+	var playerDeathSFX;
+	var musicCounter;
 }
 
 Game.prototype = {
@@ -169,12 +188,12 @@ Game.prototype = {
 		group_speaker = game.add.group();
 
 		//music
-		this.music1 = game.add.audio('dank');
-		this.music2 = game.add.audio('ambient');
-		this.music2.loopFull();
+		music1 = game.add.audio('dank');
+		music2 = game.add.audio('ambient');
+		musicCounter = 0;
 
-		this.playerDeathSFX = game.add.audio('playerDeathSFX')
-		this.playerDeathSFX.volume = 3;
+		playerDeathSFX = game.add.audio('playerDeathSFX')
+		playerDeathSFX.volume = 3;
 
 		//=============
 		//PLAYER OBJECT
@@ -182,8 +201,9 @@ Game.prototype = {
 		//=============
 		player = new Player(150, 100, 0.15, 'teddy');
 		imagination = new cloud(0, 0, 1, 'bigcloud');
-		//currentMap = new Level('t', 'tiletest1', ['cloudy','bricks3'], ['Tile Layer 1','Tile Layer 2']);
-		currentMap = new Level('m','new_last_level_map', ['last_level_tile', 'dirt-tiles'], ['Tile Layer 1','Tile Layer 2','Tile Layer 3','collision layer']);
+		//console.log("here")
+		currentMap = new Level('t', 'tiletest1', ['cloudy','bricks3'], ['Tile Layer 1','Tile Layer 2']);
+		//currentMap = new Level('t','new_last_level_map', ['last_level_tile', 'dirt-tiles'], ['Tile Layer 2','Tile Layer 1']);
 
 	},
 	update:function() {		// add game logic
@@ -197,7 +217,13 @@ Game.prototype = {
 			currentMap = new Level('e', 'elementary_tileset', ['bricks3', 'cloudy'], ['Tile Layer 1','Tile Layer 2']);
 		} else if(currentLevel == 2 && currentMap.key != 'm') {
 			deleteMap(currentMap);
+
+			//currentMap = new Level('m','new_last_level_map', ['last_level_tile', 'dirt-tiles'], ['Tile Layer 1','Tile Layer 2','Tile Layer 3','collision layer']);
+
 			//currentMap = new Level('m','noImaginationLand', ['last_level', 'dirt-tiles'], ['Tile Layer 1','Tile Layer 2','Tile Layer 3','collision Layer']);
+
+			currentMap = new Level('m','middleschool', ['bricks3', 'cloudy'], ['Tile Layer 1','Tile Layer 2']);
+
 		} else if(currentLevel == 3){
 			deleteMap(currentMap);
 			game.state.start('GameOver');
@@ -206,13 +232,33 @@ Game.prototype = {
 		//console.log(player.hearts);
 		if(player.hearts <= 0 || player.isDead){
 			deleteMap(currentMap);
-			this.playerDeathSFX.play();
+			if(music1.isPlaying){
+				music1.stop();
+			}
+			if(music2.isPlaying){
+				music2.stop();
+			}
+			playerDeathSFX.play();
+
 			game.state.start('GameOver');
+		}
+
+		if(!music1.isPlaying && !music2.isPlaying){
+			if(musicCounter%2 == 0){
+				music2.play();
+			}else{
+				music1.play();
+			}
+			musicCounter++;
+
 		}
 	}
 }
 
-
+//========
+//GAMEOVER
+//	state
+//========
 var GameOver = function(game) {
 	var endText;
 }
@@ -238,6 +284,58 @@ GameOver.prototype = {
 	}
 }
 
+//===================
+//BACKGROUND AND LORE
+//	state
+//===================
+var Lore = function(game) {
+	var loreText;
+}
+Lore.prototype = {
+	create:function(){
+		console.log("Entering Game Lore");
+		var txt = "Imagination! who can sing thy force?\nOr who describe the swiftness of thy course?\nSoaring through air to find the bright abode,\nTh' empyreal palace of the thund'ring God,\nWe on thy pinions can surpass the wind,\nAnd leave the rolling universe behind----\n                    ERNEST, PUT THAT BOOK AWAY!\n                    YOU HAVE TO PAY ATTENTION IN CLASS\n----From star to star the mental optics rove,\nMeasure the skies, and range the realms above----\n                    I SAID PUT THAT AWAY!\nBut I like using my imagination.\n                    DID I SAY YOU COULD DO THAT?\nI just want to think for myself!\n                    THAT'S IT, YOU HAVE DETENTION!";
+		loreText = new ScrollText(game, 100, 100, txt, { fontSize: '20px', fill: '#FFF', font: 'Sans Serif'});
+		loreText.speed = 1;
+		loreText.active = true;
+
+		//add some images! 
+		game.add.image(1000, 325, 'sadkid');
+	},
+	update:function(){
+		console.log(loreText);
+		if(game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR)||game.input.keyboard.isDown(Phaser.Keyboard.L)){
+			//go to next state
+			game.state.start('MainMenu');
+		}
+	}
+}
+
+
+//========================
+//CREDITS AND CONTRIBUTORS
+//	state
+//========================
+var Credits = function(game) {
+	var creditText;
+}
+Credits.prototype = {
+	create:function(){
+		console.log("Entering Credits");
+		creditText = game.add.text(700, 375,
+				("Jacob Darby - composer and writer\nJake Shapiro - artist and programmer\nPhilip Stanley - programmer and quality assurance\nTristan Clark - level designer\n\n\n\n\n\n\nspecial thanks to Luka Dowell - literature contributions\nPoem by Phillis Wheatley"), 
+				{ font:'Sans Serif', fontSize: '32px', fill: '#FFF', align: 'center' });
+		creditText.anchor.set(0.5);
+	},
+	update:function(){
+		if(game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR)||game.input.keyboard.isDown(Phaser.Keyboard.C)){
+			//go to next state
+			game.state.start('MainMenu');
+		}
+	}
+}
+
+
 //======================
 //START GAME: add states
 //======================
@@ -255,6 +353,8 @@ window.onload = function() {
 	game.state.add('MainMenu', MainMenu);
 	game.state.add('Game', Game);
 	game.state.add('GameOver', GameOver);
+	game.state.add('Lore', Lore);
+	game.state.add('Credits', Credits);
 	game.state.start('Preloader');
 }
 
