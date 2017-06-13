@@ -37,7 +37,7 @@ function Level(key, tilemap, tileimage, layer){
 	layer1.resizeWorld();
 	//entire grid will have collision set
 	map.setCollisionByExclusion([]);
-	//map.setCollisionBetween(178,195, true);
+	//map.setCollisionBetween(23582,23614, true);
 	//map.setCollisionBetween(1341,1344);
 	console.log(map);
 

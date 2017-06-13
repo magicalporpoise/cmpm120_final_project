@@ -53,6 +53,7 @@ Preloader.prototype = {
 		//game.load.tilemap('texttest','texttest.json',null,Phaser.Tilemap.TILED_JSON);
 		game.load.tilemap('elementary_tileset', 'elementary_tileset.json', null, Phaser.Tilemap.TILED_JSON);
 		game.load.tilemap('middleschool','middleschool.json',null,Phaser.Tilemap.TILED_JSON);
+		game.load.tilemap('elementary','elementary.json',null,Phaser.Tilemap.TILED_JSON);
 
 		game.load.tilemap('noImaginationLand','new_last_level.json',null,Phaser.Tilemap.TILED_JSON);
 
@@ -62,10 +63,13 @@ Preloader.prototype = {
 		game.load.spritesheet('bricks3');
 		game.load.spritesheet('cloudy');
 		//game.load.spritesheet('newTilemap');
+		game.load.spritesheet('pipes');
+		game.load.spritesheet('pipesNew')
 
 
 		// vectorized images
 		game.load.image('bigcloud','cloud3_white.png');
+		game.load.image('smallcloud','cloud5_white.png');
 
 		// rasterized images and atlas's 
 		game.load.image('chalkboard','chalkboard.png');		
@@ -183,6 +187,7 @@ Game.prototype = {
 		group_Emitter = game.add.group();
 		group_speaker = game.add.group();
 
+
 		//music
 		music1 = game.add.audio('dank');
 		music2 = game.add.audio('ambient');
@@ -197,6 +202,7 @@ Game.prototype = {
 		//=============
 		player = new Player(150, 100, 0.15, 'teddy');
 		imagination = new cloud(0, 0, 1, 'bigcloud');
+
 		currentMap = new Level('t', 'tiletest1', ['cloudy','bricks3'], ['Tile Layer 1','Tile Layer 2']);
 
 	},
@@ -208,7 +214,8 @@ Game.prototype = {
 		//console.log(currentMap);
 		if(currentLevel == 1 && currentMap.key != 'e') {
 			deleteMap(currentMap);
-			currentMap = new Level('e', 'elementary_tileset', ['bricks3', 'cloudy'], ['Tile Layer 1','Tile Layer 2']);
+			//currentMap = new Level('e', 'elementary_tileset', ['bricks3', 'cloudy'], ['Tile Layer 1','Tile Layer 2']);
+			currentMap = new Level('e', 'elementary_tileset', ['cloudy', 'bricks3'], ['Tile Layer 1','Tile Layer 2']);
 		} else if(currentLevel == 2 && currentMap.key != 'm') {
 			deleteMap(currentMap);
 			currentMap = new Level('m','middleschool', ['bricks3', 'cloudy'], ['Tile Layer 1','Tile Layer 2']);
