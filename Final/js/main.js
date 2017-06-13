@@ -183,7 +183,7 @@ Game.prototype = {
 		if(currentLevel == 1 && currentMap.key != 'e') {
 			deleteMap(currentMap);
 			//currentMap = new Level('e', 'elementary_tileset', ['bricks3', 'cloudy'], ['Tile Layer 1','Tile Layer 2']);
-			currentMap = new Level('e', 'elementary', ['cloudy', 'pipesNew'], ['Tile Layer 1','Tile Layer 2']);
+			currentMap = new Level('e', 'elementary_tileset', ['cloudy', 'bricks3'], ['Tile Layer 1','Tile Layer 2']);
 		} else if(currentLevel == 2 && currentMap.key != 'm') {
 			deleteMap(currentMap);
 			currentMap = new Level('m','middleschool', ['bricks3', 'cloudy'], ['Tile Layer 1','Tile Layer 2']);
