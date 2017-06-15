@@ -32,6 +32,7 @@ Preloader.prototype = {
 		game.load.audio('NPCHit', 'player_smack.wav')
 		game.load.audio('playerDeathSFX', 'player_death.wav');
 		game.load.audio('hideNoise', 'chairNoise.wav')
+		game.load.audio('laser', 'laser.wav')
 		game.load.path = 'assets/audio/sfx/player_attacks/';
 		game.load.audio('player_attack1', 'player_attack1.wav');
 		game.load.audio('player_attack2', 'player_attack2.wav');
