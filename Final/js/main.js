@@ -62,6 +62,7 @@ Preloader.prototype = {
 		game.load.tilemap('supaIntenseTest','supaIntenseTest.json',null,Phaser.Tilemap.TILED_JSON);
 		game.load.tilemap('testingLRI','testingLRI.json',null,Phaser.Tilemap.TILED_JSON);
 		game.load.tilemap('twoSmallerIslands','twoSmallerIslands.json',null,Phaser.Tilemap.TILED_JSON);
+		game.load.tilemap('testingIslandsMinimized','testingIslandsMinimized.json',null,Phaser.Tilemap.TILED_JSON);
 
 		//game.load.tilemap('noImaginationLand','new_last_level.json',null,Phaser.Tilemap.TILED_JSON);
 
@@ -76,6 +77,7 @@ Preloader.prototype = {
 		game.load.spritesheet('lowResIntense');
 		game.load.spritesheet('smallerIslands1');
 		game.load.spritesheet('smallerIslands2');
+		game.load.spritesheet('islandsMinimized');
 
 
 		// vectorized images
@@ -235,6 +237,8 @@ Game.prototype = {
 
 		//test = new NPC(game, 800, 1400, 'redBook', 0);
 
+		//currentMap = new Level('t', 'testingIslandsMinimized', ['islandsMinimized','bricks3'], ['Tile Layer 1','Tile Layer 2']);
+
 		currentMap = new Level('t', 'tiletest1', ['cloudy','bricks3'], ['Tile Layer 1','Tile Layer 2']);
 		//currentMap = new Level('e', 'twoSmallerIslands', ['smallerIslands1', 'smallerIslands2'], ['Tile Layer 1','Tile Layer 2'])
 		//nextMap = new Level('e', 'elementary_tileset', ['bricks3', 'pipesNew'], ['Tile Layer 1','Tile Layer 2']);
@@ -252,7 +256,8 @@ Game.prototype = {
 		if(currentLevel == 1 && currentMap.key != 'e') {
 			deleteMap(currentMap);
 
-			currentMap = new Level('e', 'elementary', ['bricks3', 'pipesNew'], ['Tile Layer 1','Tile Layer 2']);
+			currentMap = new Level('e', 'testingIslandsMinimized', ['islandsMinimized','bricks3'], ['Tile Layer 1','Tile Layer 2']);
+			//currentMap = new Level('e', 'elementary', ['bricks3', 'pipesNew'], ['Tile Layer 1','Tile Layer 2']);
 
 		} else if(currentLevel == 2 && currentMap.key != 'm') {
 			deleteMap(currentMap);
@@ -343,7 +348,7 @@ var Lore = function(game) {
 Lore.prototype = {
 	create:function(){
 		console.log("Entering Game Lore");
-		var txt = "Imagination! who can sing thy force?\nOr who describe the swiftness of thy course?\nSoaring through air to find the bright abode,\nTh' empyreal palace of the thund'ring God,\nWe on thy pinions can surpass the wind,\nAnd leave the rolling universe behind----\n                    ERNEST, PUT THAT BOOK AWAY!\n                    YOU HAVE TO PAY ATTENTION IN CLASS\n----From star to star the mental optics rove,\nMeasure the skies, and range the realms above----\n                    I SAID PUT THAT AWAY!\nBut I like using my imagination.\n                    DID I SAY YOU COULD DO THAT?\nI just want to think for myself!\n                    THAT'S IT, YOU HAVE DETENTION!";
+		var txt = "Imagination! who can sing thy force?\nOr who describe the swiftness of thy course?\nSoaring through air to find the bright abode,\nTh' empyreal palace of the thund'ring God,\nWe on thy pinions can surpass the wind,\nAnd leave the rolling universe behind----\n                    ERNEST, PAY ATTENTION!\n                    YOU HAVE TO PAY ATTENTION IN CLASS\n----From star to star the mental optics rove,\nMeasure the skies, and range the realms above----\n                    I SAID PAY ATTENTION!\nBut I like using my imagination.\n                    DID I SAY YOU COULD DO THAT?\nI just want to think for myself!\n                    THAT'S IT, YOU HAVE DETENTION!";
 		loreText = new ScrollText(game, 100, 100, txt, { fontSize: '20px', fill: '#FFF', font: 'Sans Serif'});
 		loreText.speed = 1;
 		loreText.active = true;

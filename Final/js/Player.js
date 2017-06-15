@@ -73,7 +73,7 @@ function Player(x, y, scale, img){
 	this.animations.add('falling', //[0,1,2,3,4,5,6,7,8,9,
 		[10,11,12,13,14], 1, false);
 	this.animations.add('idletosit', [15,16,17,18,19,20,21,22,23,24,25,26,27,28,29], 65, true);
-	this.animations.add('sit', [30,31,32,33,34,35,36,37,38,39,40,41,42,43,44], 65, true);
+	this.animations.add('sit', [30,31,32,33,34,35,36,37,38,39,40,41,42,43,44], 15, true);
 	this.animations.add('idle', [45,46,47,48,49,50,51,52,53,54,55,56,57,58,59], 65, true);
 	this.animations.add('takingdamage', [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14], 65, true);
 	//this.animations.add('idle', [115,116,117,118,119,120,121,122,123,124,125,126,127,128,129], 65, true);
@@ -313,7 +313,7 @@ Player.prototype.update = function(){
 		if(this.hidden)	{
 			this.facing = 1;
 			this.scale.x = this.scale.y;
-			this.animations.play('sit', 50, true);
+			this.animations.play('sit', 20, true);
 		}
 		else this.animations.play('idle', 10, true);
 	}
