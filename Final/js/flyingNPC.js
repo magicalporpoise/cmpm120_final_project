@@ -49,7 +49,7 @@ flyingNPC.prototype.update = function(){
 		//this.sight.body.setSize(100, 100, Math.cos(this.sight.rotation) * this.sight.width, Math.sin(this.sight.rotation) * this.sight.width);
 	} else {
 		this.sight.rotation = -Math.PI/2;
-		this.sight.body.setSize(this.sight.origHeight, this.sight.origWidth, 7*this.sight.origWidth/8, 0);
+		this.sight.body.setSize(this.sight.origHeight-50, this.sight.origWidth-50, 325, 50);
 		//this.sight.body.setSize(this.sight.height, Math.abs(this.sight.width), this.sight.width-42, 42);
 		//fly back up to a normal height
 		if(this.y != this.altitude) this.body.velocity.y = (this.altitude-this.y);

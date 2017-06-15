@@ -49,5 +49,5 @@ ViewBox.prototype.update = function(){
 	} else {
 		this.playerInSight = false;
 	}
-	//game.debug.body(this);
+	game.debug.body(this);
 }

@@ -146,7 +146,7 @@ NPC.prototype.update = function(){
 	//BEHAVIOR
 	if(!this.isStunned){
 	//when the player has not stunned this...
-		this.sight.visible = true;
+		this.sight.renderable = true;
 		this.stunTimerCont = false;
 		if(this.sight.playerInSight && !player.hidden) { 
 		//turn aggro
@@ -177,7 +177,7 @@ NPC.prototype.update = function(){
 			this.stunSFXplayed = true;
 			this.stunSFX.play();
 		}
-		this.sight.visible = false;
+		this.sight.renderable = false;
 		this.stunTimerCont = true;
 	}
 
