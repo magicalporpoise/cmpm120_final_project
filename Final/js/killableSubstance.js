@@ -11,7 +11,6 @@ function killableSubstance(game,x, y, img, frame){
 	//this.scale.x = scale_length;
 	//this.scale.y = scale_length;
 
-
 	game.physics.arcade.enable(this);
 	//insert into game
 	game.add.existing(this);
@@ -32,9 +31,10 @@ killableSubstance.prototype.constructor = killableSubstance;
 
 killableSubstance.prototype.update = function(){
 	let playerHit = game.physics.arcade.overlap(this, player, killPlayer);
+	console.log(shouldPlaySpike);
 	if(!playerHit){
 		shouldPlaySpike = true;
-		spikeSFX.stop();
+		//spikeSFX.stop();
 	}
 }
 
@@ -43,7 +43,7 @@ function killPlayer() {
 	// kill player
 	//console.log("killable substance is killing player");
 	//player.isDead = true;
-	if(shouldPlaySpike){
+	if(shouldPlaySpike && !spikeSFX.isPlaying){
 		spikeSFX.play();
 		shouldPlaySpike = false;
 	}

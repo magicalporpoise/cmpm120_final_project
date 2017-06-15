@@ -12,6 +12,8 @@ var music2;
 var musicCounter = 0;
 var musicMenu;
 var shouldPlayMenu = true;
+var shouldPlaySpike = true;
+var	spikeSFX;
 //================================================
 //PRELOAD: 
 //	load main art assets and move to the main menu
@@ -219,9 +221,10 @@ Game.prototype = {
 		group_speaker = game.add.group();
 
 
+		spikeSFX = game.add.audio('spike');
 		playerDeathSFX = game.add.audio('playerDeathSFX')
 		playerDeathSFX.volume = 3;
-		spikeSFX = game.add.audio('spike');
+		
 
 		//=============
 		//PLAYER OBJECT
