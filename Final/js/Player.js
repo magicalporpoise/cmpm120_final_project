@@ -152,7 +152,7 @@ Player.prototype.update = function(){
 	let mv_down = game.input.keyboard.justPressed(Phaser.Keyboard.S);
 
 	let k_attack = game.input.keyboard.justPressed(Phaser.Keyboard.K); 
-	let l_down = game.input.keyboard.justPressed(Phaser.Keyboard.L);
+	let l_down = game.input.keyboard.isDown(Phaser.Keyboard.L);
 	//let f_dash = game.input.keyboard.justPressed(Phaser.Keyboard.F);
 	let r_shoot = game.input.keyboard.justPressed(Phaser.Keyboard.J);
 
@@ -229,8 +229,9 @@ Player.prototype.update = function(){
 			hitBox.destroy();
 		}
 		if (l_down){
-			toggleInvis(this);
-		}
+			this.isInvis = true;
+		} else this.isInvis = false;
+
 		if(this.isInvis){
 			this.alpha = 0.2;
 			this.counter++;
@@ -358,8 +359,4 @@ function animationStopped(sprite, animation){
 function deathRestart(sprite){
 	sprite.x = 300;
 	sprite.y = 300;
-}
-
-function toggleInvis(me){
-	me.isInvis = !me.isInvis;
 }
