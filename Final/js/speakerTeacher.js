@@ -54,9 +54,10 @@ function insertAllText(lvl, grp){
 var EQ = ["Due on Monday!", "I don't belive\nin extra credit.", 
 		  "3 absences and\nyou fail the class.", "You can't start\nthis assignment\nthe day before!", 
 		  "Wikipedia isn't a source!", "I don't accept late work!", 
+<<<<<<< HEAD
 		  "I'm assigning\nweekend homework!", 
-		  "We're preparing you\nfor college!", "Do you have \nsomething you want\nto say to the class?", 
-		  "Attendance is mandatory!", "Open your books\nto page 394.", "You will need this\nin the future.", 
+		  "Do you have \nsomething you want\nto say to the class?", 
+		  "Open your books\nto page 394.", "You will need this\nin the future.", 
 		  "I won't provide\na study guide.", "You need to\nlearn cursive.", 
 		  "I didn't tell you\nto pack up yet!", "I excuse you!\nNot the bell!",
 		  "THE MITOCHONDRIA\nIS THE POWERHOUSE\nOF THE CELL", "The opposite of\nlowercase 'b', plus\nor minus the...",
