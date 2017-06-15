@@ -74,8 +74,9 @@ projectile.prototype.update = function(){
 
 function vanish(hb, npc){
 	//npc.destroy();
-	npc.aggro = false;
-	npc.isStunned = true;
+	if(!npc.aggro){
+		npc.isStunned = true;
+	}
 	hb.doDestroy=true;
 	//npc.sight.destroy();
 }

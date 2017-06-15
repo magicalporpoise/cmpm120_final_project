@@ -338,8 +338,10 @@ Player.prototype.update = function(){
 //FUNCTIONS
 //=========
 function stunTheEnemy(hb, npc){
-	player.punchSFX.play();
-	npc.isStunned = true;
+	if(!npc.aggro){
+		player.punchSFX.play();
+		npc.isStunned = true;
+	}
 }
 
 
