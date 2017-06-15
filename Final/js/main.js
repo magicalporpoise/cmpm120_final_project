@@ -72,7 +72,7 @@ Preloader.prototype = {
 		// vectorized images
 		//game.load.image('bigcloud','coloredCloud.png');
 		//game.load.image('bigcloud2','coloredCloud2.png');
-		game.load.image('bigcloud3','coloredCloud3.png');
+		game.load.image('bigcloud3','coloredCloud2.png');
 		game.load.image('darkcloud','darkCloud.png');
 		//game.load.image('smallcloud','cloud5_white.png');
 

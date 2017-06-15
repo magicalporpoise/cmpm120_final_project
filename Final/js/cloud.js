@@ -1,6 +1,7 @@
 function cloud(x, y, scale_length, img){
 	//background cloud
 	this.bgCloud = game.add.image(0,0, 'darkcloud');
+	//this.bgCloud.alpha = 0;
 	game.add.existing(this.bgCloud);
 
 	//inherit Phaser.Sprite class
@@ -72,6 +73,8 @@ cloud.prototype.update = function(){
 	let adjRatio = (player.hearts+20)/player.maxHearts;
 	let Ratio = (player.hearts)/player.maxHearts;
 	this.alpha = Ratio;
+	//if (player.hearts>50) 
+	//else 				  this.bgCloud.alpha = 1-Ratio;
 
 	takeDamage(this, [this.playerpain, this.rainbowDeath], this.oldHearts);
 
@@ -85,7 +88,7 @@ cloud.prototype.update = function(){
 
 	//color change LOOK AT THAT HEXIDECIMAL MATH
 	//						colors completely weirdly!!!
-	this.imagination.tint = (0xFFFFFF) - (0x00FFFF * (0x001111*Ratio));
+	//this.imagination.tint = (0xFFFFFF) - (0x00FFFF * (0x001111*Ratio));
 
 
 	this.imagination.text = player.hearts;

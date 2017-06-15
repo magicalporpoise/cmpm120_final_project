@@ -101,6 +101,8 @@ NPC.prototype.constructor = NPC;
 //	npc behavior
 //================
 NPC.prototype.update = function(){
+
+
 	//TIMERS
 	if(this.behaveCont)this.behave ++;
 	if(this.stunTimerCont)this.stunTimer++;
