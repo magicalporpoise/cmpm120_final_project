@@ -64,15 +64,15 @@ cloud.prototype.update = function(){
 	this.playerpain.x = player.x;
 	this.playerpain.y = player.y;
 
-	this.scale.x = (player.hearts+player.maxHearts/4)/player.maxHearts;
-	this.scale.y = (player.hearts+player.maxHearts/4)/player.maxHearts;
+	this.scale.x = (player.hearts+20)/player.maxHearts;
+	this.scale.y = (player.hearts+20)/player.maxHearts;
 
 	this.imagination.x = game.camera.x + this.width/4;
 	this.imagination.y = game.camera.y + this.height/4 -5;
 
 	this.imagination.text = player.hearts;
-	this.imagination.scale.x = (player.hearts+player.maxHearts/4)/player.maxHearts;
-	this.imagination.scale.y = (player.hearts+player.maxHearts/4)/player.maxHearts;
+	this.imagination.scale.x = this.scale.x;
+	this.imagination.scale.y = this.scale.y;
 }
 
 //================
