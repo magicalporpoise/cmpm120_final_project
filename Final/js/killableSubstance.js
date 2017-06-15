@@ -29,14 +29,24 @@ killableSubstance.prototype.constructor = killableSubstance;
 //UPDATE FUNCTION:
 //	killableSubstance behavior
 //==================
+
 killableSubstance.prototype.update = function(){
 	let playerHit = game.physics.arcade.overlap(this, player, killPlayer);
+	if(!playerHit){
+		shouldPlaySpike = true;
+		spikeSFX.stop();
+	}
 }
+
 
 function killPlayer() {
 	// kill player
 	//console.log("killable substance is killing player");
 	//player.isDead = true;
+	if(shouldPlaySpike){
+		spikeSFX.play();
+		shouldPlaySpike = false;
+	}
 	player.hearts--;
 
 
