@@ -216,7 +216,7 @@ Game.prototype = {
 		player = new Player(150, 100, 0.15, 'teddy');
 		imagination = new cloud(0, 0, 1, 'bigcloud');
 
-		test = new flyingNPC(game, 800, 1400, 'blueBook', 0);
+		test = new NPC(game, 800, 1400, 'redBook', 0);
 
 		currentMap = new Level('t', 'tiletest1', ['cloudy','bricks3'], ['Tile Layer 1','Tile Layer 2']);
 		//currentMap = new Level('t','new_last_level_map', ['last_level_tile', 'dirt-tiles'], ['Tile Layer 2','Tile Layer 1']);

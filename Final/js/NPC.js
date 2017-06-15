@@ -188,7 +188,7 @@ NPC.prototype.update = function(){
 		this.idle = false;
 		this.isStunned = false;
 		//messing around with max speed
-		this.maxSpeed = Math.abs(player.x - this.x) + 100;
+		this.maxSpeed = Math.min(400, Math.abs(player.x - this.x) + 100);
 		moveTowardsPlayer(this);
 		rotateSights(this, this.sight);
 		// allows npc to jump
@@ -204,7 +204,7 @@ NPC.prototype.update = function(){
 		this.sight.rotation = 0;
 		this.atkTimerCont = false;
 		this.maxSpeed = 100;
-		this.sight.body.setSize(this.sight.origWidth, this.sight.origHeight-40, 0, 0);
+		this.sight.body.setSize(this.sight.origWidth-25, this.sight.origHeight-50, 0, this.sight.origWidth/8);
 	
 	}
 

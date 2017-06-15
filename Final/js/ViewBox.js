@@ -21,7 +21,7 @@ function ViewBox(x, y, scale_length, img){
 	this.origWidth = this.width;
 	this.origHeight = this.height;
 
-	this.anchor.x=1;
+	this.anchor.x=1.05;
 	this.anchor.y=0.5;
 	//this.scale.y = scale;
 
@@ -49,5 +49,5 @@ ViewBox.prototype.update = function(){
 	} else {
 		this.playerInSight = false;
 	}
-	game.debug.body(this);
+	//game.debug.body(this);
 }

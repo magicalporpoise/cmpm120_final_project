@@ -206,12 +206,11 @@ Player.prototype.update = function(){
 		//attacking
 		if(k_attack && !this.isInvis){
 			var hitBox;	//make a hitbox to check against an enemy
-			if(this.facing > 0) hitBox = game.add.sprite(this.x, this.y, 'platform');
-			else hitBox = game.add.sprite(this.x-100, this.y, 'platform');
+			hitBox = game.add.sprite(this.x, this.y-40, 'platform');
 			game.physics.arcade.enable(hitBox);
 			//change hit box size
-			hitBox.body.setSize(100, 50, 0, 0);
-
+			hitBox.body.setSize(this.facing*125, 50);
+			//game.debug.body(hitBox);
 			//console.log("isPunching set to true");
 			//SFX
 			if(this.playerAttackCounter % 2 == 0){
