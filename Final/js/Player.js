@@ -36,11 +36,14 @@ function Player(x, y, scale, img){
 	//personal variables
 	this.maxHearts = 100;	//character's hp
 	this.hearts = this.maxHearts;		
-	this.maxSpeed = 500;	//speed cap
+	this.maxSpeed = 800;	//speed cap
+	//this.maxSpeed = 500;	//speed cap
 	this.jump = -500;		//jump height
-	this.accel = 25;		//acceleration
+	this.accel = 100;		//acceleration
+	//this.accel = 25;		//acceleration
 	this.hidden = false; 	//is the player hidden from enemies?
 	this.facing = 1; 		//1 for right, -1 for left
+	this.hitBox;			//for punching
 
 	//sounds
 	this.landSFX = game.add.audio('step');
@@ -207,13 +210,10 @@ Player.prototype.update = function(){
 		//Can only attack while not hidden
 		//attacking
 		if(k_attack && !this.isInvis){
-			var hitBox;	//make a hitbox to check against an enemy
-			hitBox = game.add.sprite(this.x, this.y-40, 'platform');
-			game.physics.arcade.enable(hitBox);
-			//change hit box size
-			hitBox.body.setSize(this.facing*125, 50);
-			//game.debug.body(hitBox);
-			//console.log("isPunching set to true");
+			this.hitBox = game.add.sprite(this.x + (this.facing>0?0:-125), this.y-40, 'platform');
+			game.physics.arcade.enable(this.hitBox);
+			this.hitBox.renderable = false;
+			this.hitBox.body.setSize(125, 50);
 			//SFX
 			if(this.playerAttackCounter % 2 == 0){
 				this.playerAttack2SFX.play();
@@ -227,8 +227,10 @@ Player.prototype.update = function(){
 			}
 
 			this.isPunching = true;
-			game.physics.arcade.overlap(hitBox, group_npc, stunTheEnemy, null, NPC);
-			hitBox.destroy();
+
+			//game.debug.body(this.hitBox);
+			game.physics.arcade.overlap(this.hitBox, group_npc, stunTheEnemy, null, NPC);
+			this.hitBox.destroy();
 		}
 		if (l_down){
 			this.isInvis = true;
@@ -338,9 +340,6 @@ Player.prototype.update = function(){
 function stunTheEnemy(hb, npc){
 	player.punchSFX.play();
 	npc.isStunned = true;
-	//npc.body.velocity.x += Math.sign(npc.x - player.x)*400;
-	//console.log(npc.body.velocity.x);
-	//console.log(Math.sign(npc.x - player.x)*400);
 }
 
 
