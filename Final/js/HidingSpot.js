@@ -25,6 +25,8 @@ function HidingSpot(game, x, y, img, frame){
 	//insert into game
 	game.add.existing(this);
 
+	this.hideNoise = game.add.audio('hideNoise');
+
 	//add to hidingspot group
 	group_hidingspot.add(this);
 }
@@ -60,6 +62,7 @@ function toggleHiding(me, input, overlapping){
 	if(input && overlapping){
 		player.hidden = !player.hidden;
 		if(player.hidden) {
+			me.hideNoise.play();
 			player.body.velocity.x = 0;
 			player.x = me.x + 50;
 			player.y = me.y+20;
