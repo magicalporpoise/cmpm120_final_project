@@ -235,7 +235,7 @@ Game.prototype = {
 		//console.log(currentMap);
 		if(currentLevel == 1 && currentMap.key != 'e') {
 			deleteMap(currentMap);
-			currentMap = new Level('e', 'elementary_tileset', ['bricks3', 'pipesNew'], ['Tile Layer 1','Tile Layer 2']);
+			currentMap = new Level('e', 'elementary', ['bricks3', 'pipesNew'], ['Tile Layer 1','Tile Layer 2']);
 		} else if(currentLevel == 2 && currentMap.key != 'm') {
 			deleteMap(currentMap);
 
