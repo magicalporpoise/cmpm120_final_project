@@ -70,7 +70,9 @@ Preloader.prototype = {
 
 
 		// vectorized images
-		game.load.image('bigcloud','coloredCloud.png');
+		//game.load.image('bigcloud','coloredCloud.png');
+		//game.load.image('bigcloud2','coloredCloud2.png');
+		game.load.image('bigcloud3','coloredCloud3.png');
 		game.load.image('darkcloud','darkCloud.png');
 		//game.load.image('smallcloud','cloud5_white.png');
 
@@ -220,7 +222,7 @@ Game.prototype = {
 		//CURRENT MAP
 		//=============
 		player = new Player(150, 100, 0.15, 'teddy');
-		imagination = new cloud(0, 0, 0.5, 'bigcloud');
+		imagination = new cloud(0, 0, 0.5, 'bigcloud3');
 
 		//test = new NPC(game, 800, 1400, 'redBook', 0);
 
