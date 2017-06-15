@@ -70,7 +70,7 @@ Preloader.prototype = {
 
 
 		// vectorized images
-		game.load.image('bigcloud','colorCloud.png');
+		game.load.image('bigcloud','coloredCloud.png');
 		game.load.image('darkcloud','darkCloud.png');
 		//game.load.image('smallcloud','cloud5_white.png');
 
@@ -151,6 +151,8 @@ MainMenu.prototype = {
 		
 		if(game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR)){
 			//go to next state
+			//add loading text
+			game.add.text(650, 3*750/4, "LOADING...", { font: 'Source Code Pro', fontSize: '64px', fill: '#FFF' });
 			musicMenu.stop();
 			game.state.start('Game');
 		} else if(game.input.keyboard.isDown(Phaser.Keyboard.L)){
@@ -218,7 +220,7 @@ Game.prototype = {
 		//CURRENT MAP
 		//=============
 		player = new Player(150, 100, 0.15, 'teddy');
-		imagination = new cloud(0, 0, 0.75, 'bigcloud');
+		imagination = new cloud(0, 0, 0.5, 'bigcloud');
 
 		//test = new NPC(game, 800, 1400, 'redBook', 0);
 

@@ -1,4 +1,8 @@
 function cloud(x, y, scale_length, img){
+	//background cloud
+	this.bgCloud = game.add.image(0,0, 'darkcloud');
+	game.add.existing(this.bgCloud);
+
 	//inherit Phaser.Sprite class
 	// calling new Sprite
 	Phaser.Sprite.call(this, game, x, y, img, 0);
@@ -9,8 +13,12 @@ function cloud(x, y, scale_length, img){
 	this.x = x;
 	this.y = y;
 	this.scale.x = scale_length;
-	this.scale.y = scale_length;	
+	this.scale.y = scale_length;
+	this.bgCloud.scale.x = scale_length;
+	this.bgCloud.scale.y = scale_length;
 	game.add.existing(this);
+
+
 
 	this.imagination = game.add.text(game.world.width/2, game.world.height/2,
 				player.hearts, 
@@ -36,6 +44,8 @@ function cloud(x, y, scale_length, img){
 	this.playerpain.setYSpeed(-100, -200);
 	this.playerpain.start(true, 1000, 0, 0, true);
 
+
+	group_Emitter.add(this.bgCloud);
 	group_Emitter.add(this);
 	group_Emitter.add(this.rainbowDeath);
 	group_Emitter.add(this.imagination);
@@ -56,33 +66,29 @@ cloud.prototype.constructor = cloud;
 cloud.prototype.update = function(){
 	this.x = game.camera.x;
 	this.y = game.camera.y;
+	this.bgCloud.x = this.x;
+	this.bgCloud.y = this.y;
 
 	let adjRatio = (player.hearts+20)/player.maxHearts;
 	let Ratio = (player.hearts)/player.maxHearts;
 	this.alpha = Ratio;
-	this.rainbowDeath.minParticleScale = 0.7*adjRatio;
-	this.rainbowDeath.maxParticleScale = 0.9*adjRatio;
 
 	takeDamage(this, [this.playerpain, this.rainbowDeath], this.oldHearts);
 
-	this.rainbowDeath.x = this.x + (this.scale.x*this.width)/3;
-	this.rainbowDeath.y = this.y + (this.scale.y*this.height)/2;
+	this.imagination.x = this.x + (this.width/2) - 50;
+	this.imagination.y = this.y + (this.height/2) - 25;
+	this.rainbowDeath.x = this.imagination.x + 50;
+	this.rainbowDeath.y = this.imagination.y + 50;
 	this.playerpain.x = player.x;
 	this.playerpain.y = player.y;
 
-	this.scale.x = adjRatio;
-	this.scale.y = adjRatio;
-
-	this.imagination.x = this.x + this.width/4;
-	this.imagination.y = this.y + (this.height)/8;
 
 	//color change LOOK AT THAT HEXIDECIMAL MATH
-	//						white at 100%               as hearts goes down, red goes up
+	//						colors completely weirdly!!!
 	this.imagination.tint = (0xFFFFFF) - (0x00FFFF * (0x001111*Ratio));
 
+
 	this.imagination.text = player.hearts;
-	this.imagination.scale.x = this.scale.x*1.5;
-	this.imagination.scale.y = this.scale.y*1.5;
 }
 
 //================
