@@ -59,6 +59,9 @@ Preloader.prototype = {
 		game.load.tilemap('middleschool','middleschool.json',null,Phaser.Tilemap.TILED_JSON);
 		game.load.tilemap('dopeislands','dopeislands.json',null,Phaser.Tilemap.TILED_JSON);
 		game.load.tilemap('elementary','elementary.json',null,Phaser.Tilemap.TILED_JSON);
+		game.load.tilemap('supaIntenseTest','supaIntenseTest.json',null,Phaser.Tilemap.TILED_JSON);
+		game.load.tilemap('testingLRI','testingLRI.json',null,Phaser.Tilemap.TILED_JSON);
+		game.load.tilemap('twoSmallerIslands','twoSmallerIslands.json',null,Phaser.Tilemap.TILED_JSON);
 
 		//game.load.tilemap('noImaginationLand','new_last_level.json',null,Phaser.Tilemap.TILED_JSON);
 
@@ -69,6 +72,10 @@ Preloader.prototype = {
 		game.load.spritesheet('cloudy');
 		game.load.spritesheet('last_level');
 		game.load.spritesheet('pipesNew');
+		game.load.spritesheet('supaIntense');
+		game.load.spritesheet('lowResIntense');
+		game.load.spritesheet('smallerIslands1');
+		game.load.spritesheet('smallerIslands2');
 
 
 		// vectorized images
@@ -219,12 +226,21 @@ Game.prototype = {
 		//PLAYER OBJECT
 		//CURRENT MAP
 		//=============
+
+
+		
+
 		player = new Player(150, 100, 0.15, 'teddy');
 		imagination = new cloud(0, 0, 0.5, 'bigcloud3');
 
 		//test = new NPC(game, 800, 1400, 'redBook', 0);
 
 		currentMap = new Level('t', 'tiletest1', ['cloudy','bricks3'], ['Tile Layer 1','Tile Layer 2']);
+		//currentMap = new Level('e', 'twoSmallerIslands', ['smallerIslands1', 'smallerIslands2'], ['Tile Layer 1','Tile Layer 2'])
+		//nextMap = new Level('e', 'elementary_tileset', ['bricks3', 'pipesNew'], ['Tile Layer 1','Tile Layer 2']);
+		//currentMap = new Level('t', 'testingLRI', ['lowResIntense','bricks3'], ['Tile Layer 1','Tile Layer 2']);
+		//currentMap = new Level('t', 'tiletest1', ['cloudy','bricks3'], ['Tile Layer 1','Tile Layer 2']);
+		//currentMap = new Level('t', 'supaIntenseTest', ['supaIntense','bricks3'], ['Tile Layer 1','Tile Layer 2']);
 
 	},
 	update:function() {		// add game logic
@@ -235,7 +251,9 @@ Game.prototype = {
 		//console.log(currentMap);
 		if(currentLevel == 1 && currentMap.key != 'e') {
 			deleteMap(currentMap);
-			currentMap = new Level('e', 'elementary_tileset', ['bricks3', 'pipesNew'], ['Tile Layer 1','Tile Layer 2']);
+			//currentMap = new Level('t', 'supaIntenseTest', ['supaIntense','bricks3'], ['Tile Layer 1','Tile Layer 2']);
+			currentMap = new Level('e', 'twoSmallerIslands', ['smallerIslands1', 'smallerIslands2'], ['Tile Layer 1','Tile Layer 2']);
+			//currentMap = new Level('e', 'elementary_tileset', ['bricks3', 'pipesNew'], ['Tile Layer 1','Tile Layer 2']);
 		} else if(currentLevel == 2 && currentMap.key != 'm') {
 			deleteMap(currentMap);
 
@@ -243,7 +261,7 @@ Game.prototype = {
 
 			//currentMap = new Level('m','noImaginationLand', ['last_level', 'dirt-tiles'], ['Tile Layer 1','Tile Layer 2','Tile Layer 3','collision Layer']);
 
-			currentMap = new Level('m','middleschool', ['bricks3', 'cloudy'], ['Tile Layer 1','Tile Layer 2']);
+			currentMap = new Level('m','middleschool', ['bricks3', 'pipesNew'], ['Tile Layer 1','Tile Layer 2']);
 
 		} else if(currentLevel == 3){
 			deleteMap(currentMap);
@@ -298,7 +316,7 @@ GameOver.prototype = {
 		grade = (g < 60 ? "F" : (g < 70 ? "D" : (g < 80 ?  "C" : (g < 90 ? "B" : "A" ))));
 
 		endText = game.add.text(350, 325,
-				("You earned a "  + finalScore + " -- " + grade + "\n\n\npress [SPACE] to try again...\n[M] to go back to the MainMenu..."), 
+				(""  + finalScore + " -- " + grade + "\n\n\npress [SPACE] to try again...\n[M] to go back to the MainMenu..."), 
 				{ fontSize: '56px', fill: '#FFF' });
 	},
 	update:function(){
