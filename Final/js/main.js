@@ -12,6 +12,8 @@ var music2;
 var musicCounter = 0;
 var musicMenu;
 var shouldPlayMenu = true;
+var shouldPlaySpike = true;
+var	spikeSFX;
 //================================================
 //PRELOAD: 
 //	load main art assets and move to the main menu
@@ -62,6 +64,7 @@ Preloader.prototype = {
 		game.load.tilemap('middleschool','middleschool.json',null,Phaser.Tilemap.TILED_JSON);
 		game.load.tilemap('dopeislands','dopeislands.json',null,Phaser.Tilemap.TILED_JSON);
 		game.load.tilemap('elementary','elementary.json',null,Phaser.Tilemap.TILED_JSON);
+		game.load.tilemap('elewopipes','elewopipes.json',null,Phaser.Tilemap.TILED_JSON);
 
 		//game.load.tilemap('noImaginationLand','new_last_level.json',null,Phaser.Tilemap.TILED_JSON);
 
@@ -219,9 +222,10 @@ Game.prototype = {
 		group_speaker = game.add.group();
 
 
+		spikeSFX = game.add.audio('spike');
 		playerDeathSFX = game.add.audio('playerDeathSFX')
 		playerDeathSFX.volume = 3;
-		spikeSFX = game.add.audio('spike');
+		
 
 		//=============
 		//PLAYER OBJECT
@@ -245,7 +249,7 @@ Game.prototype = {
 		if(currentLevel == 1 && currentMap.key != 'e') {
 			deleteMap(currentMap);
 
-			currentMap = new Level('e', 'elementary_tileset', ['bricks3', 'pipesNew'], ['Tile Layer 1','Tile Layer 2']);
+			currentMap = new Level('e', 'elewopipes', ['bricks3', 'pipesNew'], ['Tile Layer 1','Tile Layer 2']);
 
 		} else if(currentLevel == 2 && currentMap.key != 'm') {
 			deleteMap(currentMap);
