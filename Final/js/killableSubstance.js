@@ -31,7 +31,6 @@ killableSubstance.prototype.constructor = killableSubstance;
 
 killableSubstance.prototype.update = function(){
 	let playerHit = game.physics.arcade.overlap(this, player, killPlayer);
-	console.log(shouldPlaySpike);
 	if(!playerHit){
 		shouldPlaySpike = true;
 		//spikeSFX.stop();
