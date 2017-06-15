@@ -233,6 +233,7 @@ Game.prototype = {
 		//test = new NPC(game, 800, 1400, 'redBook', 0);
 
 		currentMap = new Level('t', 'tiletest1', ['cloudy','bricks3'], ['Tile Layer 1','Tile Layer 2']);
+		//console.log(group_npc.children);
 
 	},
 	update:function() {		// add game logic
@@ -243,7 +244,9 @@ Game.prototype = {
 		//console.log(currentMap);
 		if(currentLevel == 1 && currentMap.key != 'e') {
 			deleteMap(currentMap);
-			currentMap = new Level('e', 'elementary', ['bricks3', 'pipesNew'], ['Tile Layer 1','Tile Layer 2']);
+
+			currentMap = new Level('e', 'elementary_tileset', ['bricks3', 'pipesNew'], ['Tile Layer 1','Tile Layer 2']);
+
 		} else if(currentLevel == 2 && currentMap.key != 'm') {
 			deleteMap(currentMap);
 
@@ -252,6 +255,7 @@ Game.prototype = {
 			//currentMap = new Level('m','noImaginationLand', ['last_level', 'dirt-tiles'], ['Tile Layer 1','Tile Layer 2','Tile Layer 3','collision Layer']);
 
 			currentMap = new Level('m','middleschool', ['bricks3', 'cloudy'], ['Tile Layer 1','Tile Layer 2']);
+			//console.log(group_npc);
 
 		} else if(currentLevel == 3){
 			deleteMap(currentMap);
