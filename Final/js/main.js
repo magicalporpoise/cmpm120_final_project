@@ -7,6 +7,9 @@
 //create phaser game variable
 var game;
 var pauseScreen;
+var stillPlaying = false;
+var music1;
+var music2; 
 //================================================
 //PRELOAD: 
 //	load main art assets and move to the main menu
@@ -28,6 +31,8 @@ Preloader.prototype = {
 		game.load.audio('step', 'footstep.mp3');
 		game.load.audio('NPCHit', 'player_smack.wav')
 		game.load.audio('playerDeathSFX', 'player_death.wav');
+		game.load.audio('hideNoise', 'chairNoise.wav')
+		game.load.audio('laser', 'laser.wav')
 		game.load.path = 'assets/audio/sfx/player_attacks/';
 		game.load.audio('player_attack1', 'player_attack1.wav');
 		game.load.audio('player_attack2', 'player_attack2.wav');
@@ -115,6 +120,8 @@ MainMenu.prototype = {
 		console.log("MainMenu: create");
 		
 		//title name
+		music1 = game.add.audio('dank');
+		music2 = game.add.audio('ambient');
 		musicMenu = game.add.audio('menu');
 		if(shouldPlayMenu){
 			musicMenu.play();
@@ -168,8 +175,7 @@ var Game = function(game) {
 	var tilemap;
 	var grayScreen;
 	var blob;
-	var music1;
-	var music2;
+	
 	var playerDeathSFX;
 	var musicCounter;
 }
@@ -202,9 +208,6 @@ Game.prototype = {
 
 
 		//music
-		
-		music1 = game.add.audio('dank');
-		music2 = game.add.audio('ambient');
 		musicCounter = 0;
 
 		playerDeathSFX = game.add.audio('playerDeathSFX')
@@ -258,7 +261,7 @@ Game.prototype = {
 			game.state.start('GameOver');
 		}
 
-		if(!music1.isPlaying && !music2.isPlaying){
+		if(!music1.isPlaying && !music2.isPlaying &&!stillPlaying){
 			if(musicCounter%2 == 0){
 				music1.play();
 			}else{
@@ -266,6 +269,10 @@ Game.prototype = {
 			}
 			musicCounter++;
 
+		}
+		if(music1.isPlaying && music2.isPlaying){
+			music1.stop();
+			music2.stop();
 		}
 	}
 }
@@ -281,12 +288,6 @@ GameOver.prototype = {
 	create:function(){
 		console.log("ending game.....");
 		shouldPlayMenu = true;
-		if(music1.isPlaying){
-			music1.stop();
-		}
-		if(music2.isPlaying){
-			music2.stop();
-		}
 
 		currentLevel = 0;
 		//set the player's grade
@@ -302,9 +303,14 @@ GameOver.prototype = {
 	update:function(){
 		if(game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR)){
 			//go to next state
+			stillPlaying = true;
 			game.state.start('Game');
 		} else if(game.input.keyboard.isDown(Phaser.Keyboard.M)){
 			//go to next state
+			stillPlaying = false;
+			music1.stop();
+			music2.stop();
+			
 			game.state.start('MainMenu');
 		}
 	}
