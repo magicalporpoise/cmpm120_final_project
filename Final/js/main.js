@@ -28,6 +28,7 @@ Preloader.prototype = {
 		game.load.audio('step', 'footstep.mp3');
 		game.load.audio('NPCHit', 'player_smack.wav')
 		game.load.audio('playerDeathSFX', 'player_death.wav');
+		game.load.audio('hideNoise', 'chairNoise.wav')
 		game.load.path = 'assets/audio/sfx/player_attacks/';
 		game.load.audio('player_attack1', 'player_attack1.wav');
 		game.load.audio('player_attack2', 'player_attack2.wav');
@@ -278,12 +279,8 @@ GameOver.prototype = {
 	create:function(){
 		console.log("ending game.....");
 		shouldPlayMenu = true;
-		if(music1.isPlaying){
-			music1.stop();
-		}
-		if(music2.isPlaying){
-			music2.stop();
-		}
+		music1.stop();
+		music2.stop();
 
 		currentLevel = 0;
 		//set the player's grade
