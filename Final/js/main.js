@@ -7,9 +7,9 @@
 //create phaser game variable
 var game;
 var pauseScreen;
-var stillPlaying = false;
 var music1;
 var music2; 
+var musicCounter = 0;
 //================================================
 //PRELOAD: 
 //	load main art assets and move to the main menu
@@ -181,7 +181,6 @@ var Game = function(game) {
 	var blob;
 	
 	var playerDeathSFX;
-	var musicCounter;
 }
 
 Game.prototype = {
@@ -210,9 +209,6 @@ Game.prototype = {
 		group_Emitter = game.add.group();
 		group_speaker = game.add.group();
 
-
-		//music
-		musicCounter = 0;
 
 		playerDeathSFX = game.add.audio('playerDeathSFX')
 		playerDeathSFX.volume = 3;
@@ -265,14 +261,17 @@ Game.prototype = {
 			game.state.start('GameOver');
 		}
 
-		if(!music1.isPlaying && !music2.isPlaying &&!stillPlaying){
+		if(!music1.isPlaying && !music2.isPlaying){
 			if(musicCounter%2 == 0){
 				music1.play();
+				
+
 			}else{
 				music2.play();
+				
+
 			}
 			musicCounter++;
-
 		}
 		if(music1.isPlaying && music2.isPlaying){
 			music1.stop();
@@ -307,11 +306,9 @@ GameOver.prototype = {
 	update:function(){
 		if(game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR)){
 			//go to next state
-			stillPlaying = true;
 			game.state.start('Game');
 		} else if(game.input.keyboard.isDown(Phaser.Keyboard.M)){
 			//go to next state
-			stillPlaying = false;
 			music1.stop();
 			music2.stop();
 			
