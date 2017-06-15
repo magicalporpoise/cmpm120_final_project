@@ -47,7 +47,7 @@ function Player(x, y, scale, img){
 	this.landed = false;
 	this.punchSFX = game.add.audio('NPCHit');
 	this.shootSFX = game.add.audio('laser');
-	this.shootSFX.volume = .3;
+	this.shootSFX.volume = .25;
 
 
 

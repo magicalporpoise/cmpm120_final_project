@@ -10,6 +10,8 @@ var pauseScreen;
 var music1;
 var music2; 
 var musicCounter = 0;
+var musicMenu;
+var shouldPlayMenu = true;
 //================================================
 //PRELOAD: 
 //	load main art assets and move to the main menu
@@ -106,8 +108,7 @@ Preloader.prototype = {
 //MAINMENU: 
 //	wait for player input to begin the game
 //=========================================
-var musicMenu;
-var shouldPlayMenu = true;
+
 var MainMenu = function(game) {
 	//Needed text
 	var title;
@@ -127,8 +128,9 @@ MainMenu.prototype = {
 		//title name
 		music1 = game.add.audio('dank');
 		music2 = game.add.audio('ambient');
-		musicMenu = game.add.audio('menu');
+		
 		if(shouldPlayMenu){
+			musicMenu = game.add.audio('menu');
 			musicMenu.play();
 			shouldPlayMenu = false;
 		}
@@ -198,6 +200,7 @@ Game.prototype = {
 	create: function() {
 		//Major Groups for Collision checks
 		console.log('creating game');
+		musicMenu.stop();
 
 		//pause screen
 		pauseScreen = game.add.image(0, 0, 'blackTile');
