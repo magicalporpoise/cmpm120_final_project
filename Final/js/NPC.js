@@ -124,6 +124,9 @@ NPC.prototype.update = function(){
 	if(!player.hidden && this.aggro) {
 		hit = game.physics.arcade.overlap(this, player, attackPlayer);
 	}
+	if(player.isInvis){
+		game.physics.arcade.collide(this, player);
+	}
 
 	//MOVEMENT
 	if(this.movingHori != 0 && !this.isStunned) {
