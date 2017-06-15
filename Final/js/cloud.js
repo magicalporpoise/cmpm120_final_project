@@ -57,6 +57,12 @@ cloud.prototype.update = function(){
 	this.x = game.camera.x;
 	this.y = game.camera.y;
 
+	let adjRatio = (player.hearts+20)/player.maxHearts;
+	let Ratio = (player.hearts)/player.maxHearts;
+	this.alpha = Ratio;
+	this.rainbowDeath.minParticleScale = 0.7*adjRatio;
+	this.rainbowDeath.maxParticleScale = 0.9*adjRatio;
+
 	takeDamage(this, [this.playerpain, this.rainbowDeath], this.oldHearts);
 
 	this.rainbowDeath.x = this.x + (this.scale.x*this.width)/3;
@@ -64,15 +70,15 @@ cloud.prototype.update = function(){
 	this.playerpain.x = player.x;
 	this.playerpain.y = player.y;
 
-	this.scale.x = (player.hearts+20)/player.maxHearts;
-	this.scale.y = (player.hearts+20)/player.maxHearts;
+	this.scale.x = adjRatio;
+	this.scale.y = adjRatio;
 
 	this.imagination.x = this.x + this.width/4;
 	this.imagination.y = this.y + (this.height)/8;
 
 	//color change LOOK AT THAT HEXIDECIMAL MATH
 	//						white at 100%               as hearts goes down, red goes up
-	this.imagination.tint = (0xFFFFFF) - (0x00FFFF * (0x001111*player.hearts/player.maxHearts));
+	this.imagination.tint = (0xFFFFFF) - (0x00FFFF * (0x001111*Ratio));
 
 	this.imagination.text = player.hearts;
 	this.imagination.scale.x = this.scale.x*1.5;

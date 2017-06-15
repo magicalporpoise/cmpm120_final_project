@@ -293,7 +293,7 @@ GameOver.prototype = {
 		grade = (g < 60 ? "F" : (g < 70 ? "D" : (g < 80 ?  "C" : (g < 90 ? "B" : "A" ))));
 
 		endText = game.add.text(350, 325,
-				("You earned a "  + finalScore + " -- " + grade + "\npress [SPACE] to try again...\n[M] to go back to the MainMenu..."), 
+				("You earned a "  + finalScore + " -- " + grade + "\n\n\npress [SPACE] to try again...\n[M] to go back to the MainMenu..."), 
 				{ fontSize: '56px', fill: '#FFF' });
 	},
 	update:function(){
