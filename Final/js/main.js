@@ -219,7 +219,8 @@ Game.prototype = {
 		imagination = new cloud(0, 0, 1, 'bigcloud');
 
 		//currentMap = new Level('t', 'tiletest1', ['cloudy','bricks3'], ['Tile Layer 1','Tile Layer 2']);
-		currentMap = new Level('t', 'elementary', ['pipesNew','bricks3'], ['Tile Layer 2','Tile Layer 1']);
+		//currentMap = new Level('t', 'elementary', ['pipesNew','bricks3'], ['Tile Layer 2','Tile Layer 1']);
+		currentMap = new Level('t', 'elementary_tileset', ['bricks3', 'pipesNew'], ['Tile Layer 1','Tile Layer 2']);
 
 	},
 	update:function() {		// add game logic
@@ -230,8 +231,9 @@ Game.prototype = {
 		//console.log(currentMap);
 		if(currentLevel == 1 && currentMap.key != 'e') {
 			deleteMap(currentMap);
-			//currentMap = new Level('e', 'elementary_tileset', ['bricks3', 'cloudy'], ['Tile Layer 1','Tile Layer 2']);
+			//currentMap = new Level('e', 'elementary_tileset', ['bricks3', 'pipesNew'], ['Tile Layer 1','Tile Layer 2']);
 			//currentMap = new Level('t','dopeislands', ['last_level', 'dirt-tiles'], ['Tile Layer 1','Tile Layer 2']);
+			currentMap = new Level('e', 'elementary', ['pipesNew','bricks3'], ['Tile Layer 2','Tile Layer 1']);
 		} else if(currentLevel == 2 && currentMap.key != 'm') {
 			deleteMap(currentMap);
 
