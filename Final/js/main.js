@@ -260,7 +260,6 @@ Game.prototype = {
 		} else if(currentLevel == 3){
 			deleteMap(currentMap);
 			game.state.start('GameOver');
-
 		}
 		//PLAYER DEATH
 		if(player.hearts <= 0 || player.isDead){
