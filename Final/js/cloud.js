@@ -67,12 +67,16 @@ cloud.prototype.update = function(){
 	this.scale.x = (player.hearts+20)/player.maxHearts;
 	this.scale.y = (player.hearts+20)/player.maxHearts;
 
-	this.imagination.x = game.camera.x + this.width/4;
-	this.imagination.y = game.camera.y + this.height/4 -5;
+	this.imagination.x = this.x + this.width/4;
+	this.imagination.y = this.y + (this.height)/8;
+
+	//color change LOOK AT THAT HEXIDECIMAL MATH
+	//						white at 100%               as hearts goes down, red goes up
+	this.imagination.tint = (0xFFFFFF) - (0x00FFFF * (0x001111*player.hearts/player.maxHearts));
 
 	this.imagination.text = player.hearts;
-	this.imagination.scale.x = this.scale.x;
-	this.imagination.scale.y = this.scale.y;
+	this.imagination.scale.x = this.scale.x*1.5;
+	this.imagination.scale.y = this.scale.y*1.5;
 }
 
 //================
