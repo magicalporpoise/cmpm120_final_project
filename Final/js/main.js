@@ -32,6 +32,7 @@ Preloader.prototype = {
 		game.load.audio('NPCHit', 'player_smack.wav')
 		game.load.audio('playerDeathSFX', 'player_death.wav');
 		game.load.audio('hideNoise', 'chairNoise.wav')
+		game.load.audio('laser', 'laser.wav')
 		game.load.path = 'assets/audio/sfx/player_attacks/';
 		game.load.audio('player_attack1', 'player_attack1.wav');
 		game.load.audio('player_attack2', 'player_attack2.wav');
@@ -69,7 +70,8 @@ Preloader.prototype = {
 
 
 		// vectorized images
-		game.load.image('bigcloud','cloud3_white.png');
+		game.load.image('bigcloud','colorCloud.png');
+		game.load.image('darkcloud','darkCloud.png');
 		//game.load.image('smallcloud','cloud5_white.png');
 
 		// rasterized images and atlas's 
@@ -221,6 +223,8 @@ Game.prototype = {
 		//test = new NPC(game, 800, 1400, 'redBook', 0);
 
 		currentMap = new Level('t', 'tiletest1', ['cloudy','bricks3'], ['Tile Layer 1','Tile Layer 2']);
+
+		//currentMap = new Level('t', 'tiletest1', ['cloudy','bricks3'], ['Tile Layer 1','Tile Layer 2']);
 		//currentMap = new Level('t','new_last_level_map', ['last_level_tile', 'dirt-tiles'], ['Tile Layer 2','Tile Layer 1']);
 
 	},

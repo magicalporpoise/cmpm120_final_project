@@ -46,6 +46,8 @@ function Player(x, y, scale, img){
 	this.landSFX = game.add.audio('step');
 	this.landed = false;
 	this.punchSFX = game.add.audio('NPCHit');
+	this.shootSFX = game.add.audio('laser');
+	this.shootSFX.volume = .5;
 
 
 
@@ -248,16 +250,7 @@ Player.prototype.update = function(){
 			game.add.existing(this.shoot);
 			//console.log('r pressed');
 			//SFX
-			if(this.playerAttackCounter % 2 == 0){
-				this.playerAttack2SFX.play();
-				this.playerAttackCounter++;
-			}else if(this.playerAttackCounter %3 == 0){
-				this.playerAttack3SFX.play();
-				this.playerAttackCounter++;
-			}else{
-				this.playerAttack1SFX.play();
-				this.playerAttackCounter++;
-			}
+			this.shootSFX.play();
 
 			player.hearts -=2;
 		}
