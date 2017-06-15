@@ -451,6 +451,20 @@
          "tileheight":32,
          "tilewidth":32,
          "transparentcolor":"#000000"
+        }, 
+        {
+         "columns":288,
+         "firstgid":178,
+         "image":"pipesNew.png",
+         "imageheight":9217,
+         "imagewidth":9216,
+         "margin":0,
+         "name":"pipesNew",
+         "spacing":0,
+         "tilecount":82944,
+         "tileheight":32,
+         "tilewidth":32,
+         "transparentcolor":"#000000"
         }],
  "tilewidth":32,
  "version":1,
