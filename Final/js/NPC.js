@@ -125,7 +125,7 @@ NPC.prototype.update = function(){
 		hit = game.physics.arcade.overlap(this, player, attackPlayer);
 	}
 	if(player.isInvis){
-		game.physics.arcade.collide(this, player);
+		game.physics.arcade.collide(this, player, aggro);
 	}
 
 	//MOVEMENT
@@ -291,3 +291,5 @@ function rotateSights(npc, sights){
 	} else sights.rotation = Math.atan2(player.y-npc.y, player.x-npc.x);
 	//return sights.rotation;
 }
+
+function aggro(me, play){me.aggro = true;}

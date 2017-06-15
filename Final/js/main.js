@@ -214,9 +214,9 @@ Game.prototype = {
 		//CURRENT MAP
 		//=============
 		player = new Player(150, 100, 0.15, 'teddy');
-		imagination = new cloud(0, 0, 1, 'bigcloud');
+		imagination = new cloud(0, 0, 0.75, 'bigcloud');
 
-		test = new NPC(game, 800, 1400, 'redBook', 0);
+		//test = new NPC(game, 800, 1400, 'redBook', 0);
 
 		currentMap = new Level('t', 'tiletest1', ['cloudy','bricks3'], ['Tile Layer 1','Tile Layer 2']);
 		//currentMap = new Level('t','new_last_level_map', ['last_level_tile', 'dirt-tiles'], ['Tile Layer 2','Tile Layer 1']);
@@ -293,11 +293,14 @@ GameOver.prototype = {
 		grade = (g < 60 ? "F" : (g < 70 ? "D" : (g < 80 ?  "C" : (g < 90 ? "B" : "A" ))));
 
 		endText = game.add.text(350, 325,
-				("You earned a "  + finalScore + " -- " + grade + "\npress SPACE to try again..."), 
+				("You earned a "  + finalScore + " -- " + grade + "\npress [SPACE] to try again...\n[M] to go back to the MainMenu..."), 
 				{ fontSize: '56px', fill: '#FFF' });
 	},
 	update:function(){
 		if(game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR)){
+			//go to next state
+			game.state.start('Game');
+		} else if(game.input.keyboard.isDown(Phaser.Keyboard.M)){
 			//go to next state
 			game.state.start('MainMenu');
 		}
