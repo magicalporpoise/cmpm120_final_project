@@ -55,10 +55,10 @@ Preloader.prototype = {
 		//loads in json tilemap created with tiled(key,filename,
 		//not exactly sure why null works here,the tilemap tool used)
 		game.load.tilemap('tiletest1','tiletest1.json',null,Phaser.Tilemap.TILED_JSON);
-		//game.load.tilemap('texttest','texttest.json',null,Phaser.Tilemap.TILED_JSON);
 		game.load.tilemap('elementary_tileset', 'elementary_tileset.json', null, Phaser.Tilemap.TILED_JSON);
 		game.load.tilemap('middleschool','middleschool.json',null,Phaser.Tilemap.TILED_JSON);
-
+		game.load.tilemap('dopeislands','dopeislands.json',null,Phaser.Tilemap.TILED_JSON);
+		game.load.tilemap('elementary','elementary.json',null,Phaser.Tilemap.TILED_JSON);
 
 		//game.load.tilemap('noImaginationLand','new_last_level.json',null,Phaser.Tilemap.TILED_JSON);
 
@@ -67,6 +67,8 @@ Preloader.prototype = {
 		//game.load.spritesheet('tilesheet','dirt-tiles.png',32,32);
 		game.load.spritesheet('bricks3');
 		game.load.spritesheet('cloudy');
+		game.load.spritesheet('last_level');
+		game.load.spritesheet('pipesNew');
 
 
 		// vectorized images
@@ -224,9 +226,6 @@ Game.prototype = {
 
 		currentMap = new Level('t', 'tiletest1', ['cloudy','bricks3'], ['Tile Layer 1','Tile Layer 2']);
 
-		//currentMap = new Level('t', 'tiletest1', ['cloudy','bricks3'], ['Tile Layer 1','Tile Layer 2']);
-		//currentMap = new Level('t','new_last_level_map', ['last_level_tile', 'dirt-tiles'], ['Tile Layer 2','Tile Layer 1']);
-
 	},
 	update:function() {		// add game logic
 		game.camera.follow(player, Phaser.Camera.FOLLOW_LOCKON, 0.1, 0.1);
@@ -236,8 +235,7 @@ Game.prototype = {
 		//console.log(currentMap);
 		if(currentLevel == 1 && currentMap.key != 'e') {
 			deleteMap(currentMap);
-			//currentMap = new Level('e', 'elementary_tileset', ['bricks3', 'cloudy'], ['Tile Layer 1','Tile Layer 2']);
-			currentMap = new Level('e', 'elementary_tileset', ['cloudy', 'bricks3'], ['Tile Layer 1','Tile Layer 2']);
+			currentMap = new Level('e', 'elementary_tileset', ['bricks3', 'pipesNew'], ['Tile Layer 1','Tile Layer 2']);
 		} else if(currentLevel == 2 && currentMap.key != 'm') {
 			deleteMap(currentMap);
 
