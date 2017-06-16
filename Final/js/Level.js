@@ -31,6 +31,7 @@ function Level(key, tilemap, tileimage, layer){
 	// under tileset in the name category
 	map.addTilesetImage(tileimage[0]);
 	map.addTilesetImage(tileimage[1]);
+	map.addTilesetImage('pipesNew');
 
 	//initiates new layer, must be exact same name as specified in json
 	layer1 = map.createLayer(layer[0]);
