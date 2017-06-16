@@ -26,7 +26,7 @@ function ScrollText(game, x, y, txt, style){
 	game.physics.arcade.enable(this);
 	//insert into game
 	game.add.existing(this);
-	group_text.add(this);
+	if(game.state.current != 'Lore')group_text.add(this);
 }
 
 //=========
