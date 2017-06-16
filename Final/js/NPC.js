@@ -101,7 +101,7 @@ NPC.prototype.constructor = NPC;
 //	npc behavior
 //================
 NPC.prototype.update = function(){
-	//game.debug.body(this);
+
 
 	//TIMERS
 	if(this.behaveCont)this.behave ++;

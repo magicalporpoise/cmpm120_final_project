@@ -66,8 +66,16 @@ Preloader.prototype = {
 		game.load.tilemap('middleschool','middleschool.json',null,Phaser.Tilemap.TILED_JSON);
 		game.load.tilemap('dopeislands','dopeislands.json',null,Phaser.Tilemap.TILED_JSON);
 		game.load.tilemap('elementary','elementary.json',null,Phaser.Tilemap.TILED_JSON);
+
+		//game.load.tilemap('supaIntenseTest','supaIntenseTest.json',null,Phaser.Tilemap.TILED_JSON);
+		//game.load.tilemap('testingLRI','testingLRI.json',null,Phaser.Tilemap.TILED_JSON);
+		//game.load.tilemap('twoSmallerIslands','twoSmallerIslands.json',null,Phaser.Tilemap.TILED_JSON);
+		//game.load.tilemap('testingIslandsMinimized','testingIslandsMinimized.json',null,Phaser.Tilemap.TILED_JSON);
+		game.load.tilemap('testingPipesMinimized','testingPipesMinimized.json',null,Phaser.Tilemap.TILED_JSON);
+
 		game.load.tilemap('elewopipes','elewopipes.json',null,Phaser.Tilemap.TILED_JSON);
 		game.load.tilemap('transo','transo.json',null,Phaser.Tilemap.TILED_JSON);
+
 
 		//game.load.tilemap('noImaginationLand','new_last_level.json',null,Phaser.Tilemap.TILED_JSON);
 
@@ -78,12 +86,18 @@ Preloader.prototype = {
 		game.load.spritesheet('cloudy');
 		game.load.spritesheet('last_level');
 		game.load.spritesheet('pipesNew');
+		game.load.spritesheet('supaIntense');
+		game.load.spritesheet('lowResIntense');
+		game.load.spritesheet('smallerIslands1');
+		game.load.spritesheet('smallerIslands2');
+		game.load.spritesheet('islandsMinimized');
+		game.load.spritesheet('pipesMinimized');
 
 
 		// vectorized images
 		//game.load.image('bigcloud','coloredCloud.png');
 		//game.load.image('bigcloud2','coloredCloud2.png');
-		game.load.image('bigcloud3','coloredCloud3.png');
+		game.load.image('bigcloud3','coloredCloud2.png');
 		game.load.image('darkcloud','darkCloud.png');
 		//game.load.image('smallcloud','cloud5_white.png');
 
@@ -237,13 +251,20 @@ Game.prototype = {
 		//PLAYER OBJECT
 		//CURRENT MAP
 		//=============
+
+
+		
+
 		player = new Player(150, 100, 0.15, 'teddy');
 		imagination = new cloud(0, 0, 0.5, 'bigcloud3');
 
 		//test = new NPC(game, 800, 1400, 'redBook', 0);
-
+		
 		currentMap = new Level('t', 'tiletest1', ['cloudy','bricks3'], ['Tile Layer 1','Tile Layer 2']);
+
+		//currentMap = new Level('e', 'testingPipesMinimized', ['pipesMinimized','bricks3'], ['Tile Layer 1','Tile Layer 2']);
 		//console.log(group_npc.children);
+
 
 	},
 	update:function() {		// add game logic
@@ -255,7 +276,9 @@ Game.prototype = {
 		if(currentLevel == 1 && currentMap.key != 'e') {
 			deleteMap(currentMap);
 
+
 			currentMap = new Level('e', 'elewopipes', ['bricks3', 'pipesNew'], ['Tile Layer 1','Tile Layer 2']);
+
 
 		} else if(currentLevel == 2 && currentMap.key != 'm') {
 			deleteMap(currentMap);
@@ -264,8 +287,7 @@ Game.prototype = {
 
 			//currentMap = new Level('m','noImaginationLand', ['last_level', 'dirt-tiles'], ['Tile Layer 1','Tile Layer 2','Tile Layer 3','collision Layer']);
 
-			currentMap = new Level('m','middleschool', ['bricks3', 'cloudy'], ['Tile Layer 1','Tile Layer 2']);
-			//console.log(group_npc);
+
 
 		} else if(currentLevel == 3){
 			deleteMap(currentMap);
@@ -319,7 +341,7 @@ GameOver.prototype = {
 		grade = (g < 60 ? "F" : (g < 70 ? "D" : (g < 80 ?  "C" : (g < 90 ? "B" : "A" ))));
 
 		endText = game.add.text(350, 325,
-				("You earned a "  + finalScore + " -- " + grade + "\n\n\npress [SPACE] to try again...\n[M] to go back to the MainMenu..."), 
+				(""  + finalScore + " -- " + grade + "\n\n\npress [SPACE] to try again...\n[M] to go back to the MainMenu..."), 
 				{ fontSize: '56px', fill: '#FFF' });
 	},
 	update:function(){
@@ -346,7 +368,7 @@ var Lore = function(game) {
 Lore.prototype = {
 	create:function(){
 		console.log("Entering Game Lore");
-		var txt = "Imagination! who can sing thy force?\nOr who describe the swiftness of thy course?\nSoaring through air to find the bright abode,\nTh' empyreal palace of the thund'ring God,\nWe on thy pinions can surpass the wind,\nAnd leave the rolling universe behind----\n                    ERNEST, PUT THAT BOOK AWAY!\n                    YOU HAVE TO PAY ATTENTION IN CLASS\n----From star to star the mental optics rove,\nMeasure the skies, and range the realms above----\n                    I SAID PUT THAT AWAY!\nBut I like using my imagination.\n                    DID I SAY YOU COULD DO THAT?\nI just want to think for myself!\n                    THAT'S IT, YOU HAVE DETENTION!";
+		var txt = "Imagination! who can sing thy force?\nOr who describe the swiftness of thy course?\nSoaring through air to find the bright abode,\nTh' empyreal palace of the thund'ring God,\nWe on thy pinions can surpass the wind,\nAnd leave the rolling universe behind----\n                    ERNEST, PAY ATTENTION!\n                    YOU HAVE TO PAY ATTENTION IN CLASS\n----From star to star the mental optics rove,\nMeasure the skies, and range the realms above----\n                    I SAID PAY ATTENTION!\nBut I like using my imagination.\n                    DID I SAY YOU COULD DO THAT?\nI just want to think for myself!\n                    THAT'S IT, YOU HAVE DETENTION!";
 		loreText = new ScrollText(game, 100, 100, txt, { fontSize: '20px', fill: '#FFF', font: 'Sans Serif'});
 		loreText.speed = 1;
 		loreText.active = true;
