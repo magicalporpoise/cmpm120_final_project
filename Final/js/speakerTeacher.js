@@ -35,11 +35,13 @@ TEACHER[3]= [];
 // --------   5: pipes
 TEACHER[4]= ["You shouldn't be here...", 
 			 "You're not smart enough!\nYou're not good enough!", 
-			 "You should consider\nanother caree path,", 
+			 "You should consider\nanother career path,", 
 			 "Is that really what you\nwant to do with your life?",
 			 "Congratulations... You've reached the end,\n here's your reward."];
 // --------   1: final
-TEACHER[5]= ["Are you happy? Do you feel like you did you best?\n\nToo bad it doesn't matter:\nWe have drained your entire being...\nWe have taken away your everything...\n\n\nand We didn't give you a damn thing for it."]
+
+TEACHER[5]= ["Are you happy? Do you feel like you did you best?\nToo bad it doesn't matter:\nWe have drained your entire being...\nWe have taken away your everything...\nand We didn't give you a damn thing for it."]
+
 
 
 //insert the text into the needed children
