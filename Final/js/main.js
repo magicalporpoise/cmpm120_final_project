@@ -430,6 +430,10 @@ window.onkeydown = function(event){
 	if(kdown === Phaser.Keyboard.P){
 		pauseGame();
 	}
+	//LEVEL SKIP
+	if(kdown === Phaser.Keyboard.X){
+		currentLevel++;
+	}
 }
 
 //pause the game

@@ -32,7 +32,7 @@ TEACHER[2]= ["Welcome back. Please get to work.",
 			 ];
 // --------   0: transition
 TEACHER[3]= [];
-// --------   4: pipes
+// --------   5: pipes
 TEACHER[4]= ["You shouldn't be here...", 
 			 "You're not smart enough!\nYou're not good enough!", 
 			 "You should consider\nanother caree path,", 
