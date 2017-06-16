@@ -4,13 +4,13 @@
 
 //Literally contains all the text we'll need
 var TEACHER = new Array();
-for(var i = 0 ; i < 5 ; i++){
+for(var i = 0 ; i < 6 ; i++){
 	TEACHER[i] = new Array();
 }
 
 //an 2-D array of text
 //---------   NUMBER OF SPEAKERS PER LEVEL
-// --------   7
+// --------   7: intro (white)
 TEACHER[0]= ["Good morning, stu[D]ent! It's the\nstart of a beautiful d[A]y.",
 			 "Make your [W]ay to your desk chair\nand take a [S]eat.", 
 			 "As long as you remain in your seat, child,\n...and there will be no consequences\nRemain [K]alm and be respectful of\nthe wonderful instructional material.",
@@ -19,25 +19,26 @@ TEACHER[0]= ["Good morning, stu[D]ent! It's the\nstart of a beautiful d[A]y.",
 			 "If you are [L]ost, a hall monitor will\nhappily escort you to your seat.",
 			 "[J]ust pay attention and\nyou'll do great!"
 			 ];
-// --------   4
+// --------   4 elementary (bricks 1)
 TEACHER[1]= ["Come, young one. Put one foot\nin front of the other!",
 			 "Shoot for the moon! Even if you miss,\nyou'll land among the stars.",
 			 "Your enthusiasm is admirable... but\n *please* don't run in my halls.",
 			 "Oh, I'm so *very* proud of you..."];
-// --------   4
+// --------   4 middle (bricks 2)
 TEACHER[2]= ["Welcome back. Please get to work.",
 			 "You are far too slow. Maybe I\nshould have held you back.",
 			 "I had such *high* hopes for you...",
 			 "Well, at least you've\nlearned something."
 			 ];
-TEACHER[3]= ["You shouldn't be here...", 
-// --------   5
+// --------   0: transition
+TEACHER[3]= [];
+// --------   4: pipes
+TEACHER[4]= ["You shouldn't be here...", 
 			 "You're not smart enough!\nYou're not good enough!", 
 			 "You should consider\nanother caree path,", 
-			 "Is that what you really\nwant to do with your life?", 
-			 "Are you even trying?", 
+			 "Is that really what you\nwant to do with your life?",
 			 "Congratulations... You've reached the end,\n here's your reward."];
-// --------   1
+// --------   1: final
 TEACHER[1]= ["Are you happy? Do you feel like you did you best?\n\nToo bad it doesn't matter:\nWe have drained your entire being...\nWe have taken away your everything...\n\n\nand We didn't give you a damn thing for it."]
 
 

@@ -93,6 +93,7 @@ function deleteMap(map){
 	group_ViewBox.removeAll(true);
 	group_danger.removeAll(true);
 	group_speaker.removeAll(true);
+	group_text.removeAll(true);
 
 	layer1.destroy();
 	if(layer2 != undefined)layer2.destroy();

@@ -60,12 +60,11 @@ function toggleHiding(me, input, overlapping){
 	}
 
 	if(input && overlapping){
-		player.hidden = !player.hidden;
+		player.hidden = !player.hidden;	
 		if(player.hidden) {
 			me.hideNoise.play();
 			player.body.velocity.x = 0;
-			player.x = me.x + 50;
-			player.y = me.y+20;
+			player.body.velocity.y = 0;
 			player.isInvis = false;
 		}
 	}
@@ -78,5 +77,7 @@ function loseImagination(me, player){
 			me.time = 0;
 			player.hearts--;
 		}
+		player.x = me.x + 50;
+		player.y = me.y + 10;
 	}
 }
