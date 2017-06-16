@@ -39,7 +39,7 @@ TEACHER[4]= ["You shouldn't be here...",
 			 "Is that really what you\nwant to do with your life?",
 			 "Congratulations... You've reached the end,\n here's your reward."];
 // --------   1: final
-TEACHER[1]= ["Are you happy? Do you feel like you did you best?\n\nToo bad it doesn't matter:\nWe have drained your entire being...\nWe have taken away your everything...\n\n\nand We didn't give you a damn thing for it."]
+TEACHER[5]= ["Are you happy? Do you feel like you did you best?\n\nToo bad it doesn't matter:\nWe have drained your entire being...\nWe have taken away your everything...\n\n\nand We didn't give you a damn thing for it."]
 
 
 //insert the text into the needed children
