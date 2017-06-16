@@ -190,10 +190,10 @@ MainMenu.prototype = {
 			game.add.text(650, 3*750/4, "LOADING...", { font: 'Source Code Pro', fontSize: '64px', fill: '#FFF' });
 			musicMenu.stop();
 			game.state.start('Game');
-		} else if(game.input.keyboard.isDown(Phaser.Keyboard.L)){
+		} else if(game.input.keyboard.justPressed(Phaser.Keyboard.L)){
 			//go to next state
 			game.state.start('Lore');
-		} else if(game.input.keyboard.isDown(Phaser.Keyboard.C)){
+		} else if(game.input.keyboard.justPressed(Phaser.Keyboard.C)){
 			//go to next state
 			game.state.start('Credits');
 		}
@@ -269,20 +269,6 @@ Game.prototype = {
 		//test = new NPC(game, 800, 1400, 'redBook', 0);
 
 		currentMap = new Level('t', 'tiletest1', ['cloudy','bricks3'], ['Tile Layer 1','Tile Layer 2']);
-
-
-
-		//currentMap = new Level('e', 'testingSI', ['small_islands','bricks3'], ['Tile Layer 1','Tile Layer 2']);
-		
-		// LAST LEVEL
-		//currentMap = new Level('e', 'medIslandTest', ['med_islands','bricks3'], ['Tile Layer 1','Tile Layer 2']);
-
-		//currentMap = new Level('e', 'testingPipesMinimized', ['pipesMinimized','bricks3'], ['Tile Layer 1','Tile Layer 2']);
-
-
-		//currentMap = new Level('t', 'transo', ['cloudy','bricks3'], ['Tile Layer 1','Tile Layer 2']);
-
-		//console.log(group_npc.children);
 	},
 	update:function() {		// add game logic
 		game.camera.follow(player, Phaser.Camera.FOLLOW_LOCKON, 0.1, 0.1);
@@ -406,7 +392,7 @@ Lore.prototype = {
 		game.add.image(1000, 325, 'sadkid');
 	},
 	update:function(){
-		if(game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR)||game.input.keyboard.isDown(Phaser.Keyboard.L)){
+		if(game.input.keyboard.justPressed(Phaser.Keyboard.SPACEBAR)||game.input.keyboard.justPressed(Phaser.Keyboard.L)){
 			//go to next state
 			game.state.start('MainMenu');
 		}
@@ -430,7 +416,7 @@ Credits.prototype = {
 		creditText.anchor.set(0.5);
 	},
 	update:function(){
-		if(game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR)||game.input.keyboard.isDown(Phaser.Keyboard.C)){
+		if(game.input.keyboard.justPressed(Phaser.Keyboard.SPACEBAR)||game.input.keyboard.justPressed(Phaser.Keyboard.C)){
 			//go to next state
 			game.state.start('MainMenu');
 		}
