@@ -65,6 +65,7 @@ Preloader.prototype = {
 		game.load.tilemap('dopeislands','dopeislands.json',null,Phaser.Tilemap.TILED_JSON);
 		game.load.tilemap('elementary','elementary.json',null,Phaser.Tilemap.TILED_JSON);
 		game.load.tilemap('elewopipes','elewopipes.json',null,Phaser.Tilemap.TILED_JSON);
+		game.load.tilemap('transo','transo.json',null,Phaser.Tilemap.TILED_JSON);
 
 		//game.load.tilemap('noImaginationLand','new_last_level.json',null,Phaser.Tilemap.TILED_JSON);
 
@@ -236,7 +237,7 @@ Game.prototype = {
 
 		//test = new NPC(game, 800, 1400, 'redBook', 0);
 
-		currentMap = new Level('t', 'tiletest1', ['cloudy','bricks3'], ['Tile Layer 1','Tile Layer 2']);
+		currentMap = new Level('t', 'transo', ['cloudy','bricks3'], ['Tile Layer 1','Tile Layer 2']);
 		//console.log(group_npc.children);
 
 	},
