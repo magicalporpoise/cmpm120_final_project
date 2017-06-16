@@ -55,22 +55,22 @@ function Level(key, tilemap, tileimage, layer){
 	//CREATE OBJECTS: from tile map layers
 	//====================================
 	//walking npcs
-	map.createFromObjects('npc',  91, 'redBook', 0, true, true, group_npc, NPC);
+	map.createFromObjects('npc',  10, 'redBook', 0, true, true, group_npc, NPC);
 	//flying npcs
-	map.createFromObjects('flyer', 130, 'blueBook', 0, true, true, group_npc, flyingNPC);
+	map.createFromObjects('flyer', 49, 'blueBook', 0, true, true, group_npc, flyingNPC);
 
 	//creates hiding spots
-	map.createFromObjects('hide', 119, 'chair', 0, true, true, group_hidingspot, HidingSpot);
+	map.createFromObjects('hide', 38, 'chair', 0, true, true, group_hidingspot, HidingSpot);
 
 	//make diploma
-	map.createFromObjects('exit',129,'diploma', 0, true, true, group_Diploma, Diploma);
+	map.createFromObjects('exit',48,'diploma', 0, true, true, group_Diploma, Diploma);
 	//var diploma = new Diploma(game, 500, 500, 'platform', 0);
 
 	//make floor death
-	map.createFromObjects('death' ,121,'killableSubstance', 0, true, true, group_danger, killableSubstance);
+	map.createFromObjects('death' ,40,'killableSubstance', 0, true, true, group_danger, killableSubstance);
 
 	//insert SPEAKERS
-	map.createFromObjects('chalk', 118, 'speaker', 0, true, true, group_speaker, speaker);
+	map.createFromObjects('chalk', 37, 'speaker', 0, true, true, group_speaker, speaker);
 	insertAllText(currentLevel, group_speaker);
 
 	game.world.bringToTop(group_speaker);

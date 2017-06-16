@@ -261,7 +261,9 @@ Game.prototype = {
 
 		//test = new NPC(game, 800, 1400, 'redBook', 0);
 
-		currentMap = new Level('tt', 'tiletest1', ['cloudy','bricks3'], ['Tile Layer 1','Tile Layer 2']);
+		currentMap = new Level('t', 'tiletest1', ['cloudy'], ['Tile Layer 1','Tile Layer 2']);
+
+		//console.log(group_npc.children);
 	},
 	update:function() {		// add game logic
 		game.camera.follow(player, Phaser.Camera.FOLLOW_LOCKON, 0.1, 0.1);
@@ -272,17 +274,20 @@ Game.prototype = {
 		if(currentLevel == 1 && currentMap.key != 'e') {
 			deleteMap(currentMap);
 			currentMap = new Level('e', 'elewopipes', ['bricks3'], ['Tile Layer 1','Tile Layer 2']);
+
 		} else if(currentLevel == 2 && currentMap.key != 'm') {
 			deleteMap(currentMap);
+			currentMap = new Level('m', 'middleschool', ['bricks3'], ['Tile Layer 1','Tile Layer 2']);
 
-			//currentMap = new Level('m','new_last_level_map', ['last_level_tile', 'dirt-tiles'], ['Tile Layer 1','Tile Layer 2','Tile Layer 3','collision layer']);
-
-			currentMap = new Level('m','middleschool', ['bricks3'], ['Tile Layer 1','Tile Layer 2']);
-		} else if(currentLevel == 3 && currentMap.key != 't') {
+		} else if(currentLevel == 3 && currentMap.key != 'tr') {
 			deleteMap(currentMap);
-			currentMap = new Level('t', 'transo', ['bricks3', 'pipesNew'], ['Tile Layer 1','Tile Layer 2']);
+			currentMap = new Level('tr', 'transo', ['bricks3', 'pipesNew'], ['Tile Layer 1','Tile Layer 2']);
 
-		} else if(currentLevel > 3){
+		}else if(currentLevel == 4 && currentMap.key != 'p') {
+			deleteMap(currentMap);
+			currentMap = new Level('p', 'testingPipesMinimized', ['bricks3', 'pipesNew'], ['Tile Layer 1','Tile Layer 2']);
+
+		} else if(currentLevel > 4){
 			deleteMap(currentMap);
 			game.state.start('GameOver');
 		}
