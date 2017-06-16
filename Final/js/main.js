@@ -242,7 +242,7 @@ Game.prototype = {
 
 		//test = new NPC(game, 800, 1400, 'redBook', 0);
 
-		currentMap = new Level('t', 'transo', ['cloudy','bricks3'], ['Tile Layer 1','Tile Layer 2']);
+		currentMap = new Level('tt', 'tiletest1', ['cloudy','bricks3'], ['Tile Layer 1','Tile Layer 2']);
 		//console.log(group_npc.children);
 
 	},
@@ -255,7 +255,7 @@ Game.prototype = {
 		if(currentLevel == 1 && currentMap.key != 'e') {
 			deleteMap(currentMap);
 
-			currentMap = new Level('e', 'elewopipes', ['bricks3', 'pipesNew'], ['Tile Layer 1','Tile Layer 2']);
+			currentMap = new Level('e', 'elewopipes', ['bricks3'], ['Tile Layer 1','Tile Layer 2']);
 
 		} else if(currentLevel == 2 && currentMap.key != 'm') {
 			deleteMap(currentMap);
@@ -267,7 +267,11 @@ Game.prototype = {
 			currentMap = new Level('m','middleschool', ['bricks3', 'cloudy'], ['Tile Layer 1','Tile Layer 2']);
 			//console.log(group_npc);
 
-		} else if(currentLevel == 3){
+		} else if(currentLevel == 3 && currentMap.key != 't') {
+			deleteMap(currentMap);
+			currentMap = new Level('t', 'transo', ['bricks3', 'pipesNew'], ['Tile Layer 1','Tile Layer 2']);
+
+		} else if(currentLevel > 3){
 			deleteMap(currentMap);
 			game.state.start('GameOver');
 		}
