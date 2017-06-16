@@ -14,6 +14,7 @@ var musicMenu;
 var shouldPlayMenu = true;
 var shouldPlaySpike = true;
 var	spikeSFX;
+var bellSFX;
 //================================================
 //PRELOAD: 
 //	load main art assets and move to the main menu
@@ -35,9 +36,10 @@ Preloader.prototype = {
 		game.load.audio('step', 'footstep.mp3');
 		game.load.audio('NPCHit', 'player_smack.wav')
 		game.load.audio('playerDeathSFX', 'player_death.wav');
-		game.load.audio('hideNoise', 'chairNoise.wav')
-		game.load.audio('laser', 'laser.wav')
-		game.load.audio('spike', 'SpikeTheme.wav')
+		game.load.audio('hideNoise', 'chairNoise.wav');
+		game.load.audio('laser', 'laser.wav');
+		game.load.audio('spike', 'SpikeTheme.wav');
+		game.load.audio('bell', 'bell.wav');
 		game.load.path = 'assets/audio/sfx/player_attacks/';
 		game.load.audio('player_attack1', 'player_attack1.wav');
 		game.load.audio('player_attack2', 'player_attack2.wav');
@@ -223,6 +225,8 @@ Game.prototype = {
 
 
 		spikeSFX = game.add.audio('spike');
+		bellSFX = game.add.audio('bell');
+		bellSFX.volume = .2;
 		playerDeathSFX = game.add.audio('playerDeathSFX')
 		playerDeathSFX.volume = 3;
 		
