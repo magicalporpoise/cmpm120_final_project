@@ -313,7 +313,10 @@ Game.prototype = {
 		}else if(currentLevel == 4 && currentMap.key != 'p') {
 			deleteMap(currentMap);
 			currentMap = new Level('p', 'testingPipesMinimized', ['pipesMinimized'], ['Tile Layer 1']);
-		} else if(currentLevel > 4){
+		} else if(currentLevel == 5 && currentMap.key != 'f') {
+			deleteMap(currentMap);
+			currentMap = new Level('f', 'medIslandTest', ['med_islands'], ['Tile Layer 1']);
+		}else if(currentLevel > 5){
 			deleteMap(currentMap);
 			game.state.start('GameOver');
 		}
