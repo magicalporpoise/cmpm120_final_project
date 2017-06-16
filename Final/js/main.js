@@ -72,8 +72,10 @@ Preloader.prototype = {
 		//game.load.tilemap('twoSmallerIslands','twoSmallerIslands.json',null,Phaser.Tilemap.TILED_JSON);
 		game.load.tilemap('testingIslandsMinimized2','testingIslandsMinimized2.json',null,Phaser.Tilemap.TILED_JSON);
 		game.load.tilemap('testingPipesMinimized','testingPipesMinimized.json',null,Phaser.Tilemap.TILED_JSON);
+
 		game.load.tilemap('testingSI','testingSI.json',null,Phaser.Tilemap.TILED_JSON);
 		game.load.tilemap('medIslandTest','medIslandTest.json',null,Phaser.Tilemap.TILED_JSON);
+
 
 
 		game.load.tilemap('elewopipes','elewopipes.json',null,Phaser.Tilemap.TILED_JSON);
@@ -243,6 +245,7 @@ Game.prototype = {
 		group_danger = game.add.group();
 		group_Emitter = game.add.group();
 		group_speaker = game.add.group();
+		group_text = game.add.group();
 
 
 		spikeSFX = game.add.audio('spike');
@@ -265,18 +268,21 @@ Game.prototype = {
 
 		//test = new NPC(game, 800, 1400, 'redBook', 0);
 
+		currentMap = new Level('t', 'tiletest1', ['cloudy','bricks3'], ['Tile Layer 1','Tile Layer 2']);
+
 
 
 		//currentMap = new Level('e', 'testingSI', ['small_islands','bricks3'], ['Tile Layer 1','Tile Layer 2']);
-		currentMap = new Level('e', 'medIslandTest', ['med_islands','bricks3'], ['Tile Layer 1','Tile Layer 2']);
+		
+		// LAST LEVEL
+		//currentMap = new Level('e', 'medIslandTest', ['med_islands','bricks3'], ['Tile Layer 1','Tile Layer 2']);
 
 		//currentMap = new Level('e', 'testingPipesMinimized', ['pipesMinimized','bricks3'], ['Tile Layer 1','Tile Layer 2']);
 
 
 		//currentMap = new Level('t', 'transo', ['cloudy','bricks3'], ['Tile Layer 1','Tile Layer 2']);
+
 		//console.log(group_npc.children);
-
-
 	},
 	update:function() {		// add game logic
 		game.camera.follow(player, Phaser.Camera.FOLLOW_LOCKON, 0.1, 0.1);
@@ -287,24 +293,32 @@ Game.prototype = {
 		if(currentLevel == 1 && currentMap.key != 'e') {
 			deleteMap(currentMap);
 
-			currentMap = new Level('e', 'testingPipesMinimized', ['pipesMinimized','bricks3'], ['Tile Layer 1','Tile Layer 2']);
+			// DOPE PIPE LEVEL
+			//currentMap = new Level('e', 'testingPipesMinimized', ['pipesMinimized','bricks3'], ['Tile Layer 1','Tile Layer 2']);
+			
 			//currentMap = new Level('e', 'testingIslandsMinimized2', ['islandsMinimized','bricks3'], ['Tile Layer 1','Tile Layer 2']);
 			//currentMap = new Level('e', 'elewopipes', ['bricks3', 'pipesNew'], ['Tile Layer 1','Tile Layer 2']);
 
 
+			currentMap = new Level('e', 'elewopipes', ['bricks3','cloudy'], ['Tile Layer 1','Tile Layer 2']);
+
+
 		} else if(currentLevel == 2 && currentMap.key != 'm') {
 			deleteMap(currentMap);
+			currentMap = new Level('m', 'middleschool', ['bricks3', 'cloudy'], ['Tile Layer 1','Tile Layer 2']);
 
-			//currentMap = new Level('m','new_last_level_map', ['last_level_tile', 'dirt-tiles'], ['Tile Layer 1','Tile Layer 2','Tile Layer 3','collision layer']);
-
-			//currentMap = new Level('m','noImaginationLand', ['last_level', 'dirt-tiles'], ['Tile Layer 1','Tile Layer 2','Tile Layer 3','collision Layer']);
-
-
-
-		} else if(currentLevel == 3){
+		} else if(currentLevel == 3 && currentMap.key != 'tr') {
+			deleteMap(currentMap);
+			currentMap = new Level('tr', 'transo', ['bricks3', 'pipesMinimized'], ['Tile Layer 1','Tile Layer 2']);
+		}else if(currentLevel == 4 && currentMap.key != 'p') {
+			deleteMap(currentMap);
+			currentMap = new Level('p', 'testingPipesMinimized', ['pipesMinimized'], ['Tile Layer 1']);
+		} else if(currentLevel > 4){
 			deleteMap(currentMap);
 			game.state.start('GameOver');
 		}
+
+		
 		//PLAYER DEATH
 		if(player.hearts <= 0 || player.isDead){
 			deleteMap(currentMap);
@@ -344,7 +358,7 @@ GameOver.prototype = {
 	create:function(){
 		console.log("ending game.....");
 		shouldPlayMenu = true;
-
+		musicCounter++;
 		currentLevel = 0;
 		//set the player's grade
 		game.stage.backgroundColor = "#000";
@@ -448,6 +462,10 @@ window.onkeydown = function(event){
 	var kdown = event.keyCode || event.which;
 	if(kdown === Phaser.Keyboard.P){
 		pauseGame();
+	}
+	//LEVEL SKIP
+	if(kdown === Phaser.Keyboard.X){
+		currentLevel++;
 	}
 }
 
