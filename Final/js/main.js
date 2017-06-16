@@ -10,6 +10,11 @@ var pauseScreen;
 var music1;
 var music2; 
 var musicCounter = 0;
+var musicMenu;
+var shouldPlayMenu = true;
+var shouldPlaySpike = true;
+var	spikeSFX;
+var bellSFX;
 //================================================
 //PRELOAD: 
 //	load main art assets and move to the main menu
@@ -31,9 +36,10 @@ Preloader.prototype = {
 		game.load.audio('step', 'footstep.mp3');
 		game.load.audio('NPCHit', 'player_smack.wav')
 		game.load.audio('playerDeathSFX', 'player_death.wav');
-		game.load.audio('hideNoise', 'chairNoise.wav')
-		game.load.audio('laser', 'laser.wav')
-		game.load.audio('spike', 'SpikeTheme.wav')
+		game.load.audio('hideNoise', 'chairNoise.wav');
+		game.load.audio('laser', 'laser.wav');
+		game.load.audio('spike', 'SpikeTheme.wav');
+		game.load.audio('bell', 'bell.wav');
 		game.load.path = 'assets/audio/sfx/player_attacks/';
 		game.load.audio('player_attack1', 'player_attack1.wav');
 		game.load.audio('player_attack2', 'player_attack2.wav');
@@ -60,11 +66,16 @@ Preloader.prototype = {
 		game.load.tilemap('middleschool','middleschool.json',null,Phaser.Tilemap.TILED_JSON);
 		game.load.tilemap('dopeislands','dopeislands.json',null,Phaser.Tilemap.TILED_JSON);
 		game.load.tilemap('elementary','elementary.json',null,Phaser.Tilemap.TILED_JSON);
-		game.load.tilemap('supaIntenseTest','supaIntenseTest.json',null,Phaser.Tilemap.TILED_JSON);
-		game.load.tilemap('testingLRI','testingLRI.json',null,Phaser.Tilemap.TILED_JSON);
-		game.load.tilemap('twoSmallerIslands','twoSmallerIslands.json',null,Phaser.Tilemap.TILED_JSON);
-		game.load.tilemap('testingIslandsMinimized','testingIslandsMinimized.json',null,Phaser.Tilemap.TILED_JSON);
+
+		//game.load.tilemap('supaIntenseTest','supaIntenseTest.json',null,Phaser.Tilemap.TILED_JSON);
+		//game.load.tilemap('testingLRI','testingLRI.json',null,Phaser.Tilemap.TILED_JSON);
+		//game.load.tilemap('twoSmallerIslands','twoSmallerIslands.json',null,Phaser.Tilemap.TILED_JSON);
+		//game.load.tilemap('testingIslandsMinimized','testingIslandsMinimized.json',null,Phaser.Tilemap.TILED_JSON);
 		game.load.tilemap('testingPipesMinimized','testingPipesMinimized.json',null,Phaser.Tilemap.TILED_JSON);
+
+		game.load.tilemap('elewopipes','elewopipes.json',null,Phaser.Tilemap.TILED_JSON);
+		game.load.tilemap('transo','transo.json',null,Phaser.Tilemap.TILED_JSON);
+
 
 		//game.load.tilemap('noImaginationLand','new_last_level.json',null,Phaser.Tilemap.TILED_JSON);
 
@@ -117,8 +128,7 @@ Preloader.prototype = {
 //MAINMENU: 
 //	wait for player input to begin the game
 //=========================================
-var musicMenu;
-var shouldPlayMenu = true;
+
 var MainMenu = function(game) {
 	//Needed text
 	var title;
@@ -138,9 +148,11 @@ MainMenu.prototype = {
 		//title name
 		music1 = game.add.audio('dank');
 		music2 = game.add.audio('ambient');
-		musicMenu = game.add.audio('menu');
+		
 		if(shouldPlayMenu){
+			musicMenu = game.add.audio('menu');
 			musicMenu.play();
+			musicMenu.volume = .7;
 			shouldPlayMenu = false;
 		}
 		
@@ -209,6 +221,7 @@ Game.prototype = {
 	create: function() {
 		//Major Groups for Collision checks
 		console.log('creating game');
+		musicMenu.stop();
 
 		//pause screen
 		pauseScreen = game.add.image(0, 0, 'blackTile');
@@ -227,9 +240,12 @@ Game.prototype = {
 		group_speaker = game.add.group();
 
 
+		spikeSFX = game.add.audio('spike');
+		bellSFX = game.add.audio('bell');
+		bellSFX.volume = .2;
 		playerDeathSFX = game.add.audio('playerDeathSFX')
 		playerDeathSFX.volume = 3;
-		spikeSFX = game.add.audio('spike');
+		
 
 		//=============
 		//PLAYER OBJECT
@@ -244,10 +260,14 @@ Game.prototype = {
 
 		//test = new NPC(game, 800, 1400, 'redBook', 0);
 
-		//currentMap = new Level('t', 'testingIslandsMinimized', ['islandsMinimized','bricks3'], ['Tile Layer 1','Tile Layer 2']);
-		currentMap = new Level('e', 'testingPipesMinimized', ['pipesMinimized','bricks3'], ['Tile Layer 1','Tile Layer 2']);
-		//currentMap = new Level('t', 'tiletest1', ['cloudy','bricks3'], ['Tile Layer 1','Tile Layer 2']);
-		//currentMap = new Level('t', 'testingPipesMinimized', ['pipesMinimized','bricks3'], ['Tile Layer 1','Tile Layer 2']);
+
+
+		//currentMap = new Level('e', 'testingPipesMinimized', ['pipesMinimized','bricks3'], ['Tile Layer 1','Tile Layer 2']);
+
+
+		currentMap = new Level('t', 'transo', ['cloudy','bricks3'], ['Tile Layer 1','Tile Layer 2']);
+		//console.log(group_npc.children);
+
 
 	},
 	update:function() {		// add game logic
@@ -259,8 +279,8 @@ Game.prototype = {
 		if(currentLevel == 1 && currentMap.key != 'e') {
 			deleteMap(currentMap);
 
-			currentMap = new Level('e', 'testingPipesMinimized', ['pipesMinimized','bricks3'], ['Tile Layer 1','Tile Layer 2']);
-			//currentMap = new Level('e', 'elementary_tileset', ['bricks3', 'pipesNew'], ['Tile Layer 1','Tile Layer 2']);
+
+			currentMap = new Level('e', 'elewopipes', ['bricks3', 'pipesNew'], ['Tile Layer 1','Tile Layer 2']);
 
 
 		} else if(currentLevel == 2 && currentMap.key != 'm') {
@@ -275,7 +295,6 @@ Game.prototype = {
 		} else if(currentLevel == 3){
 			deleteMap(currentMap);
 			game.state.start('GameOver');
-
 		}
 		//PLAYER DEATH
 		if(player.hearts <= 0 || player.isDead){

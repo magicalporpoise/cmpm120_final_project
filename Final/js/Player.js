@@ -29,7 +29,7 @@ function Player(x, y, scale, img){
 	//this.checkWorldBounds = true;
 	//this.events.onOutOfBounds.add(deathRestart, this);
 	//set hitbox size
-	this.body.setSize(400, 800, 100, 50);
+	this.body.setSize(400, 750, 100, 50);
 	//this.body.addRectangle(400, 800, 100, 50);
 
 	
@@ -50,7 +50,7 @@ function Player(x, y, scale, img){
 	this.landed = false;
 	this.punchSFX = game.add.audio('NPCHit');
 	this.shootSFX = game.add.audio('laser');
-	this.shootSFX.volume = .3;
+	this.shootSFX.volume = .25;
 
 
 
@@ -338,8 +338,10 @@ Player.prototype.update = function(){
 //FUNCTIONS
 //=========
 function stunTheEnemy(hb, npc){
-	player.punchSFX.play();
-	npc.isStunned = true;
+	if(!npc.aggro){
+		player.punchSFX.play();
+		npc.isStunned = true;
+	}
 }
 
 

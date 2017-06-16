@@ -88,7 +88,10 @@ cloud.prototype.update = function(){
 
 	//color change LOOK AT THAT HEXIDECIMAL MATH
 	//						colors completely weirdly!!!
-	//this.imagination.tint = (0xFFFFFF) - (0x00FFFF * (0x001111*Ratio));
+
+	//this.imagination.tint = (0x010101 * (0x0F0F0F*Ratio));
+	//this.imagination.tint = (0xFFFFFF) - (0x111111 * (16*Ratio));
+
 
 
 	this.imagination.text = player.hearts;
