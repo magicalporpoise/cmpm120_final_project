@@ -325,7 +325,7 @@ GameOver.prototype = {
 	create:function(){
 		console.log("ending game.....");
 		shouldPlayMenu = true;
-
+		musicCounter++;
 		currentLevel = 0;
 		//set the player's grade
 		game.stage.backgroundColor = "#000";
