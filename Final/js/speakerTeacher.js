@@ -42,6 +42,7 @@ TEACHER[4]= ["You shouldn't be here...",
 TEACHER[5]= ["Are you happy? Do you feel like you did you best?\nToo bad it doesn't matter:\nWe have drained your entire being...\nWe have taken away your everything...\nand We didn't give you a damn thing for it."]
 
 
+
 //insert the text into the needed children
 function insertAllText(lvl, grp){
 	console.log("level is: " + lvl);
