@@ -20,6 +20,7 @@ function projectile(x, y, speed, direction, scale_length, img){
 	//this.scale.y = scale;
 
 	game.physics.arcade.enable(this);
+	this.body.setSize(100, 70, 100, 100);
 
 	this.collideworldbounds = true;
 	this.outofboundskill = true;
@@ -69,7 +70,7 @@ projectile.prototype.update = function(){
 
 
 	// debug
-	//game.debug.body(this);
+	game.debug.body(this);
 }
 
 function vanish(hb, npc){
