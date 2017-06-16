@@ -281,16 +281,18 @@ Game.prototype = {
 
 		} else if(currentLevel == 3 && currentMap.key != 'tr') {
 			deleteMap(currentMap);
-			currentMap = new Level('tr', 'transo', ['bricks3', 'pipesNew'], ['Tile Layer 1','Tile Layer 2']);
+			currentMap = new Level('tr', 'transo', ['bricks3', 'pipesMinimized'], ['Tile Layer 1','Tile Layer 2']);
 
 		}else if(currentLevel == 4 && currentMap.key != 'p') {
 			deleteMap(currentMap);
-			currentMap = new Level('p', 'testingPipesMinimized', ['bricks3', 'pipesNew'], ['Tile Layer 1','Tile Layer 2']);
+			currentMap = new Level('p', 'testingPipesMinimized', ['pipesMinimized'], ['Tile Layer 1']);
 
 		} else if(currentLevel > 4){
 			deleteMap(currentMap);
 			game.state.start('GameOver');
 		}
+
+		
 		//PLAYER DEATH
 		if(player.hearts <= 0 || player.isDead){
 			deleteMap(currentMap);

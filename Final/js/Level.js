@@ -35,7 +35,7 @@ function Level(key, tilemap, tileimage, layer){
 
 	//initiates new layer, must be exact same name as specified in json
 	layer1 = map.createLayer(layer[0]);
-	layer2 = map.createLayer(layer[1]);
+	if(layer[1] != undefined)layer2 = map.createLayer(layer[1]);
 	//layer3 = map.createLayer(layer[2]);
 	//layer4 = map.createLayer(layer[3]);
 	layer1.resizeWorld();
