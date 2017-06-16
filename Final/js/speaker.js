@@ -32,6 +32,7 @@ speaker.prototype.update = function(){
 		this.active = true;
 		//console.log("in speaker " + this.active);
 		if(this.active && !this.announcement.active){
+			bellSFX.play();
 			this.announcement.active = true;
 		}
 	}
