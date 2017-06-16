@@ -6,7 +6,7 @@
          "name":"death",
          "objects":[
                 {
-                 "gid":121,
+                 "gid":40,
                  "height":32,
                  "id":32,
                  "name":"",
@@ -41,7 +41,7 @@
          "name":"npc",
          "objects":[
                 {
-                 "gid":91,
+                 "gid":10,
                  "height":32,
                  "id":26,
                  "name":"",
@@ -53,7 +53,7 @@
                  "y":1682
                 }, 
                 {
-                 "gid":91,
+                 "gid":10,
                  "height":32,
                  "id":59,
                  "name":"",
@@ -65,7 +65,7 @@
                  "y":1016
                 }, 
                 {
-                 "gid":91,
+                 "gid":10,
                  "height":32,
                  "id":60,
                  "name":"",
@@ -89,7 +89,7 @@
          "name":"exit",
          "objects":[
                 {
-                 "gid":129,
+                 "gid":48,
                  "height":32,
                  "id":29,
                  "name":"",
@@ -113,7 +113,7 @@
          "name":"chalk",
          "objects":[
                 {
-                 "gid":118,
+                 "gid":37,
                  "height":32,
                  "id":69,
                  "name":"",
@@ -125,7 +125,7 @@
                  "y":1452.36363636364
                 }, 
                 {
-                 "gid":118,
+                 "gid":37,
                  "height":32,
                  "id":70,
                  "name":"",
@@ -137,7 +137,7 @@
                  "y":1630.18181818182
                 }, 
                 {
-                 "gid":118,
+                 "gid":37,
                  "height":32,
                  "id":71,
                  "name":"",
@@ -149,7 +149,7 @@
                  "y":1632.84848484848
                 }, 
                 {
-                 "gid":118,
+                 "gid":37,
                  "height":32,
                  "id":73,
                  "name":"",
@@ -161,7 +161,7 @@
                  "y":1634.18181818182
                 }, 
                 {
-                 "gid":118,
+                 "gid":37,
                  "height":32,
                  "id":74,
                  "name":"",
@@ -173,7 +173,7 @@
                  "y":1534.18181818182
                 }, 
                 {
-                 "gid":118,
+                 "gid":37,
                  "height":32,
                  "id":75,
                  "name":"",
@@ -185,7 +185,7 @@
                  "y":1119.0303030303
                 }, 
                 {
-                 "gid":118,
+                 "gid":37,
                  "height":32,
                  "id":76,
                  "name":"",
@@ -209,7 +209,7 @@
          "name":"hide",
          "objects":[
                 {
-                 "gid":119,
+                 "gid":38,
                  "height":32,
                  "id":35,
                  "name":"",
@@ -221,7 +221,7 @@
                  "y":1636.12121212121
                 }, 
                 {
-                 "gid":119,
+                 "gid":38,
                  "height":32,
                  "id":36,
                  "name":"",
@@ -233,7 +233,7 @@
                  "y":1731.09090909091
                 }, 
                 {
-                 "gid":119,
+                 "gid":38,
                  "height":32,
                  "id":57,
                  "name":"",
@@ -245,7 +245,7 @@
                  "y":1056
                 }, 
                 {
-                 "gid":119,
+                 "gid":38,
                  "height":32,
                  "id":58,
                  "name":"",
@@ -257,7 +257,7 @@
                  "y":1056
                 }, 
                 {
-                 "gid":119,
+                 "gid":38,
                  "height":32,
                  "id":61,
                  "name":"",
@@ -269,7 +269,7 @@
                  "y":1056
                 }, 
                 {
-                 "gid":119,
+                 "gid":38,
                  "height":32,
                  "id":62,
                  "name":"",
@@ -281,7 +281,7 @@
                  "y":1056
                 }, 
                 {
-                 "gid":119,
+                 "gid":38,
                  "height":32,
                  "id":63,
                  "name":"",
@@ -293,7 +293,7 @@
                  "y":1056
                 }, 
                 {
-                 "gid":119,
+                 "gid":38,
                  "height":32,
                  "id":64,
                  "name":"",
@@ -317,7 +317,7 @@
          "name":"flyer",
          "objects":[
                 {
-                 "gid":130,
+                 "gid":49,
                  "height":32,
                  "id":80,
                  "name":"",
@@ -329,7 +329,7 @@
                  "y":964.484848484848
                 }, 
                 {
-                 "gid":130,
+                 "gid":49,
                  "height":32,
                  "id":81,
                  "name":"",
@@ -353,22 +353,8 @@
  "tileheight":32,
  "tilesets":[
         {
-         "columns":9,
-         "firstgid":1,
-         "image":"bricks3.png",
-         "imageheight":288,
-         "imagewidth":288,
-         "margin":0,
-         "name":"bricks3",
-         "spacing":0,
-         "tilecount":81,
-         "tileheight":32,
-         "tilewidth":32,
-         "transparentcolor":"#000000"
-        }, 
-        {
          "columns":12,
-         "firstgid":82,
+         "firstgid":1,
          "image":"dirt-tiles.png",
          "imageheight":256,
          "imagewidth":384,
@@ -376,6 +362,20 @@
          "name":"dirt-tiles",
          "spacing":0,
          "tilecount":96,
+         "tileheight":32,
+         "tilewidth":32,
+         "transparentcolor":"#000000"
+        }, 
+        {
+         "columns":9,
+         "firstgid":97,
+         "image":"bricks3.png",
+         "imageheight":288,
+         "imagewidth":288,
+         "margin":0,
+         "name":"bricks3",
+         "spacing":0,
+         "tilecount":81,
          "tileheight":32,
          "tilewidth":32,
          "transparentcolor":"#000000"
