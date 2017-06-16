@@ -70,8 +70,11 @@ Preloader.prototype = {
 		//game.load.tilemap('supaIntenseTest','supaIntenseTest.json',null,Phaser.Tilemap.TILED_JSON);
 		//game.load.tilemap('testingLRI','testingLRI.json',null,Phaser.Tilemap.TILED_JSON);
 		//game.load.tilemap('twoSmallerIslands','twoSmallerIslands.json',null,Phaser.Tilemap.TILED_JSON);
-		//game.load.tilemap('testingIslandsMinimized','testingIslandsMinimized.json',null,Phaser.Tilemap.TILED_JSON);
+		game.load.tilemap('testingIslandsMinimized2','testingIslandsMinimized2.json',null,Phaser.Tilemap.TILED_JSON);
 		game.load.tilemap('testingPipesMinimized','testingPipesMinimized.json',null,Phaser.Tilemap.TILED_JSON);
+		game.load.tilemap('testingSI','testingSI.json',null,Phaser.Tilemap.TILED_JSON);
+		game.load.tilemap('medIslandTest','medIslandTest.json',null,Phaser.Tilemap.TILED_JSON);
+
 
 		game.load.tilemap('elewopipes','elewopipes.json',null,Phaser.Tilemap.TILED_JSON);
 		game.load.tilemap('transo','transo.json',null,Phaser.Tilemap.TILED_JSON);
@@ -92,6 +95,8 @@ Preloader.prototype = {
 		game.load.spritesheet('smallerIslands2');
 		game.load.spritesheet('islandsMinimized');
 		game.load.spritesheet('pipesMinimized');
+		game.load.spritesheet('small_islands');
+		game.load.spritesheet('med_islands');
 
 
 		// vectorized images
@@ -262,10 +267,13 @@ Game.prototype = {
 
 
 
+		//currentMap = new Level('e', 'testingSI', ['small_islands','bricks3'], ['Tile Layer 1','Tile Layer 2']);
+		currentMap = new Level('e', 'medIslandTest', ['med_islands','bricks3'], ['Tile Layer 1','Tile Layer 2']);
+
 		//currentMap = new Level('e', 'testingPipesMinimized', ['pipesMinimized','bricks3'], ['Tile Layer 1','Tile Layer 2']);
 
 
-		currentMap = new Level('t', 'transo', ['cloudy','bricks3'], ['Tile Layer 1','Tile Layer 2']);
+		//currentMap = new Level('t', 'transo', ['cloudy','bricks3'], ['Tile Layer 1','Tile Layer 2']);
 		//console.log(group_npc.children);
 
 
@@ -279,8 +287,9 @@ Game.prototype = {
 		if(currentLevel == 1 && currentMap.key != 'e') {
 			deleteMap(currentMap);
 
-
-			currentMap = new Level('e', 'elewopipes', ['bricks3', 'pipesNew'], ['Tile Layer 1','Tile Layer 2']);
+			currentMap = new Level('e', 'testingPipesMinimized', ['pipesMinimized','bricks3'], ['Tile Layer 1','Tile Layer 2']);
+			//currentMap = new Level('e', 'testingIslandsMinimized2', ['islandsMinimized','bricks3'], ['Tile Layer 1','Tile Layer 2']);
+			//currentMap = new Level('e', 'elewopipes', ['bricks3', 'pipesNew'], ['Tile Layer 1','Tile Layer 2']);
 
 
 		} else if(currentLevel == 2 && currentMap.key != 'm') {
