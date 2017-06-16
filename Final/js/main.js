@@ -33,6 +33,7 @@ Preloader.prototype = {
 		game.load.audio('playerDeathSFX', 'player_death.wav');
 		game.load.audio('hideNoise', 'chairNoise.wav')
 		game.load.audio('laser', 'laser.wav')
+		game.load.audio('spike', 'SpikeTheme.wav')
 		game.load.path = 'assets/audio/sfx/player_attacks/';
 		game.load.audio('player_attack1', 'player_attack1.wav');
 		game.load.audio('player_attack2', 'player_attack2.wav');
@@ -63,6 +64,7 @@ Preloader.prototype = {
 		game.load.tilemap('testingLRI','testingLRI.json',null,Phaser.Tilemap.TILED_JSON);
 		game.load.tilemap('twoSmallerIslands','twoSmallerIslands.json',null,Phaser.Tilemap.TILED_JSON);
 		game.load.tilemap('testingIslandsMinimized','testingIslandsMinimized.json',null,Phaser.Tilemap.TILED_JSON);
+		game.load.tilemap('testingPipesMinimized','testingPipesMinimized.json',null,Phaser.Tilemap.TILED_JSON);
 
 		//game.load.tilemap('noImaginationLand','new_last_level.json',null,Phaser.Tilemap.TILED_JSON);
 
@@ -78,6 +80,7 @@ Preloader.prototype = {
 		game.load.spritesheet('smallerIslands1');
 		game.load.spritesheet('smallerIslands2');
 		game.load.spritesheet('islandsMinimized');
+		game.load.spritesheet('pipesMinimized');
 
 
 		// vectorized images
@@ -190,6 +193,9 @@ var Game = function(game) {
 	var tilemap;
 	var grayScreen;
 	var blob;
+
+	var spikeSFX;
+	var shouldPlaySpike = true;
 	
 	var playerDeathSFX;
 }
@@ -223,6 +229,7 @@ Game.prototype = {
 
 		playerDeathSFX = game.add.audio('playerDeathSFX')
 		playerDeathSFX.volume = 3;
+		spikeSFX = game.add.audio('spike');
 
 		//=============
 		//PLAYER OBJECT
@@ -238,13 +245,9 @@ Game.prototype = {
 		//test = new NPC(game, 800, 1400, 'redBook', 0);
 
 		//currentMap = new Level('t', 'testingIslandsMinimized', ['islandsMinimized','bricks3'], ['Tile Layer 1','Tile Layer 2']);
-
-		currentMap = new Level('t', 'tiletest1', ['cloudy','bricks3'], ['Tile Layer 1','Tile Layer 2']);
-		//currentMap = new Level('e', 'twoSmallerIslands', ['smallerIslands1', 'smallerIslands2'], ['Tile Layer 1','Tile Layer 2'])
-		//nextMap = new Level('e', 'elementary_tileset', ['bricks3', 'pipesNew'], ['Tile Layer 1','Tile Layer 2']);
-		//currentMap = new Level('t', 'testingLRI', ['lowResIntense','bricks3'], ['Tile Layer 1','Tile Layer 2']);
+		currentMap = new Level('e', 'testingPipesMinimized', ['pipesMinimized','bricks3'], ['Tile Layer 1','Tile Layer 2']);
 		//currentMap = new Level('t', 'tiletest1', ['cloudy','bricks3'], ['Tile Layer 1','Tile Layer 2']);
-		//currentMap = new Level('t', 'supaIntenseTest', ['supaIntense','bricks3'], ['Tile Layer 1','Tile Layer 2']);
+		//currentMap = new Level('t', 'testingPipesMinimized', ['pipesMinimized','bricks3'], ['Tile Layer 1','Tile Layer 2']);
 
 	},
 	update:function() {		// add game logic
@@ -256,8 +259,9 @@ Game.prototype = {
 		if(currentLevel == 1 && currentMap.key != 'e') {
 			deleteMap(currentMap);
 
-			currentMap = new Level('e', 'testingIslandsMinimized', ['islandsMinimized','bricks3'], ['Tile Layer 1','Tile Layer 2']);
-			//currentMap = new Level('e', 'elementary', ['bricks3', 'pipesNew'], ['Tile Layer 1','Tile Layer 2']);
+			currentMap = new Level('e', 'testingPipesMinimized', ['pipesMinimized','bricks3'], ['Tile Layer 1','Tile Layer 2']);
+			//currentMap = new Level('e', 'elementary_tileset', ['bricks3', 'pipesNew'], ['Tile Layer 1','Tile Layer 2']);
+
 
 		} else if(currentLevel == 2 && currentMap.key != 'm') {
 			deleteMap(currentMap);
@@ -266,7 +270,7 @@ Game.prototype = {
 
 			//currentMap = new Level('m','noImaginationLand', ['last_level', 'dirt-tiles'], ['Tile Layer 1','Tile Layer 2','Tile Layer 3','collision Layer']);
 
-			currentMap = new Level('m','middleschool', ['bricks3', 'pipesNew'], ['Tile Layer 1','Tile Layer 2']);
+
 
 		} else if(currentLevel == 3){
 			deleteMap(currentMap);
