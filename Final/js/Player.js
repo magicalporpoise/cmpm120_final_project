@@ -29,7 +29,7 @@ function Player(x, y, scale, img){
 	//this.checkWorldBounds = true;
 	//this.events.onOutOfBounds.add(deathRestart, this);
 	//set hitbox size
-	this.body.setSize(400, 800, 100, 50);
+	this.body.setSize(400, 750, 100, 50);
 	//this.body.addRectangle(400, 800, 100, 50);
 
 	
