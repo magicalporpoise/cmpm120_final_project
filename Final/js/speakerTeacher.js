@@ -32,12 +32,11 @@ TEACHER[2]= ["Welcome back. Please get to work.",
 			 ];
 // --------   0: transition
 TEACHER[3]= [];
-// --------   5: pipes
+// --------   4: pipes
 TEACHER[4]= ["You shouldn't be here...", 
 			 "You're not smart enough!\nYou're not good enough!", 
 			 "You should consider\nanother caree path,", 
-			 "Is that what you really\nwant to do with your life?", 
-			 "Are you even trying?", 
+			 "Is that really what you\nwant to do with your life?",
 			 "Congratulations... You've reached the end,\n here's your reward."];
 // --------   1: final
 TEACHER[1]= ["Are you happy? Do you feel like you did you best?\n\nToo bad it doesn't matter:\nWe have drained your entire being...\nWe have taken away your everything...\n\n\nand We didn't give you a damn thing for it."]
