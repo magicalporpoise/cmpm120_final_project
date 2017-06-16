@@ -72,7 +72,6 @@ Preloader.prototype = {
 		//game.load.tilemap('twoSmallerIslands','twoSmallerIslands.json',null,Phaser.Tilemap.TILED_JSON);
 		//game.load.tilemap('testingIslandsMinimized','testingIslandsMinimized.json',null,Phaser.Tilemap.TILED_JSON);
 		game.load.tilemap('testingPipesMinimized','testingPipesMinimized.json',null,Phaser.Tilemap.TILED_JSON);
-
 		game.load.tilemap('elewopipes','elewopipes.json',null,Phaser.Tilemap.TILED_JSON);
 		game.load.tilemap('transo','transo.json',null,Phaser.Tilemap.TILED_JSON);
 
@@ -261,7 +260,7 @@ Game.prototype = {
 
 		//test = new NPC(game, 800, 1400, 'redBook', 0);
 
-		currentMap = new Level('t', 'tiletest1', ['cloudy'], ['Tile Layer 1','Tile Layer 2']);
+		currentMap = new Level('t', 'tiletest1', ['cloudy','bricks3'], ['Tile Layer 1','Tile Layer 2']);
 
 		//console.log(group_npc.children);
 	},
@@ -273,19 +272,19 @@ Game.prototype = {
 		//console.log(currentMap);
 		if(currentLevel == 1 && currentMap.key != 'e') {
 			deleteMap(currentMap);
-			currentMap = new Level('e', 'elewopipes', ['bricks3'], ['Tile Layer 1','Tile Layer 2']);
+			currentMap = new Level('e', 'elewopipes', ['bricks3','cloudy'], ['Tile Layer 1','Tile Layer 2']);
 
 		} else if(currentLevel == 2 && currentMap.key != 'm') {
 			deleteMap(currentMap);
-			currentMap = new Level('m', 'middleschool', ['bricks3'], ['Tile Layer 1','Tile Layer 2']);
+			currentMap = new Level('m', 'middleschool', ['bricks3', 'cloudy'], ['Tile Layer 1','Tile Layer 2']);
 
 		} else if(currentLevel == 3 && currentMap.key != 'tr') {
 			deleteMap(currentMap);
-			currentMap = new Level('tr', 'transo', ['bricks3', 'pipesNew'], ['Tile Layer 1','Tile Layer 2']);
+			currentMap = new Level('tr', 'transo', ['bricks3', 'pipesMinimized'], ['Tile Layer 1','Tile Layer 2']);
 
 		}else if(currentLevel == 4 && currentMap.key != 'p') {
 			deleteMap(currentMap);
-			currentMap = new Level('p', 'testingPipesMinimized', ['bricks3', 'pipesNew'], ['Tile Layer 1','Tile Layer 2']);
+			currentMap = new Level('p', 'testingPipesMinimized', ['bricks3', 'pipesMinimized'], ['Tile Layer 1','Tile Layer 2']);
 
 		} else if(currentLevel > 4){
 			deleteMap(currentMap);
