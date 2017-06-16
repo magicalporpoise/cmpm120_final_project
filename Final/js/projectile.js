@@ -70,7 +70,7 @@ projectile.prototype.update = function(){
 
 
 	// debug
-	game.debug.body(this);
+	//game.debug.body(this);
 }
 
 function vanish(hb, npc){
