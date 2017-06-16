@@ -238,6 +238,7 @@ Game.prototype = {
 		group_danger = game.add.group();
 		group_Emitter = game.add.group();
 		group_speaker = game.add.group();
+		group_text = game.add.group();
 
 
 		spikeSFX = game.add.audio('spike');
@@ -260,15 +261,7 @@ Game.prototype = {
 
 		//test = new NPC(game, 800, 1400, 'redBook', 0);
 
-
-
-		//currentMap = new Level('e', 'testingPipesMinimized', ['pipesMinimized','bricks3'], ['Tile Layer 1','Tile Layer 2']);
-
-
-		currentMap = new Level('t', 'transo', ['cloudy','bricks3'], ['Tile Layer 1','Tile Layer 2']);
-		//console.log(group_npc.children);
-
-
+		currentMap = new Level('tt', 'tiletest1', ['cloudy','bricks3'], ['Tile Layer 1','Tile Layer 2']);
 	},
 	update:function() {		// add game logic
 		game.camera.follow(player, Phaser.Camera.FOLLOW_LOCKON, 0.1, 0.1);
@@ -278,21 +271,18 @@ Game.prototype = {
 		//console.log(currentMap);
 		if(currentLevel == 1 && currentMap.key != 'e') {
 			deleteMap(currentMap);
-
-
-			currentMap = new Level('e', 'elewopipes', ['bricks3', 'pipesNew'], ['Tile Layer 1','Tile Layer 2']);
-
-
+			currentMap = new Level('e', 'elewopipes', ['bricks3'], ['Tile Layer 1','Tile Layer 2']);
 		} else if(currentLevel == 2 && currentMap.key != 'm') {
 			deleteMap(currentMap);
 
 			//currentMap = new Level('m','new_last_level_map', ['last_level_tile', 'dirt-tiles'], ['Tile Layer 1','Tile Layer 2','Tile Layer 3','collision layer']);
 
-			//currentMap = new Level('m','noImaginationLand', ['last_level', 'dirt-tiles'], ['Tile Layer 1','Tile Layer 2','Tile Layer 3','collision Layer']);
+			currentMap = new Level('m','middleschool', ['bricks3'], ['Tile Layer 1','Tile Layer 2']);
+		} else if(currentLevel == 3 && currentMap.key != 't') {
+			deleteMap(currentMap);
+			currentMap = new Level('t', 'transo', ['bricks3', 'pipesNew'], ['Tile Layer 1','Tile Layer 2']);
 
-
-
-		} else if(currentLevel == 3){
+		} else if(currentLevel > 3){
 			deleteMap(currentMap);
 			game.state.start('GameOver');
 		}

@@ -42,7 +42,7 @@ flyingNPC.prototype.update = function(){
 
 	//also follow y direction
 	if(this.aggro){
-		this.body.velocity.y = (player.y - this.y);
+		this.body.velocity.y = Math.min(Math.abs(player.y - this.y), 400) * Math.sign(player.y-this.y);
 		this.sight.body.setSize(2*this.sight.origWidth-50, 2*this.sight.origWidth-50, 0, -this.sight.origWidth);
 		//change view box size
 		//let angle = this.sight.rotation;
