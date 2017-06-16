@@ -242,7 +242,7 @@ Game.prototype = {
 
 		//test = new NPC(game, 800, 1400, 'redBook', 0);
 
-		currentMap = new Level('t', 'transo', ['cloudy','bricks3'], ['Tile Layer 1','Tile Layer 2']);
+		currentMap = new Level('t', 'tiletest1', ['cloudy','bricks3'], ['Tile Layer 1','Tile Layer 2']);
 		//console.log(group_npc.children);
 
 	},
