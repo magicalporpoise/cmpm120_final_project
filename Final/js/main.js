@@ -137,6 +137,7 @@ MainMenu.prototype = {
 		if(shouldPlayMenu){
 			musicMenu = game.add.audio('menu');
 			musicMenu.play();
+			musicMenu.volume = .7;
 			shouldPlayMenu = false;
 		}
 		
